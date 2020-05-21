@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat input toolbar renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "lightgray",
+      "borderTopWidth": 1,
+      "maxHeight": 120,
+      "paddingBottom": 10,
+      "paddingTop": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "gray",
+        "borderRadius": 30,
+        "borderWidth": 1.5,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginLeft": 30,
+        "marginRight": 30,
+        "paddingBottom": 5,
+        "paddingRight": 5,
+        "paddingTop": 5,
+      }
+    }
+  >
+    <TextInput
+      allowFontScaling={true}
+      multiline={true}
+      onChangeText={[Function]}
+      placeholder="Your message..."
+      rejectResponderTermination={true}
+      style={
+        Object {
+          "flex": 1,
+          "marginLeft": 25,
+          "marginRight": 10,
+        }
+      }
+      underlineColorAndroid="transparent"
+    />
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignSelf": "flex-end",
+          "backgroundColor": "orange",
+          "borderRadius": 180,
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        resizeMode="center"
+        source={1}
+        style={
+          Object {
+            "height": 42,
+            "width": 42,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

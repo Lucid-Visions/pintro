@@ -1,0 +1,60 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
+  },
+  "scripts": {
+    "start": "npm run prod",
+    "build": "npm-run-all clean transpile",
+    "server": "node ./dist-server/bin/www",
+    "dev": "NODE_ENV=development npm-run-all build server",
+    "prod": "NODE_ENV=production npm-run-all build server",
+    "transpile": "babel ./src --out-dir dist-server",
+    "clean": "rimraf dist-server",
+    "watch:dev": "nodemon"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/polyfill": "^7.8.3",
+    "@babel/preset-env": "^7.8.6",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "expo-server-sdk": "^3.5.0",
+    "express": "~4.16.1",
+    "firebase": "^7.11.0",
+    "firebase-admin": "^8.9.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.3",
+    "morgan": "~1.9.1",
+    "nodemailer": "^6.4.4",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "querystring": "^0.2.0",
+    "react-native-dotenv": "^0.2.0",
+    "request": "^2.88.2",
+    "rimraf": "^3.0.2",
+    "socket.io": "^2.3.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-plugin-transform-runtime": "^6.23.0"
+  }
+}

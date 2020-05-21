@@ -1,0 +1,293 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchButtonList /> snapshot of the component 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "paddingHorizontal": 20,
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "borderRadius": 35,
+          "height": 65,
+          "overflow": "hidden",
+          "width": 65,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "white",
+              "fontFamily": "poppins-medium",
+              "fontSize": 10,
+              "marginVertical": 20,
+            },
+            false,
+          ]
+        }
+      >
+        PEOPLE
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "borderRadius": 35,
+          "height": 65,
+          "overflow": "hidden",
+          "width": 65,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "white",
+              "fontFamily": "poppins-medium",
+              "fontSize": 10,
+              "marginVertical": 20,
+            },
+            false,
+          ]
+        }
+      >
+        COMPANIES
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "borderRadius": 35,
+          "height": 65,
+          "overflow": "hidden",
+          "width": 65,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "white",
+              "fontFamily": "poppins-medium",
+              "fontSize": 10,
+              "marginVertical": 20,
+            },
+            false,
+          ]
+        }
+      >
+        CONTENT
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "borderRadius": 35,
+          "height": 65,
+          "overflow": "hidden",
+          "width": 65,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "white",
+              "fontFamily": "poppins-medium",
+              "fontSize": 10,
+              "marginVertical": 20,
+            },
+            false,
+          ]
+        }
+      >
+        GROUPS
+      </Text>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "marginLeft": 6,
+        "marginRight": 6,
+        "opacity": 1,
+      }
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "borderRadius": 35,
+          "height": 65,
+          "overflow": "hidden",
+          "width": 65,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "white",
+              "fontFamily": "poppins-medium",
+              "fontSize": 10,
+              "marginVertical": 20,
+            },
+            false,
+          ]
+        }
+      >
+        SPACES
+      </Text>
+    </View>
+  </View>
+</View>
+`;

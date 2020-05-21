@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "shadowOffset": Object {
+          "height": 3,
+        },
+        "shadowOpacity": 0.1875,
+        "shadowRadius": 2.7,
+      },
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "white",
+        "borderRadius": 15,
+        "flexDirection": "row",
+        "marginVertical": 10,
+        "padding": 20,
+        "resizeMode": "contain",
+        "width": "99%",
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    focusable={false}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "borderRadius": 75,
+            "height": 40,
+            "overflow": "hidden",
+            "width": 40,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "flexDirection": "column",
+            "marginLeft": 15,
+            "marginTop": 5,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 16,
+              "fontWeight": "bold",
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "color": "grey",
+              "fontSize": 12,
+              "fontWeight": "normal",
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
+      accessible={true}
+      focusable={false}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "height": 35,
+            "width": 30,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

@@ -1,0 +1,896 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`YearItemSelector renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "width": 350,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "stretch",
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID="ios_touchable_wrapper"
+    >
+      <View
+        pointerEvents="box-only"
+      >
+        <TextInput
+          allowFontScaling={true}
+          editable={false}
+          rejectResponderTermination={true}
+          style={
+            Array [
+              Object {
+                "color": "white",
+                "fontFamily": "poppins-regular",
+                "fontSize": 13,
+                "marginTop": 20,
+              },
+              Object {
+                "color": "#C7C7CD",
+              },
+            ]
+          }
+          testID="text_input"
+          underlineColorAndroid="transparent"
+          value="Year"
+        />
+      </View>
+    </View>
+    <Modal
+      hardwareAccelerated={false}
+      onOrientationChange={[Function]}
+      supportedOrientations={
+        Array [
+          "portrait",
+          "landscape",
+        ]
+      }
+      testID="ios_modal"
+      transparent={true}
+      visible={false}
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        isTVSelectable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+        testID="ios_modal_top"
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#f8f8f8",
+              "borderTopColor": "#dedede",
+              "borderTopWidth": 1,
+              "flexDirection": "row",
+              "height": 45,
+              "justifyContent": "space-between",
+              "paddingHorizontal": 10,
+              "zIndex": 2,
+            },
+            undefined,
+          ]
+        }
+        testID="input_accessory_view"
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                    "borderColor": "#a1a1a1",
+                    "borderRightWidth": 1.5,
+                    "borderTopWidth": 1.5,
+                    "height": 15,
+                    "width": 15,
+                  },
+                  undefined,
+                  Object {
+                    "marginLeft": 11,
+                    "transform": Array [
+                      Object {
+                        "translateY": 4,
+                      },
+                      Object {
+                        "rotate": "-45deg",
+                      },
+                    ],
+                  },
+                  undefined,
+                  Object {},
+                ]
+              }
+            />
+          </View>
+          <View
+            accessible={true}
+            focusable={true}
+            isTVSelectable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "backgroundColor": "transparent",
+                    "borderColor": "#a1a1a1",
+                    "borderRightWidth": 1.5,
+                    "borderTopWidth": 1.5,
+                    "height": 15,
+                    "width": 15,
+                  },
+                  undefined,
+                  Object {
+                    "marginLeft": 22,
+                    "transform": Array [
+                      Object {
+                        "translateY": -5,
+                      },
+                      Object {
+                        "rotate": "135deg",
+                      },
+                    ],
+                  },
+                  undefined,
+                  Object {},
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          hitSlop={
+            Object {
+              "bottom": 4,
+              "left": 4,
+              "right": 4,
+              "top": 4,
+            }
+          }
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "opacity": 1,
+            }
+          }
+          testID="done_button"
+        >
+          <View
+            testID="needed_for_touchable"
+          >
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#007aff",
+                    "fontSize": 17,
+                    "fontWeight": "600",
+                    "paddingRight": 11,
+                    "paddingTop": 1,
+                  },
+                  undefined,
+                  Object {},
+                ]
+              }
+              testID="done_text"
+            >
+              Done
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#d0d4da",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 215,
+            },
+            undefined,
+          ]
+        }
+      >
+        <View>
+          <RCTPicker
+            items={
+              Array [
+                Object {
+                  "label": "Year",
+                  "textColor": undefined,
+                  "value": null,
+                },
+                Object {
+                  "label": "2030        ",
+                  "textColor": undefined,
+                  "value": "2030",
+                },
+                Object {
+                  "label": "2029        ",
+                  "textColor": undefined,
+                  "value": "2029",
+                },
+                Object {
+                  "label": "2028        ",
+                  "textColor": undefined,
+                  "value": "2028",
+                },
+                Object {
+                  "label": "2027        ",
+                  "textColor": undefined,
+                  "value": "2027",
+                },
+                Object {
+                  "label": "2026        ",
+                  "textColor": undefined,
+                  "value": "2026",
+                },
+                Object {
+                  "label": "2025        ",
+                  "textColor": undefined,
+                  "value": "2025",
+                },
+                Object {
+                  "label": "2024        ",
+                  "textColor": undefined,
+                  "value": "2024",
+                },
+                Object {
+                  "label": "2023        ",
+                  "textColor": undefined,
+                  "value": "2023",
+                },
+                Object {
+                  "label": "2022        ",
+                  "textColor": undefined,
+                  "value": "2022",
+                },
+                Object {
+                  "label": "2021        ",
+                  "textColor": undefined,
+                  "value": "2021",
+                },
+                Object {
+                  "label": "2020        ",
+                  "textColor": undefined,
+                  "value": "2020",
+                },
+                Object {
+                  "label": "2019        ",
+                  "textColor": undefined,
+                  "value": "2019",
+                },
+                Object {
+                  "label": "2018        ",
+                  "textColor": undefined,
+                  "value": "2018",
+                },
+                Object {
+                  "label": "2017        ",
+                  "textColor": undefined,
+                  "value": "2017",
+                },
+                Object {
+                  "label": "2016        ",
+                  "textColor": undefined,
+                  "value": "2016",
+                },
+                Object {
+                  "label": "2015        ",
+                  "textColor": undefined,
+                  "value": "2015",
+                },
+                Object {
+                  "label": "2014        ",
+                  "textColor": undefined,
+                  "value": "2014",
+                },
+                Object {
+                  "label": "2013        ",
+                  "textColor": undefined,
+                  "value": "2013",
+                },
+                Object {
+                  "label": "2012        ",
+                  "textColor": undefined,
+                  "value": "2012",
+                },
+                Object {
+                  "label": "2011        ",
+                  "textColor": undefined,
+                  "value": "2011",
+                },
+                Object {
+                  "label": "2010        ",
+                  "textColor": undefined,
+                  "value": "2010",
+                },
+                Object {
+                  "label": "2009        ",
+                  "textColor": undefined,
+                  "value": "2009",
+                },
+                Object {
+                  "label": "2008        ",
+                  "textColor": undefined,
+                  "value": "2008",
+                },
+                Object {
+                  "label": "2007        ",
+                  "textColor": undefined,
+                  "value": "2007",
+                },
+                Object {
+                  "label": "2006        ",
+                  "textColor": undefined,
+                  "value": "2006",
+                },
+                Object {
+                  "label": "2005        ",
+                  "textColor": undefined,
+                  "value": "2005",
+                },
+                Object {
+                  "label": "2004        ",
+                  "textColor": undefined,
+                  "value": "2004",
+                },
+                Object {
+                  "label": "2003        ",
+                  "textColor": undefined,
+                  "value": "2003",
+                },
+                Object {
+                  "label": "2002        ",
+                  "textColor": undefined,
+                  "value": "2002",
+                },
+                Object {
+                  "label": "2001        ",
+                  "textColor": undefined,
+                  "value": "2001",
+                },
+                Object {
+                  "label": "2000        ",
+                  "textColor": undefined,
+                  "value": "2000",
+                },
+                Object {
+                  "label": "1999        ",
+                  "textColor": undefined,
+                  "value": "1999",
+                },
+                Object {
+                  "label": "1998        ",
+                  "textColor": undefined,
+                  "value": "1998",
+                },
+                Object {
+                  "label": "1997        ",
+                  "textColor": undefined,
+                  "value": "1997",
+                },
+                Object {
+                  "label": "1996        ",
+                  "textColor": undefined,
+                  "value": "1996",
+                },
+                Object {
+                  "label": "1995        ",
+                  "textColor": undefined,
+                  "value": "1995",
+                },
+                Object {
+                  "label": "1994        ",
+                  "textColor": undefined,
+                  "value": "1994",
+                },
+                Object {
+                  "label": "1993        ",
+                  "textColor": undefined,
+                  "value": "1993",
+                },
+                Object {
+                  "label": "1992        ",
+                  "textColor": undefined,
+                  "value": "1992",
+                },
+                Object {
+                  "label": "1991        ",
+                  "textColor": undefined,
+                  "value": "1991",
+                },
+                Object {
+                  "label": "1990        ",
+                  "textColor": undefined,
+                  "value": "1990",
+                },
+                Object {
+                  "label": "1989        ",
+                  "textColor": undefined,
+                  "value": "1989",
+                },
+                Object {
+                  "label": "1988        ",
+                  "textColor": undefined,
+                  "value": "1988",
+                },
+                Object {
+                  "label": "1987        ",
+                  "textColor": undefined,
+                  "value": "1987",
+                },
+                Object {
+                  "label": "1986        ",
+                  "textColor": undefined,
+                  "value": "1986",
+                },
+                Object {
+                  "label": "1985        ",
+                  "textColor": undefined,
+                  "value": "1985",
+                },
+                Object {
+                  "label": "1984        ",
+                  "textColor": undefined,
+                  "value": "1984",
+                },
+                Object {
+                  "label": "1983        ",
+                  "textColor": undefined,
+                  "value": "1983",
+                },
+                Object {
+                  "label": "1982        ",
+                  "textColor": undefined,
+                  "value": "1982",
+                },
+                Object {
+                  "label": "1981        ",
+                  "textColor": undefined,
+                  "value": "1981",
+                },
+                Object {
+                  "label": "1980        ",
+                  "textColor": undefined,
+                  "value": "1980",
+                },
+                Object {
+                  "label": "1979        ",
+                  "textColor": undefined,
+                  "value": "1979",
+                },
+                Object {
+                  "label": "1978        ",
+                  "textColor": undefined,
+                  "value": "1978",
+                },
+                Object {
+                  "label": "1977        ",
+                  "textColor": undefined,
+                  "value": "1977",
+                },
+                Object {
+                  "label": "1976        ",
+                  "textColor": undefined,
+                  "value": "1976",
+                },
+                Object {
+                  "label": "1975        ",
+                  "textColor": undefined,
+                  "value": "1975",
+                },
+                Object {
+                  "label": "1974        ",
+                  "textColor": undefined,
+                  "value": "1974",
+                },
+                Object {
+                  "label": "1973        ",
+                  "textColor": undefined,
+                  "value": "1973",
+                },
+                Object {
+                  "label": "1972        ",
+                  "textColor": undefined,
+                  "value": "1972",
+                },
+                Object {
+                  "label": "1971        ",
+                  "textColor": undefined,
+                  "value": "1971",
+                },
+                Object {
+                  "label": "1970        ",
+                  "textColor": undefined,
+                  "value": "1970",
+                },
+                Object {
+                  "label": "1969        ",
+                  "textColor": undefined,
+                  "value": "1969",
+                },
+                Object {
+                  "label": "1968        ",
+                  "textColor": undefined,
+                  "value": "1968",
+                },
+                Object {
+                  "label": "1967        ",
+                  "textColor": undefined,
+                  "value": "1967",
+                },
+                Object {
+                  "label": "1966        ",
+                  "textColor": undefined,
+                  "value": "1966",
+                },
+                Object {
+                  "label": "1965        ",
+                  "textColor": undefined,
+                  "value": "1965",
+                },
+                Object {
+                  "label": "1964        ",
+                  "textColor": undefined,
+                  "value": "1964",
+                },
+                Object {
+                  "label": "1963        ",
+                  "textColor": undefined,
+                  "value": "1963",
+                },
+                Object {
+                  "label": "1962        ",
+                  "textColor": undefined,
+                  "value": "1962",
+                },
+                Object {
+                  "label": "1961        ",
+                  "textColor": undefined,
+                  "value": "1961",
+                },
+                Object {
+                  "label": "1960        ",
+                  "textColor": undefined,
+                  "value": "1960",
+                },
+                Object {
+                  "label": "1959        ",
+                  "textColor": undefined,
+                  "value": "1959",
+                },
+                Object {
+                  "label": "1958        ",
+                  "textColor": undefined,
+                  "value": "1958",
+                },
+                Object {
+                  "label": "1957        ",
+                  "textColor": undefined,
+                  "value": "1957",
+                },
+                Object {
+                  "label": "1956        ",
+                  "textColor": undefined,
+                  "value": "1956",
+                },
+                Object {
+                  "label": "1955        ",
+                  "textColor": undefined,
+                  "value": "1955",
+                },
+                Object {
+                  "label": "1954        ",
+                  "textColor": undefined,
+                  "value": "1954",
+                },
+                Object {
+                  "label": "1953        ",
+                  "textColor": undefined,
+                  "value": "1953",
+                },
+                Object {
+                  "label": "1952        ",
+                  "textColor": undefined,
+                  "value": "1952",
+                },
+                Object {
+                  "label": "1951        ",
+                  "textColor": undefined,
+                  "value": "1951",
+                },
+                Object {
+                  "label": "1950        ",
+                  "textColor": undefined,
+                  "value": "1950",
+                },
+                Object {
+                  "label": "1949        ",
+                  "textColor": undefined,
+                  "value": "1949",
+                },
+                Object {
+                  "label": "1948        ",
+                  "textColor": undefined,
+                  "value": "1948",
+                },
+                Object {
+                  "label": "1947        ",
+                  "textColor": undefined,
+                  "value": "1947",
+                },
+                Object {
+                  "label": "1946        ",
+                  "textColor": undefined,
+                  "value": "1946",
+                },
+                Object {
+                  "label": "1945        ",
+                  "textColor": undefined,
+                  "value": "1945",
+                },
+                Object {
+                  "label": "1944        ",
+                  "textColor": undefined,
+                  "value": "1944",
+                },
+                Object {
+                  "label": "1943        ",
+                  "textColor": undefined,
+                  "value": "1943",
+                },
+                Object {
+                  "label": "1942        ",
+                  "textColor": undefined,
+                  "value": "1942",
+                },
+                Object {
+                  "label": "1941        ",
+                  "textColor": undefined,
+                  "value": "1941",
+                },
+                Object {
+                  "label": "1940        ",
+                  "textColor": undefined,
+                  "value": "1940",
+                },
+                Object {
+                  "label": "1939        ",
+                  "textColor": undefined,
+                  "value": "1939",
+                },
+                Object {
+                  "label": "1938        ",
+                  "textColor": undefined,
+                  "value": "1938",
+                },
+                Object {
+                  "label": "1937        ",
+                  "textColor": undefined,
+                  "value": "1937",
+                },
+                Object {
+                  "label": "1936        ",
+                  "textColor": undefined,
+                  "value": "1936",
+                },
+                Object {
+                  "label": "1935        ",
+                  "textColor": undefined,
+                  "value": "1935",
+                },
+                Object {
+                  "label": "1934        ",
+                  "textColor": undefined,
+                  "value": "1934",
+                },
+                Object {
+                  "label": "1933        ",
+                  "textColor": undefined,
+                  "value": "1933",
+                },
+                Object {
+                  "label": "1932        ",
+                  "textColor": undefined,
+                  "value": "1932",
+                },
+                Object {
+                  "label": "1931        ",
+                  "textColor": undefined,
+                  "value": "1931",
+                },
+                Object {
+                  "label": "1930        ",
+                  "textColor": undefined,
+                  "value": "1930",
+                },
+                Object {
+                  "label": "1929        ",
+                  "textColor": undefined,
+                  "value": "1929",
+                },
+                Object {
+                  "label": "1928        ",
+                  "textColor": undefined,
+                  "value": "1928",
+                },
+                Object {
+                  "label": "1927        ",
+                  "textColor": undefined,
+                  "value": "1927",
+                },
+                Object {
+                  "label": "1926        ",
+                  "textColor": undefined,
+                  "value": "1926",
+                },
+                Object {
+                  "label": "1925        ",
+                  "textColor": undefined,
+                  "value": "1925",
+                },
+                Object {
+                  "label": "1924        ",
+                  "textColor": undefined,
+                  "value": "1924",
+                },
+                Object {
+                  "label": "1923        ",
+                  "textColor": undefined,
+                  "value": "1923",
+                },
+                Object {
+                  "label": "1922        ",
+                  "textColor": undefined,
+                  "value": "1922",
+                },
+                Object {
+                  "label": "1921        ",
+                  "textColor": undefined,
+                  "value": "1921",
+                },
+                Object {
+                  "label": "1920        ",
+                  "textColor": undefined,
+                  "value": "1920",
+                },
+              ]
+            }
+            onChange={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            selectedIndex={0}
+            style={
+              Array [
+                Object {
+                  "height": 216,
+                },
+                undefined,
+              ]
+            }
+            testID="ios_picker"
+          />
+        </View>
+      </View>
+    </Modal>
+  </View>
+  <TextInput
+    allowFontScaling={true}
+    borderBottomColor="lightgrey"
+    borderBottomWidth={1}
+    color="white"
+    onChangeText={[Function]}
+    placeholder="Enter company name..."
+    placeholderTextColor="white"
+    rejectResponderTermination={true}
+    style={
+      Object {
+        "alignItems": "baseline",
+        "color": "white",
+        "fontFamily": "poppins-regular",
+        "fontSize": 13,
+        "margin": "auto",
+        "paddingVertical": 20,
+        "textAlign": "left",
+      }
+    }
+    underlineColorAndroid="transparent"
+    width={250}
+  />
+</View>
+`;

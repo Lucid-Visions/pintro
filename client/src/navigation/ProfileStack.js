@@ -1,0 +1,36 @@
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import PasswordResetScreen from "../screens/PasswordResetScreen"
+
+// Import Components
+import UserProfileHandler from "../components/UserProfileHandler";
+
+// Import Screens
+import SettingsStack from "../navigation/SettingsStack";
+import WriteStatusScreen from "../screens/WriteStatusScreen";
+import ChatStack from "../navigation/ChatStack"
+
+const Stack = createStackNavigator();
+
+/**
+ * Stack navigator for the profile page.
+ */
+function ProfileStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Profile" component={UserProfileHandler} />
+      <Stack.Screen name="ChatStack" component={ChatStack} />
+      <Stack.Screen name="WriteStatus" component={WriteStatusScreen} />
+      <Stack.Screen name="SettingsStack" component={SettingsStack} />
+      <Stack.Screen name="ForgotPassword" component={PasswordResetScreen} />
+
+
+    </Stack.Navigator>
+  );
+}
+
+export default ProfileStack;

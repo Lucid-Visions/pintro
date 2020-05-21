@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: bold;
+    src:
+      local('Roboto'),
+      local('Roboto-Regular'),
+      url(../assets/Poppins\ font/Poppins-Bold.oft) format('oft'),
+      url(./fonts/Roboto-Regular.woff) format('woff');
+  }
+
+  html {
+    font-family: 'arial', bold;
+  }

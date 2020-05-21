@@ -1,0 +1,334 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActionButton /> help me with renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "shadowOffset": Object {
+          "height": 6,
+        },
+        "shadowOpacity": 0.195,
+        "shadowRadius": 5.4,
+      },
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "borderRadius": 15,
+        "flexDirection": "row",
+        "height": "10%",
+        "margin": 4,
+        "minHeight": 100,
+        "padding": 20,
+        "width": 350,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    focusable={false}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "left": "auto",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 22,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Help me with
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "grey",
+            "fontSize": 18,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        Unit Testing
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderColor": "orange",
+          "borderRadius": 75,
+          "borderWidth": 2,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": -5,
+          "padding": 2,
+          "position": "absolute",
+          "right": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "orange",
+            "borderRadius": 25,
+            "flexDirection": "row",
+            "height": 50,
+            "justifyContent": "center",
+            "marginLeft": "auto",
+            "width": 50,
+          }
+        }
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`<ActionButton /> introduce me to render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "shadowOffset": Object {
+          "height": 6,
+        },
+        "shadowOpacity": 0.195,
+        "shadowRadius": 5.4,
+      },
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "borderRadius": 15,
+        "flexDirection": "row",
+        "height": "10%",
+        "margin": 4,
+        "minHeight": 100,
+        "padding": 20,
+        "width": 350,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    focusable={false}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "left": "auto",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 22,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Introduce me to
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "grey",
+            "fontSize": 18,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        Bill Gates
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderColor": "orange",
+          "borderRadius": 75,
+          "borderWidth": 2,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": -5,
+          "padding": 2,
+          "position": "absolute",
+          "right": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "orange",
+            "borderRadius": 25,
+            "flexDirection": "row",
+            "height": 50,
+            "justifyContent": "center",
+            "marginLeft": "auto",
+            "width": 50,
+          }
+        }
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`<ActionButton /> talk to me to render correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "shadowOffset": Object {
+          "height": 6,
+        },
+        "shadowOpacity": 0.195,
+        "shadowRadius": 5.4,
+      },
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "borderRadius": 15,
+        "flexDirection": "row",
+        "height": "10%",
+        "margin": 4,
+        "minHeight": 100,
+        "padding": 20,
+        "width": 350,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    focusable={false}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "left": "auto",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 22,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Talk to me about
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "grey",
+            "fontSize": 18,
+            "fontWeight": "normal",
+          }
+        }
+      >
+        Tic Tac Toe
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderColor": "orange",
+          "borderRadius": 75,
+          "borderWidth": 2,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": -5,
+          "padding": 2,
+          "position": "absolute",
+          "right": 20,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "orange",
+            "borderRadius": 25,
+            "flexDirection": "row",
+            "height": 50,
+            "justifyContent": "center",
+            "marginLeft": "auto",
+            "width": 50,
+          }
+        }
+      >
+        <Text />
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "marginLeft": 0,
+      "padding": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "marginBottom": 5,
+        "marginLeft": 5,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "height": 25,
+            "resizeMode": "contain",
+            "width": 25,
+          }
+        }
+      />
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "poppins-semi-bold",
+              "fontSize": 9,
+              "marginLeft": 6,
+              "marginTop": "4%",
+            },
+            undefined,
+          ]
+        }
+      >
+        S E E K I N G  I N V E S T M E N T
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      isTVSelectable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "flexDirection": "row",
+          "opacity": 1,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "height": 25,
+            "marginLeft": 18,
+            "resizeMode": "contain",
+            "width": 25,
+          }
+        }
+      />
+      <Text
+        style={
+          Array [
+            Object {
+              "fontFamily": "poppins-semi-bold",
+              "fontSize": 9,
+              "marginLeft": 6,
+              "marginTop": "4%",
+            },
+            undefined,
+          ]
+        }
+      >
+        C U R R E N T L Y  H I R I N G
+      </Text>
+    </View>
+  </View>
+</View>
+`;

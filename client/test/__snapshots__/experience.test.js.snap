@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Experience component renders correctly 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontFamily": "poppins-medium",
+        "fontSize": 17,
+        "margin": "auto",
+        "marginBottom": 30,
+      }
+    }
+  >
+    Request declined.
+  </Text>
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "backgroundColor": "black",
+        "borderColor": "black",
+        "borderRadius": 7.5,
+        "borderWidth": 1,
+        "flexDirection": "row",
+        "height": 35,
+        "justifyContent": "center",
+        "marginTop": 40,
+        "opacity": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "white",
+          "fontFamily": "poppins-medium",
+          "fontSize": 10,
+        }
+      }
+    >
+      OK
+    </Text>
+  </View>
+</View>
+`;

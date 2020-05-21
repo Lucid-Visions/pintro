@@ -1,0 +1,265 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OurJourney /> snapshot of the component 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "fontFamily": "poppins-semi-bold",
+        "marginBottom": "2%",
+        "marginTop": "4%",
+      }
+    }
+  >
+    Our Journey
+  </Text>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginLeft": 30,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#686868",
+            "bottom": 10,
+            "left": -17,
+            "position": "absolute",
+            "top": 10,
+            "width": 1,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#F3A33F",
+              "borderRadius": 25,
+              "height": 7,
+              "left": -20,
+              "marginRight": 20,
+              "position": "absolute",
+              "top": 7,
+              "width": 7,
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontFamily": "poppins-semi-bold",
+            }
+          }
+        >
+          Founded:
+           
+          <Text
+            style={
+              Object {
+                "color": "grey",
+                "fontFamily": "poppins-medium",
+              }
+            }
+          >
+            15864314430000
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#F3A33F",
+              "borderRadius": 25,
+              "height": 7,
+              "left": -20,
+              "marginRight": 20,
+              "position": "absolute",
+              "top": 7,
+              "width": 7,
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontFamily": "poppins-semi-bold",
+            }
+          }
+        >
+          Location:
+           
+          <Text
+            style={
+              Object {
+                "color": "grey",
+                "fontFamily": "poppins-medium",
+              }
+            }
+          >
+            test center
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#F3A33F",
+              "borderRadius": 25,
+              "height": 7,
+              "left": -20,
+              "marginRight": 20,
+              "position": "absolute",
+              "top": 7,
+              "width": 7,
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontFamily": "poppins-semi-bold",
+            }
+          }
+        >
+          Company Size:
+           
+          <Text
+            style={
+              Object {
+                "color": "grey",
+                "fontFamily": "poppins-medium",
+              }
+            }
+          >
+            20 Members
+          </Text>
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#F3A33F",
+              "borderRadius": 25,
+              "height": 7,
+              "left": -20,
+              "marginRight": 20,
+              "position": "absolute",
+              "top": 7,
+              "width": 7,
+            }
+          }
+        />
+        <Text
+          style={
+            Object {
+              "fontFamily": "poppins-semi-bold",
+            }
+          }
+        >
+          Funding:
+           
+          <Text
+            style={
+              Object {
+                "color": "grey",
+                "fontFamily": "poppins-medium",
+              }
+            }
+          >
+            Looking for money
+          </Text>
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`<OurJourney /> snapshot of the component with no info in props 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "fontFamily": "poppins-semi-bold",
+        "marginBottom": "2%",
+        "marginTop": "4%",
+      }
+    }
+  >
+    Our Journey
+  </Text>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "marginLeft": 30,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#686868",
+            "bottom": 10,
+            "left": -17,
+            "position": "absolute",
+            "top": 10,
+            "width": 1,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

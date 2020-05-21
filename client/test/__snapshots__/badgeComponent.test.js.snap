@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge renders correctly 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "aspectRatio": 1,
+      "backgroundColor": "white",
+      "borderRadius": 15,
+      "justifyContent": "center",
+      "opacity": 1,
+      "width": "24%",
+      "zIndex": 1,
+    }
+  }
+/>
+`;

@@ -1,0 +1,237 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ExtrasButton /> snapshot of component with some action onPress 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "borderColor": "black",
+      "borderRadius": 7.5,
+      "borderWidth": 1,
+      "height": 30,
+      "opacity": 1,
+      "padding": 3,
+      "width": 40,
+    }
+  }
+>
+  <Text>
+    ...
+  </Text>
+</View>
+`;
+
+exports[`<FollowMeButton /> snapshot of component with status NOT CONNECTED 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "black",
+      "borderRadius": 5,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginRight": "5%",
+      "opacity": 1,
+      "width": "38.5%",
+    }
+  }
+>
+  <Text />
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 10,
+        "marginLeft": "5%",
+      }
+    }
+  >
+    CONNECT
+  </Text>
+</View>
+`;
+
+exports[`<FollowMeButton /> snapshot of component with status PENDING 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "black",
+      "borderRadius": 5,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginRight": "5%",
+      "opacity": 1,
+      "width": "38.5%",
+    }
+  }
+>
+  <Text />
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 10,
+        "marginLeft": "5%",
+      }
+    }
+  >
+    PENDING
+  </Text>
+</View>
+`;
+
+exports[`<MessageMeButton /> snapshot of component 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "black",
+      "borderRadius": 5,
+      "borderWidth": 1,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginRight": "5%",
+      "opacity": 1,
+      "width": "38.5%",
+    }
+  }
+>
+  <Text />
+  <Text
+    style={
+      Object {
+        "fontSize": 10,
+        "marginLeft": "5%",
+      }
+    }
+  >
+    MESSAGE ME
+  </Text>
+</View>
+`;
+
+exports[`<NewPostButton /> snapshot of component 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "black",
+      "borderRadius": 5,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginRight": "5%",
+      "opacity": 1,
+      "width": "38.5%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+        "fontSize": 10,
+        "marginLeft": "5%",
+      }
+    }
+  >
+    NEW POST
+  </Text>
+</View>
+`;
+
+exports[`<ViewConnectionsButton /> snapshot of component 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "black",
+      "borderRadius": 5,
+      "borderWidth": 1,
+      "flexDirection": "row",
+      "height": 30,
+      "justifyContent": "center",
+      "marginRight": "5%",
+      "opacity": 1,
+      "width": "38.5%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontSize": 10,
+        "marginLeft": "5%",
+      }
+    }
+  >
+    CONNECTIONS
+  </Text>
+</View>
+`;

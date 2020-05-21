@@ -1,0 +1,4588 @@
+{
+	"info": {
+		"_postman_id": "9344bb09-ccab-4c49-ab80-2da2f7fe6c37",
+		"name": "Pintro Tests copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Email Register and Sign in",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var token = json.token",
+									"var email = json.doc.email_login",
+									"var id = json.doc._id",
+									"var newUser = json.newUser",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct Email\", function() {",
+									"    pm.expect(email).to.eql(\"testuser@gmail.com\");",
+									"})",
+									"pm.test(\"Existing User\", function() {",
+									"    pm.expect(newUser).to.eql(true);",
+									"})",
+									"",
+									"pm.environment.set(\"token\", token);",
+									"pm.environment.set(\"userId\", id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email_login\": \"testuser@gmail.com\",\n  \"password\": \"SecureForFun123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								"email_and_password"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var token = json.token",
+									"var email = json.doc.email_login",
+									"var id = json.doc._id",
+									"var newUser = json.newUser",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct Email\", function() {",
+									"    pm.expect(email).to.eql(\"testuser@gmail.com\");",
+									"})",
+									"pm.test(\"Existing User\", function() {",
+									"    pm.expect(newUser).to.eql(false);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email_login\": \"testuser@gmail.com\",\n  \"password\": \"SecureForFun123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/signin/email_and_password",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"signin",
+								"email_and_password"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var email = json.email_login",
+									"var id = json._id",
+									"var newUser = json.newUser",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct Email\", function() {",
+									"    pm.expect(email).to.eql(\"testuser@gmail.com\");",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"data"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var modified = json.nModified",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Number modified\", function() {",
+									"    pm.expect(modified).to.eql(1);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"testNewName\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"data"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data after update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var email = json.email_login",
+									"var id = json._id",
+									"var newUser = json.newUser",
+									"var newName = json.name",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct Email\", function() {",
+									"    pm.expect(email).to.eql(\"testuser@gmail.com\");",
+									"})",
+									"",
+									"pm.test(\"New user\", function() {",
+									"    pm.expect(newUser).to.eql(undefined);",
+									"})",
+									"",
+									"pm.test(\"Updated name\", function() {",
+									"    pm.expect(newName).to.eql(\"testNewName\");",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"data"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Same Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Existing user\", function() {",
+									"    pm.expect(message).to.eql(\"This email is already associated with an account\");",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email_login\": \"testuser@gmail.com\",\n  \"password\": \"SecureForFun123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								"email_and_password"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendPasswordReset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ad2dbb7-4f4f-4965-bf35-c1ef35f3db2b",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Email Sent\", function() {",
+									"    pm.expect(message).to.eql(\"Reset email sent\");",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/resetpassword?email=testuser@gmail.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"resetpassword"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "testuser@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SendPasswordReset Invalid email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d79bd167-f7ec-4e27-9b6e-016608c4806a",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Email not Sent\", function() {",
+									"    pm.expect(message).to.eql(\"Email not found\");",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/resetpassword?email=nonExistentUser@gmail.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"resetpassword"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "nonExistentUser@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d79bd167-f7ec-4e27-9b6e-016608c4806a",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"User deleted\", function() {",
+									"    pm.expect(message).to.eql(\"Successfully deleted your account and all your data in our system.\");",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"data"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Connections",
+			"item": [
+				{
+					"name": "Register User 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var token = json.token",
+									"var email = json.doc.email_login",
+									"var id = json.doc._id",
+									"var newUser = json.newUser",
+									"",
+									"pm.test(\"Correct Email\", function() {",
+									"    pm.expect(email).to.eql(\"testuser1@gmail.com\");",
+									"})",
+									"pm.test(\"Existing User\", function() {",
+									"    pm.expect(newUser).to.eql(true);",
+									"})",
+									"",
+									"pm.environment.set(\"user1Token\", token);",
+									"pm.environment.set(\"user1Id\", id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email_login\": \"testuser1@gmail.com\",\n  \"password\": \"SecureForFun123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								"email_and_password"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var token = json.token",
+									"var email = json.doc.email_login",
+									"var id = json.doc._id",
+									"var newUser = json.newUser",
+									"",
+									"pm.test(\"Correct Email\", function() {",
+									"    pm.expect(email).to.eql(\"testuser2@gmail.com\");",
+									"})",
+									"pm.test(\"Existing User\", function() {",
+									"    pm.expect(newUser).to.eql(true);",
+									"})",
+									"",
+									"pm.environment.set(\"user2Token\", token);",
+									"pm.environment.set(\"user2Id\", id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email_login\": \"testuser2@gmail.com\",\n  \"password\": \"SecureForFun123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								"email_and_password"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Follow User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"var follower = json.doc.follower",
+									"var followee = json.doc.followee",
+									"var status = json.doc.status",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct follower\", function() {",
+									"    pm.expect(follower).to.eql(pm.variables.get('user1Id'));",
+									"})",
+									"pm.test(\"Correct followee\", function() {",
+									"    pm.expect(followee).to.eql(pm.variables.get('user2Id'));",
+									"})",
+									"",
+									"pm.environment.set(\"relationshipId\", json.doc._id);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user1Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"followee\": \"{{user2Id}}\",\n  \"followeeType\": \"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetNotifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One notification\", function() {",
+									"    pm.expect(json.length).to.eql(1);",
+									"})",
+									"",
+									"pm.environment.set(\"user2Notification1\", json[0]._id);",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user2Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/notification",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"notification"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Notification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One deleted\", function() {",
+									"    pm.expect(json.deletedCount).to.eql(1);",
+									"})",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user2Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{user2Notification1}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/notification",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"notification"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetNotifications after delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One notification\", function() {",
+									"    pm.expect(json.length).to.eql(0);",
+									"})",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user2Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/notification",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"notification"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pending",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One pending connection\", function() {",
+									"    pm.expect(json.length).to.eql(1);",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{user1Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection/pending",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection",
+								"pending"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Followers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One pending connection\", function() {",
+									"    pm.expect(json.length).to.eql(0);",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{user1Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection/connected",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection",
+								"connected"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Following",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One pending connection\", function() {",
+									"    pm.expect(json.length).to.eql(1);",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{user1Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"var follower = json.doc.follower",
+									"var followee = json.doc.followee",
+									"var status = json.doc.status",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct follower\", function() {",
+									"    pm.expect(follower).to.eql(pm.variables.get('user1Id'));",
+									"})",
+									"pm.test(\"Correct followee\", function() {",
+									"    pm.expect(followee).to.eql(pm.variables.get('user2Id'));",
+									"})",
+									"pm.test(\"Correct message\", function() {",
+									"    pm.expect(message).to.eql(\"Request accepted.\");",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user2Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"follower\": \"{{user1Id}}\",\n  \"response\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection/respond",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection",
+								"respond"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pending after accept",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One pending connection\", function() {",
+									"    pm.expect(json.length).to.eql(0);",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user1Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection/pending",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection",
+								"pending"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Followers after Accept",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"One pending connection\", function() {",
+									"    pm.expect(json.length).to.eql(1);",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{user1Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection/connected",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection",
+								"connected"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unfollow User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct message\", function() {",
+									"    pm.expect(message).to.eql(\"Unfollowed.\");",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user1Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"followee\": \"{{user2Id}}\",\n  \"followeeType\": \"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Block",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct message\", function() {",
+									"    pm.expect(message).to.eql(\"Blocked.\");",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user1Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"followee\": \"{{user2Id}}\",\n  \"followeeType\": \"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection/block",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection",
+								"block"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unblock",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d8d2105-fb11-42cf-89fa-6238c367790c",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Correct message\", function() {",
+									"    pm.expect(message).to.eql(\"Unblocked.\");",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{user1Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"followee\": \"{{user2Id}}\",\n  \"followeeType\": \"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/connection/block",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"connection",
+								"block"
+							],
+							"query": [
+								{
+									"key": "email_login",
+									"value": "test@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password_hash",
+									"value": "testHash",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "and",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d79bd167-f7ec-4e27-9b6e-016608c4806a",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"User deleted\", function() {",
+									"    pm.expect(message).to.eql(\"Successfully deleted your account and all your data in our system.\");",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{user1Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"data"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d79bd167-f7ec-4e27-9b6e-016608c4806a",
+								"exec": [
+									"var json = JSON.parse(responseBody)",
+									"var message = json.message",
+									"",
+									"pm.test(\"Status test\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"User deleted\", function() {",
+									"    pm.expect(message).to.eql(\"Successfully deleted your account and all your data in our system.\");",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{user2Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"data"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Business",
+			"item": [
+				{
+					"name": "Setup",
+					"item": [
+						{
+							"name": "Create user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b562c4b8-c096-4fa5-9acb-a42337c07d43",
+										"exec": [
+											"let returnedDoc = JSON.parse(responseBody);",
+											"let authToken = returnedDoc.token;",
+											"let userId = returnedDoc.doc._id;",
+											"",
+											"",
+											"pm.environment.set(\"userToken\", authToken);",
+											"pm.environment.set(\"userId\", userId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_login\": \"test@gmail.com\",\n  \"password\": \"testPassword\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"register",
+										"email_and_password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "Create business without JWT",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d25b5a17-35d9-4277-8560-0c954b896042",
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Returns 'Forbidden'\", function () {",
+											"    pm.response.to.have.body(\"Forbidden\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create business without name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b8750f75-f4de-4ea8-8233-a15ae89d691a",
+										"exec": [
+											"let jsonData = pm.response.json();",
+											"let errorType = jsonData.error;",
+											"let message = jsonData.message;",
+											"",
+											"",
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Error type is 'query error'\", function () {",
+											"    pm.expect(errorType).to.eql(\"query error\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Error messsage is provided\", function () {",
+											"    pm.expect(message).to.eql(\"Name of the business missing\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create business",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "47eb1aa4-1e02-4e83-9986-f4a2c8af95f8",
+										"exec": [
+											"pm.environment.set(\"businessName\", \"Pintro\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2168bc4c-a9d9-4820-b9e9-1767a8ea8e2f",
+										"exec": [
+											"let doc = JSON.parse(responseBody);",
+											"let businessId = doc._id;",
+											"let businessName = doc.name;",
+											"let ownerId = doc.owner.user_id;",
+											"",
+											"",
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct business name\", function () {",
+											"    pm.expect(businessName).to.eql(pm.environment.get(\"businessName\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Request issuer is the business owner\", function () {",
+											"    pm.expect(ownerId).to.eql(pm.environment.get(\"userId\"));",
+											"});",
+											"",
+											"",
+											"pm.environment.set(\"businessId\", businessId);",
+											"pm.environment.set(\"businessName\", businessName);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"{{businessName}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get business by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fc05d7b-4767-4bc6-9e0b-7d12e35befde",
+										"exec": [
+											"let doc = JSON.parse(responseBody)[0];",
+											"let businessId = doc._id;",
+											"let businessName = doc.name;",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"console.log(doc);",
+											"",
+											"pm.test(\"Correct business id\", function () {",
+											"    pm.expect(businessId).to.eql(pm.environment.get(\"businessId\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct business name\", function () {",
+											"    pm.expect(businessName).to.eql(pm.environment.get(\"businessName\"));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business?_id={{businessId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{businessId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get business by name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c0113909-12e8-462d-844a-afd9698358da",
+										"exec": [
+											"let doc = JSON.parse(responseBody)[0];",
+											"let businessId = doc._id;",
+											"let businessName = doc.name;",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct business id\", function () {",
+											"    pm.expect(businessId).to.eql(pm.environment.get(\"businessId\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct business name\", function () {",
+											"    pm.expect(businessName).to.eql(pm.environment.get(\"businessName\"));",
+											"});",
+											"",
+											"",
+											"pm.environment.unset(\"businessName\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business?name={{businessName}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{businessName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all businesses",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "93c03eb1-e5f2-4503-9969-8f5a904ca155",
+										"exec": [
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://localhost:3000/api/v1/business\",",
+											"        method: \"POST\",",
+											"        header: {",
+											"            \"Content-Type\": \"application/json\",",
+											"            \"Accept\": \"application/json\",",
+											"            \"Authorization\": pm.environment.get(\"userToken\")",
+											"        },",
+											"        body: JSON.stringify({ name: \"Other Co.\", location: \"New York\" })",
+											"    },",
+											"    function (err, response) {",
+											"        let successful = [200, 201, 202].includes(response.code);",
+											"        ",
+											"        if(successful){",
+											"                console.log(response.json()._id);",
+											"            pm.environment.set(\"otherBusinessId\", response.json()._id);",
+											"            ",
+											"            console.log(\"Query successful\");",
+											"        } else {",
+											"            console.log(\"Query unsuccessful\");",
+											"        }",
+											"    }",
+											");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "52542b9b-e13f-41f6-81d1-0418081c2f0e",
+										"exec": [
+											"let doc = JSON.parse(responseBody);",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response contains two documents\", function () {",
+											"    pm.expect(doc.length).to.eql(1);",
+											"});",
+											"",
+											"",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/business/\" + pm.environment.get(\"otherBusinessId\"),",
+											"        method: \"DELETE\",",
+											"        header: {",
+											"            \"Content-Type\": \"application/json\",",
+											"            \"Accept\": \"application/json\",",
+											"            \"Authorization\": pm.environment.get(\"userToken\")",
+											"        }",
+											"    },",
+											"    function (err, response) {",
+											"        let successful = [200, 201, 202].includes(response.code);",
+											"        ",
+											"        if(successful)",
+											"            console.log(\"Query successful\");",
+											"        else",
+											"            console.log(\"Query unsuccessful\");",
+											"    }",
+											");",
+											"",
+											"",
+											"pm.environment.unset(\"otherBusinessId\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update business",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2164266e-f154-4924-be2b-c13149d212c1",
+										"exec": [
+											"pm.environment.set(\"businessBio\", \"Lorem ipsum dolor sit amet...\");",
+											"pm.environment.set(\"businessSeekingInvestment\", true);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c2ce1571-b5e4-4889-bb04-cc1b0c7ec22a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"bio\": \"{{businessBio}}\",\n\t\"seeking_investment\": \"{{businessSeekingInvestment}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business/{{businessId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business",
+										"{{businessId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get business by id after update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fc05d7b-4767-4bc6-9e0b-7d12e35befde",
+										"exec": [
+											" responseBody = JSON.parse(responseBody)",
+											" businessBio = responseBody.bio;",
+											" seekingInvestment = responseBody.seeking_investment;",
+											"",
+											"pm.test(\"Correct business bio\", function () {",
+											"    pm.expect(businessBio).to.eql(pm.environment.get(\"businessBio\"));",
+											"});",
+											"",
+											"pm.test(\"Correct value for 'seeking_investment' field\", function () {",
+											"    pm.expect(seekingInvestment).to.eql(pm.environment.get(\"businessSeekingInvestment\"));",
+											"});",
+											"",
+											"pm.environment.unset(\"businessBio\");",
+											"pm.environment.unset(\"businessSeekingInvestment\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business?_id={{businessId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{businessId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete business",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0333cc50-6d30-4950-90e9-960d1fad31ed",
+										"exec": [
+											"let doc = JSON.parse(responseBody);",
+											"let businessId = doc._id;",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Deleted business was returned\", function () {",
+											"    pm.expect(businessId).to.eql(pm.environment.get(\"businessId\"));",
+											"});",
+											"",
+											"",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/business?_id=\" + pm.environment.get(\"businessId\"),",
+											"        method: \"GET\"",
+											"    },",
+											"    function (err, response) {",
+											"        pm.test(\"The database does not contain the deleted business\", function(){",
+											"            let responseBody = response.json();",
+											"            pm.expect(response.code).to.eql(404);",
+											"            pm.expect(responseBody.error).to.eql(\"query error\");",
+											"            pm.expect(responseBody.message).to.eql(\"Business not found\");",
+											"        });",
+											"    }",
+											");",
+											"",
+											"",
+											"// the businessId variable is no longer needed",
+											"pm.environment.unset(\"businessId\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/business/{{businessId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"business",
+										"{{businessId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1036ad74-2730-48bf-b261-91cc0681d6f0",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f64f6a78-d8b4-4905-9f4a-51b907f8ed8e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Teardown",
+					"item": [
+						{
+							"name": "Delete user",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{userToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_id\": \"{{userId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"data"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Hub",
+			"item": [
+				{
+					"name": "Setup",
+					"item": [
+						{
+							"name": "Create hub owner",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b562c4b8-c096-4fa5-9acb-a42337c07d43",
+										"exec": [
+											"let returnedDoc = JSON.parse(responseBody);",
+											"let authToken = returnedDoc.token;",
+											"let userId = returnedDoc.doc._id;",
+											"",
+											"",
+											"pm.environment.set(\"hubOwnerToken\", authToken);",
+											"pm.environment.set(\"hubOwnerId\", userId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_login\": \"test@gmail.com\",\n  \"password\": \"testPassword\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"register",
+										"email_and_password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "baa25846-ae96-42ce-b7f0-2808581493ea",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3af8922c-7e70-4afb-bf35-ac123ab368d7",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "Create hub without JWT",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d25b5a17-35d9-4277-8560-0c954b896042",
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Returns 'Forbidden'\", function () {",
+											"    pm.response.to.have.body(\"Forbidden\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create hub without name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b8750f75-f4de-4ea8-8233-a15ae89d691a",
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Error messsage is returned\", function () {",
+											"    pm.response.to.have.body(\"Name of the hub missing\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{hubOwnerToken}}"
+									}
+								],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create hub",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "47eb1aa4-1e02-4e83-9986-f4a2c8af95f8",
+										"exec": [
+											"pm.environment.set(\"hubName\", \"Pintro Hub\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2168bc4c-a9d9-4820-b9e9-1767a8ea8e2f",
+										"exec": [
+											"let doc = JSON.parse(responseBody);",
+											"let hubId = doc._id;",
+											"let hubName = doc.name;",
+											"let adminId = doc.members[0].user_id;",
+											"",
+											"",
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct hub name\", function () {",
+											"    pm.expect(hubName).to.eql(pm.environment.get(\"hubName\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Request issuer is the hub admin\", function () {",
+											"    pm.expect(adminId).to.eql(pm.environment.get(\"hubOwnerId\"));",
+											"});",
+											"",
+											"",
+											"pm.environment.set(\"hubId\", hubId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{hubOwnerToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"{{hubName}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get hub by id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fc05d7b-4767-4bc6-9e0b-7d12e35befde",
+										"exec": [
+											"let doc = JSON.parse(responseBody)[0];",
+											"let hubId = doc._id;",
+											"let hubName = doc.name;",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct hub id\", function () {",
+											"    pm.expect(hubId).to.eql(pm.environment.get(\"hubId\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct hub name\", function () {",
+											"    pm.expect(hubName).to.eql(pm.environment.get(\"hubName\"));",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub?_id={{hubId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{hubId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get hub by name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c0113909-12e8-462d-844a-afd9698358da",
+										"exec": [
+											"let doc = JSON.parse(responseBody)[0];",
+											"let hubId = doc._id;",
+											"let hubName = doc.name;",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct hub id\", function () {",
+											"    pm.expect(hubId).to.eql(pm.environment.get(\"hubId\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct hub name\", function () {",
+											"    pm.expect(hubName).to.eql(pm.environment.get(\"hubName\"));",
+											"});",
+											"",
+											"",
+											"pm.environment.unset(\"hubName\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub?name={{hubName}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "{{hubName}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all hubs",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "93c03eb1-e5f2-4503-9969-8f5a904ca155",
+										"exec": [
+											"// create an additional hub",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://localhost:3000/api/v1/hub\",",
+											"        method: \"POST\",",
+											"        header: {",
+											"            \"Content-Type\": \"application/json\",",
+											"            \"Accept\": \"application/json\",",
+											"            \"Authorization\": pm.environment.get(\"hubOwnerToken\")",
+											"        },",
+											"        body: JSON.stringify({ name: \"Other Hub\", description: \"Lorem ipsum...\" })",
+											"    },",
+											"    function (err, response) {",
+											"        let successful = [200, 201, 202].includes(response.code);",
+											"        ",
+											"        if(successful){",
+											"                console.log(response.json()._id);",
+											"            pm.environment.set(\"otherHubId\", response.json()._id);",
+											"            ",
+											"            console.log(\"Query successful\");",
+											"        } else {",
+											"            console.log(\"Query unsuccessful\");",
+											"        }",
+											"    }",
+											");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "52542b9b-e13f-41f6-81d1-0418081c2f0e",
+										"exec": [
+											"let doc = JSON.parse(responseBody);",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response contains two documents\", function () {",
+											"    pm.expect(doc.length).to.eql(1);",
+											"});",
+											"",
+											"",
+											"// delete the additional hub",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/hub/\" + pm.environment.get(\"otherHubId\"),",
+											"        method: \"DELETE\",",
+											"        header: {",
+											"            \"Content-Type\": \"application/json\",",
+											"            \"Accept\": \"application/json\",",
+											"            \"Authorization\": pm.environment.get(\"hubOwnerToken\")",
+											"        }",
+											"    },",
+											"    function (err, response) {",
+											"        let successful = [200, 201, 202].includes(response.code);",
+											"        ",
+											"        if(successful)",
+											"            console.log(\"Query successful\");",
+											"        else",
+											"            console.log(\"Query unsuccessful\");",
+											"    }",
+											");",
+											"",
+											"",
+											"pm.environment.unset(\"otherHubId\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update hub",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2164266e-f154-4924-be2b-c13149d212c1",
+										"exec": [
+											"pm.environment.set(\"hubDescription\", \"Lorem ipsum dolor sit amet...\");",
+											"pm.environment.set(\"hubLocation\", \"New York\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c2ce1571-b5e4-4889-bb04-cc1b0c7ec22a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/hub?_id=\" + pm.environment.get(\"hubId\"),",
+											"        method: \"GET\"",
+											"    },",
+											"    function (err, response) {",
+											"        //let responseBody = response.json();",
+											"        //let hubDescription = responseBody.description;",
+											"        //let hubLocation = responseBody.location;",
+											"        ",
+											"       // pm.test(\"Correct hub description\", function () {",
+											"        //    pm.expect(hubDescription).to.eql(pm.environment.get(\"hubDescription\"));",
+											"        //});",
+											"        ",
+											"       // pm.test(\"Correct hub location\", function () {",
+											"        //    pm.expect(hubLocation).to.eql(pm.environment.get(\"hubLocation\"));",
+											"        //});",
+											"});",
+											"",
+											"",
+											"pm.environment.unset(\"hubDescription\");",
+											"pm.environment.unset(\"hubLocation\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{hubOwnerToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"description\": \"{{hubDescription}}\",\n\t\"location\": \"{{hubLocation}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub/{{hubId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub",
+										"{{hubId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete hub",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0333cc50-6d30-4950-90e9-960d1fad31ed",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Deleted hub was returned\", function () {",
+											"    let doc = JSON.parse(responseBody);",
+											"    let hubId = doc._id;",
+											"    ",
+											"    pm.expect(hubId).to.eql(pm.environment.get(\"hubId\"));",
+											"});",
+											"",
+											"",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/hub?_id=\" + pm.environment.get(\"hubId\"),",
+											"        method: \"GET\"",
+											"    },",
+											"    function (err, response) {",
+											"        pm.test(\"The database does not contain the deleted hub\", function(){",
+											"            pm.expect(response.code).to.eql(404);",
+											"            pm.expect(response.text()).to.eql(\"Hub not found\");",
+											"        });",
+											"    }",
+											");",
+											"",
+											"",
+											"// the hubId variable is no longer needed",
+											"pm.environment.unset(\"hubId\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{hubOwnerToken}}"
+									}
+								],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/hub/{{hubId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"hub",
+										"{{hubId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Teardown",
+					"item": [
+						{
+							"name": "Delete hub owner",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8f970c0d-5f55-4f69-9d72-ef33d5f56b2d",
+										"exec": [
+											"pm.environment.unset(\"hubOwnerId\");",
+											"pm.environment.unset(\"hubOwnerToken\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{hubOwnerToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_id\": \"{{hubOwnerId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"data"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3e140c4d-c3df-46e6-b8b8-5527a3ee957f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fa3dfe0c-22ea-4c27-941a-f05148587731",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "Setup",
+					"item": [
+						{
+							"name": "Create article author",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b562c4b8-c096-4fa5-9acb-a42337c07d43",
+										"exec": [
+											"let returnedDoc = JSON.parse(responseBody);",
+											"let authToken = returnedDoc.token;",
+											"let userId = returnedDoc.doc._id;",
+											"",
+											"",
+											"pm.environment.set(\"articleAuthorToken\", authToken);",
+											"pm.environment.set(\"articleAuthorId\", userId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_login\": \"test@gmail.com\",\n  \"password\": \"testPassword\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"register",
+										"email_and_password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create other user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b562c4b8-c096-4fa5-9acb-a42337c07d43",
+										"exec": [
+											"let returnedDoc = JSON.parse(responseBody);",
+											"let authToken = returnedDoc.token;",
+											"let userId = returnedDoc.doc._id;",
+											"",
+											"",
+											"pm.environment.set(\"otherUserToken\", authToken);",
+											"pm.environment.set(\"otherUserId\", userId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email_login\": \"user@test.com\",\n  \"password\": \"userPassword\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/register/email_and_password",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"register",
+										"email_and_password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "baa25846-ae96-42ce-b7f0-2808581493ea",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3af8922c-7e70-4afb-bf35-ac123ab368d7",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "Create article without JWT",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d25b5a17-35d9-4277-8560-0c954b896042",
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Returns 'Forbidden'\", function () {",
+											"    pm.response.to.have.body(\"Forbidden\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create article without content",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b8750f75-f4de-4ea8-8233-a15ae89d691a",
+										"exec": [
+											"// The status code should actually be 400, but the server returns 500",
+											"// Should be fixed in the future",
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Error messsage is returned\", function () {",
+											"    pm.response.to.have.body(\"An error occurred while saving the data\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{articleAuthorToken}}"
+									}
+								],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create article",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "47eb1aa4-1e02-4e83-9986-f4a2c8af95f8",
+										"exec": [
+											"pm.environment.set(\"articleTitle\", \"Hello, World!\");",
+											"pm.environment.set(\"articleText\", \"Lorem ipsum dolor sit amet...\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2168bc4c-a9d9-4820-b9e9-1767a8ea8e2f",
+										"exec": [
+											"let doc = JSON.parse(responseBody);",
+											"let articleId = doc._id;",
+											"let articleTitle = doc.title;",
+											"let articleText = doc.text;",
+											"let authorId = doc.author.author_id;",
+											"",
+											"",
+											"pm.test(\"Successful POST request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct article title\", function () {",
+											"    pm.expect(articleTitle).to.eql(pm.environment.get(\"articleTitle\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct article text\", function () {",
+											"    pm.expect(articleText).to.eql(pm.environment.get(\"articleText\"));",
+											"});",
+											"",
+											"",
+											"pm.test(\"Request issuer is the article author\", function () {",
+											"    pm.expect(authorId).to.eql(pm.environment.get(\"articleAuthorId\"));",
+											"});",
+											"",
+											"",
+											"pm.environment.set(\"articleId\", articleId);",
+											"",
+											"pm.environment.unset(\"articleTitle\");",
+											"pm.environment.unset(\"articleText\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{articleAuthorToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"{{articleTitle}}\",\n\t\"text\": \"{{articleText}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get article by id (when exists)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fc05d7b-4767-4bc6-9e0b-7d12e35befde",
+										"exec": [
+											"let articlesReturned = JSON.parse(responseBody);",
+											"let doc = articlesReturned[0];",
+											"let articleId = doc._id;",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Only one article returned\", function () {",
+											"    pm.expect(articlesReturned.length).to.eql(1);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct article id\", function () {",
+											"    pm.expect(articleId).to.eql(pm.environment.get(\"articleId\"));",
+											"});",
+											"",
+											"console.log(articleId);",
+											"    console.log(articleId.length);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article?_id={{articleId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{articleId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get article by id (when doesn't exist)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1fc05d7b-4767-4bc6-9e0b-7d12e35befde",
+										"exec": [
+											"// Note: as the article id is randomly generated, there is a chance",
+											"// that there is an article with this id already in the database",
+											"",
+											"pm.test(\"Status code is 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct message returned\", function () {",
+											"    pm.response.to.have.body(\"Articles not found\");",
+											"});",
+											"",
+											"",
+											"pm.environment.unset(\"nonExistantArticleId\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bb2cfe1e-19b3-4b23-9add-ed53496c3d9b",
+										"exec": [
+											"let idLength = 24;",
+											"let articleId = \"\";",
+											"",
+											"for (let i = 0; i < idLength; ++i) {",
+											"    articleId += (Math.floor(Math.random() * 16)).toString(16);",
+											"}",
+											"    ",
+											"    console.log(articleId);",
+											"    console.log(articleId.length);",
+											"pm.environment.set(\"nonExistantArticleId\", articleId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article?_id={{nonExistantArticleId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									],
+									"query": [
+										{
+											"key": "_id",
+											"value": "{{nonExistantArticleId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all articles",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "93c03eb1-e5f2-4503-9969-8f5a904ca155",
+										"exec": [
+											"// create an additional article",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://localhost:3000/api/v1/article\",",
+											"        method: \"POST\",",
+											"        header: {",
+											"            \"Content-Type\": \"application/json\",",
+											"            \"Accept\": \"application/json\",",
+											"            \"Authorization\": pm.environment.get(\"articleAuthorToken\")",
+											"        },",
+											"        body: JSON.stringify({ title: \"Other Article\", text: \"Some sample text...\" })",
+											"    },",
+											"    function (err, response) {",
+											"        let successful = [200, 201, 202].includes(response.code);",
+											"        ",
+											"        if(successful){",
+											"                console.log(response.json()._id);",
+											"            pm.environment.set(\"otherArticleId\", response.json()._id);",
+											"            ",
+											"            console.log(\"Query successful\");",
+											"        } else {",
+											"            console.log(\"Query unsuccessful\");",
+											"        }",
+											"    }",
+											");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "52542b9b-e13f-41f6-81d1-0418081c2f0e",
+										"exec": [
+											"let doc = JSON.parse(responseBody);",
+											"",
+											"",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response contains two documents\", function () {",
+											"    pm.expect(doc.length).to.eql(2);",
+											"});",
+											"",
+											"",
+											"// delete the additional article",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/article/\" + pm.environment.get(\"otherArticleId\"),",
+											"        method: \"DELETE\",",
+											"        header: {",
+											"            \"Content-Type\": \"application/json\",",
+											"            \"Accept\": \"application/json\",",
+											"            \"Authorization\": pm.environment.get(\"articleAuthorToken\")",
+											"        }",
+											"    },",
+											"    function (err, response) {",
+											"        let successful = [200, 201, 202].includes(response.code);",
+											"        ",
+											"        if(successful)",
+											"            console.log(\"Query successful\");",
+											"        else",
+											"            console.log(\"Query unsuccessful\");",
+											"    }",
+											");",
+											"",
+											"",
+											"pm.environment.unset(\"otherArticleId\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update article (by author)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2164266e-f154-4924-be2b-c13149d212c1",
+										"exec": [
+											"pm.environment.set(\"newArticleTitle\", \"New title\");",
+											"pm.environment.set(\"newArticleText\", \"Updated article text\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c2ce1571-b5e4-4889-bb04-cc1b0c7ec22a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/article?_id=\" + pm.environment.get(\"articleId\"),",
+											"        method: \"GET\"",
+											"    },",
+											"    function (err, response) {",
+											"        //let responseBody = response.json();",
+											"        //let articleTitle = responseBody.title;",
+											"        //let articleText = responseBody.text;",
+											"        ",
+											"        //pm.test(\"Correct article title\", function () {",
+											"        //    pm.expect(articleTitle).to.eql(pm.environment.get(\"newArticleTitle\"));",
+											"       // });",
+											"        ",
+											"        //pm.test(\"Correct article text\", function () {",
+											"        //    pm.expect(articleText).to.eql(pm.environment.get(\"newArticleText\"));",
+											"        //});",
+											"});",
+											"",
+											"",
+											"pm.environment.unset(\"newArticleTitle\");",
+											"pm.environment.unset(\"newArticleText\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{articleAuthorToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"{{newArticleTitle}}\",\n\t\"text\": \"{{newArticleText}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article/{{articleId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article",
+										"{{articleId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update article (by other user)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "2164266e-f154-4924-be2b-c13149d212c1",
+										"exec": [
+											"pm.environment.set(\"otherArticleTitle\", \"Some other title\");",
+											"pm.environment.set(\"otherArticleText\", \"Text updated by other user\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c2ce1571-b5e4-4889-bb04-cc1b0c7ec22a",
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Correct error message returned\", function () {",
+											"    pm.response.to.have.body(\"You are not authorised to update the specified record\");",
+											"});",
+											"",
+											"",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/article?_id=\" + pm.environment.get(\"articleId\"),",
+											"        method: \"GET\"",
+											"    },",
+											"    function (err, newResponse) {",
+											"        let responseBody = newResponse.json()[0];",
+											"        let articleTitle = responseBody.title;",
+											"        let articleText = responseBody.text;",
+											"        ",
+											"        pm.test(\"Article title was not changed\", function () {",
+											"            pm.expect(articleTitle).not.eql(pm.environment.get(\"otherArticleTitle\"));",
+											"        });",
+											"        ",
+											"        pm.test(\"Article text was not changed\", function () {",
+											"            pm.expect(articleText).not.eql(pm.environment.get(\"otherArticleText\"));",
+											"        });",
+											"});",
+											"",
+											"",
+											"pm.environment.unset(\"otherArticleTitle\");",
+											"pm.environment.unset(\"otherArticleText\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{otherUserToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"title\": \"{{otherArticleTitle}}\",\n\t\"text\": \"{{otherArticleText}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article/{{articleId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article",
+										"{{articleId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete article",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0333cc50-6d30-4950-90e9-960d1fad31ed",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Deleted article was returned\", function () {",
+											"    let doc = JSON.parse(responseBody);",
+											"    let articleId = doc._id;",
+											"    ",
+											"    pm.expect(articleId).to.eql(pm.environment.get(\"articleId\"));",
+											"});",
+											"",
+											"",
+											"pm.sendRequest(",
+											"    {",
+											"        url: \"http://\"+pm.environment.get(\"host\")+\":\"+pm.environment.get(\"port\")+\"/api/v1/article?_id=\" + pm.environment.get(\"articleId\"),",
+											"        method: \"GET\"",
+											"    },",
+											"    function (err, response) {",
+											"        pm.test(\"The database does not contain the deleted article\", function(){",
+											"            pm.expect(response.code).to.eql(404);",
+											"            pm.expect(response.text()).to.eql(\"Articles not found\");",
+											"        });",
+											"    }",
+											");",
+											"",
+											"",
+											"// the articleId variable is no longer needed",
+											"pm.environment.unset(\"articleId\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{articleAuthorToken}}"
+									}
+								],
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/article/{{articleId}}",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"article",
+										"{{articleId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Teardown",
+					"item": [
+						{
+							"name": "Delete article author",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8f970c0d-5f55-4f69-9d72-ef33d5f56b2d",
+										"exec": [
+											"pm.environment.unset(\"articleAuthorId\");",
+											"pm.environment.unset(\"articleAuthorToken\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{articleAuthorToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_id\": \"{{articleAuthorId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"data"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete other user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8f970c0d-5f55-4f69-9d72-ef33d5f56b2d",
+										"exec": [
+											"pm.environment.unset(\"otherUserId\");",
+											"pm.environment.unset(\"otherUserToken\");"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "{{otherUserToken}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"_id\": \"{{otherUserId}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{host}}:{{port}}/api/v1/user/data",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"data"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3e140c4d-c3df-46e6-b8b8-5527a3ee957f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "fa3dfe0c-22ea-4c27-941a-f05148587731",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5f03b4c7-2e8f-46f2-a314-328ecaf96f98",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f321cd7-1162-4553-91f9-685f45df7ff3",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Companies button renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "shadowOffset": Object {
+          "height": 6,
+        },
+        "shadowOpacity": 0.195,
+        "shadowRadius": 5.4,
+      },
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "borderRadius": 15,
+        "flexDirection": "row",
+        "padding": 20,
+        "resizeMode": "contain",
+        "width": "85%",
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    focusable={false}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderColor": "red",
+        "flex": 1,
+        "flexDirection": "row",
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginLeft": 0,
+          "padding": 2,
+        }
+      }
+    >
+      <Image
+        source={1}
+        style={
+          Object {
+            "borderRadius": 75,
+            "height": 40,
+            "overflow": "hidden",
+            "width": 40,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "flexDirection": "column",
+          "left": "auto",
+          "marginLeft": 5,
+          "marginTop": 5,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "grey",
+            "fontSize": 12,
+            "fontWeight": "normal",
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;

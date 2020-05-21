@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo:4.2.3
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017-27019:27017-27019
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+    depends_on:
+      - mongo
+
+  server:
+    build: ./server
+    container_name: server
+    volumes:
+      - ./server:/app
+    ports:
+      - 443:443
+      - 3000:3000
+    environment:
+      PORT_HTTPS: 443
+      PORT_HTTP: 3000
+    command: npm run watch:dev
+    depends_on:
+      - mongo

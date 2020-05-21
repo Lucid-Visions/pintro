@@ -1,0 +1,2149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MoodButton /> snapshot of the mood icon button 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  isTVSelectable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "marginLeft": 6,
+      "marginRight": 6,
+      "opacity": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "white",
+          "borderRadius": 30,
+          "height": 60,
+          "justifyContent": "center",
+          "width": 60,
+        },
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "orange",
+          "borderRadius": 30,
+          "height": 60,
+          "justifyContent": "center",
+          "width": 60,
+        },
+      ]
+    }
+  >
+    <Image
+      source={1}
+      style={
+        Object {
+          "aspectRatio": 1,
+          "height": 30,
+          "overflow": "hidden",
+          "resizeMode": "contain",
+          "width": 30,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "white",
+            "fontFamily": "poppins-medium",
+            "fontSize": 10,
+            "paddingBottom": 15,
+            "paddingTop": 15,
+          },
+          Object {
+            "color": "#E1963D",
+            "fontFamily": "poppins-medium",
+            "textDecorationColor": "#E1963D",
+            "textDecorationLine": "underline",
+          },
+        ]
+      }
+    >
+      HAPPY
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`<MoodButtonCard /> <MoodButtonCard /> with no initial selected mood snapshot of the card component 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  supportedOrientations={
+    Array [
+      "portrait",
+      "landscape",
+    ]
+  }
+  swipeThreshold={100}
+  transparent={true}
+  visible={false}
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "black",
+        "bottom": 0,
+        "height": 1334,
+        "left": 0,
+        "opacity": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <View
+    hideModalContentWhileAnimating={false}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+        "margin": 37.5,
+        "transform": Array [
+          Object {
+            "translateY": 0,
+          },
+        ],
+      }
+    }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#1A1A1A",
+          "borderRadius": 20,
+          "flexDirection": "column",
+          "height": "95%",
+          "justifyContent": "center",
+          "maxHeight": 550,
+          "width": "90%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontFamily": "poppins-bold",
+            "fontSize": 26,
+            "margin": "auto",
+            "paddingTop": 20,
+            "textAlign": "left",
+          }
+        }
+      >
+        Choose a mood
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "space-around",
+            "padding": 20,
+            "width": 320,
+          }
+        }
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              HAPPY
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              MOTIVATED
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              EXHAUSTED
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              OVER IT (DEAD)
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              BURNED OUT
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              COFFEE & RANT
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              GROWING
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              INSPIRE ME
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              HELPFUL
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              FIREFIGHTING
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              ZEN
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              SOCIABLE
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
+
+exports[`<MoodButtonCard /> snapshot of the card component 1`] = `
+<Modal
+  animationType="none"
+  hardwareAccelerated={false}
+  hideModalContentWhileAnimating={false}
+  onModalHide={[Function]}
+  onModalWillHide={[Function]}
+  onModalWillShow={[Function]}
+  onRequestClose={[Function]}
+  scrollHorizontal={false}
+  scrollOffset={0}
+  scrollOffsetMax={0}
+  scrollTo={null}
+  supportedOrientations={
+    Array [
+      "portrait",
+      "landscape",
+    ]
+  }
+  swipeThreshold={100}
+  transparent={true}
+  visible={true}
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "black",
+        "bottom": 0,
+        "height": 1334,
+        "left": 0,
+        "opacity": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <View
+    hideModalContentWhileAnimating={false}
+    onModalHide={[Function]}
+    onModalWillHide={[Function]}
+    onModalWillShow={[Function]}
+    pointerEvents="box-none"
+    scrollHorizontal={false}
+    scrollOffset={0}
+    scrollOffsetMax={0}
+    scrollTo={null}
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "center",
+        "margin": 37.5,
+        "transform": Array [
+          Object {
+            "translateY": 1334,
+          },
+        ],
+      }
+    }
+    supportedOrientations={
+      Array [
+        "portrait",
+        "landscape",
+      ]
+    }
+    swipeThreshold={100}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "center",
+          "backgroundColor": "#1A1A1A",
+          "borderRadius": 20,
+          "flexDirection": "column",
+          "height": "95%",
+          "justifyContent": "center",
+          "maxHeight": 550,
+          "width": "90%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontFamily": "poppins-bold",
+            "fontSize": 26,
+            "margin": "auto",
+            "paddingTop": 20,
+            "textAlign": "left",
+          }
+        }
+      >
+        Choose a mood
+      </Text>
+      <View
+        style={
+          Object {
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "space-around",
+            "padding": 20,
+            "width": 320,
+          }
+        }
+      >
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "orange",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  Object {
+                    "color": "#E1963D",
+                    "fontFamily": "poppins-medium",
+                    "textDecorationColor": "#E1963D",
+                    "textDecorationLine": "underline",
+                  },
+                ]
+              }
+            >
+              HAPPY
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              MOTIVATED
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              EXHAUSTED
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              OVER IT (DEAD)
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              BURNED OUT
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              COFFEE & RANT
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              GROWING
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              INSPIRE ME
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              HELPFUL
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              FIREFIGHTING
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              ZEN
+            </Text>
+          </View>
+        </View>
+        <View
+          accessible={true}
+          focusable={true}
+          isTVSelectable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "marginLeft": 6,
+              "marginRight": 6,
+              "opacity": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "white",
+                  "borderRadius": 30,
+                  "height": 60,
+                  "justifyContent": "center",
+                  "width": 60,
+                },
+                false,
+              ]
+            }
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 30,
+                  "overflow": "hidden",
+                  "resizeMode": "contain",
+                  "width": 30,
+                }
+              }
+            />
+          </View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "white",
+                    "fontFamily": "poppins-medium",
+                    "fontSize": 10,
+                    "paddingBottom": 15,
+                    "paddingTop": 15,
+                  },
+                  false,
+                ]
+              }
+            >
+              SOCIABLE
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</Modal>
+`;
