@@ -104,6 +104,17 @@ export default env
 * `npm start` or `expo start`
 * Install the Expo client on android or ios
 * Scan the QR code found on localhost:19002. Expo should build the react bundle and download it to your mobile device
+* Alternatively, it is possible to use either the Android or iOS simulator.
+  * Follow relevant guide to get started
+    * iOS -  https://docs.expo.io/workflow/ios-simulator/
+    * Android - https://docs.expo.io/workflow/android-studio-emulator/
+
+* Possible errors
+  * App silently times out and never starts the application
+    * This could be caused by a firewall rule blocking the expo client port (19001).
+      * Solutions:
+        * Allow this port on the firewall
+        * Start expo in tunnel mode `expo start --tunnel` or start it normally and choose `tunnel` from the left menu
 
 ## Authors
 
