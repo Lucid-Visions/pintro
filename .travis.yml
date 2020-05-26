@@ -1,0 +1,15 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - docker build --tag "${DOCKER_ORG}/${SERVER_IMAGE_TAG}" server/.
+
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+
+deploy:
+  provider: script
+  script: docker push "${DOCKER_ORG}/${SERVER_IMAGE_TAG}"
