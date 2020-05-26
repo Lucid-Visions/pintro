@@ -23,9 +23,9 @@ services:
     depends_on:
       - mongo
 
-  server:
-    build: ./server
-    container_name: server
+  pintro-server:
+    image: mcpolandc/pintro-server
+    container_name: pintro-server
     volumes:
       - ./server:/app
     ports:
