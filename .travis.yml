@@ -1,7 +1,8 @@
-language: javascript
-
 services:
   - docker
+
+before_deploy:
+  - docker login -u "{$REGISTRY_USER}" -p "{$REGISTRY_PASSWORD}"
 
 script:
   - docker build --tag "${DOCKER_ORG}/${SERVER_IMAGE_TAG}" server/.
