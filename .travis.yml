@@ -1,11 +1,9 @@
 services:
   - docker
 
-before_deploy:
-  - docker login -u "{$REGISTRY_USER}" -p "{$REGISTRY_PASSWORD}" docker.io
-
 script:
   - docker build --tag "${DOCKER_ORG}/${SERVER_IMAGE_TAG}" server/.
 
 after_success:
+  - docker login -u "{$REGISTRY_USER}" -p "{$REGISTRY_PASSWORD}" docker.io
   - docker push "${DOCKER_ORG}/${SERVER_IMAGE_TAG}"
