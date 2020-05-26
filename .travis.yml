@@ -1,0 +1,10 @@
+language: javascript
+
+services:
+  - docker
+
+script:
+  - docker build --tag ${DOCKER_ORG}/${SERVER_IMAGE_TAG} .
+
+after_script:
+  - docker push ${DOCKER_ORG}/${SERVER_IMAGE_TAG}
