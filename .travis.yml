@@ -13,3 +13,6 @@ before_deploy:
 deploy:
   provider: script
   script: docker push "${DOCKER_ORG}/${SERVER_IMAGE_TAG}"
+
+notifications:
+  slack: lucid-visions:WVPXvEOYvigHF2gpVHAGl3Yh
