@@ -1,45 +1,44 @@
-import { connect } from "mongoose";
-require("@babel/polyfill");
+import { connect } from 'mongoose'
+require('@babel/polyfill')
 
 
 // Import environment variables
-require("dotenv").config();
+require('dotenv').config()
 
 // Database creds
-const dbUser = process.env.MONGO_USERNAME;
-const dbPass = process.env.MONGO_PASSWORD;
+const dbUser = process.env.MONGO_USERNAME
+const dbPass = process.env.MONGO_PASSWORD
 
 // Database Name
-const database = process.env.MONGO_DB;
+const database = process.env.MONGO_DB
 
-// Connection 
+// Connection
 const host = process.env.MONGO_HOST
 const port = process.env.MONGO_PORT
 
 // Connection URL
-const url = `mongodb://${host}:${port}`;
+const url = `mongodb://${host}:${port}`
 
 // Connection options (authentication)
 const options = {
-  auth: { authSource: "admin" },
+  auth: { authSource: 'admin' },
   user: dbUser,
-  pass: dbPass
-};
+  pass: dbPass,
+}
 
 class Database {
   constructor() {
-    this._connect();
+    this._connect()
   }
 
   async _connect() {
     try {
-      await connect(`${url}/${database}`, options);
-      console.log("Database connection successful");
-    }
-    catch(error) {
+      await connect(`${url}/${database}`, options)
+      console.log('Database connection successful')
+    } catch (error) {
       console.error(error)
     }
   }
 }
 
-export default new Database();
+export default new Database()

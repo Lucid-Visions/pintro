@@ -34,6 +34,5 @@ services:
     environment:
       PORT_HTTPS: 443
       PORT_HTTP: 3000
-    command: npm run watch:dev
     depends_on:
       - mongo
