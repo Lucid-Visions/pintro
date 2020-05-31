@@ -4,3 +4,4 @@ dist/
 dist-server/
 **/.env*
 .DS_Store
+gce.json
