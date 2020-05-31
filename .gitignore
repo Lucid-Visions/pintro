@@ -3,3 +3,4 @@ dist/
 **/.expo/*
 dist-server/
 **/.env*
+.DS_Store

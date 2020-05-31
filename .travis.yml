@@ -4,7 +4,7 @@ services:
   - docker
 
 script:
-  - docker build --tag "${DOCKER_ORG}/${SERVER_IMAGE_TAG}" server/.
+  - docker build --tag "${DOCKER_ADDRESS}/${REGISTRY_USER}/${SERVER_IMAGE_NAME}" server/.
 
 
 before_deploy:
@@ -12,7 +12,7 @@ before_deploy:
 
 deploy:
   provider: script
-  script: docker push "${DOCKER_ORG}/${SERVER_IMAGE_TAG}"
+  script: docker push "${DOCKER_ADDRESS}/${REGISTRY_USER}/${SERVER_IMAGE_NAME}""
 
 notifications:
   slack: lucid-visions:WVPXvEOYvigHF2gpVHAGl3Yh
