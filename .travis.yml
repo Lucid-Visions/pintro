@@ -4,15 +4,16 @@ services:
   - docker
 
 script:
-  - docker build --tag "${DOCKER_ADDRESS}/${REGISTRY_USER}/${SERVER_IMAGE_NAME}" server/.
+  - docker build --tag "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/pintro-server" server/.
+  - docker build --tag "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/mongo-seed" server/.
 
 
 before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker login -u _json_key -p ${REGISTRY_KEY}
 
 deploy:
   provider: script
-  script: docker push "${DOCKER_ADDRESS}/${REGISTRY_USER}/${SERVER_IMAGE_NAME}""
+  script: docker push "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/pintro-server" && docker push "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/mongo-seed"
 
-notifications:
-  slack: lucid-visions:WVPXvEOYvigHF2gpVHAGl3Yh
+# notifications:
+#   slack: lucid-visions:WVPXvEOYvigHF2gpVHAGl3Yh
