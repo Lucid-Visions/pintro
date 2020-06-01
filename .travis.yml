@@ -20,7 +20,7 @@ before_deploy:
   - gcloud --quiet components update
 deploy:
   - provider: script
-    script: chmod +x script/docker-push.sh && script/docker-push.sh
+    script: chmod +x scripts/docker-push.sh && scripts/docker-push.sh
     skip_cleanup: true
     on:
       branch: fix-travis-build
