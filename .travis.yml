@@ -7,6 +7,9 @@ cache:
     - "$HOME/google-cloud-sdk/"
 services:
   - docker
+script:
+  - docker build --tag "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/pintro-server" server/
+  - docker build --tag "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/mongo-seed" docker/mongo-seed/
 env:
   global:
     - GOOGLE_APPLICATION_CREDENTIALS=~/gcloud-service-key.json
@@ -17,7 +20,7 @@ before_deploy:
   - gcloud --quiet components update
 deploy:
   - provider: script
-    script: chmod +x script/docker-build-push.sh && script/docker-build-push.sh
+    script: chmod +x script/docker-push.sh && script/docker-push.sh
     skip_cleanup: true
     on:
       branch: fix-travis-build
