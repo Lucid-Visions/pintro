@@ -1,18 +1,17 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 script:
-  - docker build --tag "${DOCKER_ORG}/${SERVER_IMAGE_TAG}" server/.
-
-
+- docker build --tag "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/pintro-server" server/
+- docker build --tag "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/mongo-seed" docker/mongo-seed/
 before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-
+- docker login -u _json_key --password-stdin "https://${REGISTRY_ADDRESS}"
 deploy:
   provider: script
-  script: docker push "${DOCKER_ORG}/${SERVER_IMAGE_TAG}"
-
+  script: docker push "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/pintro-server" &&
+    docker push "${REGISTRY_ADDRESS}/${REGISTRY_PROJECT_ID}/mongo-seed"
 notifications:
   slack: lucid-visions:WVPXvEOYvigHF2gpVHAGl3Yh
+before_install:
+- openssl aes-256-cbc -K $encrypted_a3c2492b5906_key -iv $encrypted_a3c2492b5906_iv
+  -in gce.json.enc -out gce.json -d

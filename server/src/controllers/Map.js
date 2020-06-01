@@ -1,7 +1,5 @@
-import jwt from "jsonwebtoken";
-import jwtData from "../bin/jwtData";
-import UserModel from "../models/user_model";
-require("dotenv").config();
+import UserModel from '../models/user_model'
+require('dotenv').config()
 
 const Map = {
   getMapData(req, res) {
@@ -9,31 +7,31 @@ const Map = {
       return res
         .status(400)
         .send({
-          error: "Error fetching data",
-          message: "You must provide both long, lat query parameters"
-        });
+          error: 'Error fetching data',
+          message: 'You must provide both long, lat query parameters',
+        })
     }
     UserModel.find({
       location: {
         $near: {
           $maxDistance: req.query.distance || 1000,
           $geometry: {
-            type: "Point",
-            coordinates: [req.query.long, req.query.lat]
-          }
-        }
-      }
+            type: 'Point',
+            coordinates: [req.query.long, req.query.lat],
+          },
+        },
+      },
     })
-      .populate("action_buttons")
+      .populate('action_buttons')
       .find((error, results) => {
         if (error) {
           return res
             .status(400)
-            .send({ error: "Error fetching data", message: error });
+            .send({ error: 'Error fetching data', message: error })
         }
-        return res.status(200).send(results);
-      });
-  }
-};
+        return res.status(200).send(results)
+      })
+  },
+}
 
-export default Map;
+export default Map

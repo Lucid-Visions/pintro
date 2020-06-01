@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 
-/*-------------- Example ------------*/
+/* -------------- Example ------------*/
 
 let emailSchema = new mongoose.Schema({
-  email: String
-}, { collection: 'emails' }) //collection name
+  email: String,
+}, { collection: 'emails' }) // collection name
 
 export default mongoose.model('Emails', emailSchema)

@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer'
 
 // async..await is not allowed in global scope, must use a wrapper
 export default async function main(recipient, content) {
@@ -9,10 +9,10 @@ export default async function main(recipient, content) {
   let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: "segwayteamkcl@gmail.com", // generated ethereal user
-      pass: "lkmhkupxrpzfnvcw" // generated ethereal password
-    }
-  });
+      user: 'segwayteamkcl@gmail.com', // generated ethereal user
+      pass: 'lkmhkupxrpzfnvcw', // generated ethereal password
+    },
+  })
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
@@ -20,14 +20,14 @@ export default async function main(recipient, content) {
     to: recipient, // list of receivers
     subject: content.subject, // Subject line
     text: content.text, // plain text body
-    html: content.html // html body
-  });
+    html: content.html, // html body
+  })
 
-  console.log("Message sent: %s", info.messageId);
+  console.log('Message sent: %s', info.messageId)
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   return info.messageId
 }
