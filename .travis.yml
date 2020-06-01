@@ -23,6 +23,6 @@ deploy:
     script: chmod +x scripts/docker-push.sh && scripts/docker-push.sh
     skip_cleanup: true
     on:
-      branch: fix-travis-build
+      branch: master
 notifications:
   slack: lucid-visions:WVPXvEOYvigHF2gpVHAGl3Yh
