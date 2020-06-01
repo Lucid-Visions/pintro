@@ -20,10 +20,14 @@ import ActionButtons from './controllers/ActionButtons'
 import Notifications from './controllers/Notification'
 import ResetPassword from './controllers/ResetPassword'
 
+import Database from './database'
+
 const app = express()
 
 app.use(urlencoded({ extended: true }))
 app.use(json())
+
+Database._connect()
 
 
 /* ------------- Endpoints -------------*/

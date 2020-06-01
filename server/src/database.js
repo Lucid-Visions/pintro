@@ -1,5 +1,4 @@
 import { connect } from 'mongoose'
-require('@babel/polyfill')
 
 
 // Import environment variables
