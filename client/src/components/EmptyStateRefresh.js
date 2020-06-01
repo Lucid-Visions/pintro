@@ -2,7 +2,7 @@ import { ScrollView, RefreshControl, StyleSheet } from "react-native";
 import EmptyState from "./EmptyState";
 import React from "react"
 
-function emptyStateRefresh({ refreshing, onRefresh, state }) {
+function emptyStateRefresh({ refreshing, onRefresh, state, onPress }) {
   return (
     <ScrollView
       style={styles.container}
@@ -10,7 +10,7 @@ function emptyStateRefresh({ refreshing, onRefresh, state }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <EmptyState state={state} />
+      <EmptyState state={state} onPress={onPress}/>
     </ScrollView>
   );
 }
