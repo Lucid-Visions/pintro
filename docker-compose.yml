@@ -8,12 +8,19 @@ services:
     container_name: mongo
     ports:
       - 27017-27019:27017-27019
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
 
   mongo-seed:
     image: eu.gcr.io/onyx-seeker-278919/mongo-seed
     container_name: mongo-seed
     links:
       - mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
 
   mongo-express:
     image: mongo-express
@@ -22,6 +29,9 @@ services:
       - 8081:8081
     depends_on:
       - mongo
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
   pintro-server:
     image: eu.gcr.io/onyx-seeker-278919/pintro-server
