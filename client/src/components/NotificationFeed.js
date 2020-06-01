@@ -122,6 +122,7 @@ class NotificationFeed extends React.Component {
           refreshing={this.state.refreshing}
           onRefresh={this.onRefresh}
           state={"notification"}
+          onPress={()=>{this.props.navigation.navigate("Home")}}
         />
       );
     } else {
