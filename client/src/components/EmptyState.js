@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { View, Image, StyleSheet, Text, Dimensions } from "react-native";
+import { View, Image, StyleSheet, Text, Dimensions, TouchableOpacity } from "react-native";
 import WideButton from "./WideButton";
 import sources, { text, actions } from "../assets/emptyStates/emptyStates";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 function EmptyState({ state, onPress, modal }) {
   return (
