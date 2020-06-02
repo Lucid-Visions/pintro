@@ -1,0 +1,1 @@
+[{"_id":{"$oid":"5e9351c4d1804000881c3bf1"},"author":{"_id":{"$oid":"5e9351c4d1804000881c3bf2"},"author_id":{"$oid":"5e9351c4d1804000881c3bed"},"name":""},"date_stamp":1586713028623,"title":"New title","text":"Updated article text","likes":[],"comments":[],"__v":0}]
