@@ -5,7 +5,7 @@
     "icon": "./src/assets/icon.png",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "platforms": ["ios", "android", "web"],
     "scheme": "pintro",
     "orientation": "portrait",
@@ -20,7 +20,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.lucidvisions.pintro",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.1",
       "supportsTablet": true
     },
     "android": {
