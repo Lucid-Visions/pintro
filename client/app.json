@@ -1,15 +1,14 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
-    "privacy": "public",
-    "sdkVersion": "36.0.0",
-    "platforms": ["ios", "android", "web"],
-
-    "scheme": "pintro",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "name": "Pintro",
+    "slug": "pintro-app",
     "icon": "./src/assets/icon.png",
+    "privacy": "unlisted",
+    "sdkVersion": "36.0.0",
+    "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
+    "scheme": "pintro",
+    "orientation": "portrait",
     "splash": {
       "image": "./src/assets/splash.png",
       "resizeMode": "contain",
@@ -20,7 +19,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.lucidvisions.pintro",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.lucidvisions.pintro",
+      "versionCode": 1
     }
   }
 }
