@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+    steps:
+      - run:
+        name: Build Docker Images
+        command: |
+          docker build --tag "${DOCKER_REGISTRY_ADDRESS}/${DOCKER_REGISTRY_PROJECT_ID}/${SERVER_IMAGE_NAME}" server/
+          docker build --tag "${DOCKER_REGISTRY_ADDRESS}/${DOCKER_REGISTRY_PROJECT_ID}/${MONGO_SEED_IMAGE_NAME}" docker/mongo-seed/
+      - run:
+          name: Authorize to Google Cloud Cluster
+          command: |
+              sudo gcloud --quiet components update
+              echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+              gcloud --quiet config set project ${DOCKER_REGISTRY_ADDRESS}
+      - run:
+        name: Push Docker Image
+        command: |
+            gcloud docker -- push $IMAGE_NAME:$CIRCLE_SHA1
+            test $CIRCLE_BRANCH = master && gcloud docker -- push $IMAGE_NAME:latest || echo "not master so no latest"
