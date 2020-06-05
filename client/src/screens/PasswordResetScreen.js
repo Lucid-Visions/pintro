@@ -37,12 +37,11 @@ const PasswordResetScreen = ({ navigation }) => {
               height: 20,
               width: 25,
               resizeMode: "contain",
-              alignSelf: "left",
               marginTop: 20
             }}
           />
         </TouchableOpacity>
-        <View style={{ flexDirection: "column", alignContent: "left" }}>
+        <View style={{ flexDirection: "column" }}>
           <Text
             style={{
               color: "white",
