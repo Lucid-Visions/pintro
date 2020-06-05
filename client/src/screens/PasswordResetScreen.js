@@ -50,7 +50,7 @@ const PasswordResetScreen = ({ navigation }) => {
               marginTop: 20
             }}
           >
-            Send Password Reset Email
+            Reset Password
           </Text>
           <View style={{ marginTop: "20%" }}>
             <View style={styles.bottomBorder}>
