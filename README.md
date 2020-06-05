@@ -29,7 +29,7 @@ The backend components have been dockerized for simple deployment. This tutorial
 ```
 MONGO_USERNAME=root
 MONGO_PASSWORD=example
-MONGO_HOST=mongodb
+MONGO_HOST=127.0.0.1
 MONGO_PORT=27017
 MONGO_DB=pintro
 
@@ -76,38 +76,34 @@ FIREBASE_MEASUREMENTID=[Add creds]
 *  `$export PORT=5000` to use port 5000 for the admin panel
 * `npm start`
 
+### Add platform-tools to your path (pre-req to run using local backend with android device/emulator)
+* In terminal, run the following:
+`echo 'export ANDROID_HOME=/Users/$USER/Library/Android/sdk' >> ~/.bash_profile`
+`echo 'export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools' >> ~/.bash_profile`
+* Refresh your bash profile (or restart your terminal app)
+`source ~/.bash_profile`
+* Run `adb start-server`
+* Start your android emulator
+* In terminal run `adb reverse tcp:3000 tcp:3000`
+
 ### Client App
 * The beta version of the app is run using the expo framework
 * The expo server should be installed on a computer on the same network as the target mobile device for best results.
 * Install the expo cli with -g flag `npm install -g expo-cli`
 * cd into /client
-* `npm install`
-* create a file called "env.js" in /client/src with the following content
-```
-import Constants from "expo-constants";
-import Config from 'react-native-config'
-const ssl = false
-const { manifest } = Constants;
-const production = true
-const productionHost =  "" //AWS ip
-const host = manifest.debuggerHost.split(':').shift()
-env = {
-    protocol: ssl?"https":"http",
-    host: production?productionHost:host,
-    port:ssl?"443":"3000"
-}
-
-
-export default env
-```
-* `cd ..` so that you are in /client
-* `npm start` or `expo start`
+* run `npm install`
+* If you want to run the app using a local backend, follow the next step, if not then skip and set `production` to true in `/client/src/env.js`
+* Get your local device IP (This step is optional if you want to run using a local backend)
+  * On Mac - Go to `Networking` on System preferences and grab the IP on the right hand side
+  * In terminal, run `REACT_NATIVE_PACKAGER_HOSTNAME=[ip]` replacing [ip] with the one you just copied
+* run `expo start`
 * Install the Expo client on android or ios
 * Scan the QR code found on localhost:19002. Expo should build the react bundle and download it to your mobile device
 * Alternatively, it is possible to use either the Android or iOS simulator.
   * Follow relevant guide to get started
     * iOS -  https://docs.expo.io/workflow/ios-simulator/
     * Android - https://docs.expo.io/workflow/android-studio-emulator/
+
 
 * Possible errors
   * App silently times out and never starts the application
