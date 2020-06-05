@@ -13,7 +13,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
 
   mongo-seed:
-    image: eu.gcr.io/onyx-seeker-278919/mongo-seed
+    image: eu.gcr.io/pintro-279114/mongo-seed
     container_name: mongo-seed
     links:
       - mongodb
@@ -34,7 +34,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
   pintro-server:
-    image: eu.gcr.io/onyx-seeker-278919/pintro-server
+    image: eu.gcr.io/pintro-279114/mongo-seed
     container_name: pintro-server
     volumes:
       - ./server:/app

@@ -1,4 +1,4 @@
-import { connect } from 'mongoose'
+import mongoose from 'mongoose'
 
 
 // Import environment variables
@@ -30,14 +30,14 @@ class Database {
     this._connect()
   }
 
-  async _connect() {
-    try {
-      await connect(`${url}/${database}`, options)
-      console.log('Database connection successful')
-    } catch (error) {
-      console.error(error)
-    }
+  _connect() {
+      mongoose.connect(`${url}/${database}`, options)
+      this.db = mongoose.connection
+  }
+
+  getDatabase() {
+    return this.db
   }
 }
 
-export default new Database()
+export default Database

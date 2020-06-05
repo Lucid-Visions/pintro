@@ -21,7 +21,6 @@ import { useNavigation } from "@react-navigation/native";
 import SettingsRow from "../components/SettingsRow";
 import UpdatePanel from "../components/UpdatePanel";
 import DeleteModal from "../components/DeleteAccountModal";
-import { State } from "react-native-gesture-handler";
 
 const { height } = Dimensions.get("window");
 
@@ -178,7 +177,12 @@ const SettingsScreen = () => {
     },
     { lbl: "Push notifications", rightComponent: <ToggleSwitchComponent /> },
     { lbl: "Set nearby distance", rightComponent: <SliderComponent /> },
-    { lbl: "Edit communities", rightComponent: <ArrowComponent /> }
+    { lbl: "Edit communities", rightComponent: <ArrowComponent /> },
+    {
+      lbl: "Create community",
+      rightComponent: <ArrowComponent />,
+      action: () => navigation.navigate("CreateCommunity")
+    }
   ];
   const aboutData = [
     { lbl: "Terms of use", rightComponent: <ArrowComponent /> },

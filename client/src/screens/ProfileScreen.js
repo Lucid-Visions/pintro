@@ -668,12 +668,6 @@ const ProfileScreen = ({
         {editBtn("SettingsStack", {screen: "Edit Experience", params: { experience }})}
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate("CreateCommunity")}>
-        <View>
-            <Text>Create Community</Text>
-        </View>
-      </TouchableOpacity>
-
       {recommendationsSection()}
       <View style={styles.badgesSection}>
         <Text style={{ marginVertical: "5%", fontFamily: "poppins-bold" }}>

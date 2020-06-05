@@ -12,4 +12,7 @@ export const namePlaceholder = 'Enter your community name';
 export const storyLabel = 'Community story';
 export const storyPlaceholder = 'Tell us about your community';
 
+export const urlLabel = 'Website url';
+export const urlPlaceholder = 'Enter website url';
+
 export const ctaText = 'STEP 1 OF 2';
