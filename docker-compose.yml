@@ -34,7 +34,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
 
   pintro-server:
-    image: eu.gcr.io/pintro-279114/mongo-seed
+    image: eu.gcr.io/pintro-279114/pintro-server
     container_name: pintro-server
     volumes:
       - ./server:/app

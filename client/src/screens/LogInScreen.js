@@ -74,7 +74,7 @@ const LogInScreen = ({ navigation }) => {
             }}
           />
         </TouchableOpacity>
-        <View style={{ flexDirection: "column", alignContent: "left" }}>
+        <View style={{ flexDirection: "column" }}>
           <Text
             style={{
               color: "white",

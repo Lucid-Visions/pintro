@@ -2,7 +2,7 @@ import Constants from "expo-constants";
 import Config from 'react-native-config'
 const ssl = false
 const { manifest } = Constants;
-const production = true
+const production = false
 const productionHost = "3.134.100.191"
 const host = manifest.debuggerHost.split(':').shift()
 env = {
