@@ -690,7 +690,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "poppins-bold",
     flexWrap: "wrap",
-    width: 200,
+    width: 155,
   },
   header: {
     flexDirection: "row",
@@ -775,11 +775,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   editPen: {
-    position: "absolute",
     resizeMode: "contain",
     marginTop: 10,
     height: 17,
-    right: -10,
   },
   editRow: {
     flexDirection: "row",
