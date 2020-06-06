@@ -96,7 +96,6 @@ export default class AskHelpScreen extends Component {
                   height: 20,
                   width: 25,
                   resizeMode: "contain",
-                  alignSelf: "left",
                   marginHorizontal: 20,
                   marginTop: 10
                 }}

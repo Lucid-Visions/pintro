@@ -37,12 +37,11 @@ const PasswordResetScreen = ({ navigation }) => {
               height: 20,
               width: 25,
               resizeMode: "contain",
-              alignSelf: "left",
               marginTop: 20
             }}
           />
         </TouchableOpacity>
-        <View style={{ flexDirection: "column", alignContent: "left" }}>
+        <View style={{ flexDirection: "column" }}>
           <Text
             style={{
               color: "white",
@@ -51,7 +50,7 @@ const PasswordResetScreen = ({ navigation }) => {
               marginTop: 20
             }}
           >
-            Send Password Reset Email
+            Reset Password
           </Text>
           <View style={{ marginTop: "20%" }}>
             <View style={styles.bottomBorder}>
