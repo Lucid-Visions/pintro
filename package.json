@@ -11,6 +11,10 @@
   },
   "scripts": {
     "lint": "eslint './src/**/*.{js,ts,tsx}",
-    "pre-push": "cd server && eslint './src/**/*.{js,ts,tsx}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "cd server && eslint './src/**/*.{js,ts,tsx}'"
+    }
   }
 }
