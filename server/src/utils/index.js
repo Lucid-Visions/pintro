@@ -1,3 +1,3 @@
 export const isEmpty = (obj) => {
-    return Object.getOwnPropertyNames(obj).length === 0;
+  return Object.getOwnPropertyNames(obj).length === 0
 }

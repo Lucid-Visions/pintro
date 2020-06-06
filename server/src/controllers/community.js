@@ -21,7 +21,7 @@ class CommunityController {
     if (isEmpty(req.body)) {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Request body missing' }})
     }
-  
+
     // Return error if community already exsits
     const dupeUsers = await this.repository.getByName(req.body.name)
 
