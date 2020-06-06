@@ -1,0 +1,16 @@
+{
+  "name": "pintro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Lucid-Visions/pintro.git",
+  "author": "mcpolandc <mcpolandc@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "husky": "^4.2.5"
+  },
+  "scripts": {
+    "lint": "eslint './src/**/*.{js,ts,tsx}",
+    "pre-push": "cd server && eslint './src/**/*.{js,ts,tsx}'"
+  }
+}
