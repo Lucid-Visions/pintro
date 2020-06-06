@@ -9,10 +9,10 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  SafeAreaView,
   AsyncStorage,
   TextInput,
 } from "react-native";
+import Constants from "expo-constants";
 import LinkedIn from "../components/register/LinkedIn";
 import WideButtonComponent from "../components/WideButton";
 
@@ -56,7 +56,7 @@ const LogInScreen = ({ navigation }) => {
   const { signIn } = React.useContext(AuthContext);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View>
         <TouchableOpacity
           onPress={() => {
@@ -147,7 +147,7 @@ const LogInScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -161,6 +161,7 @@ async function _storeData(key, val) {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#1A1A1A",
     alignItems: "center",

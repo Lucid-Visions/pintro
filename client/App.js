@@ -1,6 +1,5 @@
 import React from "react";
 import AppNavigator from "./src/navigation/AppNavigator";
-import { StyleSheet, AsyncStorage, View } from "react-native";
 import * as Font from "expo-font";
 import Redirect from "./src/components/HandleRedirect";
 import { InAppNotificationProvider} from "react-native-in-app-notification";

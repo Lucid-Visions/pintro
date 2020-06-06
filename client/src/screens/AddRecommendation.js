@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -8,8 +7,9 @@ import {
   ScrollView,
   Image,
   TextInput,
-  Dimensions,
+  Dimensions
 } from "react-native";
+import Constants from "expo-constants";
 import PostButton from "../components/WideButtonRight";
 import MultiSelect from "react-native-multiple-select";
 import TagsPassions from "../assets/TagsPassions";
@@ -147,7 +147,7 @@ const AddRecommendation = ({ route }) => {
 
   return (
     <ScrollView>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         {navigation.canGoBack() && (
           <TouchableOpacity
             onPress={() => {
@@ -276,13 +276,14 @@ const AddRecommendation = ({ route }) => {
             value="Done"
           />
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-around",

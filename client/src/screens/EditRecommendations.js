@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   ScrollView,
   Image
 } from "react-native";
+import Constants from "expo-constants";
 import RecommendationButton from "../components/RecommendationButton";
 import { useNavigation } from "@react-navigation/native";
 
@@ -156,7 +156,7 @@ const EditRecommendations = ({ route }) => {
 
   return (
     <ScrollView style={styles.container2} showsVerticalScrollIndicator={false}>
-      <SafeAreaView style={styles.container1}>
+      <View style={styles.container1}>
         <View style={styles.container}>
           {navigation.canGoBack() && (
             <TouchableOpacity
@@ -206,7 +206,7 @@ const EditRecommendations = ({ route }) => {
             </View>
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };
@@ -249,6 +249,7 @@ styles = StyleSheet.create({
     justifyContent: "space-evenly"
   },
   container2: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     alignContent: "center"
   },

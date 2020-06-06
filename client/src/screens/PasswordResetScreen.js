@@ -5,10 +5,9 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  SafeAreaView,
-  AsyncStorage,
   TextInput
 } from "react-native";
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButton";
 
 const reset = async (email, navigation) => {
@@ -24,7 +23,7 @@ const PasswordResetScreen = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View>
         <TouchableOpacity
           onPress={() => {
@@ -82,13 +81,14 @@ const PasswordResetScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#1A1A1A",
     alignItems: "center"

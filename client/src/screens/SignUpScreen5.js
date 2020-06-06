@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -9,6 +8,7 @@ import {
   Image,
   ScrollView
 } from "react-native";
+import Constants from "expo-constants";
 //import updateRequest from "../assets/updateRequest";
 import WideButtonComponent from "../components/WideButtonRight";
 import YearItemSelector from "../components/YearItemSelector";
@@ -134,7 +134,7 @@ export default class SignUpScreen5 extends Component {
         style={styles.container2}
         showsVerticalScrollIndicator={false}
       >
-        <SafeAreaView style={styles.container1}>
+        <View style={styles.container1}>
           <View style={styles.container}>
             {navigation.canGoBack() && (
               <TouchableOpacity
@@ -272,7 +272,7 @@ export default class SignUpScreen5 extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </SafeAreaView>
+        </View>
       </ScrollView>
     );
   }
@@ -342,6 +342,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly"
   },
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#1A1A1A",
     alignItems: "flex-start",
@@ -356,6 +357,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container2: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#1A1A1A",
     alignContent: "center"

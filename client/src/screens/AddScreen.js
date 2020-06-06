@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { WGOModal } from '../components/WGOModal';
 /**
  * Main screen of the add tab.
@@ -26,7 +26,7 @@ export default class AddScreen extends React.Component {
     }
 
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View>
           <View style={{ marginTop: 50 }}>
             <TouchableOpacity onPress={() => toggleModal()}>
@@ -35,7 +35,7 @@ export default class AddScreen extends React.Component {
             <WGOModal />
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }

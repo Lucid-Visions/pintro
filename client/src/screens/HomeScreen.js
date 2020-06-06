@@ -1,10 +1,10 @@
 import {
   StyleSheet,
-  SafeAreaView,
   Text,
   View,
   Dimensions,
 } from "react-native";
+import Constants from "expo-constants";
 import MapComponent from "../components/MapComponent";
 import * as React from "react";
 import { TabView, SceneMap, TabBar, Image } from "react-native-tab-view";
@@ -57,7 +57,7 @@ export default function HomeScreen({ navigation }) {
 
 
   return (
-    <SafeAreaView style={styles.safeContainer}>
+    <View style={styles.safeContainer}>
       <TabView
         renderTabBar={props => renderTabBar(props)}
         navigationState={{ index, routes }}
@@ -65,7 +65,7 @@ export default function HomeScreen({ navigation }) {
         onIndexChange={setIndex}
         initialLayout={initialLayout}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height
   },
   safeContainer: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
   },
 });

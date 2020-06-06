@@ -6,9 +6,9 @@ import {
   ScrollView,
   TextInput,
   Image,
-  SafeAreaView,
   TouchableOpacity
 } from "react-native";
+import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 import { filters } from "../assets/resultFilters";
 
@@ -249,7 +249,7 @@ const BrowseScreen = ({
 
     // Render the Browse page
     return (
-      <SafeAreaView>
+      <View>
         <TouchableOpacity
           onPressIn={() => setDraggable(true)}
           onPressOut={() => setDraggable(false)}
@@ -389,7 +389,7 @@ const BrowseScreen = ({
             </View>
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     );
   } else return null;
 };

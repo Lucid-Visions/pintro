@@ -1,5 +1,6 @@
 import React, { useState, Component } from "react";
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButton";
 import WideButtonRight from "../components/WideButtonRight";
 import { AuthContext } from "../navigation/AppNavigator";
@@ -8,7 +9,7 @@ const BusSignUpScreen6 = ({ navigation, route }) => {
   const companyID = route.params.companyID
   const user = route.params.user
   return(
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.container}>
         <View>
           
@@ -42,7 +43,7 @@ const BusSignUpScreen6 = ({ navigation, route }) => {
       </View>
         
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: '#F0F0F1',
     alignItems: 'center',

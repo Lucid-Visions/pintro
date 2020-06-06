@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   ScrollView,
   Image
 } from "react-native";
+import Constants from "expo-constants";
 import WideButton from "../components/WideButtonRight";
 import TagsData from "../assets/TagsData";
 import Tag from "../components/Tag";
@@ -70,7 +70,7 @@ const EditPassions = ({ route }) => {
 
   return (
     <ScrollView style={styles.container2} showsVerticalScrollIndicator={false}>
-      <SafeAreaView style={styles.container1}>
+      <View style={styles.container1}>
         <View style={styles.container}>
           {navigation.canGoBack() && (
             <TouchableOpacity
@@ -139,7 +139,7 @@ const EditPassions = ({ route }) => {
               </TouchableOpacity>
             </View>
           </View>
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly"
   },
   container2: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     alignContent: "center"
   },
