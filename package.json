@@ -10,7 +10,7 @@
     "husky": "^4.2.5"
   },
   "scripts": {
-    "lint": "eslint './src/**/*.{js,ts,tsx}",
+    "lint": "eslint './src/**/*.{js,ts,tsx}"
   },
   "husky": {
     "hooks": {
