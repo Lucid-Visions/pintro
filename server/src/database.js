@@ -31,8 +31,8 @@ class Database {
   }
 
   _connect() {
-      mongoose.connect(`${url}/${database}`, options)
-      this.db = mongoose.connection
+    mongoose.connect(`${url}/${database}`, options)
+    this.db = mongoose.connection
   }
 
   getDatabase() {

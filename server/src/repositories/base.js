@@ -8,7 +8,7 @@ class BaseRepository {
   /**
      *
      * @param {Object} record New database entry
-     * 
+     *
      * @returns {boolean} Operation success status
      */
   async create(record) {
