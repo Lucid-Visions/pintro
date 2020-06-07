@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
@@ -9,6 +8,7 @@ import {
   AsyncStorage,
   Image,
 } from "react-native";
+import Constants from "expo-constants";
 import ProfilePictureComponent from "../components/ProfilePicture";
 import {
   FollowMeButton,
@@ -548,7 +548,7 @@ const ProfileScreen = ({
 
   // Render the main profile screen container.
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {uid && (
         <TouchableOpacity
           onPress={() => {
@@ -675,7 +675,7 @@ const ProfileScreen = ({
         </Text>
         <View style={styles.recommendationsAndBadges}>{badgeButtons}</View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -691,7 +691,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "poppins-bold",
     flexWrap: "wrap",
-    width: 200,
+    width: 155,
   },
   header: {
     flexDirection: "row",
@@ -776,11 +776,9 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   editPen: {
-    position: "absolute",
     resizeMode: "contain",
     marginTop: 10,
     height: 17,
-    right: -10,
   },
   editRow: {
     flexDirection: "row",

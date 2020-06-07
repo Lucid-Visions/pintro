@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
@@ -10,7 +9,7 @@ import {
   AsyncStorage,
   Dimensions
 } from "react-native";
-
+import Constants from "expo-constants";
 import ToggleSwitch from "toggle-switch-react-native";
 import Slider from "react-native-slider";
 import SlidingUpPanel from "rn-sliding-up-panel";
@@ -262,7 +261,7 @@ const SettingsScreen = () => {
   });
 
   return (
-    <View>
+    <View style={{paddingTop: Constants.statusBarHeight}}>
     <ScrollView contentInsetAdjustmentBehavior="automatic">
       {navigation.canGoBack() && (
         <TouchableOpacity
@@ -283,7 +282,7 @@ const SettingsScreen = () => {
           />
         </TouchableOpacity>
       )}
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.sectionContainer}>
           <Text style={styles.heading}>PERSONAL</Text>
           {personalButtons}
@@ -298,7 +297,7 @@ const SettingsScreen = () => {
         </View>
         
         <DeleteModal isVisible={deleteModalVisible} toggle={toggleDeleteModal} />
-      </SafeAreaView>
+      </View>
     </ScrollView>
     <SlidingUpPanel
     ref={updateSlider}

@@ -9,7 +9,6 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  SafeAreaView,
   AsyncStorage
 } from "react-native";
 import LinkedIn from "../components/register/LinkedIn";
@@ -49,7 +48,7 @@ const SignInScreen = ({ navigation }) => {
   const { signIn } = React.useContext(AuthContext);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.container}>
         <Image style={styles.image} source={require("../assets/Logo.png")}/>
         <Text style={styles.text}>Hello there!</Text>
@@ -95,7 +94,7 @@ const SignInScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

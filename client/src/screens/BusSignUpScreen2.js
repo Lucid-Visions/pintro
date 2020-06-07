@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -9,6 +8,7 @@ import {
   ScrollView,
   Image
 } from "react-native";
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButtonRight";
 import TagsData from "../assets/TagsData";
 import Tag from "../components/Tag";
@@ -81,7 +81,7 @@ class BusSignUpScreen2 extends Component {
         style={styles.container2}
         showsVerticalScrollIndicator={false}
       >
-        <SafeAreaView style={styles.container1}>
+        <View style={styles.container1}>
           <View style={styles.container}>
           {navigation.canGoBack() && (
               <TouchableOpacity
@@ -132,7 +132,7 @@ class BusSignUpScreen2 extends Component {
                     </TouchableOpacity>
                 </View>
           </View>
-        </SafeAreaView>
+        </View>
       </ScrollView>
     )
   }
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     paddingBottom: 50
   },
   container1: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#F0F0F1",
     alignContent: "center",
@@ -180,6 +181,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container2: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#F0F0F1",
     alignContent: "center"

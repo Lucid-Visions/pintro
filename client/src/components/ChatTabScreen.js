@@ -1,10 +1,10 @@
 import {
   StyleSheet,
-  SafeAreaView,
   Text,
   View,
   Dimensions,
 } from "react-native";
+import Constants from "expo-constants";
 import * as React from "react";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import NotificationFeed from "../components/NotificationFeed"
@@ -57,7 +57,7 @@ export default function ChatTabScreen({ navigation, route }) {
 
 
   return (
-    <SafeAreaView style={styles.safeContainer}>
+    <View style={styles.safeContainer}>
       <TabView
         renderTabBar={props => renderTabBar(props)}
         navigationState={{ index, routes }}
@@ -65,7 +65,7 @@ export default function ChatTabScreen({ navigation, route }) {
         onIndexChange={setIndex}
         initialLayout={initialLayout}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height
   },
   safeContainer: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
   },
 });
