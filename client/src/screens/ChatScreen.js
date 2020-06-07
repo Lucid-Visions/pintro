@@ -1,8 +1,9 @@
 import React from 'react';
 import {
-  SafeAreaView, StyleSheet, View, Image, Text,
+  StyleSheet, View, Image, Text,
   TouchableOpacity, Platform, StatusBar, KeyboardAvoidingView
 } from 'react-native';
+import Constants from "expo-constants";
 import ActionButtonComponent from '../components/ActionButton';
 import Chat from "../components/Chat";
 
@@ -64,12 +65,12 @@ export default class ChatScreen extends React.Component {
   render() {
     return (
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'android' ? "height" : null}>
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
           {this.renderHeader()}
           {this.renderTopComponent()}
           <Chat user={this.state.user} chat={this.state.chat} socket={this.state.socket} style={styles.chat} />
           <View />
-        </SafeAreaView>
+        </View>
       </KeyboardAvoidingView>
     )
   };
@@ -77,6 +78,7 @@ export default class ChatScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "white",
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0   // on Android, the content has to be lowered below the status bar

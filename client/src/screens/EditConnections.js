@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
   Image,
   AsyncStorage,
-  Dimensions,
 } from "react-native";
+import Constants from "expo-constants";
 import ConnectionButton from "../components/ConnectionButton";
 import EmptyState from "../components/EmptyState";
 
@@ -330,7 +328,7 @@ const EditConnections = ({ route }) => {
     return <EmptyState state={"internet"} />;
   } else {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         {navigation.canGoBack() && (
           <TouchableOpacity
             onPress={() => {
@@ -370,13 +368,14 @@ const EditConnections = ({ route }) => {
             onDragEnd={handleDragRow}
           />
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     flexDirection: "column",
     justifyContent: "flex-start",

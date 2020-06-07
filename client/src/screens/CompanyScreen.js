@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
@@ -85,7 +84,7 @@ const CompanyScreen = ({
   ));
 
         return (
-          <SafeAreaView>
+          <View>
             <ScrollView contentInsetAdjustmentBehavior="automatic" style={{backgroundColor:"#F5F5F5"}}>
                 <View style={{flexDirection: "column"}}>
                     <View>
@@ -161,7 +160,7 @@ const CompanyScreen = ({
                     </View>
                 </View>
             </ScrollView>
-          </SafeAreaView>
+          </View>
         );
 }
 

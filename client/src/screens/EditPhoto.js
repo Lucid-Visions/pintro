@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   ScrollView,
   Image,
 } from "react-native";
+import Constants from "expo-constants";
 import PostButton from "../components/WideButtonRight";
 import { useNavigation } from "@react-navigation/native";
 
@@ -92,7 +92,7 @@ const EditPhoto = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {navigation.canGoBack() && (
         <TouchableOpacity
           onPress={() => {
@@ -145,12 +145,13 @@ const EditPhoto = ({ route }) => {
           value="DONE"
         />
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-around",

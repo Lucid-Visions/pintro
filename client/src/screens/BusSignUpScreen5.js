@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { Dimensions, SafeAreaView, Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image, AsyncStorage } from "react-native"
+import { Dimensions, Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image, AsyncStorage } from "react-native";
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButtonRight"
 import MultiSelect from "react-native-multiple-select"
 import ProfileCard from "../components/ProfileCard"
@@ -83,7 +84,7 @@ export default class BusSignUpScreen5 extends Component {
 
         return (
             <ScrollView style={styles.container2} showsVerticalScrollIndicator={false}>
-            <SafeAreaView style={styles.container1}>
+            <View style={styles.container1}>
             <View style={styles.container}>
             {navigation.canGoBack() && (
               <TouchableOpacity
@@ -180,7 +181,7 @@ export default class BusSignUpScreen5 extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
-          </SafeAreaView>
+          </View>
           </ScrollView>
         )
     }
@@ -222,6 +223,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
       },
       container: {
+        paddingTop: Constants.statusBarHeight,
         flex: 1,
         backgroundColor: "#F0F0F1",
         alignItems: "flex-start",
@@ -230,6 +232,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
       },
       container1: {
+        paddingTop: Constants.statusBarHeight,
         flex: 1,
         backgroundColor: "#F0F0F1",
         alignContent: "center",

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   Dimensions,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
@@ -10,6 +9,7 @@ import {
   Image,
   AsyncStorage
 } from "react-native";
+import Constants from "expo-constants";
 import HelpTextInput from "../components/HelpTextInput";
 import MultiSelect from "react-native-multiple-select";
 import TagsData from "../assets/TagsData";
@@ -83,7 +83,7 @@ export default class AskHelpScreen extends Component {
         style={styles.container2}
         showsVerticalScrollIndicator={false}
       >
-        <SafeAreaView style={styles.container1}>
+        <View style={styles.container1}>
           {navigation.canGoBack() && (
             <TouchableOpacity
               onPress={() => {
@@ -175,7 +175,7 @@ export default class AskHelpScreen extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </SafeAreaView>
+        </View>
       </ScrollView>
     );
   }
@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     paddingVertical: 30
   },
   container1: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#F1F1F1",
     justifyContent: "space-between"

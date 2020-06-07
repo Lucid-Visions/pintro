@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
   ScrollView,
   TextInput,
-  AsyncStorage,
   TouchableOpacity,
   Image
 } from "react-native";
+import Constants from "expo-constants";
 import RNPickerSelect from "react-native-picker-select";
 import { useNavigation } from "@react-navigation/native";
 
@@ -218,7 +217,7 @@ const EditExperience = ({ route }) => {
 
   return (
     <ScrollView>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         {navigation.canGoBack() && (
           <TouchableOpacity
             onPress={() => {
@@ -316,13 +315,14 @@ const EditExperience = ({ route }) => {
             value="Done"
           />
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     flexDirection: "column",
     marginHorizontal: 20

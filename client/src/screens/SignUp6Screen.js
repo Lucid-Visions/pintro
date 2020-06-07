@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  SafeAreaView,
   Text,
   View,
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   ScrollView,
   Image
 } from "react-native";
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButtonRight";
 import TagPassions from "../assets/TagsPassions";
 import Tag from "../components/Tag";
@@ -64,7 +64,7 @@ class SignUp6Screen extends Component {
         style={styles.container2}
         showsVerticalScrollIndicator={false}
       >
-        <SafeAreaView style={styles.container1}>
+        <View style={styles.container1}>
           <View style={styles.container}>
           {navigation.canGoBack() && (
               <TouchableOpacity
@@ -123,7 +123,7 @@ class SignUp6Screen extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </SafeAreaView>
+        </View>
       </ScrollView>
     );
   }
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly"
   },
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#1A1A1A",
     alignItems: "flex-start",
@@ -171,6 +172,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container2: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#1A1A1A",
     alignContent: "center"

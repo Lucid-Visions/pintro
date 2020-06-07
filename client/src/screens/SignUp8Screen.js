@@ -1,6 +1,6 @@
 import React, { useState, Component } from "react";
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity} from "react-native";
-import { NavigationActions } from '@react-navigation/native';
+import { Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButton";
 import WideButtonRight from "../components/WideButtonRight";
 
@@ -10,7 +10,7 @@ const SignUp8Screen = ({ navigation }) => {
   const { signIn } = React.useContext(AuthContext);
   
   return(
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.container}>
         <View>
           
@@ -44,7 +44,7 @@ const SignUp8Screen = ({ navigation }) => {
       </View>
         
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: '#1A1A1A',
     alignItems: 'center',
