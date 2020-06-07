@@ -5,10 +5,8 @@ import {
   View,
   Dimensions,
 } from "react-native";
-import MapComponent from "../components/MapComponent";
 import * as React from "react";
-import { TabView, SceneMap, TabBar, Image } from "react-native-tab-view";
-import LiveFeed from "../components/LiveFeed"
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import NotificationFeed from "../components/NotificationFeed"
 import Chats from "./ChatsComponent";
 const initialLayout = { width: Dimensions.get("window").width };
