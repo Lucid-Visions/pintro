@@ -10,6 +10,7 @@ import SettingsStack from "../navigation/SettingsStack";
 import WriteStatusScreen from "../screens/WriteStatusScreen";
 import ChatStack from "../navigation/ChatStack"
 import CreateCommunity from "../modules/communities/create";
+import CreateCommunityAddTags from "../modules/communities/create/add-tags-page";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,7 @@ function ProfileStack() {
       <Stack.Screen name="SettingsStack" component={SettingsStack} />
       <Stack.Screen name="ForgotPassword" component={PasswordResetScreen} />
       <Stack.Screen name="CreateCommunity" component={CreateCommunity}></Stack.Screen>
+      <Stack.Screen name="CreateCommunityAddTags" component={CreateCommunityAddTags}></Stack.Screen>
 
     </Stack.Navigator>
   );
