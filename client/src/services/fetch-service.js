@@ -31,6 +31,9 @@ class FetchAPIService {
     }
 
     // POST
+    static async post(url, config) {
+        return FetchAPIService.sendRequest(url, { method: 'POST', ...config})
+    }
 
     // PUT
 
