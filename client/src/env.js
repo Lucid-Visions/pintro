@@ -9,7 +9,7 @@ if(!production) host = manifest.debuggerHost.split(':').shift()
 
 env = {
     protocol: ssl?"https":"http",
-    host: production?productionHost:host,
+    host: useDevServer ? productionHost : host,
     port:ssl?"443":"3000"
 }
 
