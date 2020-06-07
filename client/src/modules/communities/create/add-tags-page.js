@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import styles from "./styles";
 
 import TagsData from "../../../assets/TagsData";
 import Tag from "../../../components/Tag";
@@ -8,7 +10,7 @@ import {
     ctaText2
 } from './constants';
 
-const CreateCommunityAddTags = () => {
+const CreateCommunityAddTags = (props) => {
     Array.prototype.chunk = function(n) {
       if (!this.length) {
         return [];
@@ -16,7 +18,7 @@ const CreateCommunityAddTags = () => {
       return [this.slice(0, n)].concat(this.slice(n).chunk(n));
     };
 
-    const { navigation } = this.props;
+    const { navigation } = props;
     const tagsItems = TagsData.map((item, index) => (
       <Tag key={index} item={item} i={3} callback={this.tagCallback} />
     ));
@@ -26,7 +28,7 @@ const CreateCommunityAddTags = () => {
             style={styles.container2}
             showsVerticalScrollIndicator={false}
         >
-        <SafeAreaView style={styles.container1}>
+        <View style={styles.container1}>
           <View style={styles.container}>
             <BackButton navigation={navigation} />
 
@@ -53,7 +55,7 @@ const CreateCommunityAddTags = () => {
                     <TouchableOpacity onPress={() => this.update(navigation)} underlayColor="white">
                         <WideButtonComponent
                             value={ctaText2}
-                            source={require("../assets/arrow-right-white.png")}
+                            source={require("../../../assets/arrow-right-white.png")}
                             containerStyle={{
                             ...styles.btn
                             }}
@@ -62,7 +64,7 @@ const CreateCommunityAddTags = () => {
                     </TouchableOpacity>
                 </View>
           </View>
-        </SafeAreaView>
+        </View>
       </ScrollView>
     )
 }

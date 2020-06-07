@@ -36,8 +36,6 @@ services:
   pintro-server:
     image: eu.gcr.io/pintro-279114/pintro-server
     container_name: pintro-server
-    volumes:
-      - ./server:/app
     ports:
       - 443:443
       - 3000:3000

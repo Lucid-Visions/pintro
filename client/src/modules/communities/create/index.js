@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { ScrollView, SafeAreaView, Text, View, TextInput, TouchableOpacity } from "react-native"
+import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 import WideButtonComponent from "../../../components/WideButtonRight";
@@ -40,7 +40,7 @@ const CreateCommunity = ({ navigation }) => {
 
   return (
     <ScrollView>
-      <SafeAreaView>
+      <View>
         <View style={styles.container}>
           
           <BackButton navigation={navigation} />
@@ -84,7 +84,7 @@ const CreateCommunity = ({ navigation }) => {
           <View>
             <TouchableOpacity onPress={() => navigation.navigate('CreateCommunityAddTags', { name, story, url })}>
                 <WideButtonComponent
-                    value={ctaText}
+                    value={ctaText1}
                     source={require("../../../assets/arrow-right-white.png")}
                     containerStyle={{
                     ...styles.btn
@@ -95,7 +95,7 @@ const CreateCommunity = ({ navigation }) => {
           </View>
 
         </View>
-      </SafeAreaView>
+      </View>
     </ScrollView>
   )
 };

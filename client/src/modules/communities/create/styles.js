@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   h1: {
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     color: 'lightgrey'
   },
   container: {
-    marginTop: 20,
+    marginTop: Constants.statusBarHeight + 20,
     flex: 1,
     backgroundColor: "#F0F0F1",
     alignItems: "flex-start",
