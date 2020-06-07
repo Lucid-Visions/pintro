@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
   ScrollView,
   TouchableOpacity,
   Image,
-  AsyncStorage
 } from "react-native";
+import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 
 import SettingsRow from "../components/SettingsRow";
@@ -125,33 +124,33 @@ const EditProfileScreen = ({ route }) => {
   });
 
   return (
-    <ScrollView contentInsetAdjustmentBehavior="automatic">
-      {navigation.canGoBack() && (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-          style={{ marginTop: 20 }}
-        >
-          <Image
-            source={require("../assets/leftArrow.png")}
-            style={{
-              height: 20,
-              width: 25,
-              resizeMode: "contain",
-              alignSelf: "flex-start",
-              marginHorizontal: 20
+      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{paddingTop: Constants.statusBarHeight}}>
+        {navigation.canGoBack() && (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
             }}
-          />
-        </TouchableOpacity>
-      )}
-      <SafeAreaView style={styles.container}>
-        <View style={styles.sectionContainer}>
-          <Text style={styles.heading}>PROFILE</Text>
-          {profileButtons}
+            style={{ paddingTop: Constants.statusBarHeight }}
+          >
+            <Image
+              source={require("../assets/leftArrow.png")}
+              style={{
+                height: 20,
+                width: 25,
+                resizeMode: "contain",
+                alignSelf: "flex-start",
+                marginHorizontal: 20
+              }}
+            />
+          </TouchableOpacity>
+        )}
+        <View style={styles.container}>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.heading}>PROFILE</Text>
+            {profileButtons}
+          </View>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
   );
 };
 

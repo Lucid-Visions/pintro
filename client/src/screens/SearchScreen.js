@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -9,6 +8,7 @@ import {
   Image,
   AsyncStorage
 } from "react-native";
+import Constants from "expo-constants";
 import SlidingUpPanel from "rn-sliding-up-panel";
 
 import SearchButtonList from "../components/SearchButtonList";
@@ -137,7 +137,7 @@ export default class SearchScreen extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container2}>
+      <View style={styles.container2}>
         <View style={styles.container} showsVerticalScrollIndicator={false}>
           <View paddingHorizontal={20}>
             <Text style={styles.h1}>Browse</Text>
@@ -184,7 +184,7 @@ export default class SearchScreen extends React.Component {
             />
           </SlidingUpPanel>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
     alignContent: "center"
   },
   container2: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#1A1A1A",
     justifyContent: "space-between"

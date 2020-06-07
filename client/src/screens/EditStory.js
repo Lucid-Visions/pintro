@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   Text,
   Image,
   ScrollView,
   TextInput,
-  AsyncStorage,
   TouchableOpacity
 } from "react-native";
+import Constants from "expo-constants";
 import { useNavigation } from "@react-navigation/native";
 
 import WideButton from "../components/WideButton";
@@ -69,7 +68,7 @@ const EditStory = ({ route }) => {
 
   return (
     <ScrollView>
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         {navigation.canGoBack() && (
           <TouchableOpacity
             onPress={() => {
@@ -134,13 +133,14 @@ const EditStory = ({ route }) => {
             value="Done"
           />
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-around",
