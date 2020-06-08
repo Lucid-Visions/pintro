@@ -1,0 +1,13 @@
+#1.0.4
+
+General Bugs
+- Fixed a bug where the user wasn't being redirected back to the home page when they pressed the button on the "No Notifications" screen
+- Fixed a bug where the user was unable to hide the modal when they pressed the button on the "No Results" modal
+
+Android Bugs
+- Fixed crashes caused by invalid CSS
+- Fixed a bug where the user could not press edit icons on the user profile page
+- Fixed a lot of android padding issues where content was being cut off by the notifications bar at the top of the page
+
+
+#1.0
