@@ -28,7 +28,12 @@
     },
     "android": {
       "package": "com.lucidvisions.pintro",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDD38i0B5hG0qJgF8xSLxVNdMZgsxWPHV0"
+        }
+      }
     }
   }
 }
