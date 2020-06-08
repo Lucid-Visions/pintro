@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  build_all_branches:
     docker: 
       - image: google/cloud-sdk
     steps:
@@ -15,3 +15,24 @@ jobs:
       - run: docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1} docker/mongo-seed
       - run: docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1}
       - run: docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1}
+
+  # Only run this on master to update :latest tag in registry
+  build_master_only:
+    branches:
+      only:
+        - circleci-project-setup
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GCLOUD_COMPUTE_ZONE}
+          gcloud auth configure-docker
+      - run: docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server server
+      - run: docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed docker/mongo-seed
+      - run: docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server
+      - run: docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed
+      
