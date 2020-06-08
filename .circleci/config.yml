@@ -6,11 +6,12 @@ jobs:
       steps:
         - checkout
         - setup_remote_docker
-        - run: |
-          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-          gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
-          gcloud --quiet config set compute/zone ${GCLOUD_COMPUTE_ZONE}
-          gcloud auth configure-docker
+        - run:
+          - |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GCLOUD_COMPUTE_ZONE}
+            gcloud auth configure-docker
         - run: docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} server
         - run: docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1} docker/mongo-seed
         - run: docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1}
