@@ -5,8 +5,6 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: docker build --tag ${GOOGLE_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} server
       - run: docker build --tag ${GOOGLE_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1} docker/mongo-seed
       - run: docker push ${GOOGLE_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1}
