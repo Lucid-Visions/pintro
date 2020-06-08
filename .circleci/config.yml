@@ -3,6 +3,9 @@ jobs:
   build:
     docker: 
       - image: google/cloud-sdk
+        auth:
+          username: _json_key
+          password: $GCLOUD_SERVICE_KEY
     steps:
       - checkout
       - setup_remote_docker
