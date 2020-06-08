@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from "react-native"
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from "react-native"
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButtonRight"
 import RNPickerSelect from "react-native-picker-select";
 const updateRequestBusiness = require("../assets/updateRequestBusiness").update;
@@ -49,7 +50,7 @@ export default class BusSignUpScreen3 extends Component {
         const {navigation} = this.props
         return (
             <ScrollView style={styles.container2} showsVerticalScrollIndicator={false}>
-            <SafeAreaView style={styles.container1}>
+            <View style={styles.container1}>
             <View style={styles.container}>
             {navigation.canGoBack() && (
               <TouchableOpacity
@@ -63,7 +64,6 @@ export default class BusSignUpScreen3 extends Component {
                     height: 20,
                     width: 25,
                     resizeMode: "contain",
-                    marginLeft: 20
                   }}
                 />
               </TouchableOpacity>
@@ -147,7 +147,7 @@ export default class BusSignUpScreen3 extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
-          </SafeAreaView>
+          </View>
           </ScrollView>
         )
     }
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
       },
       container: {
+        paddingTop: Constants.statusBarHeight,
         flex: 1,
         backgroundColor: "#F0F0F1",
         alignItems: "flex-start",
@@ -204,6 +205,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20
       },
       container1: {
+        paddingTop: Constants.statusBarHeight,
         flex: 1,
         backgroundColor: "#F0F0F1",
         alignContent: "center",

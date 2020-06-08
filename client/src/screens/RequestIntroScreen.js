@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   Dimensions,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
@@ -10,6 +9,7 @@ import {
   Image,
   AsyncStorage
 } from "react-native";
+import Constants from "expo-constants";
 import IntroTextInput from "../components/IntroTextInput";
 import MultiSelect from "react-native-multiple-select";
 import PostButton from "../components/WideButtonRight";
@@ -101,7 +101,7 @@ export default class RequestIntroScreen extends Component {
         style={styles.container2}
         showsVerticalScrollIndicator={false}
       >
-        <SafeAreaView style={styles.container1}>
+        <View style={styles.container1}>
         {navigation.canGoBack() && (
           <TouchableOpacity
             onPress={() => {
@@ -114,7 +114,6 @@ export default class RequestIntroScreen extends Component {
                 height: 20,
                 width: 25,
                 resizeMode: "contain",
-                alignSelf: "left", 
                 marginHorizontal:20,
                 marginTop:10
               }}
@@ -195,7 +194,7 @@ export default class RequestIntroScreen extends Component {
               </TouchableOpacity>
             </View>
           </View>
-        </SafeAreaView>
+        </View>
       </ScrollView>
     );
   }
@@ -214,6 +213,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container2: {
+    paddingTop: Constants.statusBarHeight,
     flex: 1,
     backgroundColor: "#F1F1F1"
   },

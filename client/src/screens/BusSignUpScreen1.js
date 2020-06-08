@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { SafeAreaView, Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from "react-native"
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, ScrollView, Image } from "react-native";
+import Constants from "expo-constants";
 import WideButtonComponent from "../components/WideButtonRight"
 import { AsyncStorage } from "react-native";
 import env from "../env";
@@ -113,7 +114,6 @@ export default class BusSignUpScreen1 extends Component {
         const {navigation} = this.props
         return (
             <ScrollView style={styles.container2} showsVerticalScrollIndicator={false}>
-            <SafeAreaView style={styles.container1}>
             <View style={styles.container}>
             {navigation.canGoBack() && (
               <TouchableOpacity
@@ -127,7 +127,6 @@ export default class BusSignUpScreen1 extends Component {
                     height: 20,
                     width: 25,
                     resizeMode: "contain",
-                    marginLeft: 20
                   }}
                 />
               </TouchableOpacity>
@@ -219,7 +218,6 @@ export default class BusSignUpScreen1 extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
-          </SafeAreaView>
           </ScrollView>
         )
     }
@@ -268,6 +266,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
       },
       container: {
+        paddingTop: Constants.statusBarHeight,
         flex: 1,
         backgroundColor: "#F0F0F1",
         alignItems: "flex-start",
@@ -275,14 +274,8 @@ const styles = StyleSheet.create({
         paddingBottom: 50,
         paddingHorizontal: 20
       },
-      container1: {
-        flex: 1,
-        backgroundColor: "#F0F0F1",
-        alignContent: "center",
-        alignItems: "center",
-        justifyContent: "space-between"
-      },
       container2: {
+        paddingTop: Constants.statusBarHeight,
         flex: 1,
         backgroundColor: "#F0F0F1",
         alignContent: "center"
