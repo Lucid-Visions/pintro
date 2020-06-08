@@ -6,6 +6,7 @@ steps:
 
 - id: 'pintro-server:latest'
   name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
   args:
   - '-c'
   - 'if [ $BRANCH_NAME == 'master' ]; then docker tag 'eu.gcr.io/$PROJECT_ID/pintro-server:$COMMIT_SHA', 'eu.gcr.io/$PROJECT_ID/pintro-server:latest' ; fi'
@@ -14,6 +15,7 @@ steps:
 # mongo-seed image (build and push latest and $COMMIT_SHA)
 - id: 'mongo-seed:$COMMIT_SHA'
   name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
   args: [ 'build', '-t', 'eu.gcr.io/$PROJECT_ID/mongo-seed:$COMMIT_SHA', 'docker/mongo-seed' ]
 
 - id: 'mongo-seed:latest'
