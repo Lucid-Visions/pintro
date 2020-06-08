@@ -46,7 +46,13 @@ class FetchAPIService {
             throw Error(err.message)
         }
 
-        return response.json()
+        const json = await response.json()
+
+        return {
+            status: response.status,
+            ok: response.ok,
+            data: json
+        }
     }
 
     /**

@@ -16,9 +16,17 @@ import useForm from '../hooks'
 
 import styles from "./styles";
 
-const CreateCommunityAddTags = (props) => {
+// TODO: Move this somewhere more generic
+Array.prototype.chunk = function(n) {
+  if (!this.length) {
+    return [];
+  }
+  return [this.slice(0, n)].concat(this.slice(n).chunk(n));
+};
 
-    const [ fields, onChange ] = useForm({ ...props.route.params, tags: [] })
+const CreateCommunityAddTags = ({ navigation, route: { params } }) => {
+
+    const [ fields, onChange ] = useForm({ ...params, tags: [] })
 
     const onTagChange = (tag, isChosen) => {
       tags = [ ...fields.tags ]
@@ -33,14 +41,17 @@ const CreateCommunityAddTags = (props) => {
       onChange('tags', tags)
     }
 
-    Array.prototype.chunk = function(n) {
-      if (!this.length) {
-        return [];
-      }
-      return [this.slice(0, n)].concat(this.slice(n).chunk(n));
-    };
+    const onCreateCommunity = async () => {
+      const resp = await createCommunity(fields)
 
-    const { navigation } = props;
+      if (!resp.ok) {
+        alert(resp.data.error.message)
+        return
+      }
+
+      navigation.navigate("CreateCommunityThanks", {id: resp.data.insertedId })
+    }
+
     const tagsItems = TagsData.map((item, index) => (
       <Tag key={index} item={item} i={3} callback={onTagChange} />
     ));
@@ -74,7 +85,7 @@ const CreateCommunityAddTags = (props) => {
             </View>
 
             <View paddingTop={20} alignSelf={'center'}>
-              <TouchableOpacity onPress={() => createCommunity(fields)} underlayColor="white">
+              <TouchableOpacity onPress={onCreateCommunity} underlayColor="white">
                   <WideButtonRight
                       value={ctaText2}
                       source={require("../../../../assets/arrow-right-white.png")}

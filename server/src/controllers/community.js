@@ -29,14 +29,17 @@ class CommunityController {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Record already exists' }})
     }
 
-    const isCreated = await this.repository.create(req.body)
+    const createResult = await this.repository.create(req.body)
 
     // Return error if there is a DB issue on creation
-    if (!isCreated) {
+    if (!createResult.result.ok) {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Record could not be created' }})
     }
 
-    res.status(http.CREATED).send('Community created')
+    res.status(http.CREATED).json({
+      insertedId: createResult.insertedId,
+      insertedCount: createResult.insertedCount,
+    })
   }
 }
 

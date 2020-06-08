@@ -11,6 +11,7 @@ import WriteStatusScreen from "../screens/WriteStatusScreen";
 import ChatStack from "../navigation/ChatStack"
 import CreateCommunity from "../modules/communities/create";
 import CreateCommunityAddTags from "../modules/communities/create/add-tags-page";
+import CreateCommunityThanks from '../modules/communities/create/thank-you-page';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ function ProfileStack() {
       <Stack.Screen name="ForgotPassword" component={PasswordResetScreen} />
       <Stack.Screen name="CreateCommunity" component={CreateCommunity}></Stack.Screen>
       <Stack.Screen name="CreateCommunityAddTags" component={CreateCommunityAddTags}></Stack.Screen>
+      <Stack.Screen name="CreateCommunityThanks" component={CreateCommunityThanks}></Stack.Screen>
 
     </Stack.Navigator>
   );

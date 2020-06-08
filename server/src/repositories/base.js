@@ -12,9 +12,7 @@ class BaseRepository {
      * @returns {boolean} Operation success status
      */
   async create(record) {
-    const response = await this.collection.insertOne(record)
-
-    return Boolean(response.result.ok)
+    return this.collection.insertOne(record)
   }
 
   /**

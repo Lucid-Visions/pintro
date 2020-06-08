@@ -6,7 +6,7 @@ export const createCommunity = async (data) => {
       response = await FetchAPIService.post('/api/v1/community', { body: JSON.stringify(data) })
     }
     catch(err) {
-      return { error: true }
+      return err
     }
     
     return response
