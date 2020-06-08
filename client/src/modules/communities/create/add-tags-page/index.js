@@ -1,16 +1,38 @@
 import React from 'react';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
 
-import styles from "./styles";
-
-import TagsData from "../../../assets/TagsData";
-import Tag from "../../../components/Tag";
+import { createCommunity } from '../actions'
+import BackButton from '../../../shared/back-button'
+import WideButtonRight from "../../../../components/WideButtonRight";
+import TagsData from "../../../../assets/TagsData";
+import Tag from "../../../../components/Tag";
 import {
     title2,
     subTitle2,
-    ctaText2
-} from './constants';
+    ctaText2,
+    fieldTitle2
+} from '../constants';
+import useForm from '../hooks'
+
+import styles from "./styles";
 
 const CreateCommunityAddTags = (props) => {
+
+    const [ fields, onChange ] = useForm({ ...props.route.params, tags: [] })
+
+    const onTagChange = (tag, isChosen) => {
+      tags = [ ...fields.tags ]
+
+      if (isChosen) {
+        tags.push(tag)
+      } else {
+        const i = tags.indexOf(tag)
+        tags.splice(i, 1)
+      }
+
+      onChange('tags', tags)
+    }
+
     Array.prototype.chunk = function(n) {
       if (!this.length) {
         return [];
@@ -20,10 +42,10 @@ const CreateCommunityAddTags = (props) => {
 
     const { navigation } = props;
     const tagsItems = TagsData.map((item, index) => (
-      <Tag key={index} item={item} i={3} callback={this.tagCallback} />
+      <Tag key={index} item={item} i={3} callback={onTagChange} />
     ));
 
-    return (
+    return ( 
         <ScrollView
             style={styles.container2}
             showsVerticalScrollIndicator={false}
@@ -52,17 +74,17 @@ const CreateCommunityAddTags = (props) => {
             </View>
 
             <View paddingTop={20} alignSelf={'center'}>
-                    <TouchableOpacity onPress={() => this.update(navigation)} underlayColor="white">
-                        <WideButtonComponent
-                            value={ctaText2}
-                            source={require("../../../assets/arrow-right-white.png")}
-                            containerStyle={{
-                            ...styles.btn
-                            }}
-                            textStyle={{ fontSize: 14, fontFamily: "poppins-light", color: 'lightgrey' }}
-                        />
-                    </TouchableOpacity>
-                </View>
+              <TouchableOpacity onPress={() => createCommunity(fields)} underlayColor="white">
+                  <WideButtonRight
+                      value={ctaText2}
+                      source={require("../../../../assets/arrow-right-white.png")}
+                      containerStyle={{
+                      ...styles.btn
+                      }}
+                      textStyle={{ fontSize: 14, fontFamily: "poppins-light", color: 'lightgrey' }}
+                  />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </ScrollView>

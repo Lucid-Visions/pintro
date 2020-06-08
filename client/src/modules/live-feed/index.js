@@ -78,8 +78,6 @@ export default class LiveFeed extends React.Component {
   }
 
   fetchData = async () => {
-
-    console.log('fetchData')
     const response = await getFeed()
     if (response.error) {
         this.setState({ networkError: true, refreshing: false })

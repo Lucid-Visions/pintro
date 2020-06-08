@@ -3,7 +3,6 @@ import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import PropTypes from 'prop-types';
 
 import WideButtonComponent from "../../../components/WideButtonRight";
-
 import BackButton from '../../shared/back-button';
 
 import {
@@ -18,25 +17,15 @@ import {
   urlPlaceholder1,
   ctaText1
 } from './constants';
+import  useForm from './hooks'
 
 import styles from './styles';
 
-const reducer = (state, { field, value}) => {
-  return {
-    ...state,
-    [field]: value
-  }
-};
-
 const CreateCommunity = ({ navigation }) => {
 
-  const [ state, dispatch ] = useReducer(reducer, initialState)
-  
-  const onChange = (field, value) => {
-    dispatch({ field, value })
-  };
+  const [ fields, onChange ] = useForm(initialState)
 
-  const { name, story, url } = state;
+  const { name, story, url } = fields;
 
   return (
     <ScrollView>
@@ -82,7 +71,7 @@ const CreateCommunity = ({ navigation }) => {
           </View>
   
           <View>
-            <TouchableOpacity onPress={() => navigation.navigate('CreateCommunityAddTags', { name, story, url })}>
+            <TouchableOpacity onPress={() => navigation.navigate('CreateCommunityAddTags', fields)}>
                 <WideButtonComponent
                     value={ctaText1}
                     source={require("../../../assets/arrow-right-white.png")}

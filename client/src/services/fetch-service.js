@@ -1,4 +1,4 @@
-
+import { AsyncStorage } from 'react-native'
 import Logger from 'js-logger'
 
 // Logger
@@ -20,6 +20,36 @@ const defaultHeaders = {
 class FetchAPIService {
 
     /**
+     * sendRequest
+     * 
+     * Generic request function that all HTTP methods use
+     * @param {string} url 
+     * @param {Object} addtionalConfig 
+     */
+    static async sendRequest(url, addtionalConfig) {
+        const userToken = await AsyncStorage.getItem("token")
+
+        if (!userToken) {
+            log.error('Authentication failed')
+            return
+        }
+
+        const headers = { ...defaultHeaders, "Authorization": userToken }
+        const config = { ...addtionalConfig, headers }
+        let response
+
+        try {
+            response = await fetch(`http://${env.host}:${env.port}${url}`, config)
+        }
+        catch(err) {
+            log.error(err.message)
+            throw Error(err.message)
+        }
+
+        return response.json()
+    }
+
+    /**
      * 
      * FetchAPI.get(url: string, config: Object)
      * 
@@ -38,29 +68,6 @@ class FetchAPIService {
     // PUT
 
     // DELETE
-
-    static async sendRequest(url, addtionalConfig) {
-        const userToken = await AsyncStorage.getItem("token")
-
-        if (!userToken) {
-            log.error('Authentication failed')
-            return
-        }
-
-        const headers = new Headers({ ...defaultHeaders, "Authorization": userToken })
-        const config = { ...addtionalConfig, headers }
-        let response
-
-        try {
-            response = await fetch(`http://${env.host}:${env.port}/${url}`, config)
-        }
-        catch(err) {
-            log.error(err.message)
-            throw Error(err.message)
-        }
-
-        return response.json()
-    }
 }
 
 export default FetchAPIService

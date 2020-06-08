@@ -1,8 +1,9 @@
-import { post } from '../../services/fetch-service'
+import  FetchAPIService from '../../../services/fetch-service'
 
 export const createCommunity = async (data) => {
+    let response
     try {
-      response = await post(`/api/v1/feed?${params}`, { body: data })
+      response = await FetchAPIService.post('/api/v1/community', { body: JSON.stringify(data) })
     }
     catch(err) {
       return { error: true }
