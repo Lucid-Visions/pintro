@@ -28,26 +28,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly"
   },
+  btnDisabled: {
+    opacity: 0.4,
+  },
   container: {
+    marginTop: Constants.statusBarHeight + 20,
     flex: 1,
     backgroundColor: "#F0F0F1",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    paddingBottom: 50
-  },
-  container1: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#F0F0F1",
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  container2: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#F0F0F1",
-    alignContent: "center"
+    paddingBottom: 50,
+    paddingHorizontal: 20
   },
   tags: {
     flexDirection: "row",

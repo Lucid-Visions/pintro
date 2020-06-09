@@ -8,7 +8,7 @@ import TagsData from "../../../../assets/TagsData";
 import Tag from "../../../../components/Tag";
 import {
     title2,
-    subTitle2,
+    subtitle2,
     ctaText2,
     fieldTitle2
 } from '../constants';
@@ -52,22 +52,28 @@ const CreateCommunityAddTags = ({ navigation, route: { params } }) => {
       navigation.navigate("CreateCommunityThanks", {id: resp.data.insertedId })
     }
 
+    const isSubmitDisabled = () => {
+      return !(fields.tags.length > 2)
+    }
+
+    let btnStyles = { ...styles.btn }
+
+    if (isSubmitDisabled()) {
+      btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    }
+
     const tagsItems = TagsData.map((item, index) => (
       <Tag key={index} item={item} i={3} callback={onTagChange} />
     ));
 
     return ( 
-        <ScrollView
-            style={styles.container2}
-            showsVerticalScrollIndicator={false}
-        >
-        <View style={styles.container1}>
+        <ScrollView>
           <View style={styles.container}>
             <BackButton navigation={navigation} />
 
             <View>
               <Text style={styles.h1}>{title2}</Text>
-              <Text style={styles.h2}>{subTitle2}</Text>
+              <Text style={styles.h2}>{subtitle2}</Text>
             </View>
 
             <View paddingTop={70}>
@@ -85,19 +91,19 @@ const CreateCommunityAddTags = ({ navigation, route: { params } }) => {
             </View>
 
             <View paddingTop={20} alignSelf={'center'}>
-              <TouchableOpacity onPress={onCreateCommunity} underlayColor="white">
+              <TouchableOpacity
+                onPress={onCreateCommunity} underlayColor="white"
+                disabled={isSubmitDisabled()}
+                >
                   <WideButtonRight
                       value={ctaText2}
                       source={require("../../../../assets/arrow-right-white.png")}
-                      containerStyle={{
-                      ...styles.btn
-                      }}
+                      containerStyle={btnStyles}
                       textStyle={{ fontSize: 14, fontFamily: "poppins-light", color: 'lightgrey' }}
                   />
               </TouchableOpacity>
             </View>
           </View>
-        </View>
       </ScrollView>
     )
 }

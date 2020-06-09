@@ -43,6 +43,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     justifyContent: 'space-evenly'
   },
+  btnDisabled: {
+    opacity: 0.4,
+  },
   btnText: {
     fontSize: 14,
     fontFamily: "poppins-light",
@@ -62,6 +65,9 @@ const styles = StyleSheet.create({
     borderBottomColor: 'lightgrey',
     borderBottomWidth: 1,
     alignSelf: "flex-start"
+  },
+  bottomBorderError: {
+    borderBottomColor: 'red'
   }
 });
 
