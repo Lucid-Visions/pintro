@@ -51,4 +51,4 @@ workflows:
             - build
           filters:
               tags:
-                only: circleci-project-setup
+                only: master
