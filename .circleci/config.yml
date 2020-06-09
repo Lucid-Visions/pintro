@@ -36,7 +36,6 @@ workflows:
     jobs:
       - build
       - master_only:
-          type: approval
           requires:
             - build
           filters:
