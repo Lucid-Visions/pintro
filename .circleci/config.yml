@@ -28,6 +28,8 @@ jobs:
       - run:
           name: Docker build and push (latest)
           command: |
+            docker tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:latest
+            docker tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1} docker/mongo-seed ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:latest
             docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:latest
             docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:latest
 
