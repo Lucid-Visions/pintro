@@ -51,5 +51,4 @@ workflows:
             - build
           filters:
               tags:
-                only:
-                  - master
+                only: master
