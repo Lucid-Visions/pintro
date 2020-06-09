@@ -1,16 +1,19 @@
 import React from "react";
 import RNPickerSelect from 'react-native-picker-select';
-import { TextInput, View, StyleSheet } from "react-native"
+import { TextInput, View, StyleSheet } from "react-native";
+
+var moment = require('moment');
 
 function yearsPickerArray() {
-  let itemsArr = []
-  for (let i = 2030; i >= 1920; i--) {
-      itemsArr.push({
-          value: `${i}`,
-          label: `${i}`
-      });
+  let years = [];
+  for(let i = 0; i<100; i++){
+    let year = (moment().year())-i
+    years.push({
+      value: `${year}`,
+      label: `${year}`
+    })
   }
-  return itemsArr
+  return years;
 }
 
 function YearItemSelector({callback, yearValue, yearPlaceholder, value, placeholder, id, type, blackTheme}) {
@@ -22,9 +25,10 @@ function YearItemSelector({callback, yearValue, yearPlaceholder, value, placehol
         value={yearValue}
         items={yearsPickerArray()}
         style={blackTheme ? pickerStyleDark : pickerStyle}
+        placeholderTextColor={blackTheme ? "grey"  : "white"}
       />
       <TextInput
-        style={styles.placeholder}
+        style={blackTheme ? styles.placeholderDark : styles.placeholder}
         width={250}
         placeholderTextColor={blackTheme ? "grey"  : "white"}
         borderBottomColor={blackTheme ? "grey"  : "lightgrey"}
@@ -39,56 +43,66 @@ function YearItemSelector({callback, yearValue, yearPlaceholder, value, placehol
 
 const pickerStyle = {
 	inputIOS: {
-        color: 'white',
-        fontSize: 13,
-        fontFamily: "poppins-regular",
-        marginTop: 20
+    color: 'white',
+    fontSize: 13,
+    fontFamily: "poppins-regular",
+    marginTop: 20,
 	},
 	inputAndroid: {
-        color: 'white',
-        fontSize: 13,
-        fontFamily: "poppins-regular",
-        marginTop: 20
-
+    color: 'white',
+    fontSize: 13,
+    width: 101,
+    fontFamily: "poppins-regular",
+    marginTop: 20,
 	},
 	placeholderColor: 'white',
 };
 
 const pickerStyleDark = {
 	inputIOS: {
-        color: 'black',
-        fontSize: 13,
-        fontFamily: "poppins-regular",
-        marginTop: 20
+    color: 'black',
+    fontSize: 13,
+    fontFamily: "poppins-regular",
+    marginTop: 20,
+    paddingLeft: 20
 	},
 	inputAndroid: {
-        color: 'black',
-        fontSize: 13,
-        fontFamily: "poppins-regular",
-        marginTop: 20
-
+    color: 'black',
+    width: 101,
+    fontSize: 13,
+    fontFamily: "poppins-regular",
+    marginTop: 20,
 	},
 	placeholderColor: 'grey',
 };
 
 
 const styles = StyleSheet.create({
-      placeholder: {
-        fontFamily: "poppins-regular",
-        textAlign: "left", 
-        color: "white",
-        margin: "auto",
-        alignItems: "baseline",
-        fontSize: 13,
-        paddingVertical: 20
-      },
-      twoColumns: {
-        flexDirection: 'row',
-        width: 350,
-        alignSelf: "flex-start",
-        alignItems: "center",
-        justifyContent: "space-between"
-      },
+  placeholder: {
+    fontFamily: "poppins-regular",
+    textAlign: "left", 
+    color: "white",
+    margin: "auto",
+    alignItems: "baseline",
+    fontSize: 13,
+    paddingVertical: 20,
+  },
+  placeholderDark: {
+    fontFamily: "poppins-regular",
+    textAlign: "left", 
+    color: "black",
+    margin: "auto",
+    alignItems: "baseline",
+    fontSize: 13,
+    paddingVertical: 20
+  },
+  twoColumns: {
+    flexDirection: 'row',
+    width: 350,
+    alignSelf: "flex-start",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
 })
 
 export default YearItemSelector;
