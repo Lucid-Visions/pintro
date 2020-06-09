@@ -16,7 +16,7 @@ import useForm from '../hooks'
 
 import styles from "./styles";
 
-// TODO: Move this somewhere more generic
+// TODO: https://lucidvisions.atlassian.net/browse/PIN-86 - Move this somewhere more generic
 Array.prototype.chunk = function(n) {
   if (!this.length) {
     return [];
