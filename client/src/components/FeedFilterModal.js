@@ -3,7 +3,16 @@ import { View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import Modal from "react-native-modal";
 
 
-class FeedFilterComponent extends React.Component {
+/**
+ * FilterType enum
+ */
+const FilterType = {
+    STATUS: 1,
+    HELP_ME_WITH: 2,
+    INTRODUCE_ME: 3
+}
+
+class FeedFilterModal extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -28,7 +37,7 @@ class FeedFilterComponent extends React.Component {
     }
 
     toggleStatus = () => {
-        this.props.update(!this.state.isStatus?1:null)
+        this.props.onSetFilter(!this.state.isStatus ? FilterType.STATUS : null)
         this.setState({
             isStatus: !this.state.isStatus,
             isHelpMeWith: false,
@@ -39,7 +48,7 @@ class FeedFilterComponent extends React.Component {
     }
 
     toggleHelpMeWith = () => {
-        this.props.update(!this.state.isHelpMeWith?2:null)
+        this.props.onSetFilter(!this.state.isHelpMeWith ? FilterType.HELP_ME_WITH : null)
         this.setState({
             isHelpMeWith: !this.state.isHelpMeWith,
             isStatus: false,
@@ -49,7 +58,7 @@ class FeedFilterComponent extends React.Component {
     }
 
     toggleIntroduceMe = () => {
-        this.props.update(!this.state.isIntroduceMe?3:null)
+        this.props.onSetFilter(!this.state.isIntroduceMe ? FilterType.INTRODUCE_ME : null)
         this.setState({
             isIntroduceMe: !this.state.isIntroduceMe,
             isStatus: false,
@@ -238,4 +247,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default FeedFilterComponent;
+export default FeedFilterModal;

@@ -7,8 +7,8 @@ import {
 import Constants from "expo-constants";
 import MapComponent from "../components/MapComponent";
 import * as React from "react";
-import { TabView, SceneMap, TabBar, Image } from "react-native-tab-view";
-import LiveFeed from "../components/LiveFeed"
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import LiveFeed from "../modules/live-feed"
 
 const initialLayout = { width: Dimensions.get("window").width };
 
@@ -88,24 +88,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-// /**
-//  * Main screen of the Home tab.
-//  */
-// export default class HomeScreen extends React.Component {
-//     static navigationOptions = {
-//         headerLeft: "Arrow_back", // To be changed with an icon.
-//         headerRight: "Share_button" // To be changed with an icon.
-//     }
-//     constructor(props) {
-//         super(props);
-//     };
-
-//     render() {
-//         return (
-//             <SafeAreaView style={styles.container}>
-//                 <MapComponent style={styles.mapStyle}/>
-//             </SafeAreaView>
-//         )
-//     };
-// }
