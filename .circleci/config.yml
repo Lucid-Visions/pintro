@@ -47,6 +47,8 @@ workflows:
     jobs:
       - build
       - master_only:
+          requires:
+            - build
           filters:
               tags:
                 only:
