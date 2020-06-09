@@ -1,32 +1,34 @@
 version: 2.1
 jobs:
   build:
-    docker: 
+    docker:
       - image: google/cloud-sdk
     steps:
       - checkout
       - setup_remote_docker
       - run:
-        name: Set up GCloud
-        command: |
-          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=- \
-          gcloud --quiet config set project ${GCLOUD_PROJECT_ID} \
-          gcloud --quiet config set compute/zone ${GCLOUD_COMPUTE_ZONE} \
-          gcloud auth configure-docker
+          name: Set up GCloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=- \
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID} \
+            gcloud --quiet config set compute/zone ${GCLOUD_COMPUTE_ZONE} \
+            gcloud auth configure-docker
       - run:
-        name: Docker build and push (commit sha)
-        command: |
-          docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} server \
-          docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1} docker/mongo-seed \
-          docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} \
-          docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1}
+          name: Docker build and push (commit sha)
+          command: |
+            docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} server \
+            docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1} docker/mongo-seed \
+            docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} \
+            docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1}
   master_only:
+    docker:
+      - image: google/cloud-sdk
     steps:
       - run:
-        name: Docker build and push (latest)
-        command: |
-          docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:latest \
-          docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:latest
+          name: Docker build and push (latest)
+          command: |
+            docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:latest \
+            docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:latest
 
 workflows:
   version: 2.1
