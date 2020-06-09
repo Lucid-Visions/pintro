@@ -1,8 +1,8 @@
 import  FetchAPIService from '../../services/fetch-service'
 
-export const getFeed = async ({limit= 10, date_stamp= Date.now(), filter = undefined}) => {
+export const getFeed = async (limit = 10, date_stamp = Date.now(), filter = undefined) => {
 
-    let filterParam
+    let filterParam = ''
     if (filter) {
       filterParam = `&filter=${filter}`
     }
@@ -14,7 +14,7 @@ export const getFeed = async ({limit= 10, date_stamp= Date.now(), filter = undef
       response = await FetchAPIService.get(`/api/v1/feed?${params}`)
     }
     catch(err) {
-      return { error: true }
+      return err
     }
     
     return response

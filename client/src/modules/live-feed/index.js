@@ -85,7 +85,7 @@ export default class LiveFeed extends React.Component {
     }
 
     this.setState({
-        items: [...this.state.items, ...response],
+        items: [...this.state.items, ...response.data],
         networkError: false,
         refreshing: false,
     })    
