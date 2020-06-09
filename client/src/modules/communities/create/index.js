@@ -15,8 +15,7 @@ import {
   storyPlaceholder1,
   urlLabel1,
   urlPlaceholder1,
-  ctaText1,
-  nameRegex
+  ctaText1
 } from './constants';
 import  useForm from './hooks'
 
@@ -29,11 +28,7 @@ const CreateCommunity = ({ navigation }) => {
   const { name, story, url } = fields;
 
   const isSubmitDisabled = () => {
-    return !(name.length > 0 && story.length > 0 && isNameValid())
-  }
-
-  const isNameValid = () => {
-    return true
+    return !(name.length > 0 && story.length > 0)
   }
 
   let btnStyles = styles.btn
@@ -42,16 +37,9 @@ const CreateCommunity = ({ navigation }) => {
     btnStyles = { ...styles.btn, ...styles.btnDisabled }
   }
 
-  let nameFieldStyles = styles.bottomBorder
-
-  if (!isNameValid()) {
-    nameFieldStyles = { ...styles.bottomBorder, ...styles.bottomBorderError }
-  }
-
   return (
     <ScrollView>
       <View style={styles.container}>
-        
         <BackButton navigation={navigation} />
         
         <View>
@@ -59,7 +47,7 @@ const CreateCommunity = ({ navigation }) => {
           <Text style={styles.h2}>{subTitle1}</Text>
         </View>
 
-        <View style={nameFieldStyles}>
+        <View style={styles.bottomBorder}>
           <Text style={styles.prompt}>{nameLabel1}</Text>
             <TextInput
                 style={styles.placeholder}

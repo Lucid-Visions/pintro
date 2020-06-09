@@ -24,5 +24,3 @@ export const subtitle2 = 'Categorise your community (3 minimum)'
 
 export const fieldTitle2 = 'Choose from the most popular'
 export const ctaText2 = 'CREATE COMMUNITY';
-
-export const nameRegex = '/^[a-zA-Z0-9 ._-]+$/'
