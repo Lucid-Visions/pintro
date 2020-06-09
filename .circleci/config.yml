@@ -50,5 +50,5 @@ workflows:
           requires:
             - build
           filters:
-              tags:
-                only: master
+            branches:
+              only: master
