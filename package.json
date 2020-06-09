@@ -10,7 +10,14 @@
     "husky": "^4.2.5"
   },
   "scripts": {
-    "lint": "eslint './src/**/*.{js,ts,tsx}",
-    "pre-push": "cd server && eslint './src/**/*.{js,ts,tsx}'"
+    "lint": "eslint './src/**/*.{js,ts,tsx}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "cd server && eslint './src/**/*.{js,ts,tsx}'"
+    }
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0"
   }
 }

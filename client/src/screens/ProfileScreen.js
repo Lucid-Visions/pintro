@@ -667,6 +667,7 @@ const ProfileScreen = ({
         />
         {editBtn("SettingsStack", {screen: "Edit Experience", params: { experience }})}
       </View>
+
       {recommendationsSection()}
       <View style={styles.badgesSection}>
         <Text style={{ marginVertical: "5%", fontFamily: "poppins-bold" }}>

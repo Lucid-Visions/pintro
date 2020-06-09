@@ -1,21 +1,26 @@
 import React from "react";
+
 import {
   StyleSheet,
   View,
-  ScrollView,
-  RefreshControl,
   AsyncStorage,
   FlatList,
 } from "react-native";
-import FeedComponent from "../components/FeedItem";
-import WhiteFeedComponent from "../components/WhiteFeedItem";
-import FeedFilterComponent from "../components/FeedFilter";
-import EmptyStateRefresh from "./EmptyStateRefresh";
+import FeedComponent from "../../components/FeedItem";
+import WhiteFeedComponent from "../../components/WhiteFeedItem";
+import FeedFilterModal from "../../components/FeedFilterModal";
+import EmptyStateRefresh from "../../components/EmptyStateRefresh";
 
+import { getFeed } from './actions'
+
+// Logger
 /**
  * Main screen of the Home tab.
  */
 export default class LiveFeed extends React.Component {
+
+
+
   static navigationOptions = {
     headerLeft: "Arrow_back", // To be changed with an icon.
     headerRight: "Share_button", // To be changed with an icon.
@@ -43,7 +48,6 @@ export default class LiveFeed extends React.Component {
     this.getUid()
     this.fetchData({});
   }
-
 
   getUid = async () => {
 
@@ -73,44 +77,22 @@ export default class LiveFeed extends React.Component {
     this.setState({uid:responseJson._id})
   }
 
-
-  fetchData = async ({limit= 10, date_stamp= Date.now(), extend= false}) => {
-    console.log(date_stamp)
-    var myHeaders = new Headers();
-    var userToken = await AsyncStorage.getItem("token");
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", userToken);
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-    var response = await fetch(
-      `http://${env.host}:${env.port}/api/v1/feed?limit=${limit}&date_stamp=${date_stamp}&filter=${this.state.filter}`,
-      requestOptions
-    ).catch((err) => {
-      if (err.message === "Network request failed") {
-        this.setState({ networkError: true, refreshing: false });
-      }
-    });
-    if (response == null) return [];
-    const responseJson = await response.json();
-    console.log(responseJson)
-    this.setState({
-      items: extend?[...this.state.items, ...responseJson]:responseJson,
-      networkError: false,
-      refreshing: false,
-    });
-  };
-
-  setFilter(i) {
-    if (i != null) {
-      this.setState({ filter: i });
-    } else {
-      this.setState({ filter: -1 });
+  fetchData = async () => {
+    const response = await getFeed()
+    if (response.error) {
+        this.setState({ networkError: true, refreshing: false })
+        return
     }
-    this.fetchData({});
+
+    this.setState({
+        items: [...this.state.items, ...response.data],
+        networkError: false,
+        refreshing: false,
+    })    
+  }
+
+  setFilter = (filter) =>  {
+    this.fetchData({ filter })
   }
 
   getItem(x){
@@ -167,15 +149,13 @@ export default class LiveFeed extends React.Component {
   
   }
 
-  getFilter(){
-    return (
-      <View>
-              <FeedFilterComponent update={(x) => this.setFilter(x)} />
-            </View>
-    )
-  }
   render() {
-    let items = this.state.items.map((x) => this.getItem(x));
+    const filterPopup = (
+      <View>
+        <FeedFilterModal onSetFilter={this.setFilter} />
+      </View>
+    )
+
     if (this.state.networkError) {
       return (
         <EmptyStateRefresh
@@ -187,14 +167,14 @@ export default class LiveFeed extends React.Component {
     } else {
       return (
               <FlatList
-              ListHeaderComponent={this.getFilter()}
+
                 data={this.state.items}
                 renderItem={({item})=>this.getItem(item)}
                 onRefresh={this._onRefresh}
                 refreshing={this.state.refreshing}
                 keyExtractor={(item) => item._id}
                 numColumns={2}
-                onMomentumScrollEnd={()=>this.fetchData({date_stamp:this.state.items.length > 0 ? this.state.items[this.state.items.length-1].date_stamp-1:Date.now(), extend:true})}
+                onMomentumScrollEnd={this.fetchData}
                 onEndReachedThreshold={0.5}
                 initialNumToRender={4}
               />
