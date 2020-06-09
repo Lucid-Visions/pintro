@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import RNPickerSelect from 'react-native-picker-select';
-import { TextInput, View, StyleSheet, ShadowPropTypesIOS } from "react-native"
+import { TextInput, View, StyleSheet } from "react-native"
 
 function yearsPickerArray() {
   let itemsArr = []
   for (let i = 2030; i >= 1920; i--) {
       itemsArr.push({
           value: `${i}`,
-          label: `${i}        `
+          label: `${i}`
       });
   }
   return itemsArr
@@ -26,7 +26,6 @@ function YearItemSelector({callback, yearValue, yearPlaceholder, value, placehol
       <TextInput
         style={styles.placeholder}
         width={250}
-        color={blackTheme ? "black" : "white"}
         placeholderTextColor={blackTheme ? "grey"  : "white"}
         borderBottomColor={blackTheme ? "grey"  : "lightgrey"}
         borderBottomWidth={1}
