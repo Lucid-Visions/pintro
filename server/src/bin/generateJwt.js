@@ -4,7 +4,7 @@ var constants = require('./constants')
 
 var payload = {
   user: {
-    uid: '5ed5466fcfae0f00068cb6cd',
+    uid: process.argv[2],
     type: 'user',
   },
 }
