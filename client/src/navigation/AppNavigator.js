@@ -5,7 +5,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "../screens/SplashScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpStack from "./SignUpStack";
-import ProfileScreen from "../screens/ProfileScreen";
 import TabMenu from "./MainTabNavigator";
 import registerNotification from "../assets/registerNotification"
 //for WGO Modal
