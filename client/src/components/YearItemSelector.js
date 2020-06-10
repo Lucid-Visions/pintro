@@ -1,8 +1,7 @@
 import React from "react";
 import RNPickerSelect from 'react-native-picker-select';
 import { TextInput, View, StyleSheet } from "react-native";
-
-var moment = require('moment');
+import moment from 'moment';
 
 function yearsPickerArray() {
   let years = [];
