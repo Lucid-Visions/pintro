@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 
 class BaseRepository {
 
@@ -16,14 +17,18 @@ class BaseRepository {
   }
 
   /**
+   *
+   * @param {string} id
+   */
+  async get(id) {
+    return this.collection.find({ _id: mongoose.Types.ObjectId(id) }).toArray()
+  }
+
+  /**
      * Other CRUDs
      */
 
   // getAll() {
-
-  // }
-
-  // get(id) {
 
   // }
 

@@ -15,7 +15,7 @@ class CommunityController {
      * @param {Request} req HTTP request send from client
      * @param {Response} res HTTP response that is returned
      */
-  async create(req, res) {
+  async createCommunity(req, res) {
 
     // Return error if body is missing
     if (isEmpty(req.body)) {
@@ -40,6 +40,18 @@ class CommunityController {
       insertedId: createResult.insertedId,
       insertedCount: createResult.insertedCount,
     })
+  }
+
+  /**
+   *
+   * @param {Request} req HTTP request send from client
+   * @param {Response} res HTTP response that is returned
+   */
+  async getCommunity(req, res) {
+    const id = req.params.id
+    const communities = await this.repository.get(id)
+
+    return res.status(http.OK).json(communities)
   }
 }
 

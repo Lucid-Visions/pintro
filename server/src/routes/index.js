@@ -146,6 +146,7 @@ router.get('/newpassword', ResetPassword.newPasswordPage)
 /**
  *  Community
  */
-router.post('/community', communityController.create.bind(communityController))
+router.post('/community', communityController.createCommunity.bind(communityController))
+router.get('/community/:id', communityController.getCommunity.bind(communityController))
 
 export default router
