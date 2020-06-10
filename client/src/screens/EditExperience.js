@@ -239,21 +239,21 @@ const EditExperience = ({ route }) => {
         <Text style={styles.header}>Edit your experience</Text>
         <Text style={styles.headerText}>Your work experience timeline</Text>
 
-        <Text style={styles.categoryHeader}>Work Experience</Text>
+        <Text style={styles.categoryHeader}>Work Experience *</Text>
         <TextInput
           style={styles.placeholder}
           placeholderTextColor={"grey"}
-          placeholder={`${state.years || "Enter your work experience..."}`}
-          onChangeText={input => setState({ years: input })}
+          placeholder={state.years ? `${state.years} Years` : "Enter number of years"}
+          onEndEditing={input => setState({years: input.nativeEvent.text})}
           keyboardType={"numeric"}
         />
 
-        <Text style={styles.categoryHeader}>Industry</Text>
+        <Text style={styles.categoryHeader}>Industry *</Text>
         <TextInput
           style={styles.placeholder}
           placeholderTextColor={"grey"}
           placeholder={state.industry || "Enter your industry..."}
-          onChangeText={input => setState({ industry: input })}
+          onEndEditing={input => setState({ industry: input.nativeEvent.text })}
         />
 
         <Text style={styles.categoryHeader}>Previous Companies</Text>
@@ -290,7 +290,7 @@ const EditExperience = ({ route }) => {
           }}
         />
 
-        <Text style={styles.categoryHeader}>Academic Level</Text>
+        <Text style={styles.categoryHeader}>Academic Level *</Text>
         <RNPickerSelect
           style={styles.pickerContainer}
           value={state.level}

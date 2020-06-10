@@ -165,7 +165,8 @@ export default class SignUpScreen5 extends Component {
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
-                placeholder="Enter a number of years"
+                placeholder="Enter number of years"
+                keyboardType={"numeric"}
                 onChangeText={years => this.setState({ years })}
                 value={this.state.years}
               />
