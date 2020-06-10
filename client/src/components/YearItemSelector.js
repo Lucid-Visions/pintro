@@ -51,7 +51,7 @@ const pickerStyle = {
 	inputAndroid: {
     color: 'white',
     fontSize: 13,
-    width: 101,
+    width: 105,
     fontFamily: "poppins-regular",
     marginTop: 20,
 	},
@@ -68,7 +68,7 @@ const pickerStyleDark = {
 	},
 	inputAndroid: {
     color: 'black',
-    width: 101,
+    width: 105,
     fontSize: 13,
     fontFamily: "poppins-regular",
     marginTop: 20,

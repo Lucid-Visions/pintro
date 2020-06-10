@@ -131,6 +131,7 @@ export default class SignUpScreen2 extends Component {
                 placeholderTextColor={"white"}
                 placeholder="Enter your phone number"
                 onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                keyboardType={"numeric"}
                 value={this.state.phoneNumber}
               />
             </View>
