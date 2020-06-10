@@ -59,6 +59,7 @@ export default class SignUpScreen2 extends Component {
       `http://${env.host}:${env.port}/api/v1/register/email_and_password`,
       requestOptions
     );
+
     var responseJson = await response.json();
     if (response.ok) {
       this._storeData("token", responseJson.token);

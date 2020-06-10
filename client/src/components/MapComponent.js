@@ -19,7 +19,6 @@ let tempRegion = null;
 class MapComponent extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       region: {
         latitude: 51.509865,
