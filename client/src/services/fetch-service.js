@@ -51,7 +51,7 @@ class FetchAPIService {
         return {
             status: response.status,
             ok: response.ok,
-            data: json
+            data: json.data
         }
     }
 
