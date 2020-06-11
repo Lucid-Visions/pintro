@@ -1,23 +1,19 @@
-import fs from 'fs'
-
-
-var i = 'Pintro'
-var s = 'pintroAPI'
-var a = 'https://pintro.com' // to change
+var fs = require('fs')
+var constants = require('./constants')
 
 const Options = {
   signOptions: {
-    issuer: i,
-    subject: s,
-    audience: a,
+    issuer: constants.JWTIssuer,
+    subject: constants.JWTSubject,
+    audience: constants.JWTAudience,
     expiresIn: '360h',
     algorithm: 'RS256',
   },
 
   verifyOptions: {
-    issuer: i,
-    subject: s,
-    audience: a,
+    issuer: constants.JWTIssuer,
+    subject: constants.JWTSubject,
+    audience: constants.JWTAudience,
     expiresIn: '360h',
     algorithm: ['RS256'],
   },
@@ -41,4 +37,4 @@ const Options = {
 
 }
 
-export default Options
+module.exports = Options
