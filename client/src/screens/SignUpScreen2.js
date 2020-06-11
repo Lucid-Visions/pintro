@@ -13,6 +13,14 @@ import WideButtonComponent from "../components/WideButtonRight";
 import { AsyncStorage } from "react-native";
 import env from "../env";
 
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const phoneRegex = /^(?:(?:00)?44|0)7(?:[45789]\d{2}|624)\d{6}$/;
+const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+var validEmail = true;
+var validNumber = true;
+var validPassword = true;
+
 export default class SignUpScreen2 extends Component {
   static navigationOptions = {
     headerLeft: "Arrow_back" // To be changed with an icon.
@@ -43,8 +51,8 @@ export default class SignUpScreen2 extends Component {
 
     var raw = JSON.stringify({
       email_login: this.state.email.toLowerCase(),
-      password: password.toLowerCase(),
-      phone: this.state.phoneNumber.toLowerCase(),
+      password: password,
+      phone: this.state.phoneNumber,
       mood: 1,
     });
 
@@ -82,6 +90,26 @@ export default class SignUpScreen2 extends Component {
     }
   }
 
+  /**
+   * Validates input on a field.
+   *
+   * @param options Information for the field to be validated.
+   * @param options.regex The Regex to be used for validation.
+   * @param options.input Input from the field to be validated.
+   * @param options.stateKey The key for setting state.
+   * @return Result of validation assigned to the passed flag.
+ */
+
+  fieldValidator = (options = {}) => {
+    if (options.regex.test(options.input) === false) {
+      this.setState({ [options.stateKey]: options.input })
+      return false;
+    } else {
+      this.setState({ [options.stateKey]: options.input })
+      return true;
+    }
+  }
+
   render() {
     const { navigation } = this.props;
     return (
@@ -113,30 +141,30 @@ export default class SignUpScreen2 extends Component {
               <Text style={styles.h2}>Create your account</Text>
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={!validEmail ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Email address</Text>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
                 placeholder="Enter your email address"
-                onChangeText={email => this.setState({ email })}
+                onChangeText={text => validEmail = this.fieldValidator({regex: emailRegex, input: text, stateKey: 'email'})}
                 value={this.state.email}
               />
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={!validNumber ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Phone number</Text>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
                 placeholder="Enter your phone number"
-                onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                onChangeText={phoneNumber => validNumber = this.fieldValidator({regex: phoneRegex, input: phoneNumber, stateKey: 'phoneNumber'})}
                 keyboardType={"numeric"}
                 value={this.state.phoneNumber}
               />
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={!validPassword? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Password</Text>
               <TextInput
                 style={styles.placeholder}
@@ -148,7 +176,7 @@ export default class SignUpScreen2 extends Component {
               />
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={!validPassword? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Confirm password</Text>
               <TextInput
                 style={styles.placeholder}
@@ -251,6 +279,12 @@ const styles = StyleSheet.create({
   bottomBorder: {
     width: 350,
     borderBottomColor: "lightgrey",
+    borderBottomWidth: 1,
+    alignSelf: "flex-start"
+  },
+  bottomBorderInvalid: {
+    width: 350,
+    borderBottomColor: "red",
     borderBottomWidth: 1,
     alignSelf: "flex-start"
   }
