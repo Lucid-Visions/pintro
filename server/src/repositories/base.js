@@ -21,7 +21,18 @@ class BaseRepository {
    * @param {string} id
    */
   async get(id) {
-    return this.collection.find({ _id: mongoose.Types.ObjectId(id) }).toArray()
+    let response
+    try {
+      const collection = await this.collection.find({ _id: mongoose.Types.ObjectId(id) })
+
+      if (await collection.count() > 0) {
+        response = { data: await collection.toArray() }
+      }
+    } catch (error) {
+      response = { error }
+    }
+
+    return response
   }
 
   /**

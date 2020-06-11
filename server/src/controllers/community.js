@@ -37,8 +37,10 @@ class CommunityController {
     }
 
     res.status(http.CREATED).json({
-      insertedId: createResult.insertedId,
-      insertedCount: createResult.insertedCount,
+      data: {
+        insertedId: createResult.insertedId,
+        insertedCount: createResult.insertedCount,
+      },
     })
   }
 
@@ -49,9 +51,15 @@ class CommunityController {
    */
   async getCommunity(req, res) {
     const id = req.params.id
-    const communities = await this.repository.get(id)
 
-    return res.status(http.OK).json(communities)
+    const response = await this.repository.get(id)
+
+    if (response.error) {
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not retrieve record' }})
+    }
+
+    const [ community ] = response.data
+    return res.status(http.OK).json({ data: community })
   }
 }
 
