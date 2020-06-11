@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignInScreen from "../screens/SignInScreen";
-import SignUpScreen2 from "../screens/SignUpScreen2";
+import SignUpScreen2 from "../modules/users/create/components/create-account-screen";
 import SignUpScreen4 from "../screens/SignUpScreen4";
 import SignUpScreen5 from "../screens/SignUpScreen5";
 import SignUp6Screen from "../screens/SignUp6Screen";
