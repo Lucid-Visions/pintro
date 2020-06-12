@@ -76,7 +76,6 @@ export default class userDetailsScreen extends Component {
                 placeholder="Enter your full name"
                 onChangeText={name => {
                   validName = fieldValidator({regex: nameRegex, input: name})
-                  console.log(validName)
                   this.setState({ name })
                 }}
                 value={this.state.name}

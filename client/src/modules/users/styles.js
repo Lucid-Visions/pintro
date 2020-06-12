@@ -109,6 +109,21 @@ const styles = StyleSheet.create({
     imageContainer: {
       alignSelf: "center",
       paddingTop: 20
+    },
+    tags: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center"
+    },
+    tagScrollContainer: {
+      overflow: "hidden",
+      maxHeight: 200 
+    },
+    tagScrollView: {
+      paddingTop: 20
+    },
+    headerPadding: {
+      paddingHorizontal: 20
     }
 });
 
