@@ -153,7 +153,7 @@ class UserProfileHandler extends Component {
   };
 
   getContent() {
-    if (this.state.networkErr == true) {
+    if (this.state.networkErr) {
       return <EmptyState state={"internet"} />;
     } else {
       return (

@@ -108,7 +108,7 @@ class NotificationFeed extends React.Component {
     });
     data = data.filter(item => item);
 
-    if (this.state.networkErr == true) {
+    if (this.state.networkErr) {
       return (
         <EmptyStateRefresh
           refreshing={this.state.refreshing}

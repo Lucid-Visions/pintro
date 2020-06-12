@@ -572,9 +572,6 @@ const ProfileScreen = ({
 
       {moodSelectorComponent()}
       <View style={styles.header}>
-        {console.log('rendering')}
-        {console.log('profile picture: ', profile_picture)}
-
           <ProfilePictureComponent
             status={moodState ? moodState : -1}
             source={profile_picture}
