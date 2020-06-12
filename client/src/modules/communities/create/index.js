@@ -6,7 +6,7 @@ import WideButtonComponent from "../../../components/WideButtonRight";
 import BackButton from '../../shared/back-button';
 
 import {
-  initialState,
+  createFormInitialState,
   title1,
   subTitle1,
   nameLabel1,
@@ -16,14 +16,14 @@ import {
   urlLabel1,
   urlPlaceholder1,
   ctaText1
-} from './constants';
+} from '../constants';
 import  useForm from './hooks'
 
 import styles from './styles';
 
 const CreateCommunity = ({ navigation }) => {
 
-  const [ fields, onChange ] = useForm(initialState)
+  const [ fields, onChange ] = useForm(createFormInitialState)
 
   const { name, story, url } = fields;
 
