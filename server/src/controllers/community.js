@@ -15,7 +15,7 @@ class CommunityController {
      * @param {Request} req HTTP request send from client
      * @param {Response} res HTTP response that is returned
      */
-  async create(req, res) {
+  async createCommunity(req, res) {
 
     // Return error if body is missing
     if (isEmpty(req.body)) {
@@ -37,9 +37,29 @@ class CommunityController {
     }
 
     res.status(http.CREATED).json({
-      insertedId: createResult.insertedId,
-      insertedCount: createResult.insertedCount,
+      data: {
+        insertedId: createResult.insertedId,
+        insertedCount: createResult.insertedCount,
+      },
     })
+  }
+
+  /**
+   *
+   * @param {Request} req HTTP request send from client
+   * @param {Response} res HTTP response that is returned
+   */
+  async getCommunity(req, res) {
+    const id = req.params.id
+
+    const response = await this.repository.get(id)
+
+    if (response.error) {
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not retrieve record' }})
+    }
+
+    const [ community ] = response.data
+    return res.status(http.OK).json({ data: community })
   }
 }
 
