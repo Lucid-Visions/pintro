@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfileScreen /> Snapshot test matches snapshot 1`] = `
+<RCTScrollView>
+  <View>
+    <View>
+      <Text>
+        TEST
+      </Text>
+      <Text>
+        TEST
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;

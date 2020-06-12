@@ -1,4 +1,15 @@
+
+export const ActionTypes = Object.freeze({
+    FETCHED_COMMUNITY: 'FETCHED_COMMUNITY'
+})
+
 export const initialState = {
+    currentProfile: {},
+    communities: {},
+}
+
+
+export const createFormInitialState = {
     name: '',
     story: '',
 }
@@ -24,3 +35,11 @@ export const subtitle2 = 'Categorise your community (3 minimum)'
 
 export const fieldTitle2 = 'Choose from the most popular'
 export const ctaText2 = 'CREATE COMMUNITY';
+
+// Profile
+export const storyTitle = 'Our Story'
+export const membersTitle = 'Members'
+export const adminTitle = 'Community Admin'
+export const postTitle = 'Posts'
+export const eventsTitle = 'Upcoming Events'
+export const articlesTitle = 'Articles'

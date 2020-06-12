@@ -12,6 +12,7 @@ import ChatStack from "../navigation/ChatStack"
 import CreateCommunity from "../modules/communities/create";
 import CreateCommunityAddTags from "../modules/communities/create/add-tags-page";
 import CreateCommunityThanks from '../modules/communities/create/thank-you-page';
+import CommunityProfilePage from '../modules/communities/profile/components/profile-screen'
 
 const Stack = createStackNavigator();
 
@@ -22,7 +23,6 @@ function ProfileStack() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
       }}
     >
       <Stack.Screen name="Profile" component={UserProfileHandler} />
@@ -33,6 +33,7 @@ function ProfileStack() {
       <Stack.Screen name="CreateCommunity" component={CreateCommunity}></Stack.Screen>
       <Stack.Screen name="CreateCommunityAddTags" component={CreateCommunityAddTags}></Stack.Screen>
       <Stack.Screen name="CreateCommunityThanks" component={CreateCommunityThanks}></Stack.Screen>
+      <Stack.Screen name="CommunityProfile" component={CommunityProfilePage}></Stack.Screen>
 
     </Stack.Navigator>
   );
