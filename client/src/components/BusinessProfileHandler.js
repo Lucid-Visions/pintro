@@ -116,8 +116,6 @@ class BusinessProfileHandler extends Component {
   getContent() {
     if (this.state.networkErr) {
       return <EmptyState state={"internet"} />;
-    } else if (this.state.networkErr == "loading") {
-      return <Text>Loading</Text>;
     } else {
       return (
         <View>

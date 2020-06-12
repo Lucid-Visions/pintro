@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   ScrollView,
@@ -8,25 +7,25 @@ import {
   AsyncStorage,
   Image,
 } from "react-native";
-import Constants from "expo-constants";
-import ProfilePictureComponent from "../components/ProfilePicture";
+import styles from './styles';
+import ProfilePictureComponent from "../../../components/ProfilePicture";
 import {
   FollowMeButton,
   MessageMeButton,
   ExtrasButton,
   ViewConnectionsButton,
   NewPostButton,
-} from "../components/ProfileActionButtons";
-import ActionButtonComponent from "../components/ActionButton";
-import RecommendationButton from "../components/RecommendationButton";
-import BadgeComponent from "../components/BadgeComponent";
-import Tag from "../components/Tag";
-import Experience from "../components/Experience";
-import MoodButtonCard from "../components/MoodButtonCard";
-import AcceptRequestModal from "../components/followRequestModal";
-import ConnectModal from "../components/ConnectModal";
-import ChatConnectPopup from "../components/ChatConnectPopup";
-const updateRequest = require("../assets/updateRequest").update;
+} from "../../../components/ProfileActionButtons";
+import ActionButtonComponent from "../../../components/ActionButton";
+import RecommendationButton from "../../../components/RecommendationButton";
+import BadgeComponent from "../../../components/BadgeComponent";
+import Tag from "../../../components/Tag";
+import Experience from "../../../components/Experience";
+import MoodButtonCard from "../../../components/MoodButtonCard";
+import AcceptRequestModal from "../../../components/followRequestModal";
+import ConnectModal from "../../../components/ConnectModal";
+import ChatConnectPopup from "../../../components/ChatConnectPopup";
+const updateRequest = require("../../../assets/updateRequest").update;
 
 
 /**
@@ -183,7 +182,7 @@ const ProfileScreen = ({
       return (
         <TouchableOpacity onPress={() => navigation.navigate(screen, props)}>
           <Image
-            source={require("../assets/editPen.png")}
+            source={require("../../../assets/editPen.png")}
             style={styles.editPen}
           />
         </TouchableOpacity>
@@ -557,7 +556,7 @@ const ProfileScreen = ({
           style={{ marginTop: 20 }}
         >
           <Image
-            source={require("../assets/leftArrow.png")}
+            source={require("../../../assets/leftArrow.png")}
             style={{
               height: 20,
               width: 25,
@@ -573,7 +572,6 @@ const ProfileScreen = ({
 
       {moodSelectorComponent()}
       <View style={styles.header}>
-
           <ProfilePictureComponent
             status={moodState ? moodState : -1}
             source={profile_picture}
@@ -678,112 +676,5 @@ const ProfileScreen = ({
     </View>
   );
 };
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 30,
-  },
-  name: {
-    fontWeight: "bold",
-    fontSize: 20,
-    fontFamily: "poppins-bold",
-    flexWrap: "wrap",
-    width: 155,
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    margin: "2%",
-    marginBottom: 0,
-    marginTop: 0,
-  },
-  experienceContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-  },
-  myStoryContainer: {
-    alignSelf: "stretch",
-  },
-  subTextExperience: { fontFamily: "poppins-medium", color: "#757575" },
-  experienceCircle: {
-    height: 7,
-    width: 7,
-    backgroundColor: "#F3A33F",
-    borderRadius: 25,
-    marginRight: 20,
-    position: "absolute",
-    left: -20,
-    top: 7,
-  },
-  indentOne: {
-    marginLeft: 20,
-  },
-  headerText: {
-    marginTop: "5%",
-    marginLeft: "5%",
-    flexDirection: "column",
-    justifyContent: "center",
-    flexShrink: 1,
-    flex: 1,
-  },
-  buttonContainer: {
-    flexDirection: "column",
-    alignContent: "center",
-  },
-  buttons: {
-    flexDirection: "row",
-    marginBottom: 20,
-    marginTop: 35,
-  },
-  actionButtons: {
-    flexDirection: "row",
-    minHeight: 120,
-    margin: 0,
-    padding: 0,
-  },
-  experience: {
-    flexDirection: "row",
-  },
-  recommendationsSection: {
-    flexDirection: "column",
-    flexWrap: "wrap",
-    marginTop: 10,
-  },
-  badgesSection: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginTop: 10,
-  },
-  recommendationsAndBadges: {
-    top: 5,
-    flexDirection: "row",
-    marginTop: "2%",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  tags: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-  },
-  tagScrollContainer: {
-    height: 90,
-    overflow: "hidden",
-  },
-  editPen: {
-    resizeMode: "contain",
-    marginTop: 10,
-    height: 17,
-  },
-  editRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-});
 
 export default ProfileScreen;
