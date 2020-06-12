@@ -166,18 +166,18 @@ export default class LiveFeed extends React.Component {
       );
     } else {
       return (
-              <FlatList
-
-                data={this.state.items}
-                renderItem={({item})=>this.getItem(item)}
-                onRefresh={this._onRefresh}
-                refreshing={this.state.refreshing}
-                keyExtractor={(item) => item._id}
-                numColumns={2}
-                onMomentumScrollEnd={this.fetchData}
-                onEndReachedThreshold={0.5}
-                initialNumToRender={4}
-              />
+        <FlatList
+          ListHeaderComponent={filterPopup}
+          data={this.state.items}
+          renderItem={({item})=>this.getItem(item)}
+          onRefresh={this._onRefresh}
+          refreshing={this.state.refreshing}
+          keyExtractor={(item) => item._id}
+          numColumns={2}
+          onMomentumScrollEnd={this.fetchData}
+          onEndReachedThreshold={0.5}
+          initialNumToRender={4}
+        />
       );
     }
   }
