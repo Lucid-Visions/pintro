@@ -8,19 +8,30 @@ import {
   Image,
   ScrollView
 } from "react-native";
-import Constants from "expo-constants";
-//import updateRequest from "../assets/updateRequest";
-import WideButtonComponent from "../components/WideButtonRight";
-import YearItemSelector from "../components/YearItemSelector";
+import styles from '../../styles'
+import { yearsRegex } from '../../constants'
+import BackButton from "../../../shared/icons/back-button/darkTheme"
+import WideButtonComponent from "../../../../components/WideButtonRight";
+import YearItemSelector from "../../../../components/YearItemSelector";
 import RNPickerSelect from "react-native-picker-select";
+import fieldValidator from "../../../shared/utils"
 
-const updateRequest = require("../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/updateRequest").update;
 
-export default class SignUpScreen5 extends Component {
-  static navigationOptions = {
-    headerLeft: "Arrow_back" // To be changed with an icon.
-    //headerRight: "Share_button" // To be changed with an icon.
-  };
+var validYears;
+var btnStyles = { ...styles.btn, ...styles.btnDisabled }
+
+const isSubmitDisabled = () => {
+  if(validYears) {
+    btnStyles = styles.btn
+    return false;
+  } else {
+    btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    return true;
+  }
+}
+
+export default class workExperienceScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -99,10 +110,11 @@ export default class SignUpScreen5 extends Component {
         academic_level: this.state.level
         }
       };
-    } else alert("Please don't leave empty fields.");
+    } 
   }
 
   render() {
+    {/* Need to verify with danielle which of these fields are going to be required*/}
     const { navigation } = this.props;
     let experienceInput = this.state.experience.map((x, index) => {
       return (
@@ -136,23 +148,7 @@ export default class SignUpScreen5 extends Component {
       >
         <View style={styles.container1}>
           <View style={styles.container}>
-            {navigation.canGoBack() && (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              >
-                <Image
-                  source={require("../assets/leftArrowWhite.png")}
-                  style={{
-                    height: 20,
-                    width: 25,
-                    resizeMode: "contain",
-                    alignSelf: "flex-start"
-                  }}
-                />
-              </TouchableOpacity>
-            )}
+          <BackButton navigation={navigation} />
             <View>
               <Text style={styles.h1}>Tell us your history</Text>
               <Text style={styles.h2}>Your work experience timeline</Text>
@@ -161,18 +157,22 @@ export default class SignUpScreen5 extends Component {
             <View>
               <Text style={styles.prompt}>Work experience</Text>
             </View>
-            <View style={styles.bottomBorder}>
+            <View style={validYears==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
                 placeholder="Enter number of years"
                 keyboardType={"numeric"}
-                onChangeText={years => this.setState({ years })}
+                onChangeText={years => {
+                  validYears = fieldValidator({regex: yearsRegex, input: years})
+                  this.setState({ years })
+                }}
                 value={this.state.years}
               />
             </View>
 
             <View>
+              {/* Going to be a dropdown as per PIN-79*/}
               <Text style={styles.prompt}>Industry</Text>
             </View>
             <View style={styles.bottomBorder}>
@@ -202,7 +202,7 @@ export default class SignUpScreen5 extends Component {
             >
               <Image
                 style={styles.image}
-                source={require("../assets/whitePlus.png")}
+                source={require("../../../../assets/whitePlus.png")}
               />
             </TouchableOpacity>
 
@@ -224,7 +224,7 @@ export default class SignUpScreen5 extends Component {
             >
               <Image
                 style={styles.image}
-                source={require("../assets/whitePlus.png")}
+                source={require("../../../../assets/whitePlus.png")}
               />
             </TouchableOpacity>
 
@@ -257,13 +257,12 @@ export default class SignUpScreen5 extends Component {
               <TouchableOpacity
                 onPress={() => this.update(navigation)}
                 underlayColor="white"
+                disabled={isSubmitDisabled()}
               >
                 <WideButtonComponent
                   value={"STEP 4 OF 6"}
-                  source={require("../assets/arrow-right.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  source={require("../../../../assets/arrow-right.png")}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 14,
                     fontFamily: "poppins-light",
@@ -297,98 +296,3 @@ const pickerStyle = {
   placeholderColor: "white"
 };
 
-const styles = StyleSheet.create({
-  h1: {
-    fontFamily: "poppins-bold",
-    color: "white",
-    margin: "auto",
-    textAlign: "left",
-    fontSize: 30,
-    paddingTop: 50,
-    paddingBottom: 20
-  },
-  h2: {
-    fontFamily: "poppins-regular",
-    textAlign: "left",
-    color: "lightgrey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 11,
-    paddingBottom: 15
-  },
-  prompt: {
-    fontFamily: "poppins-regular",
-    textAlign: "left",
-    color: "lightgrey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 11,
-    paddingTop: 30
-  },
-  placeholder: {
-    fontFamily: "poppins-regular",
-    textAlign: "left",
-    color: "white",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 13,
-    paddingVertical: 20
-  },
-  btn: {
-    fontFamily: "poppins-medium",
-    width: 350,
-    marginTop: 30,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-evenly"
-  },
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    paddingBottom: 50
-  },
-  container1: {
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  container2: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center"
-  },
-  bottomBorder: {
-    width: 350,
-    borderBottomColor: "lightgrey",
-    borderBottomWidth: 0.5,
-    alignSelf: "flex-start"
-  },
-  twoColumns: {
-    flexDirection: "row",
-    width: 350,
-    alignSelf: "flex-start",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  pickerItem: {
-    fontFamily: "poppins-medium",
-    color: "white",
-    padding: 20
-  },
-  image: {
-    alignSelf: "center",
-    height: 12,
-    width: 12,
-    resizeMode: "contain"
-  },
-  imageContainer: {
-    alignSelf: "center",
-    paddingTop: 20
-  }
-});

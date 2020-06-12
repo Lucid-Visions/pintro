@@ -4,8 +4,7 @@
    * @param options Information for the field to be validated.
    * @param options.regex The Regex to be used for validation.
    * @param options.input Input from the field to be validated.
-   * @param options.stateKey The key for setting state.
-   * @return Result of validation assigned to the passed flag.
+   * @return Boolean result of validation.
  */
 
 const fieldValidator = (options = {}) => {

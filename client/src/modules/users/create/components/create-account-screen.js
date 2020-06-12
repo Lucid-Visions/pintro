@@ -5,7 +5,6 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Image
 } from "react-native";
 import BackButton from '../../../shared/icons/back-button/darkTheme'
 import {
@@ -20,9 +19,22 @@ import env from "../../../../env";
 
 import fieldValidator from "../../../shared/utils"
 
-var validEmail = true;
-var validNumber = true;
-var validPassword = true;
+var validEmail;
+var validNumber;
+var validPassword;
+var passwordMatch;
+
+var btnStyles = { ...styles.btn, ...styles.btnDisabled }
+
+const isSubmitDisabled = () => {
+  if(validEmail && validNumber && validPassword && passwordMatch) {
+    btnStyles = styles.btn
+    return false;
+  } else {
+    btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    return true;
+  }
+}
 
 export default class createAccountScreen extends Component {
   static navigationOptions = {
@@ -47,10 +59,6 @@ export default class createAccountScreen extends Component {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", userToken);
     var password = this.state.password1; //need to hash the password here
-    if (this.state.password1 != this.state.password2) {
-      alert("Passwords do not match");
-      return;
-    }
 
     var raw = JSON.stringify({
       email_login: this.state.email.toLowerCase(),
@@ -108,7 +116,7 @@ export default class createAccountScreen extends Component {
               <Text style={styles.h2}>Create your account</Text>
             </View>
 
-            <View style={!validEmail ? styles.bottomBorderInvalid : styles.bottomBorder}>
+            <View style={validEmail==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Email address</Text>
               <TextInput
                 style={styles.placeholder}
@@ -122,7 +130,7 @@ export default class createAccountScreen extends Component {
               />
             </View>
 
-            <View style={!validNumber ? styles.bottomBorderInvalid : styles.bottomBorder}>
+            <View style={validNumber==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Phone number</Text>
               <TextInput
                 style={styles.placeholder}
@@ -137,44 +145,54 @@ export default class createAccountScreen extends Component {
               />
             </View>
 
-            <View style={!validPassword? styles.bottomBorderInvalid : styles.bottomBorder}>
+            <View style={validPassword==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Password</Text>
               <TextInput
                 style={styles.placeholder}
                 secureTextEntry={true}
                 placeholderTextColor={"white"}
                 placeholder="Enter a strong password"
-                onChangeText={password1 => this.setState({ password1 })}
+                onChangeText={password1 => {
+                  validPassword = fieldValidator({regex: passwordRegex, input: password1})
+                  this.setState({ password1 })
+                }}
                 value={this.state.password1}
               />
             </View>
-
-            <View style={!validPassword? styles.bottomBorderInvalid : styles.bottomBorder}>
+            {validPassword==false && <Text style={styles.errorText}>Passwords must contain one uppercase letter, one lowercase letter, one number and one special character</Text>}
+            <View style={passwordMatch==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Confirm password</Text>
               <TextInput
                 style={styles.placeholder}
                 secureTextEntry={true}
                 placeholderTextColor={"white"}
                 placeholder="Confirm your strong password"
-                onChangeText={password2 => this.setState({ password2 })}
+                onChangeText={password2 => {
+                  if(this.state.password1 !== password2) { 
+                    passwordMatch = false;
+                  } else {
+                    passwordMatch = true;
+                  }
+                  this.setState({ password2 })
+                }}
                 value={this.state.password2}
               />
             </View>
+            {passwordMatch==false && <Text style={styles.errorText}>Passwords do not match</Text>}
             <View paddingTop={20} alignSelf={"center"}>
               <TouchableOpacity
                 onPress={() => this.register()}
                 underlayColor="white"
+                disabled={isSubmitDisabled()}
               >
                 <WideButtonComponent
                   value={"STEP 1 OF 6"}
                   source={require("../../../../assets/arrow-right.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 14,
                     fontFamily: "poppins-light",
-                    color: "#1A1A1A"
+                    color: "black"
                   }}
                 />
               </TouchableOpacity>

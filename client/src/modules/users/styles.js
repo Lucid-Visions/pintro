@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
       margin: "auto",
       textAlign: "left",
       fontSize: 30,
-      paddingTop: 20,
+      paddingTop: 50,
       paddingBottom: 20
     },
     h2: {
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
       margin: "auto",
       alignItems: "baseline",
       fontSize: 11,
-      paddingBottom: 20
+      paddingBottom: 15
     },
     prompt: {
       fontFamily: "poppins-regular",
@@ -42,6 +42,9 @@ const styles = StyleSheet.create({
       backgroundColor: "white",
       flexDirection: "row",
       justifyContent: "space-evenly"
+    },
+    btnDisabled: {
+      opacity: 0.4,
     },
     container: {
       paddingTop: Constants.statusBarHeight,
@@ -75,6 +78,37 @@ const styles = StyleSheet.create({
       borderBottomColor: "red",
       borderBottomWidth: 1,
       alignSelf: "flex-start"
+    },
+    errorText: {
+      fontFamily: "poppins-regular",
+      color: "red",
+      margin: "auto",
+      width: 350,
+      alignItems: "baseline",
+      fontSize: 11,
+      paddingTop: 5
+    },
+    twoColumns: {
+      flexDirection: "row",
+      width: 350,
+      alignSelf: "flex-start",
+      alignItems: "center",
+      justifyContent: "space-between"
+    },
+    pickerItem: {
+      fontFamily: "poppins-medium",
+      color: "white",
+      padding: 20
+    },
+    image: {
+      alignSelf: "center",
+      height: 12,
+      width: 12,
+      resizeMode: "contain"
+    },
+    imageContainer: {
+      alignSelf: "center",
+      paddingTop: 20
     }
 });
 
