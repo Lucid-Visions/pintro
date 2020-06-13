@@ -25,7 +25,7 @@ const CreateCommunityThanks = ({ navigation, route: { params } }) => {
       
       <View paddingTop={20} alignSelf={'center'}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("CommunityProfile", {id: params.id })}
+            onPress={() => navigation.navigate("CommunityProfile", params)}
             underlayColor="white"
           >
               <WideButtonRight

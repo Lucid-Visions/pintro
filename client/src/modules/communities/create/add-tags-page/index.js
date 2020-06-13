@@ -51,7 +51,7 @@ const CreateCommunityAddTags = ({ navigation, route: { params } }) => {
         return
       }
 
-      navigation.navigate("CreateCommunityThanks", {id: resp.data.insertedId })
+      navigation.navigate("CreateCommunityThanks", { id: resp.data.insertedId, ...fields })
     }
 
     const isSubmitDisabled = () => {
