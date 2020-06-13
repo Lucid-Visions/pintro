@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProfileScreen from "../screens/ProfileScreen";
+import ProfileScreen from "../modules/users/profile/index";
 import env from "../env";
 import {
   AsyncStorage,
@@ -155,8 +155,6 @@ class UserProfileHandler extends Component {
   getContent() {
     if (this.state.networkErr) {
       return <EmptyState state={"internet"} />;
-    } else if (this.state.networkErr == "loading") {
-      return <Text>Loading</Text>;
     } else {
       return (
         <View>
