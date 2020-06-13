@@ -5,7 +5,7 @@
     "icon": "./src/assets/icon.png",
     "privacy": "unlisted",
     "sdkVersion": "36.0.0",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "platforms": ["ios", "android", "web"],
     "scheme": "pintro",
     "orientation": "portrait",
@@ -20,7 +20,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.lucidvisions.pintro",
-      "buildNumber": "1.0.6",
+      "buildNumber": "1.0.7",
       "supportsTablet": true,
       "config":{
         "googleMapsApiKey": "AIzaSyDD38i0B5hG0qJgF8xSLxVNdMZgsxWPHV0"
@@ -28,7 +28,11 @@
     },
     "android": {
       "package": "com.lucidvisions.pintro",
-      "versionCode": 1
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDYeZHou47KJUP9wB3-TgT51GtfQ7XH23s"
+        }
+      }
     }
   }
 }
