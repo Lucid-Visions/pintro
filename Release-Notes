@@ -1,3 +1,16 @@
+#1.0.9
+
+General Bugs
+- Fixed a bug where the feed leaves a placeholder space for a deleted post
+
+Android Bugs
+- Fixed a bug where user profile images weren't rendering on android devices- Fixed a bug where the user was unable to progress past step 3 of the sign up process
+
+New Features
+- Added the ability for users to create a community on the settings page of the user's profile
+- Once the user has created a community, they can click a button to navigate to their newly created community profile page
+
+
 #1.0.4
 
 General Bugs
@@ -11,3 +24,4 @@ Android Bugs
 
 
 #1.0
+- Base version of the app
