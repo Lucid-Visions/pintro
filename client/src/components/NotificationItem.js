@@ -142,12 +142,12 @@ class NotificationItemComponent extends React.Component {
     if (this.props.notification_type == "status") {
       let profilePicture = this.props.data.user.profile_picture;
       return profilePicture
-        ? { url: profilePicture }
+        ? { uri: profilePicture }
         : require("../assets/empty-profile-picture.png");
     } else if (this.props.notification_type == "relationship") {
       let profilePicture = this.props.data.follower.profile_picture;
       return profilePicture
-        ? { url: profilePicture }
+        ? { uri: profilePicture }
         : require("../assets/empty-profile-picture.png");
     } else {
       return require("../assets/empty-profile-picture.png");

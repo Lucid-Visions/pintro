@@ -57,7 +57,7 @@ class TeamComponent extends React.Component {
         return(
             <TouchableOpacity style={styles.container} onPress={()=>this.props.navigation.navigate("Profile",{uid:user._id})}>
                     <ImageBackground 
-                        source={{url:user.profile_picture} || require('../assets/empty-profile-picture.png')}
+                        source={{uri:user.profile_picture} || require('../assets/empty-profile-picture.png')}
                         style={[styles.img, this.state.isSelected1 && styles.selectedImg]} borderRadius={20 / 2}>
                     </ImageBackground>
                 </TouchableOpacity>

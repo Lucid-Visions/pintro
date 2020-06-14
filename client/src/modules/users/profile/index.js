@@ -297,7 +297,7 @@ const ProfileScreen = ({
           >
             Talk to me about
           </Text>
-          {editBtn("SettingsStack", {screen:"Edit Passions", params: { interests }})}
+          {editBtn("SettingsStack", {screen:"Edit Interests", params: { interests }})}
         </View>
 
         <View style={styles.tagScrollContainer}>
@@ -373,7 +373,7 @@ const ProfileScreen = ({
           data={relationshipData}
           connection={connection}
           respond={respond}
-          profilePicture={{ url: relationshipData.follower.profile_picture }}
+          profilePicture={{ uri: relationshipData.follower.profile_picture }}
           onModalHide={() => {}}
           connectModal={
             <ConnectModal

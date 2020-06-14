@@ -189,7 +189,7 @@ export default class workExperienceScreen extends Component {
             </View>
             {experienceInput}
             <TouchableOpacity
-              style={styles.imageContainer}
+              style={styles.btn}
               onPress={() => {
                 this.setState({
                   experience: this.state.experience.concat({
@@ -199,10 +199,7 @@ export default class workExperienceScreen extends Component {
                 });
               }}
             >
-              <Image
-                style={styles.image}
-                source={require("../../../../assets/whitePlus.png")}
-              />
+              <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
             </TouchableOpacity>
 
             <View>
@@ -211,7 +208,7 @@ export default class workExperienceScreen extends Component {
             {educationInput}
 
             <TouchableOpacity
-              style={styles.imageContainer}
+              style={styles.btn}
               onPress={() => {
                 this.setState({
                   education: this.state.education.concat({
@@ -221,10 +218,7 @@ export default class workExperienceScreen extends Component {
                 });
               }}
             >
-              <Image
-                style={styles.image}
-                source={require("../../../../assets/whitePlus.png")}
-              />
+              <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
             </TouchableOpacity>
 
             <View>

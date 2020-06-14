@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
-  ScrollView,
   Image,
 } from "react-native";
-import Constants from "expo-constants";
-import PostButton from "../components/WideButtonRight";
+import styles from "../styles"
+import PostButton from "../../../../components/WideButtonRight";
 import { useNavigation } from "@react-navigation/native";
+import BackButton from "../../../shared/icons/back-button/lightTheme";
 
 import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from "expo-file-system";
 
-const updateRequest = require("../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/updateRequest").update;
 
 const EditPhoto = ({ route }) => {
   const navigation = useNavigation();
@@ -93,24 +91,7 @@ const EditPhoto = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      {navigation.canGoBack() && (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-          style={{ marginTop: 20 }}
-        >
-          <Image
-            source={require("../assets/leftArrow.png")}
-            style={{
-              height: 20,
-              width: 25,
-              resizeMode: "contain",
-              alignSelf: "flex-start",
-            }}
-          />
-        </TouchableOpacity>
-      )}
+      <BackButton navigation={navigation} />
       <Text style={styles.header}>Edit your photo</Text>
       <Text style={styles.headerText}>Upload a profile photo</Text>
       {/* Thumbnail */}
@@ -124,8 +105,8 @@ const EditPhoto = ({ route }) => {
           <Image
             source={
               state.photoURI != null
-                ? { url: state.photoURI }
-                : require("../assets/addProfilePhoto.png")
+                ? { uri: state.photoURI }
+                : require("../../../../assets/addProfilePhoto.png")
             }
             style={{
               height: 250,
@@ -148,41 +129,5 @@ const EditPhoto = ({ route }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-around",
-    marginHorizontal: 20,
-  },
-  header: {
-    fontFamily: "poppins-bold",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 24,
-    paddingTop: 50,
-  },
-  headerText: {
-    fontFamily: "poppins-regular",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingTop: 20,
-    paddingBottom: 30,
-  },
-  submitBtn: {
-    backgroundColor: "black",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "black",
-    color: "black",
-    width: 300,
-    marginVertical: 50,
-  },
-});
 
 export default EditPhoto;

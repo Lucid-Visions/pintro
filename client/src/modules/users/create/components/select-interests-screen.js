@@ -82,7 +82,7 @@ export default class selectTagsScreen extends Component {
               <BackButton navigation={navigation} />
             </View>
             <View>
-              <Text style={{...styles.h1, ...styles.headerPadding}}>What are your passions?</Text>
+              <Text style={{...styles.h1, ...styles.headerPadding}}>What are your interests?</Text>
               <Text style={{...styles.h2, ...styles.headerPadding}}>Choose your passion tags (6 minimum)</Text>
             </View>
 
