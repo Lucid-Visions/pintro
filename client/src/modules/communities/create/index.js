@@ -3,7 +3,7 @@ import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import PropTypes from 'prop-types';
 
 import WideButtonComponent from "../../../components/WideButtonRight";
-import BackButton from '../../shared/back-button';
+import BackButton from '../../shared/icons/back-button/lightTheme';
 
 import {
   createFormInitialState,
