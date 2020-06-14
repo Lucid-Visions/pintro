@@ -3,11 +3,9 @@ import ProfileScreen from "../modules/users/profile/index";
 import env from "../env";
 import {
   AsyncStorage,
-  Text,
   View,
   ScrollView,
   RefreshControl,
-  StyleSheet,
   Image
 } from "react-native";
 import EmptyState from "./EmptyState";

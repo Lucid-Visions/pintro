@@ -6,7 +6,7 @@ import WideButtonRight from "../components/WideButtonRight";
 
 import { AuthContext } from "../navigation/AppNavigator";
 
-const SignUp8Screen = ({ navigation }) => {
+const SignUp8Screen = () => {
   const { signIn } = React.useContext(AuthContext);
   
   return(
@@ -23,7 +23,7 @@ const SignUp8Screen = ({ navigation }) => {
       <View paddingTop={20} alignSelf={'center'}>
           <TouchableOpacity onPress={() => signIn("alex")} underlayColor="white" >
               <WideButtonRight
-                  value={"GO TO YOUR PROFILE"}
+                  value={"GO TO PINTRO"}
                   source={require("../assets/arrow-right.png")}
                   containerStyle={{
                       ...styles.whitebtn
