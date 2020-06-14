@@ -45,7 +45,7 @@ export default class selectTagsScreen extends Component {
     } else {
       prevSelected = prevSelected.filter(item => item !== text);
     }
-    this.setState({ selectedItems: prevSelected });
+    this.setState({ tags: prevSelected });
   }
 
   isSubmitDisabled = () => {
