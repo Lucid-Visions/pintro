@@ -13,7 +13,7 @@ const ProfilePictureComponent = ({ source, status, onPress, onLongPress }) => (
   <View style={styles.container}>
     <Image
       style={styles.image}
-      source={source?{url:source} : require("../assets/empty-profile-picture.png")}
+      source={source?{uri:source} : require("../assets/empty-profile-picture.png")}
     />
     
     {/** Render the appropiate status image */}
