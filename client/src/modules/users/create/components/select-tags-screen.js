@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Image
 } from "react-native";
-import Constants from "expo-constants";
-import WideButtonComponent from "../components/WideButtonRight";
-import TagPassions from "../assets/TagsPassions";
-import Tag from "../components/Tag";
+import BackButton from '../../../shared/icons/back-button/darkTheme'
+import styles from '../../styles'
+import WideButtonComponent from "../../../../components/WideButtonRight";
+import TagPassions from "../../../../assets/TagsPassions";
+import Tag from "../../../../components/Tag";
 
-const updateRequest = require("../assets/updateRequest").update;
-class SignUp6Screen extends Component {
+const updateRequest = require("../../../../assets/updateRequest").update;
+
+var btnStyles = { ...styles.btn, ...styles.btnDisabled }
+
+export default class selectTagsScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -32,7 +34,7 @@ class SignUp6Screen extends Component {
 
   onSelectedItemsChange = selectedItems => {
     this.setState({ selectedItems })
-}
+  }
 
   tagCallback(text, selected) {
     let prevSelected = this.state.tags;
@@ -44,6 +46,16 @@ class SignUp6Screen extends Component {
       prevSelected = prevSelected.filter(item => item !== text);
     }
     this.setState({ selectedItems: prevSelected });
+  }
+
+  isSubmitDisabled = () => {
+    if(this.state.tags.length >= 6) {
+      btnStyles = styles.btn
+      return false;
+    } else {
+      btnStyles = { ...styles.btn, ...styles.btnDisabled }
+      return true;
+    }
   }
 
   render() {
@@ -66,31 +78,16 @@ class SignUp6Screen extends Component {
       >
         <View style={styles.container1}>
           <View style={styles.container}>
-          {navigation.canGoBack() && (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              >
-                <Image
-                  source={require("../assets/leftArrowWhite.png")}
-                  style={{
-                    height: 20,
-                    width: 25,
-                    resizeMode: "contain",
-                    alignSelf: "flex-start",
-                    marginHorizontal: 20
-                  }}
-                />
-              </TouchableOpacity>
-            )}
+            <View style={styles.headerPadding}>
+              <BackButton navigation={navigation} />
+            </View>
             <View>
-              <Text style={styles.h1}>What are your passions?</Text>
-              <Text style={styles.h2}>Choose your passion tags (6 minimum)</Text>
+              <Text style={{...styles.h1, ...styles.headerPadding}}>What are your passions?</Text>
+              <Text style={{...styles.h2, ...styles.headerPadding}}>Choose your passion tags (6 minimum)</Text>
             </View>
 
             <View paddingTop={70}>
-              <Text style={styles.h2}>Choose from the most popular</Text>
+              <Text style={{...styles.h2, ...styles.headerPadding}}>Choose from the most popular</Text>
               <View style={styles.tagScrollContainer}>
                 <ScrollView style={styles.tagScrollView} horizontal={true}>
                   <View >
@@ -107,13 +104,12 @@ class SignUp6Screen extends Component {
               <TouchableOpacity
                 onPress={() => this.update(navigation)}
                 underlayColor="white"
+                disabled={this.isSubmitDisabled()}
               >
                 <WideButtonComponent
                   value={"STEP 5 OF 6"}
-                  source={require("../assets/arrow-right.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  source={require("../../../../assets/arrow-right.png")}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 14,
                     fontFamily: "poppins-light",
@@ -128,67 +124,3 @@ class SignUp6Screen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  h1: {
-    fontFamily: "poppins-bold",
-    color: "white",
-    margin: "auto",
-    textAlign: "left",
-    fontSize: 26,
-    paddingTop: 50,
-    paddingHorizontal: 20
-  },
-  h2: {
-    fontFamily: "poppins-regular",
-    color: "lightgrey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingTop: 20,
-    paddingHorizontal: 20
-  },
-  btn: {
-    fontFamily: "poppins-medium",
-    width: 350,
-    marginTop: 30,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-evenly"
-  },
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    paddingBottom: 50
-  },
-  container1: {
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  container2: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center"
-  },
-  tags: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center"
-  },
-  tagScrollContainer: {
-    overflow: "hidden",
-    maxHeight: 200 
-  },
-  tagScrollView: {
-    paddingTop: 20
-  }
-});
-
-export default SignUp6Screen;

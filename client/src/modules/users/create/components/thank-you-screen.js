@@ -1,12 +1,12 @@
-import React, { useState, Component } from "react";
+import React from "react";
 import { Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import Constants from "expo-constants";
-import WideButtonComponent from "../components/WideButton";
-import WideButtonRight from "../components/WideButtonRight";
+import WideButtonComponent from "../../../../components/WideButton";
+import WideButtonRight from "../../../../components/WideButtonRight";
 
-import { AuthContext } from "../navigation/AppNavigator";
+import { AuthContext } from "../../../../navigation/AppNavigator";
 
-const SignUp8Screen = ({ navigation }) => {
+const thankYouScreen = ({ navigation }) => {
   const { signIn } = React.useContext(AuthContext);
   
   return(
@@ -24,7 +24,7 @@ const SignUp8Screen = ({ navigation }) => {
           <TouchableOpacity onPress={() => signIn("alex")} underlayColor="white" >
               <WideButtonRight
                   value={"GO TO YOUR PROFILE"}
-                  source={require("../assets/arrow-right.png")}
+                  source={require("../../../../assets/arrow-right.png")}
                   containerStyle={{
                       ...styles.whitebtn
                   }}
@@ -34,7 +34,7 @@ const SignUp8Screen = ({ navigation }) => {
         <TouchableOpacity underlayColor="white" style={{marginTop:5}}>
               <WideButtonComponent
                   value={"INVITE CONNECTIONS"}
-                  source={require("../assets/linkedIn.png")}
+                  source={require("../../../../assets/linkedIn.png")}
                   containerStyle={{
                       ...styles.blackbtn
                   }}
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUp8Screen
+export default thankYouScreen;
