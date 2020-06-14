@@ -26,7 +26,7 @@ class BaseRepository {
       const collection = await this.collection.find({ _id: mongoose.Types.ObjectId(id) })
 
       if (await collection.count() === 0) {
-        return { error: 'Record now found' }
+        return { error: 'Record not found' }
       }
 
       response = { data: await collection.toArray() }
