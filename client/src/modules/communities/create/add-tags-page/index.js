@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
 
-import { createCommunity } from '../actions'
+import { createCommunity } from '../../actions'
 import BackButton from '../../../shared/back-button'
 import WideButtonRight from "../../../../components/WideButtonRight";
 import TagsData from "../../../../assets/TagsData";
@@ -11,10 +11,11 @@ import {
     subtitle2,
     ctaText2,
     fieldTitle2
-} from '../constants';
+} from '../../constants';
 import useForm from '../hooks'
 
 import styles from "./styles";
+import { useDispatch } from 'react-redux';
 
 // TODO: https://lucidvisions.atlassian.net/browse/PIN-86 - Move this somewhere more generic
 Array.prototype.chunk = function(n) {
@@ -25,6 +26,7 @@ Array.prototype.chunk = function(n) {
 };
 
 const CreateCommunityAddTags = ({ navigation, route: { params } }) => {
+    const dispatch = useDispatch()
 
     const [ fields, onChange ] = useForm({ ...params, tags: [] })
 
@@ -42,14 +44,14 @@ const CreateCommunityAddTags = ({ navigation, route: { params } }) => {
     }
 
     const onCreateCommunity = async () => {
-      const resp = await createCommunity(fields)
+      const resp = await createCommunity(dispatch, fields)
 
       if (!resp.ok) {
         alert(resp.data.error.message)
         return
       }
 
-      navigation.navigate("CreateCommunityThanks", {id: resp.data.insertedId })
+      navigation.navigate("CreateCommunityThanks", { id: resp.data.insertedId, ...fields })
     }
 
     const isSubmitDisabled = () => {

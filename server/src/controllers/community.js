@@ -19,21 +19,21 @@ class CommunityController {
 
     // Return error if body is missing
     if (isEmpty(req.body)) {
-      return res.status(http.BAD_REQUEST).json({ error: { message: 'Request body missing' }})
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Communty request body missing' }})
     }
 
     // Return error if community already exsits
     const dupeUsers = await this.repository.getByName(req.body.name)
 
     if (dupeUsers && dupeUsers.length > 0) {
-      return res.status(http.BAD_REQUEST).json({ error: { message: 'Record already exists' }})
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Community already exists' }})
     }
 
     const createResult = await this.repository.create(req.body)
 
     // Return error if there is a DB issue on creation
     if (!createResult.result.ok) {
-      return res.status(http.BAD_REQUEST).json({ error: { message: 'Record could not be created' }})
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Community could not be created' }})
     }
 
     res.status(http.CREATED).json({
@@ -55,7 +55,7 @@ class CommunityController {
     const response = await this.repository.get(id)
 
     if (response.error) {
-      return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not retrieve record' }})
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not retrieve community' }})
     }
 
     const [ community ] = response.data
