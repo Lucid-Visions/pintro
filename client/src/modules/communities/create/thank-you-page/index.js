@@ -11,7 +11,7 @@ import {
 
 import styles from './styles'
 
-const CreateCommunityThanks = () => {
+const CreateCommunityThanks = ({ navigation, route: { params } }) => {
   return(
     <View style={styles.container}>
       <View style={styles.container}>
@@ -24,7 +24,10 @@ const CreateCommunityThanks = () => {
         </View>      
       
       <View paddingTop={20} alignSelf={'center'}>
-          <TouchableOpacity onPress={()=> {}} underlayColor="white" >
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CommunityProfile", params)}
+            underlayColor="white"
+          >
               <WideButtonRight
                   value={profileLinkText}
                   source={require("../../../../assets/arrow-right-white.png")}
