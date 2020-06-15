@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  KeyboardAvoidingView
 } from "react-native";
 import styles from "../../styles"
 import BackButton from "../../../shared/icons/back-button/darkTheme"
@@ -60,90 +61,92 @@ export default class userDetailsScreen extends Component {
         style={styles.container2}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.container1}>
-          <View style={styles.container}>
-          <BackButton navigation={navigation} />
-            <View>
-              <Text style={styles.h1}>What's your story?</Text>
-              <Text style={styles.h2}>Build your profile</Text>
-            </View>
+        <KeyboardAvoidingView>
+          <View style={styles.container1}>
+            <View style={styles.container}>
+            <BackButton navigation={navigation} />
+              <View>
+                <Text style={styles.h1}>What's your story?</Text>
+                <Text style={styles.h2}>Build your profile</Text>
+              </View>
 
-            <View style={validName==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
-              <Text style={styles.prompt}>Name</Text>
-              <TextInput
-                style={styles.placeholder}
-                placeholderTextColor={"white"}
-                placeholder="Enter your full name"
-                onChangeText={name => {
-                  validName = fieldValidator({regex: nameRegex, input: name})
-                  this.setState({ name })
-                }}
-                value={this.state.name}
-              />
-            </View>
-            {/* Going to be a dropdown as per PIN-79*/}
-            <View style={styles.bottomBorder}>
-              <Text style={styles.prompt}>Current job title</Text>
-              <TextInput
-                style={styles.placeholder}
-                placeholderTextColor={"white"}
-                placeholder="Enter your job title"
-                onChangeText={currentJob => this.setState({ currentJob })}
-                value={this.state.currentJob}
-              />
-            </View>
-
-            <View style={styles.bottomBorder}>
-              <Text style={styles.prompt}>Current company</Text>
-              <TextInput
-                style={styles.placeholder}
-                placeholderTextColor={"white"}
-                placeholder="Enter current company name"
-                onChangeText={currentCompany =>
-                  this.setState({ currentCompany })
-                }
-                value={this.state.currentCompany}
-              />
-            </View>
-
-            <View style={styles.bottomBorder}>
-              <Text style={styles.prompt}>Your story</Text>
-              <TextInput
-                style={{ ...styles.placeholder, height: 100 }}
-                placeholderTextColor={"white"}
-                multiline={true}
-                placeholder={"Tell us about yourself"}
-                onChangeText={story => {
-                  if (story.length < 160) {
-                    this.setState({ story });
-                  } else {
-                    alert("160 Chars max");
-                  }
-                }}
-                value={this.state.story}
-              />
-            </View>
-
-            <View paddingTop={20} alignSelf={"center"}>
-              <TouchableOpacity
-                onPress={() => this.update(navigation)}
-                underlayColor="white"
-                disabled={isSubmitDisabled()}
-              >
-                <WideButtonComponent
-                  value={"STEP 3 OF 6"}
-                  source={require("../../../../assets/arrow-right.png")}
-                  containerStyle={btnStyles}
-                  textStyle={{
-                    fontSize: 14,
-                    fontFamily: "poppins-light",
-                    color: "#1A1A1A"
+              <View style={validName==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
+                <Text style={styles.prompt}>Name</Text>
+                <TextInput
+                  style={styles.placeholder}
+                  placeholderTextColor={"white"}
+                  placeholder="Enter your full name"
+                  onChangeText={name => {
+                    validName = fieldValidator({regex: nameRegex, input: name})
+                    this.setState({ name })
                   }}
+                  value={this.state.name}
                 />
-              </TouchableOpacity>
+              </View>
+              {/* Going to be a dropdown as per PIN-79*/}
+              <View style={styles.bottomBorder}>
+                <Text style={styles.prompt}>Current job title</Text>
+                <TextInput
+                  style={styles.placeholder}
+                  placeholderTextColor={"white"}
+                  placeholder="Enter your job title"
+                  onChangeText={currentJob => this.setState({ currentJob })}
+                  value={this.state.currentJob}
+                />
+              </View>
+
+              <View style={styles.bottomBorder}>
+                <Text style={styles.prompt}>Current company</Text>
+                <TextInput
+                  style={styles.placeholder}
+                  placeholderTextColor={"white"}
+                  placeholder="Enter current company name"
+                  onChangeText={currentCompany =>
+                    this.setState({ currentCompany })
+                  }
+                  value={this.state.currentCompany}
+                />
+              </View>
+
+              <View style={styles.bottomBorder}>
+                <Text style={styles.prompt}>Your story</Text>
+                <TextInput
+                  style={{ ...styles.placeholder, height: 100 }}
+                  placeholderTextColor={"white"}
+                  multiline={true}
+                  placeholder={"Tell us about yourself"}
+                  onChangeText={story => {
+                    if (story.length < 160) {
+                      this.setState({ story });
+                    } else {
+                      alert("160 Chars max");
+                    }
+                  }}
+                  value={this.state.story}
+                />
+              </View>
+
+              <View paddingTop={20} alignSelf={"center"}>
+                <TouchableOpacity
+                  onPress={() => this.update(navigation)}
+                  underlayColor="white"
+                  disabled={isSubmitDisabled()}
+                >
+                  <WideButtonComponent
+                    value={"STEP 3 OF 6"}
+                    source={require("../../../../assets/arrow-right.png")}
+                    containerStyle={btnStyles}
+                    textStyle={{
+                      fontSize: 14,
+                      fontFamily: "poppins-light",
+                      color: "#1A1A1A"
+                    }}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </ScrollView>
     );
   }
