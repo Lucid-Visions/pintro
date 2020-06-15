@@ -8,7 +8,7 @@ import {
   ScrollView
 } from "react-native";
 import styles from '../../styles'
-import { yearsRegex } from '../../constants'
+import { yearsRegex, nameRegex } from '../../constants'
 import BackButton from "../../../shared/icons/back-button/darkTheme"
 import WideButtonComponent from "../../../../components/WideButtonRight";
 import YearItemSelector from "../../../../components/YearItemSelector";
@@ -18,10 +18,12 @@ import fieldValidator from "../../../shared/utils"
 const updateRequest = require("../../../../assets/updateRequest").update;
 
 var validYears;
+var validIndustry;
+var validAcademicLevel;
 var btnStyles = { ...styles.btn, ...styles.btnDisabled }
 
 const isSubmitDisabled = () => {
-  if(validYears) {
+  if(validYears && validIndustry && validAcademicLevel) {
     btnStyles = styles.btn
     return false;
   } else {
@@ -174,12 +176,15 @@ export default class workExperienceScreen extends Component {
               {/* Going to be a dropdown as per PIN-79*/}
               <Text style={styles.prompt}>Industry</Text>
             </View>
-            <View style={styles.bottomBorder}>
+            <View style={validIndustry==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
                 placeholder="Enter your current industry"
-                onChangeText={industry => this.setState({ industry })}
+                onChangeText={industry => {
+                  validIndustry = fieldValidator({regex: nameRegex, input: industry})
+                  this.setState({ industry })
+                }}
                 value={this.state.industry}
               />
             </View>
@@ -189,7 +194,7 @@ export default class workExperienceScreen extends Component {
             </View>
             {experienceInput}
             <TouchableOpacity
-              style={styles.btn}
+              style={styles.imageContainer}
               onPress={() => {
                 this.setState({
                   experience: this.state.experience.concat({
@@ -199,7 +204,10 @@ export default class workExperienceScreen extends Component {
                 });
               }}
             >
-              <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
+              <Image
+                style={styles.image}
+                source={require("../../../../assets/whitePlus.png")}
+              />
             </TouchableOpacity>
 
             <View>
@@ -208,7 +216,7 @@ export default class workExperienceScreen extends Component {
             {educationInput}
 
             <TouchableOpacity
-              style={styles.btn}
+              style={styles.imageContainer}
               onPress={() => {
                 this.setState({
                   education: this.state.education.concat({
@@ -218,7 +226,10 @@ export default class workExperienceScreen extends Component {
                 });
               }}
             >
-              <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
+              <Image
+                style={styles.image}
+                source={require("../../../../assets/whitePlus.png")}
+              />
             </TouchableOpacity>
 
             <View>
@@ -230,8 +241,10 @@ export default class workExperienceScreen extends Component {
               }}
             >
               <RNPickerSelect
-                //placeholder={"Year": null}
-                onValueChange={value => this.setState({ level: value })}
+                onValueChange={value => {
+                  validAcademicLevel = true
+                  this.setState({ level: value })}
+                }
                 items={[
                   {
                     label: "Certificate of Higher Education",

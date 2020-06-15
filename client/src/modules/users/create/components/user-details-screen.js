@@ -128,7 +128,7 @@ export default class userDetailsScreen extends Component {
               <TouchableOpacity
                 onPress={() => this.update(navigation)}
                 underlayColor="white"
-                disable={isSubmitDisabled()}
+                disabled={isSubmitDisabled()}
               >
                 <WideButtonComponent
                   value={"STEP 3 OF 6"}

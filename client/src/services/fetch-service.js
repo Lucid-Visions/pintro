@@ -41,9 +41,8 @@ class FetchAPIService {
         try {
             response = await fetch(`http://${env.host}:${env.port}${url}`, config)
         }
-        catch(err) {
-            log.error(err.message)
-            throw Error(err.message)
+        catch(error) {
+            return { error }
         }
 
         const json = await response.json()

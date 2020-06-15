@@ -1,8 +1,16 @@
-import React from "react";
-import AppNavigator from "./src/navigation/AppNavigator";
-import * as Font from "expo-font";
-import Redirect from "./src/components/HandleRedirect";
-import { InAppNotificationProvider} from "react-native-in-app-notification";
+import React from "react"
+import { InAppNotificationProvider} from "react-native-in-app-notification"
+import * as Font from "expo-font"
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+import AppNavigator from "./src/navigation/AppNavigator"
+import Redirect from "./src/components/HandleRedirect"
+import reducers from './src/reducers'
+
+const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)))
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +19,6 @@ class App extends React.Component {
       fontLoaded: false,
     };
   }
-
 
   async componentDidMount() {
     Redirect._addLinkingListener();
@@ -30,9 +37,11 @@ class App extends React.Component {
   render() {
     if (this.state.fontLoaded) {
       return (
-        <InAppNotificationProvider>
-          <AppNavigator />
-        </InAppNotificationProvider>
+        <Provider store={store}>
+          <InAppNotificationProvider>
+            <AppNavigator />
+          </InAppNotificationProvider>
+        </Provider>
       );
     } else {
       return null;
