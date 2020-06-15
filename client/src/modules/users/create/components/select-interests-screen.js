@@ -15,7 +15,7 @@ const updateRequest = require("../../../../assets/updateRequest").update;
 
 var btnStyles = { ...styles.btn, ...styles.btnDisabled }
 
-export default class selectTagsScreen extends Component {
+export default class selectInterestsScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -45,7 +45,7 @@ export default class selectTagsScreen extends Component {
     } else {
       prevSelected = prevSelected.filter(item => item !== text);
     }
-    this.setState({ selectedItems: prevSelected });
+    this.setState({ tags: prevSelected });
   }
 
   isSubmitDisabled = () => {
