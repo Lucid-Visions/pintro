@@ -29,7 +29,7 @@ export default class selectInterestsScreen extends Component {
     if (this.state.tags.length >= 6) {
       const result = updateRequest({tags: this.state.tags});
       if (result) navigation.navigate("SignUp7");
-    }else alert("Please select at least 6 passions!")
+    }else alert("Please select at least 6 interests")
   }
 
   onSelectedItemsChange = selectedItems => {
@@ -83,7 +83,7 @@ export default class selectInterestsScreen extends Component {
             </View>
             <View>
               <Text style={{...styles.h1, ...styles.headerPadding}}>What are your interests?</Text>
-              <Text style={{...styles.h2, ...styles.headerPadding}}>Choose your passion tags (6 minimum)</Text>
+              <Text style={{...styles.h2, ...styles.headerPadding}}>Choose your interests (6 minimum)</Text>
             </View>
 
             <View paddingTop={70}>
