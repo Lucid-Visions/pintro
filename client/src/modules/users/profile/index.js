@@ -25,6 +25,8 @@ import MoodButtonCard from "../../../components/MoodButtonCard";
 import AcceptRequestModal from "../../../components/followRequestModal";
 import ConnectModal from "../../../components/ConnectModal";
 import ChatConnectPopup from "../../../components/ChatConnectPopup";
+import CommunityPreview from './community-preview'
+
 const updateRequest = require("../../../assets/updateRequest").update;
 
 
@@ -665,6 +667,7 @@ const ProfileScreen = ({
         />
         {editBtn("SettingsStack", {screen: "Edit Experience", params: { experience }})}
       </View>
+      <CommunityPreview />
 
       {recommendationsSection()}
       <View style={styles.badgesSection}>
