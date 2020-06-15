@@ -667,7 +667,7 @@ const ProfileScreen = ({
         />
         {editBtn("SettingsStack", {screen: "Edit Experience", params: { experience }})}
       </View>
-      <CommunityPreview />
+      <CommunityPreview navigation={navigation} />
 
       {recommendationsSection()}
       <View style={styles.badgesSection}>
