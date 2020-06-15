@@ -173,6 +173,23 @@ export default class workExperienceScreen extends Component {
                   value={this.state.years}
                 />
               </View>
+            <View>
+              <Text style={styles.prompt}>Previous companies</Text>
+            </View>
+            {experienceInput}
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => {
+                this.setState({
+                  experience: this.state.experience.concat({
+                    year: null,
+                    value: null
+                  })
+                });
+              }}
+            >
+              <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
+            </TouchableOpacity>
 
               <View>
                 {/* Going to be a dropdown as per PIN-79*/}
@@ -196,20 +213,17 @@ export default class workExperienceScreen extends Component {
               </View>
               {experienceInput}
               <TouchableOpacity
-                style={styles.imageContainer}
+                style={styles.btn}
                 onPress={() => {
                   this.setState({
-                    experience: this.state.experience.concat({
+                    education: this.state.education.concat({
                       year: null,
                       value: null
                     })
                   });
                 }}
               >
-                <Image
-                  style={styles.image}
-                  source={require("../../../../assets/whitePlus.png")}
-                />
+                <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
               </TouchableOpacity>
 
               <View>
