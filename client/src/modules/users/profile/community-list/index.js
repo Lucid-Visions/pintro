@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { ScrollView, View } from 'react-native'
 
 import CommunityCard from '../community-card'
-import BackButton from '../../../shared/back-button'
+import BackButton from '../../../shared/icons/back-button/lightTheme'
 
 import styles from './styles'
 

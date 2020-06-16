@@ -1,27 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
-import { getCommunities } from '../actions'
 import { title, seeAllLabel } from '../constants'
 import CommunityCard from '../community-card'
 
-const CommunityPreview = ({ navigation }) => {
-  const dispatch = useDispatch()
-
-  const {
-    userProfile: { communities },
-  } =  useSelector((state) => state, shallowEqual)
-
-  useEffect(() => {
-    async function fetchData() {
-      await getCommunities(dispatch)
-    }
-
-    fetchData()
-    
-  }, [ communities ])
+const CommunityPreview = ({ communities, navigation }) => {
 
   const seeAllBtn = communities && communities.length > 2 && (
     <TouchableOpacity onPress={() => navigation.navigate('CommunityList', { communities })}>
@@ -29,7 +13,7 @@ const CommunityPreview = ({ navigation }) => {
     </TouchableOpacity>
   )
 
-  const content = communities ? (
+  const content = communities && communities.length > 0 ? (
     <View>
       <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", marginVertical: "5%" }}>
         <Text style={{
@@ -49,6 +33,7 @@ const CommunityPreview = ({ navigation }) => {
 }
 
 CommunityPreview.propTypes = {
+  communties: PropTypes.arrayOf(PropTypes.object),
   navigation: PropTypes.object.isRequired
 }
 

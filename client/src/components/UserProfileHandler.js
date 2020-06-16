@@ -43,7 +43,8 @@ class UserProfileHandler extends Component {
       academic_level: "",
       currentJobTitle: "",
       currentCompany: "",
-      experience: {}
+      experience: {},
+      communities: []
     };
   }
 
@@ -59,11 +60,10 @@ class UserProfileHandler extends Component {
 
     var requestOptions = {
       method: "GET",
-      headers: myHeaders,
-      redirect: "follow"
+      headers: myHeaders
     };
 
-    var response = await fetch(
+    var userResp = await fetch(
       `http://${env.host}:${env.port}/api/v1/user/data?` +
         (this.state.uid ? `id=${this.state.uid}` : ""),
       requestOptions
@@ -73,20 +73,35 @@ class UserProfileHandler extends Component {
       this.setState({ networkErr: true });
       return null;
     });
-    if (response == null) {
+    if (userResp == null) {
       return;
     }
     this.setState({ networkErr: false });
-    var responseText = await response.text();
-    var responseJson = JSON.parse(responseText);
-    if (responseJson.err) {
+
+    var userJson = await userResp.json();
+    if (userJson.err) {
       alert("Error");
-      console.log(responseJson.err);
+      console.log(userJson.err);
       return;
     }
 
+    const communityResp = await fetch(`http://${env.host}:${env.port}/api/v1/community`, requestOptions)
+
+    if (communityResp == null) {
+      return;
+    }
+    const communities = await communityResp.json();
+    if (communities.err) {
+      console.log(communities.err)
+      alert("Error");
+      console.log(userJson.err);
+      return;
+    }
+
+    const json = { ...userJson, communities: communities.data }
+
     //TODO remove the hardcoded stuff
-    var user = responseJson;
+    var user = json;
     var username = user.user
     var interests = user.tags;
     var skills = user.skills;
@@ -142,7 +157,8 @@ class UserProfileHandler extends Component {
       academic_level,
       currentJobTitle,
       currentCompany,
-      experience
+      experience,
+      communities: user.communities
     };
     this.setState({ ...newState });
   }
@@ -182,6 +198,7 @@ class UserProfileHandler extends Component {
             currentCompany={this.state.currentCompany}
             experience={this.state.experience}
             refresh={()=>this.fetchUserData()}
+            communities={this.state.communities}
           />
         </View>
       );
