@@ -23,6 +23,12 @@ const CommunityPreview = ({ navigation }) => {
     
   }, [ communities ])
 
+  const seeAllBtn = communities && communities.length > 2 && (
+    <TouchableOpacity onPress={() => navigation.navigate('CommunityList', { communities })}>
+      <Text>{seeAllLabel}</Text>
+    </TouchableOpacity>
+  )
+
   const content = communities ? (
     <View>
       <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", marginVertical: "5%" }}>
@@ -31,9 +37,7 @@ const CommunityPreview = ({ navigation }) => {
         }}>
           {title}
         </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('CommunityList', { communities })}>
-          <Text>{seeAllLabel}</Text>
-        </TouchableOpacity>
+        {seeAllBtn}
       </View>
       {communities.slice(0, 2).map(c => (
         <CommunityCard key={c.name} community={c} navigation={navigation} />
