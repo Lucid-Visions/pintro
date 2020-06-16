@@ -124,7 +124,7 @@ const EditPhoto = ({ route }) => {
           <Image
             source={
               state.photoURI != null
-                ? { url: state.photoURI }
+                ? { uri: state.photoURI }
                 : require("../assets/addProfilePhoto.png")
             }
             style={{

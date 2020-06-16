@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignInScreen from "../screens/SignInScreen";
 import createAccountScreen from "../modules/users/create/components/create-account-screen";
+import userProfilePhotoScreen from "../modules/users/create/components/user-profile-photo-screen";
 import userDetailsScreen from "../modules/users/create/components/user-details-screen";
 import workExperienceScreen from "../modules/users/create/components/work-experience-screen";
 import selectTagsScreen from "../modules/users/create/components/select-tags-screen";
@@ -28,6 +29,7 @@ function SignUpStack() {
     >
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="SignUp2" component={createAccountScreen} />
+      <Stack.Screen name="SignUp3" component={userProfilePhotoScreen} />
       {/**<Stack.Screen name="BusSignUp1" component={BusSignUpScreen1} />
       <Stack.Screen name="BusSignUp2" component={BusSignUpScreen2} />
       <Stack.Screen name="BusSignUp3" component={BusSignUpScreen3} />
