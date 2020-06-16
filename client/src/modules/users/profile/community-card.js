@@ -3,7 +3,17 @@ import PropTypes from 'prop-types'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 
 const CommunityCard = ({ community, navigation }) => {
-  const userCountText = community.users.length > 3 ? `+${community.users.length - 3}` : ''
+
+  const stackedUserImgs = community.users.length > 3 && (
+    <View style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
+      <View style={{ backgroundColor: '#909091', height: 25, width: 25, borderRadius: 25 }}></View>
+      <View style={{ backgroundColor: '#a9a9aa', height: 25, width: 25, borderRadius: 25, marginLeft: -15 }}></View>
+      <View style={{ backgroundColor: '#c1c1c3', height: 25, width: 25, borderRadius: 25, marginLeft: -15 }}></View>
+      <View style={{ backgroundColor: 'orange', height: 25, width: 25, borderRadius: 25, marginLeft: -15 }}>
+        <Text style={{ fontSize: 11, top: 6, left: 4 }}>{`+${community.users.length - 3}`}</Text>
+      </View>
+    </View>
+  )
 
   return (
     <TouchableOpacity
@@ -23,14 +33,7 @@ const CommunityCard = ({ community, navigation }) => {
               <Text>{community.users.length} Members</Text>
             </View>
           </View>
-          <View style={{ display: 'flex', flexDirection: 'row', marginTop: 5 }}>
-            <View style={{ backgroundColor: '#909091', height: 25, width: 25, borderRadius: 25 }}></View>
-            <View style={{ backgroundColor: '#a9a9aa', height: 25, width: 25, borderRadius: 25, marginLeft: -15 }}></View>
-            <View style={{ backgroundColor: '#c1c1c3', height: 25, width: 25, borderRadius: 25, marginLeft: -15 }}></View>
-            <View style={{ backgroundColor: 'orange', height: 25, width: 25, borderRadius: 25, marginLeft: -15 }}>
-              <Text style={{ fontSize: 11, top: 6, left: 4 }}>{userCountText}</Text>
-            </View>
-          </View>
+          {stackedUserImgs}
         </View>
       </View>
     </TouchableOpacity>
