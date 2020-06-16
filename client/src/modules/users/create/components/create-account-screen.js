@@ -2,18 +2,41 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Image
 } from "react-native";
-import Constants from "expo-constants";
-import WideButtonComponent from "../components/WideButtonRight";
+import BackButton from '../../../shared/icons/back-button/darkTheme'
+import {
+  emailRegex,
+  phoneRegex,
+  passwordRegex
+} from '../../constants';
+import styles from "../../styles"
+import WideButtonComponent from "../../../../components/WideButtonRight";
 import { AsyncStorage } from "react-native";
-import env from "../env";
+import env from "../../../../env";
 
-export default class SignUpScreen2 extends Component {
+import fieldValidator from "../../../shared/utils"
+
+var validEmail;
+var validNumber;
+var validPassword;
+var passwordMatch;
+
+var btnStyles = { ...styles.btn, ...styles.btnDisabled }
+
+const isSubmitDisabled = () => {
+  if(validEmail && validNumber && validPassword && passwordMatch) {
+    btnStyles = styles.btn
+    return false;
+  } else {
+    btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    return true;
+  }
+}
+
+export default class createAccountScreen extends Component {
   static navigationOptions = {
     headerLeft: "Arrow_back" // To be changed with an icon.
   };
@@ -36,15 +59,11 @@ export default class SignUpScreen2 extends Component {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", userToken);
     var password = this.state.password1; //need to hash the password here
-    if (this.state.password1 != this.state.password2) {
-      alert("Passwords do not match");
-      return;
-    }
 
     var raw = JSON.stringify({
       email_login: this.state.email.toLowerCase(),
-      password: password.toLowerCase(),
-      phone: this.state.phoneNumber.toLowerCase(),
+      password: password,
+      phone: this.state.phoneNumber,
       mood: 1,
     });
 
@@ -91,89 +110,89 @@ export default class SignUpScreen2 extends Component {
       >
         <View style={styles.container1}>
           <View style={styles.container}>
-            {navigation.canGoBack() && (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              >
-                <Image
-                  source={require("../assets/leftArrowWhite.png")}
-                  style={{
-                    height: 20,
-                    width: 25,
-                    resizeMode: "contain",
-                    alignSelf: "flex-start"
-                  }}
-                />
-              </TouchableOpacity>
-            )}
+          <BackButton navigation={navigation} />
             <View>
               <Text style={styles.h1}>Let's get started</Text>
               <Text style={styles.h2}>Create your account</Text>
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={validEmail==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Email address</Text>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
                 placeholder="Enter your email address"
-                onChangeText={email => this.setState({ email })}
+                onChangeText={email => {
+                  validEmail = fieldValidator({regex: emailRegex, input: email})
+                  this.setState({email})
+                }}
                 value={this.state.email}
               />
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={validNumber==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Phone number</Text>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
                 placeholder="Enter your phone number"
-                onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                onChangeText={phoneNumber => {
+                  validNumber = fieldValidator({regex: phoneRegex, input: phoneNumber})
+                  this.setState({phoneNumber})
+                }}
                 keyboardType={"numeric"}
                 value={this.state.phoneNumber}
               />
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={validPassword==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Password</Text>
               <TextInput
                 style={styles.placeholder}
                 secureTextEntry={true}
                 placeholderTextColor={"white"}
                 placeholder="Enter a strong password"
-                onChangeText={password1 => this.setState({ password1 })}
+                onChangeText={password1 => {
+                  validPassword = fieldValidator({regex: passwordRegex, input: password1})
+                  this.setState({ password1 })
+                }}
                 value={this.state.password1}
               />
             </View>
-
-            <View style={styles.bottomBorder}>
+            {validPassword==false && <Text style={styles.errorText}>Passwords must contain one uppercase letter, one lowercase letter, one number and one special character</Text>}
+            <View style={passwordMatch==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Confirm password</Text>
               <TextInput
                 style={styles.placeholder}
                 secureTextEntry={true}
                 placeholderTextColor={"white"}
                 placeholder="Confirm your strong password"
-                onChangeText={password2 => this.setState({ password2 })}
+                onChangeText={password2 => {
+                  if(this.state.password1 !== password2) { 
+                    passwordMatch = false;
+                  } else {
+                    passwordMatch = true;
+                  }
+                  this.setState({ password2 })
+                }}
                 value={this.state.password2}
               />
             </View>
+            {passwordMatch==false && <Text style={styles.errorText}>Passwords do not match</Text>}
             <View paddingTop={20} alignSelf={"center"}>
               <TouchableOpacity
                 onPress={() => this.register()}
                 underlayColor="white"
+                disabled={isSubmitDisabled()}
               >
                 <WideButtonComponent
                   value={"STEP 1 OF 6"}
-                  source={require("../assets/arrow-right.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  source={require("../../../../assets/arrow-right.png")}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 14,
                     fontFamily: "poppins-light",
-                    color: "#1A1A1A"
+                    color: "black"
                   }}
                 />
               </TouchableOpacity>
@@ -184,74 +203,3 @@ export default class SignUpScreen2 extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  h1: {
-    fontFamily: "poppins-bold",
-    color: "white",
-    margin: "auto",
-    textAlign: "left",
-    fontSize: 30,
-    paddingTop: 20,
-    paddingBottom: 20
-  },
-  h2: {
-    fontFamily: "poppins-regular",
-    color: "lightgrey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 11,
-    paddingBottom: 20
-  },
-  prompt: {
-    fontFamily: "poppins-regular",
-    color: "lightgrey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 11,
-    paddingTop: 30
-  },
-  placeholder: {
-    fontFamily: "poppins-regular",
-    color: "white",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 13,
-    paddingVertical: 20
-  },
-  btn: {
-    fontFamily: "poppins-medium",
-    width: 350,
-    marginTop: 30,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-evenly"
-  },
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    paddingBottom: 50
-  },
-  container1: {
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  container2: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center"
-  },
-  bottomBorder: {
-    width: 350,
-    borderBottomColor: "lightgrey",
-    borderBottomWidth: 1,
-    alignSelf: "flex-start"
-  }
-});

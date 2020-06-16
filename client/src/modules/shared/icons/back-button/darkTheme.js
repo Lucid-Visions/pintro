@@ -7,7 +7,7 @@ import styles from './styles';
 const BackButton = ({ navigation }) => (
     navigation.canGoBack() && (
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image style={styles.image} source={require("../../../assets/leftArrow.png")} />
+          <Image style={styles.image} source={require("../../../../assets/leftArrowWhite.png")} />
         </TouchableOpacity>
     )
 );

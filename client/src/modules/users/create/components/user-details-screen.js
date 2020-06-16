@@ -2,21 +2,32 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Image
 } from "react-native";
-import Constants from "expo-constants";
-import WideButtonComponent from "../components/WideButtonRight";
+import styles from "../../styles"
+import BackButton from "../../../shared/icons/back-button/darkTheme"
+import WideButtonComponent from "../../../../components/WideButtonRight";
+import { nameRegex } from '../../constants'
+import fieldValidator from "../../../shared/utils/index";
 
-const updateRequest = require("../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/updateRequest").update;
+var validName;
 
-export default class SignUpScreen4 extends Component {
-  static navigationOptions = {
-    headerLeft: "Arrow_back" // To be changed with an icon.
-  };
+var btnStyles = { ...styles.btn, ...styles.btnDisabled }
+
+const isSubmitDisabled = () => {
+  if(validName) {
+    btnStyles = styles.btn
+    return false;
+  } else {
+    btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    return true;
+  }
+}
+
+export default class userDetailsScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -29,30 +40,20 @@ export default class SignUpScreen4 extends Component {
   }
 
   update(navigation) {
-    const toUpdate = this.constructToUpdate();
+    const toUpdate = {
+      name: this.state.name.trim(),
+      "experience.currentJobTitle": this.state.currentJob.trim(),
+      "experience.currentCompany": this.state.currentCompany.trim(),
+      bio: this.state.story.trim()
+    };
     if (toUpdate) {
       const result = updateRequest(toUpdate);
       if (result) navigation.navigate("SignUp5");
     }
   }
 
-  constructToUpdate() {
-    if (
-      this.state.name.trim() &&
-      this.state.currentCompany.trim() &&
-      this.state.currentJob.trim() &&
-      this.state.story.trim()
-    ) {
-      return {
-        name: this.state.name,
-        "experience.currentJobTitle": this.state.currentJob,
-        "experience.currentCompany": this.state.currentCompany,
-        bio: this.state.story
-      };
-    } else alert("Please don't leave empty fields.");
-  }
-
   render() {
+    {/* Need to verify with danielle which of these fields are going to be required*/}
     const { navigation } = this.props;
     return (
       <ScrollView
@@ -61,39 +62,26 @@ export default class SignUpScreen4 extends Component {
       >
         <View style={styles.container1}>
           <View style={styles.container}>
-            {navigation.canGoBack() && (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.goBack();
-                }}
-              >
-                <Image
-                  source={require("../assets/leftArrowWhite.png")}
-                  style={{
-                    height: 20,
-                    width: 25,
-                    resizeMode: "contain",
-                    alignSelf: "flex-start"
-                  }}
-                />
-              </TouchableOpacity>
-            )}
+          <BackButton navigation={navigation} />
             <View>
               <Text style={styles.h1}>What's your story?</Text>
               <Text style={styles.h2}>Build your profile</Text>
             </View>
 
-            <View style={styles.bottomBorder}>
+            <View style={validName==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
               <Text style={styles.prompt}>Name</Text>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"white"}
                 placeholder="Enter your full name"
-                onChangeText={name => this.setState({ name })}
+                onChangeText={name => {
+                  validName = fieldValidator({regex: nameRegex, input: name})
+                  this.setState({ name })
+                }}
                 value={this.state.name}
               />
             </View>
-
+            {/* Going to be a dropdown as per PIN-79*/}
             <View style={styles.bottomBorder}>
               <Text style={styles.prompt}>Current job title</Text>
               <TextInput
@@ -140,13 +128,12 @@ export default class SignUpScreen4 extends Component {
               <TouchableOpacity
                 onPress={() => this.update(navigation)}
                 underlayColor="white"
+                disabled={isSubmitDisabled()}
               >
                 <WideButtonComponent
                   value={"STEP 3 OF 6"}
-                  source={require("../assets/arrow-right.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  source={require("../../../../assets/arrow-right.png")}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 14,
                     fontFamily: "poppins-light",
@@ -161,74 +148,3 @@ export default class SignUpScreen4 extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  h1: {
-    fontFamily: "poppins-bold",
-    color: "white",
-    margin: "auto",
-    textAlign: "left",
-    fontSize: 30,
-    paddingTop: 50,
-    paddingBottom: 20
-  },
-  h2: {
-    fontFamily: "poppins-regular",
-    color: "lightgrey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 11,
-    paddingBottom: 15
-  },
-  prompt: {
-    fontFamily: "poppins-regular",
-    color: "lightgrey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 11,
-    paddingTop: 30
-  },
-  placeholder: {
-    fontFamily: "poppins-regular",
-    color: "white",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 13,
-    paddingVertical: 20
-  },
-  btn: {
-    fontFamily: "poppins-medium",
-    width: 350,
-    marginTop: 30,
-    backgroundColor: "white",
-    flexDirection: "row",
-    justifyContent: "space-evenly"
-  },
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    paddingBottom: 50
-  },
-  container1: {
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  container2: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    backgroundColor: "#1A1A1A",
-    alignContent: "center"
-  },
-  bottomBorder: {
-    width: 350,
-    borderBottomColor: "lightgrey",
-    borderBottomWidth: 1,
-    alignSelf: "flex-start"
-  }
-});
