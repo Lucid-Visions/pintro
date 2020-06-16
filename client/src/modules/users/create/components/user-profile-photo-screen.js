@@ -63,8 +63,6 @@ const userProfilePhotoScreen = () => {
     );
     const responseJSON = await uploadResponse.json();
 
-    console.log(responseJSON)
-
     return responseJSON;
   };
 
@@ -87,7 +85,6 @@ const userProfilePhotoScreen = () => {
       } else {
         const encoded_image = await response.base64;
         const imageURI = await response.uri;
-        console.log(response)
 
         setState({ photoBase64: encoded_image, photoURI: imageURI });
       }
@@ -108,7 +105,6 @@ const userProfilePhotoScreen = () => {
                 <View
                     style={{ flex: 1, justifyContent: "center" }}
                 >
-                    {console.log('rendering', state.photoURI)}
                     <TouchableOpacity
                         onPress={() => uploadPhoto()}
                         style={{ marginTop: 20 }}
