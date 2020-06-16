@@ -72,6 +72,7 @@ const userProfilePhotoScreen = () => {
     var options = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
+      aspect: [1, 1],
       quality: 0.3,
       base64: true,
     };
@@ -101,11 +102,11 @@ const userProfilePhotoScreen = () => {
         <View style={styles.container1}>
             <View style={styles.container}>
                 <BackButton navigation={navigation} />
-                <Text style={styles.h1}>Edit your photo</Text>
+                <Text style={styles.h1}>Show us your face</Text>
                 <Text style={styles.h2}>Upload a profile photo</Text>
                 {/* Thumbnail */}
                 <View
-                    style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
+                    style={{ flex: 1, justifyContent: "center" }}
                 >
                     {console.log('rendering', state.photoURI)}
                     <TouchableOpacity
@@ -123,7 +124,8 @@ const userProfilePhotoScreen = () => {
                             width: 350,
                             resizeMode: "contain",
                             marginVertical: 30,
-                            borderRadius: 125
+                            borderRadius: 120/2,
+                            overflow: "hidden",
                         }}
                     />
                     </TouchableOpacity>
@@ -131,11 +133,13 @@ const userProfilePhotoScreen = () => {
                 <TouchableOpacity
                     onPress={() => update()}
                     underlayColor="white"
+                    disabled={!state.photoURI}
+                    style={{paddingTop: 20}}
                 >
                     <WideButtonComponent
-                        value={"STEP 3 OF 6"}
+                        value={"STEP 2 OF 6"}
                         source={require("../../../../assets/arrow-right.png")}
-                        containerStyle={styles.btn}
+                        containerStyle={!state.photoURI ? {...styles.btn, ...styles.btnDisabled} : styles.btn}
                         textStyle={{
                             fontSize: 14,
                             fontFamily: "poppins-light",
