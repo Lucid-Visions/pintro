@@ -1,8 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
-
+import BackButton from '../../../shared/icons/back-button/lightTheme'
 import { createCommunity } from '../../actions'
-import BackButton from '../../../shared/back-button'
 import WideButtonRight from "../../../../components/WideButtonRight";
 import TagsData from "../../../../assets/TagsData";
 import Tag from "../../../../components/Tag";

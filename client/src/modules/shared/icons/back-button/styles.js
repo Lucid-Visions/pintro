@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
     image: {
-        height: 15,
-        width: 20,
+        height: 20,
+        width: 25,
         resizeMode: "contain",
-        marginLeft: -10
+        alignSelf: "flex-start"
     }
 });
 
