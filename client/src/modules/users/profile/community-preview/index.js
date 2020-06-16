@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { shallowEqual, useSelector, useDispatch } from 'react-redux'
 
 import { getCommunities } from '../actions'
@@ -23,11 +23,7 @@ const CommunityPreview = ({ navigation }) => {
     
   }, [ communities ])
 
-  const communityCards = communities && communities.slice(0, 2).map(c => (
-    <CommunityCard key={c.name} community={c} navigation={navigation} />
-  ))
-
-  return (
+  const content = communities ? (
     <View>
       <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between", marginVertical: "5%" }}>
         <Text style={{
@@ -39,9 +35,13 @@ const CommunityPreview = ({ navigation }) => {
           <Text>{seeAllLabel}</Text>
         </TouchableOpacity>
       </View>
-      {communityCards}
+      {communities.slice(0, 2).map(c => (
+        <CommunityCard key={c.name} community={c} navigation={navigation} />
+      ))}
     </View>
-  )
+  ) : null
+
+  return content
 }
 
 CommunityPreview.propTypes = {
