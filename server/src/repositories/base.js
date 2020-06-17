@@ -53,7 +53,7 @@ class BaseRepository {
       response = await this.collection.updateOne({ _id: mongoose.Types.ObjectId(communityId), admins: userId }, { $set: { ...data } })
 
       if (response.result.nModified === 0) {
-        return { error: "Could not update database" }
+        return { error: 'Could not update database' }
       }
 
     } catch (error) {
