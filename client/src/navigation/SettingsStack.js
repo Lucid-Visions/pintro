@@ -20,7 +20,7 @@ import SignUpStack from "../navigation/SignUpStack";
 import EditCommunityScreen from "../modules/communities/edit/components/edit-community-screen";
 import EditCommunityInfo from "../modules/communities/edit/components/edit-info-screen";
 import EditCommunityPhoto from "../modules/communities/edit/components/edit-photo-screen";
-//import EditCommunityTags from "../modules/communities/edit/components/edit-tags-screen";
+import EditCommunityTags from "../modules/communities/edit/components/edit-tags-screen";
 //import EditCommunityMembers from "../modules/communities/edit/components/edit-members-screen";
 //import EditCommunityArticles from "../modules/communities/edit/components/edit-articles-screen";
 //import EditCommunityEvents from "../modules/communities/edit/components/edit-events-screen";
@@ -58,7 +58,8 @@ function SettingsStack() {
       <Stack.Screen name="Edit Community" component={EditCommunityScreen} />
       <Stack.Screen name="Edit Community Photo" component={EditCommunityPhoto} />
       <Stack.Screen name="Edit Community Info" component={EditCommunityInfo} />
-      {/* <Stack.Screen name="Edit Community Tags" component={EditCommunityTags} />
+      <Stack.Screen name="Edit Community Tags" component={EditCommunityTags} />
+      {/* 
       <Stack.Screen name="Edit Community Articles" component={EditCommunityArticles} />
       <Stack.Screen name="Edit Community Members" component={EditCommunityMembers} />
       <Stack.Screen name="Edit Community Events" component={EditCommunityEvents} /> */}
