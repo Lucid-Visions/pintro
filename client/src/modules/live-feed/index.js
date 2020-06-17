@@ -77,21 +77,22 @@ export default class LiveFeed extends React.Component {
     this.setState({uid:responseJson._id})
   }
 
-  fetchData = async () => {
-    const response = await getFeed()
+  fetchData = async ({limit, date_stamp, extend, filter}) => {
+    const response = await getFeed({limit, date_stamp, filter})
     if (response.error) {
         this.setState({ networkError: true, refreshing: false })
         return
     }
 
     this.setState({
-        items: [...this.state.items, ...response.data],
+        items: extend?[...this.state.items, ...response.data]:response.data,
         networkError: false,
         refreshing: false,
     })    
   }
 
   setFilter = (filter) =>  {
+    if(!filter) filter = -1;
     this.fetchData({ filter })
   }
 
@@ -166,18 +167,18 @@ export default class LiveFeed extends React.Component {
       );
     } else {
       return (
-              <FlatList
-
-                data={this.state.items}
-                renderItem={({item})=>this.getItem(item)}
-                onRefresh={this._onRefresh}
-                refreshing={this.state.refreshing}
-                keyExtractor={(item) => item._id}
-                numColumns={2}
-                onMomentumScrollEnd={this.fetchData}
-                onEndReachedThreshold={0.5}
-                initialNumToRender={4}
-              />
+        <FlatList
+          ListHeaderComponent={filterPopup}
+          data={this.state.items}
+          renderItem={({item})=>this.getItem(item)}
+          onRefresh={this._onRefresh}
+          refreshing={this.state.refreshing}
+          keyExtractor={(item) => item._id}
+          numColumns={2}
+          onMomentumScrollEnd={()=>this.fetchData({date_stamp:this.state.items.length > 0 ? this.state.items[this.state.items.length-1].date_stamp-1:Date.now(), extend:true})}
+          onEndReachedThreshold={0.5}
+          initialNumToRender={4}
+        />
       );
     }
   }
