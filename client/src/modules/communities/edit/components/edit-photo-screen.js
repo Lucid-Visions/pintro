@@ -13,7 +13,7 @@ import { updateCommunity } from "../../actions";
 import * as ImagePicker from "expo-image-picker";
 
 const EditCommunityPhoto = ({ navigation, route }) => {
-  console.log(route.params.profile_picture)
+
   const community = route.params
 
   const [state, updateState] = useState({
