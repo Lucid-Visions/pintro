@@ -7,7 +7,8 @@ class BaseRepository {
   }
 
   /**
-     *
+     * create
+     * 
      * @param {Object} record New database entry
      *
      * @returns {boolean} Operation success status
@@ -17,7 +18,8 @@ class BaseRepository {
   }
 
   /**
-   *
+   * get
+   * 
    * @param {string} id
    */
   async get(id) {
@@ -39,17 +41,29 @@ class BaseRepository {
   }
 
   /**
+   * update
+   * 
+   * @param {string} id Id of record that will be updated
+   * @param {Object} data Data to overwrite existing data
+   */
+  async update(id, data) {
+    let response
+    try {
+      response = await this.collection.updateOne({ _id: mongoose.Types.ObjectId(id) }, { $set: { ...data } })
+    } catch (error) {
+      response = { error }
+    }
+
+    return response
+  }
+
+  /**
      * Other CRUDs
      */
 
   // getAll() {
 
   // }
-
-  // update() {
-
-  // }
-
 }
 
 export default BaseRepository
