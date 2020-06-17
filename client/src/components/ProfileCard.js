@@ -29,7 +29,7 @@ class ProfileCard extends Component {
           <View style={styles.horizontalContainer}>
             <Image
               style={styles.profilePicture}
-              source={{url:this.props.profile_picture} || require("../assets/empty-profile-picture.png")}
+              source={{uri:this.props.profile_picture} || require("../assets/empty-profile-picture.png")}
             />
             <View style={styles.textContainer}>
               <Text style={styles.headingOne}>{this.props.name}</Text>
