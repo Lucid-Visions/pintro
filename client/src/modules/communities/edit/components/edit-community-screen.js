@@ -7,27 +7,12 @@ import {
   Image,
 } from "react-native";
 import styles from "../styles"
-import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 
 import SettingsRow from "../../../../components/SettingsRow";
 
-const EditCommunityScreen = ({ route }) => {
-  const community = route.params.community
+const EditCommunityScreen = ({navigation, route: {params}}) => {
 
-  const name = community.name;
-  const story = community.story;
-  const url = community.url;
-
-//   const interests = user.tags;
-//   const skills = user.skills;
-//   const bio = user.bio;
-//   const recommendations = user.recommendations;
-//   const name = community.name;
-//   const experience = user.experience;
-
-  const navigation = useNavigation();
-  
   /**
    * Right arrow component
    */
@@ -48,7 +33,7 @@ const EditCommunityScreen = ({ route }) => {
       lbl: "Edit community information",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Info", {name, story, url});
+        navigation.navigate("Edit Community Info", params);
       }
     },
     {
@@ -86,6 +71,12 @@ const EditCommunityScreen = ({ route }) => {
         navigation.navigate("Edit Members");
       }
     },
+    {
+      lbl: "Delete Community",
+      action: () => {
+        //deleteCommunity();
+      }
+    }
   ];
 
   /**

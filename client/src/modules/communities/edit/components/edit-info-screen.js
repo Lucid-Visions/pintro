@@ -11,12 +11,10 @@ import BackButton from "../../../shared/icons/back-button/lightTheme";
 import styles from "../styles";
 
 import WideButton from "../../../../components/WideButton";
+import { updateCommunity } from "../../actions"
 
-const updateRequest = require("../../../../assets/communityUpdateRequest").update;
+const EditStory = ({ navigation, route }) => {
 
-const EditStory = ({ route }) => {
-
-  const navigation = useNavigation();
   const community = route.params;
 
   // State of the fields on the screen
@@ -54,12 +52,15 @@ const EditStory = ({ route }) => {
     if (fieldsEmpty) {
       alert("Please don't leave empty fields");
     } else {
-      updateRequest({
-        name: state.name,
-        story: state.story,
-        url: state.url
-      });
-      navigation.navigate("Profile");
+      updateCommunity(
+        community._id,
+        {
+          name: state.name,
+          story: state.story,
+          url: state.url
+        }
+      );
+      navigation.navigate('CommunityProfile', {...community})
     }
   };
 

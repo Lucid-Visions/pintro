@@ -16,6 +16,14 @@ import EditRecommendations from "../modules/users/edit/components/edit-recommend
 import AddRecommendation from "../screens/AddRecommendation";
 import EditConnections from "../modules/users/edit/components/edit-connections-screen";
 import SignUpStack from "../navigation/SignUpStack";
+// Import Community Screens
+import EditCommunityScreen from "../modules/communities/edit/components/edit-community-screen";
+import EditCommunityInfo from "../modules/communities/edit/components/edit-info-screen";
+import EditCommunityPhoto from "../modules/communities/edit/components/edit-photo-screen";
+//import EditCommunityTags from "../modules/communities/edit/components/edit-tags-screen";
+//import EditCommunityMembers from "../modules/communities/edit/components/edit-members-screen";
+//import EditCommunityArticles from "../modules/communities/edit/components/edit-articles-screen";
+//import EditCommunityEvents from "../modules/communities/edit/components/edit-events-screen";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +54,14 @@ function SettingsStack() {
       <Stack.Screen name="Add Recommendation" component={AddRecommendation} />
       {/* Connections */}
       <Stack.Screen name="Connection Profile" component={UserProfileHandler} />
+
+      <Stack.Screen name="Edit Community" component={EditCommunityScreen} />
+      <Stack.Screen name="Edit Community Photo" component={EditCommunityPhoto} />
+      <Stack.Screen name="Edit Community Info" component={EditCommunityInfo} />
+      {/* <Stack.Screen name="Edit Community Tags" component={EditCommunityTags} />
+      <Stack.Screen name="Edit Community Articles" component={EditCommunityArticles} />
+      <Stack.Screen name="Edit Community Members" component={EditCommunityMembers} />
+      <Stack.Screen name="Edit Community Events" component={EditCommunityEvents} /> */}
 
       <Stack.Screen name={"SignUpStack"} component={SignUpStack} />
 
