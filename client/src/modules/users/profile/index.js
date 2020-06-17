@@ -25,6 +25,8 @@ import MoodButtonCard from "../../../components/MoodButtonCard";
 import AcceptRequestModal from "../../../components/followRequestModal";
 import ConnectModal from "../../../components/ConnectModal";
 import ChatConnectPopup from "../../../components/ChatConnectPopup";
+import CommunityPreview from './community-preview'
+
 const updateRequest = require("../../../assets/updateRequest").update;
 
 
@@ -56,6 +58,7 @@ const ProfileScreen = ({
   currentCompany,
   experience,
   refresh,
+  communities
 }) => {
   // Set whether the 'My Story' text is expanded.
   const [textExpanded, setTextExpanded] = useState(false);
@@ -665,6 +668,7 @@ const ProfileScreen = ({
         />
         {editBtn("SettingsStack", {screen: "Edit Experience", params: { experience }})}
       </View>
+      <CommunityPreview communities={communities} navigation={navigation} />
 
       {recommendationsSection()}
       <View style={styles.badgesSection}>
