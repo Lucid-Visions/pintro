@@ -6,26 +6,24 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import styles from "../styles";
 
 import WideButton from "../../../../components/WideButton";
 
-const updateRequest = require("../../../../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/communityUpdateRequest").update;
 
 const EditStory = ({ route }) => {
 
   const navigation = useNavigation();
-  const user = route.params;
+  const community = route.params;
 
   // State of the fields on the screen
   const [state, updateState] = useState({
-    name: user.name || "",
-    role: user.experience.currentJobTitle || "",
-    company: user.experience.currentCompany || "",
-    bio: user.bio || ""
+    name: community.name || "",
+    story: community.story || "",
+    url: community.url || ""
   });
 
   const setState = newState => {
@@ -38,12 +36,11 @@ const EditStory = ({ route }) => {
    * Check if fields are not empty
    */
   const checkFieldsEmpty = () => {
-    const nameEmpty = state.name === "";
-    const roleEmpty = state.role === "";
-    const companyEmpty = state.company === "";
-    const bioEmpty = state.bio === "";
+    const communityNameEmpty = state.name === "";
+    const communityStoryEmpty = state.story === "";
+    const communityUrlEmpty = state.url === ""
 
-    if (nameEmpty || roleEmpty || companyEmpty || bioEmpty) {
+    if (communityNameEmpty || communityStoryEmpty || communityUrlEmpty) {
       return true;
     } else return false;
   };
@@ -57,11 +54,10 @@ const EditStory = ({ route }) => {
     if (fieldsEmpty) {
       alert("Please don't leave empty fields");
     } else {
-      const result = updateRequest({
+      updateRequest({
         name: state.name,
-        "experience.currentCompany": state.company,
-        bio: state.bio,
-        "experience.currentJobTitle": state.role
+        story: state.story,
+        url: state.url
       });
       navigation.navigate("Profile");
     }
@@ -71,43 +67,32 @@ const EditStory = ({ route }) => {
     <ScrollView>
       <View style={styles.container}>
         <BackButton navigation={navigation} />
-        <Text style={styles.header}>Edit your story</Text>
-        <Text style={styles.headerText}>Build your profile</Text>
+        <Text style={styles.header}>Edit your community info</Text>
         <View>
           <Text style={styles.categoryHeader}>Name</Text>
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={state.name || "Enter your full name..."}
+            placeholder={state.name || "Enter your community name..."}
             onEndEditing={input => setState({name: input.nativeEvent.text})}
           />
         </View>
         <View>
-          <Text style={styles.categoryHeader}>Current job title</Text>
+          <Text style={styles.categoryHeader}>Story</Text>
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={state.role || "Enter your current position"}
-            onEndEditing={input => setState({role: input.nativeEvent.text})}
+            placeholder={state.story || "Enter your community story"}
+            onEndEditing={input => setState({story: input.nativeEvent.text})}
           />
         </View>
         <View>
-          <Text style={styles.categoryHeader}>Current company</Text>
+          <Text style={styles.categoryHeader}>URL</Text>
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={state.company || "Enter your current company..."}
-            onEndEditing={input => setState({company: input.nativeEvent.text})}
-          />
-        </View>
-        <View>
-          <Text style={styles.categoryHeader}>Your Story</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={state.bio || "Enter your story..."}
-            multiline={true}
-            onEndEditing={input => setState({bio: input.nativeEvent.text})}
+            placeholder={state.url || "Enter your community URL..."}
+            onEndEditing={input => setState({url: input.nativeEvent.text})}
           />
         </View>
         <TouchableOpacity onPress={() => update()}>
