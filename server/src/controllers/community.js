@@ -120,7 +120,6 @@ class CommunityController {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not update community' }})
     }
 
-    console.log({ response })
     return res.status(http.OK).json({ data: Boolean(response.result.ok) })
   }
 }
