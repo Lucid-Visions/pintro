@@ -209,7 +209,7 @@ const AddRecommendation = ({ route }) => {
             <Image
               source={
                 photoData.URI != null
-                  ? { url: photoData.URI }
+                  ? { uri: photoData.URI }
                   : require("../assets/addThumbnail.png")
               }
               style={{

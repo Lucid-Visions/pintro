@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   ScrollView,
   TextInput,
   TouchableOpacity,
-  Image
 } from "react-native";
-import Constants from "expo-constants";
+import styles from "../styles"
 import RNPickerSelect from "react-native-picker-select";
 import { useNavigation } from "@react-navigation/native";
 
-import WideButton from "../components/WideButton";
-import AddButton from "../components/AddButton";
-import YearItemSelector from "../components/YearItemSelector";
+import WideButton from "../../../../components/WideButton";
+import { Ionicons } from '@expo/vector-icons';
+import YearItemSelector from "../../../../components/YearItemSelector";
+import BackButton from "../../../shared/icons/back-button/lightTheme";
 
-const updateRequest = require("../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/updateRequest").update;
 
 const EditExperience = ({ route }) => {
   const navigation = useNavigation();
@@ -218,24 +217,7 @@ const EditExperience = ({ route }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {navigation.canGoBack() && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-            style={{ marginTop: 20 }}
-          >
-            <Image
-              source={require("../assets/leftArrow.png")}
-              style={{
-                height: 20,
-                width: 25,
-                resizeMode: "contain",
-                alignSelf: "flex-start",
-              }}
-            />
-          </TouchableOpacity>
-        )}
+      <BackButton navigation={navigation} />
         <Text style={styles.header}>Edit your experience</Text>
         <Text style={styles.headerText}>Your work experience timeline</Text>
 
@@ -258,8 +240,9 @@ const EditExperience = ({ route }) => {
 
         <Text style={styles.categoryHeader}>Previous Companies</Text>
         {displayCompanies}
-        <AddButton
-          action={() => {
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
             setState({
               companies: state.companies.concat({
                 year: null,
@@ -271,12 +254,15 @@ const EditExperience = ({ route }) => {
               })
             });
           }}
-        />
+        >
+          <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
+        </TouchableOpacity>
 
         <Text style={styles.categoryHeader}>Education</Text>
         {displayEducation}
-        <AddButton
-          action={() => {
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
             setState({
               education: state.education.concat({
                 year: null,
@@ -288,7 +274,10 @@ const EditExperience = ({ route }) => {
               })
             });
           }}
-        />
+        >
+          <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
+        </TouchableOpacity>
+
 
         <Text style={styles.categoryHeader}>Academic Level *</Text>
         <RNPickerSelect
@@ -319,66 +308,5 @@ const EditExperience = ({ route }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    flexDirection: "column",
-    marginHorizontal: 20
-  },
-  containerHorizontal: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center"
-  },
-  pickerContainer: {
-    fontSize: 13,
-    borderBottomColor: "grey",
-    borderBottomWidth: 1,
-    padding: 20
-  },
-  header: {
-    fontFamily: "poppins-bold",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 24,
-    paddingTop: 30
-  },
-  headerText: {
-    fontFamily: "poppins-regular",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingTop: 15,
-    paddingBottom: 30
-  },
-  categoryHeader: {
-    fontFamily: "poppins-regular",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingBottom: 5
-  },
-  placeholder: {
-    fontFamily: "poppins-regular",
-    borderBottomWidth: 1,
-    fontSize: 13,
-    paddingVertical: 15,
-    marginBottom: 40
-  },
-  submitBtn: {
-    backgroundColor: "black",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "black",
-    color: "black",
-    width: 300,
-    marginVertical: 30
-  }
-});
 
 export default EditExperience;

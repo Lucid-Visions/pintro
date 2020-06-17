@@ -15,7 +15,7 @@ const updateRequest = require("../../../../assets/updateRequest").update;
 
 var btnStyles = { ...styles.btn, ...styles.btnDisabled }
 
-export default class selectTagsScreen extends Component {
+export default class selectInterestsScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -29,7 +29,7 @@ export default class selectTagsScreen extends Component {
     if (this.state.tags.length >= 6) {
       const result = updateRequest({tags: this.state.tags});
       if (result) navigation.navigate("SignUp7");
-    }else alert("Please select at least 6 passions!")
+    }else alert("Please select at least 6 interests")
   }
 
   onSelectedItemsChange = selectedItems => {
@@ -82,8 +82,8 @@ export default class selectTagsScreen extends Component {
               <BackButton navigation={navigation} />
             </View>
             <View>
-              <Text style={{...styles.h1, ...styles.headerPadding}}>What are your passions?</Text>
-              <Text style={{...styles.h2, ...styles.headerPadding}}>Choose your passion tags (6 minimum)</Text>
+              <Text style={{...styles.h1, ...styles.headerPadding}}>What are your interests?</Text>
+              <Text style={{...styles.h2, ...styles.headerPadding}}>Choose your interests (6 minimum)</Text>
             </View>
 
             <View paddingTop={70}>

@@ -2,16 +2,14 @@ import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
-  StyleSheet,
-  TouchableOpacity,
   ScrollView,
-  Image
 } from "react-native";
-import Constants from "expo-constants";
-import RecommendationButton from "../components/RecommendationButton";
+import styles from "../styles";
+import RecommendationButton from "../../../../components/RecommendationButton";
 import { useNavigation } from "@react-navigation/native";
+import BackButton from "../../../shared/icons/back-button/lightTheme";
 
-const updateRequest = require("../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/updateRequest").update;
 
 const EditRecommendations = ({ route }) => {
   const navigation = useNavigation();
@@ -155,34 +153,16 @@ const EditRecommendations = ({ route }) => {
   };
 
   return (
-    <ScrollView style={styles.container2} showsVerticalScrollIndicator={false}>
+    <ScrollView>
       <View style={styles.container1}>
         <View style={styles.container}>
-          {navigation.canGoBack() && (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}
-              style={{ marginTop: 20 }}
-            >
-              <Image
-                source={require("../assets/leftArrow.png")}
-                style={{
-                  height: 20,
-                  width: 25,
-                  resizeMode: "contain",
-                  alignSelf: "flex-start",
-                  marginHorizontal: 20
-                }}
-              />
-            </TouchableOpacity>
-          )}
+          <BackButton navigation={navigation} />
           <View>
-            <Text style={styles.subTitle}>{state.userName}'s</Text>
-            <Text style={styles.title}>Recommendations</Text>
+            <Text style={styles.headerTextRecommendations}>{state.userName}'s</Text>
+            <Text style={styles.headerRecommendations}>Recommendations</Text>
             {/* Articles */}
             <View>
-              <Text style={styles.categoryHeader}>Articles</Text>
+              <Text style={styles.categoryHeaderBold}>Articles</Text>
               <View style={styles.recommendationsRow}>
                 {recommendationRow("articles").slice(0, 3)}
               </View>
@@ -192,14 +172,14 @@ const EditRecommendations = ({ route }) => {
             </View>
             {/* Books */}
             <View>
-              <Text style={styles.categoryHeader}>Books</Text>
+              <Text style={styles.categoryHeaderBold}>Books</Text>
               <View style={styles.recommendationsRow}>
                 {recommendationRow("books").slice(0, 3)}
               </View>
             </View>
             {/* Videos */}
             <View>
-              <Text style={styles.categoryHeader}>Videos</Text>
+              <Text style={styles.categoryHeaderBold}>Videos</Text>
               <View style={styles.recommendationsRow}>
                 {recommendationRow("videos").slice(0, 3)}
               </View>
@@ -210,64 +190,5 @@ const EditRecommendations = ({ route }) => {
     </ScrollView>
   );
 };
-
-styles = StyleSheet.create({
-  title: {
-    fontFamily: "poppins-bold",
-    color: "black",
-    margin: "auto",
-    textAlign: "left",
-    fontSize: 26,
-    padding: 20,
-    paddingTop: 0
-  },
-  subTitle: {
-    fontFamily: "poppins-regular",
-    color: "grey",
-    margin: "auto",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingHorizontal: 20,
-    paddingTop: 40,
-    paddingBottom: 0
-  },
-
-  categoryHeader: {
-    fontFamily: "poppins-semi-bold",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 14,
-    padding: 20
-  },
-  btn: {
-    fontFamily: "poppins-medium",
-    width: 350,
-    marginTop: 30,
-    backgroundColor: "black",
-    flexDirection: "row",
-    justifyContent: "space-evenly"
-  },
-  container2: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    alignContent: "center"
-  },
-  recommendationsRow: {
-    flex: 1,
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "center",
-    paddingBottom: 15
-  },
-  tags: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center"
-  },
-  tagScrollContainer: {
-    overflow: "hidden"
-  }
-});
 
 export default EditRecommendations;
