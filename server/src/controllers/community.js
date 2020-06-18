@@ -128,6 +128,7 @@ class CommunityController {
 
     const response = await this.repository.update(decodedJwt.user.uid, communityId, req.body)
 
+    console.log(response)
     // Return error if there was an error updating the record
     if (response.error) {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not update community' }})

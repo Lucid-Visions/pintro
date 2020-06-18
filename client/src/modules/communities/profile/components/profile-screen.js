@@ -109,7 +109,7 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                 <EditButton
                   navigation={navigation}
                   screen="SettingsStack"
-                  params={{screen: "Edit Community Info", params: { story: params.story, name: params.name, url: params.url }}}
+                  params={{screen: "Edit Community Info", params}}
                 />
               </View>
               <Text style={styles.companyName}>{params.name}</Text>
