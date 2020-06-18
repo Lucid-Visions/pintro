@@ -14,9 +14,6 @@ import { MessageMeButton } from "../../../../components/ProfileActionButtons";
 import { ExtrasButton } from "../../../../components/ProfileActionButtons";
 import LatestPostComponent from "../../../../components/LatestPostButton";
 import FollowersComponent from "../../../../components/Followers";
-import Tag from "../../../../components/Tag";
-
-import { getUser } from '../../../users/profile/actions'
 
 import styles from './styles'
 
@@ -25,16 +22,6 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
   // Set whether the 'My Story' text is expanded.
   const [ textExpanded, setTextExpanded ] = useState(false);
   
-  const [ admin, setAdmin ] = useState(null)
-
-  useEffect(() => {
-    async function fetchData() {
-      const user = await getUser(params.admins[0])
-      setAdmin(user)
-    }
-
-    fetchData()
-  }, [])
 
   /**
    * Expand the 'My story' text on press of the 'More' button.
@@ -43,14 +30,35 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
     setTextExpanded(prevState => { return !prevState });
   };
 
-  const communityAdmins = admin && (
+  const members = (
+    <View>
+      <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+        Members
+      </Text>
+      <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
+        {params.members.map(member => (
+          <Image
+            style={{ height: 50, width: 50, borderRadius: 25, marginRight: 7 }}
+            source={member.profile_picture ? { uri: member.profile_picture } : require("../../../../assets/empty-profile-picture.png")} />
+        ))}
+      </View>
+    </View>
+  )
+
+  const communityAdmins = (
     <View>
       <Text style={{ fontFamily: "poppins-semi-bold", marginTop: 30 }}>
         Community Admins
       </Text>
-      <View style={{ marginTop: 10 }} >
-        <ImageCard title={admin.name} subtitle={`${admin.experience.currentJobTitle} @ ${admin.experience.currentCompany}`} />
-      </View>
+      {params.admins.slice(0, 2).map(admin => (
+        <View style={{ marginTop: 10 }} >
+          <ImageCard
+            title={admin.name}
+            subtitle={`${admin.experience.currentJobTitle} @ ${admin.experience.currentCompany}`}
+            imgSrc={{ uri: admin.profile_picture }}
+            />
+        </View>
+      ))}
     </View>
   )
 
@@ -97,16 +105,7 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View>
-              <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
-                Members
-              </Text>
-              <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
-                {[...Array(6).keys()].map((_, i) => (
-                  <Image style={{ height: 50, width: 50, borderRadius: 25, marginRight: 7 }} source={require("../../../../assets/empty-profile-picture.png")} />
-                ))}
-              </View>
-            </View>
+            {members}
             {communityAdmins}
             <View style={{flexDirection: "row" }}>
                 <Text style={{ marginTop: "6%", fontFamily: "poppins-semi-bold", marginBottom: 8, marginLeft: 2 }}>

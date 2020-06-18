@@ -26,7 +26,7 @@ const CommunityPreview = ({ communities, navigation }) => {
       {communities.slice(0, 2).map(c => (
         <ImageCard
           title={c.name}
-          subtitle={`${c.users.length} Members`}
+          subtitle={`${c.members.length} Members`}
           onPress={() => navigation.navigate('CommunityProfile', {...c})}
         />
       ))}
