@@ -16,16 +16,7 @@ import Tag from "../../../../components/Tag";
 
 import styles from './styles'
 
-const CommunityProfileScreen = ({
-  route: {
-    params: {
-      name,
-      story,
-      url,
-      tags
-    }
-  }
-}) => {
+const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
   // Set whether the 'My Story' text is expanded.
   const [ textExpanded, setTextExpanded ] = useState(false);
@@ -64,7 +55,7 @@ const CommunityProfileScreen = ({
 
 
 
-  let companyTags = tags.map((tag, i) => (
+  let companyTags = params.tags.map((tag, i) => (
     <Tag
       key={i}
       item={{ text: tag.toUpperCase(), disabled: true }}
@@ -74,62 +65,68 @@ const CommunityProfileScreen = ({
 
   return (
     <View>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{backgroundColor:"#F5F5F5"}}>
-        <View style={{flexDirection: "column"}}>
+      <TouchableOpacity
+                onPress={() => navigation.navigate("SettingsStack", {screen: "Edit Community", params })}
+                style={{ zIndex: 99, width: "100%", height: 30, marginTop: 20 }}
+      ></TouchableOpacity>
       <View>
-          <Image
-              source={require("../../../../assets/Empty-profile-picture-semi.png")}
-              style={{resizeMode: "cover", width:"100%"}}
-          />
-      </View>
-        <View style={styles.container} >
-          <View style={styles.myStory}>
-              <Text style={{ fontFamily:'poppins-regular', color: 'grey' }}>{url}</Text>
-              <Text style={styles.companyName}>{name}</Text>
-          </View>
-          <View style={styles.buttons}>
-              <FollowMeButton onPress={()=>{}} text={"FOLLOW US"}/>
-              <MessageMeButton onPress={()=>{}} text={"MESSAGE US"}/>
-              <ExtrasButton />
-          </View>
-          <View style={styles.myStoryContainer}>
-              <View style={styles.myStory}>
-                  <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
-                      Our Story
-                  </Text>
-                  <Text
-                      style={{ fontFamily: "poppins-semi-bold", color: "grey" }}
-                      numberOfLines={textExpanded ? 0 : 4}
-                  >
-                      {story} 
-                  </Text>
-                  <TouchableOpacity onPress={() => expandText()}>
-                      <Text style={{ color: "orange", marginBottom: 8, marginTop: 3 }}>
-                          {textExpanded ? "Less" : "More"}
-                      </Text>
-                  </TouchableOpacity>
-              </View>
-          </View>
-          <View>
-            {getCompanyTags(companyTags)}
-          </View>
-          <View style={{flexDirection: "row" }}>
-              <Text style={{ marginTop: "6%", fontFamily: "poppins-semi-bold", marginBottom: 8, marginLeft: 2 }}>
-                  Latest Posts
-              </Text>
-              <TouchableOpacity>
-                  <Text style={{ marginTop: "9%", fontFamily: "poppins-semi-bold", marginBottom: 8, marginLeft: 178, fontSize: 10, color: "#A9A9A9" }}>
-                      See all posts
-                  </Text>
-              </TouchableOpacity>
-          </View> 
-          <LatestPostComponent post={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} likes={"3"} comments={"5"} /> 
-          <View paddingTop={10}>
-            <FollowersComponent /> 
+        <ScrollView contentInsetAdjustmentBehavior="automatic" style={{backgroundColor:"#F5F5F5"}}>
+          <View style={{flexDirection: "column"}}>
+        <View>
+            <Image
+                source={require("../../../../assets/Empty-profile-picture-semi.png")}
+                style={{resizeMode: "cover", width:"100%"}}
+            />
+        </View>
+          <View style={styles.container} >
+            <View style={styles.myStory}>
+                <Text style={{ fontFamily:'poppins-regular', color: 'grey' }}>{params.url}</Text>
+                <Text style={styles.companyName}>{params.name}</Text>
+            </View>
+            <View style={styles.buttons}>
+                <FollowMeButton onPress={()=>{}} text={"FOLLOW US"}/>
+                <MessageMeButton onPress={()=>{}} text={"MESSAGE US"}/>
+                <ExtrasButton />
+            </View>
+            <View style={styles.myStoryContainer}>
+                <View style={styles.myStory}>
+                    <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+                        Our Story
+                    </Text>
+                    <Text
+                        style={{ fontFamily: "poppins-semi-bold", color: "grey" }}
+                        numberOfLines={textExpanded ? 0 : 4}
+                    >
+                        {params.story} 
+                    </Text>
+                    <TouchableOpacity onPress={() => expandText()}>
+                        <Text style={{ color: "orange", marginBottom: 8, marginTop: 3 }}>
+                            {textExpanded ? "Less" : "More"}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+            <View>
+              {getCompanyTags(companyTags)}
+            </View>
+            <View style={{flexDirection: "row" }}>
+                <Text style={{ marginTop: "6%", fontFamily: "poppins-semi-bold", marginBottom: 8, marginLeft: 2 }}>
+                    Latest Posts
+                </Text>
+                <TouchableOpacity>
+                    <Text style={{ marginTop: "9%", fontFamily: "poppins-semi-bold", marginBottom: 8, marginLeft: 178, fontSize: 10, color: "#A9A9A9" }}>
+                        See all posts
+                    </Text>
+                </TouchableOpacity>
+            </View> 
+            <LatestPostComponent post={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} likes={"3"} comments={"5"} /> 
+            <View paddingTop={10}>
+              <FollowersComponent /> 
+            </View>
           </View>
         </View>
+        </ScrollView>
       </View>
-      </ScrollView>
     </View>
   )
 }

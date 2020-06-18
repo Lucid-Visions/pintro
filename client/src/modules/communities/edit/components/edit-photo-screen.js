@@ -7,18 +7,16 @@ import {
 } from "react-native";
 import styles from "../styles"
 import PostButton from "../../../../components/WideButtonRight";
-import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
+import { updateCommunity } from "../../actions";
 
 import * as ImagePicker from "expo-image-picker";
 
-const updateRequest = require("../../../../assets/updateRequest").update;
-
-const EditPhoto = ({ route }) => {
-  const navigation = useNavigation();
+const EditCommunityPhoto = ({ navigation, route }) => {
+  const community = route.params
 
   const [state, updateState] = useState({
-    photoURI: route.params.user.profile_picture || null,
+    photoURI: community.profile_picture || null,
     photoBase64: null,
   });
 
@@ -37,8 +35,13 @@ const EditPhoto = ({ route }) => {
     if (photoServerResponse.status == 200) {
       const photoUrl = photoServerResponse.data.url;
 
-      updateRequest({ profile_picture: photoUrl });
-      navigation.goBack();
+      updateCommunity(
+        community._id,
+        {
+          profile_picture: photoUrl,
+        }
+      );
+      navigation.navigate('CommunityProfile', {...community})
     }
   };
 
@@ -92,8 +95,8 @@ const EditPhoto = ({ route }) => {
   return (
     <View style={styles.container}>
       <BackButton navigation={navigation} />
-      <Text style={styles.header}>Edit your photo</Text>
-      <Text style={styles.headerText}>Upload a profile photo</Text>
+      <Text style={styles.header}>Edit your community photo</Text>
+      <Text style={styles.headerText}>Upload a community photo</Text>
       {/* Thumbnail */}
       <View
         style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
@@ -130,4 +133,4 @@ const EditPhoto = ({ route }) => {
   );
 };
 
-export default EditPhoto;
+export default EditCommunityPhoto;
