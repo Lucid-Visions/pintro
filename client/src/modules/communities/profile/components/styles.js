@@ -79,10 +79,13 @@ const styles = StyleSheet.create({
   experience: {
     flexDirection: "row"
   },
-  recommendationsSection: {
-    flexDirection: "column",
-    flexWrap: "wrap",
-    marginTop: 10
+  articles: {
+    top: 5,
+    flexDirection: "row",
+    marginTop: "2%",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   tags: {
     flexDirection: "row",

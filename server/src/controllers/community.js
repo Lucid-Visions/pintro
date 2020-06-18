@@ -43,7 +43,7 @@ class CommunityController {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Community already exists' }})
     }
 
-    const community = { ...req.body, users: [ decodedJwt.user.uid ], admins: [ decodedJwt.user.uid ] }
+    const community = { ...req.body, memberIds: [ decodedJwt.user.uid ], adminIds: [ decodedJwt.user.uid ] }
     const createResult = await this.repository.create(community)
 
     // Return error if there is a DB issue on creation
@@ -127,7 +127,7 @@ class CommunityController {
     }
 
     const response = await this.repository.update(decodedJwt.user.uid, communityId, req.body)
-    
+
     // Return error if there was an error updating the record
     if (response.error) {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not update community' }})
