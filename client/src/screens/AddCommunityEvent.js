@@ -18,7 +18,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import { useNavigation } from "@react-navigation/native";
 
-const AddRecommendation = ({ route }) => {
+const AddCommunityEvent = ({ route }) => {
   const navigation = useNavigation();
   const callback = route.params.update;
   const editMode = route.params.editMode || false;
@@ -33,7 +33,6 @@ const AddRecommendation = ({ route }) => {
     id: editMode ? editData.id : route.params.id,
     title: editMode ? editData.title : "",
     link: editMode ? editData.resource : "",
-    type: editMode ? editData.type : route.params.type,
     photo: editMode ? editData.photo : null,
     tags: editMode ? editData.tags : [],
   });
@@ -53,7 +52,6 @@ const AddRecommendation = ({ route }) => {
     return {
       id: state.id,
       title: state.title,
-      type: state.type,
       resource: state.link,
       photo: uploadedPhoto,
       tags: state.tags,
@@ -66,10 +64,9 @@ const AddRecommendation = ({ route }) => {
   const checkFieldsEmpty = () => {
     const titleEmpty = state.title === "";
     const linkEmpty = state.link === "";
-    const typeEmpty = state.type === "";
     const tagsEmpty = state.tags.length == 0;
 
-    if (titleEmpty || linkEmpty || typeEmpty || tagsEmpty) {
+    if (titleEmpty || linkEmpty || tagsEmpty) {
       return true;
     } else return false;
   };
@@ -166,13 +163,10 @@ const AddRecommendation = ({ route }) => {
             />
           </TouchableOpacity>
         )}
-        <Text style={styles.header}>Add a recommendation</Text>
-        <Text style={styles.headerText}>
-          Let people know what has helped you on your journey!
-        </Text>
+        <Text style={styles.header}>Add an upcoming event</Text>
         {/* Title */}
         <View>
-          <Text style={styles.categoryHeader}>Recommendation Title</Text>
+          <Text style={styles.categoryHeader}>Event Name</Text>
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
@@ -183,7 +177,7 @@ const AddRecommendation = ({ route }) => {
         {/* Link */}
         <View>
           <Text style={styles.categoryHeader}>
-            Recommendation Link{" "}
+            Eventbrite Link{" "}
             <Text style={{ fontStyle: "italic" }}>
               (full https URL required)
             </Text>{" "}
@@ -192,7 +186,7 @@ const AddRecommendation = ({ route }) => {
             style={styles.placeholder}
             placeholderTextColor={"grey"}
             placeholder={
-              editMode ? state.link : "Add external link (article, book, video)"
+              editMode ? state.link : "Add external eventbrite link"
             }
             onChangeText={(input) => setState({ link: input })}
           />
@@ -200,7 +194,7 @@ const AddRecommendation = ({ route }) => {
         {/* Thumbnail */}
         <View>
           <Text style={styles.categoryHeader}>
-            Recommendation Thumbnail (Optional)
+            Event Thumbnail
           </Text>
           <TouchableOpacity
             onPress={() => importPhoto()}
@@ -334,4 +328,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddRecommendation;
+export default AddCommunityEvent;
