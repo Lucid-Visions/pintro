@@ -18,7 +18,7 @@ const EditPhoto = ({ route }) => {
   const navigation = useNavigation();
 
   const [state, updateState] = useState({
-    photoURI: null,
+    photoURI: route.params.user.profile_picture || null,
     photoBase64: null,
   });
 

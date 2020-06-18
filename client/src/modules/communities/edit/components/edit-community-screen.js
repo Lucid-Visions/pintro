@@ -40,7 +40,7 @@ const EditCommunityScreen = ({navigation, route: {params}}) => {
       lbl: "Edit community photo",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Photo");
+        navigation.navigate("Edit Community Photo", params);
       }
     },
     {

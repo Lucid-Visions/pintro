@@ -6,12 +6,11 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import styles from "../styles";
 
 import WideButton from "../../../../components/WideButton";
-import { updateCommunity } from "../../actions"
+import { updateCommunity } from "../../actions";
 
 const EditStory = ({ navigation, route }) => {
 
@@ -36,9 +35,8 @@ const EditStory = ({ navigation, route }) => {
   const checkFieldsEmpty = () => {
     const communityNameEmpty = state.name === "";
     const communityStoryEmpty = state.story === "";
-    const communityUrlEmpty = state.url === ""
 
-    if (communityNameEmpty || communityStoryEmpty || communityUrlEmpty) {
+    if (communityNameEmpty || communityStoryEmpty) {
       return true;
     } else return false;
   };
