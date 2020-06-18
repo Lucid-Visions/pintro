@@ -36,12 +36,9 @@ const EditCommunityEvents = ({ navigation, route }) => {
     };
   };
 
-  const initialState = helperConstructState(community.events);
-
   const [state, updateState] = useState({
     communityName: community.name,
-    events: initialState,
-    itemsArray: community.events || []
+    events: community.events || []
   });
 
   const setState = newState => {
@@ -51,13 +48,13 @@ const EditCommunityEvents = ({ navigation, route }) => {
   };
 
   /**
-   * Updates the recommendations state with the new itemsArray,
+   * Updates the recommendations state with the new events,
    * after the update() function
    */
   useEffect(()=> {
-      const deconstructedArr = helperConstructState(state.itemsArray)
+      const deconstructedArr = helperConstructState(state.events)
       setState({recommendations: deconstructedArr});
-  },[state.itemsArray])
+  },[state.events])
 
   /**
    * creates a new recommendation or updates an existing one
@@ -68,12 +65,11 @@ const EditCommunityEvents = ({ navigation, route }) => {
       let nextRecommendations
 
     // check if the recommendation is new, or updated one
-    console.log(recommendation.id)
     if(recommendation.id == 0){
         let newId;
         // construct the new id of the recommendation
-        if (state.itemsArray.length > 0){
-            let idList = state.itemsArray.map(a => a.id);
+        if (state.events.length > 0){
+            let idList = state.events.map(a => a.id);
             newId = Math.max(...idList)+1
         }else newId = 1
 
@@ -83,18 +79,15 @@ const EditCommunityEvents = ({ navigation, route }) => {
         }
 
         // add the new recommendation to an array with the old ones
-        nextRecommendations = state.itemsArray.concat([newRecommendation])
-        //console.log('next recommendations: ', nextRecommendations)
+        nextRecommendations = state.events.concat([newRecommendation])
     } else {
         // search the index of the recommendation we are updating
-        const idx = state.itemsArray.findIndex(item => item.id === recommendation.id)
+        const idx = state.events.findIndex(item => item.id === recommendation.id)
         // copy the old recommendation array and replace the updated recommendation
-        const tmpRecommendations = state.itemsArray.slice();
+        const tmpRecommendations = state.events.slice();
         tmpRecommendations[idx] = recommendation
         nextRecommendations = tmpRecommendations
     }
-    
-    console.log(nextRecommendations)
 
     // update the db with the updated recommendations array
     updateCommunity(
@@ -104,7 +97,7 @@ const EditCommunityEvents = ({ navigation, route }) => {
         }
     );
 
-    setState({itemsArray: nextRecommendations})
+    setState({events: nextRecommendations})
   };
 
   
@@ -114,20 +107,20 @@ const EditCommunityEvents = ({ navigation, route }) => {
    */
   const recommendationRow = type => {
     return [...Array(6)].map((x, i) => {
-      if (state.events.events[i] != null) {
+      if (state.events[i] != null) {
         return (
           <RecommendationButton
           key={`item-${i}`}
             editView={true}
-            title={state.events.events[i].title}
-            resource={state.events.events[i].resource}
-            thumbnail={state.events.events[i].photo}
+            title={state.events[i].title}
+            resource={state.events[i].resource}
+            thumbnail={state.events[i].photo}
             secondaryResource={() =>
               navigation.navigate("Add Community Event", {
                 update,
                 type,
                 editMode: true,
-                data: state.events.events[i]
+                data: state.events[i]
               })
             }
           />

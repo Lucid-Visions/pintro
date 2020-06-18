@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Image,
   TextInput,
   Dimensions
 } from "react-native";
@@ -13,8 +12,7 @@ import Constants from "expo-constants";
 import PostButton from "../components/WideButtonRight";
 import MultiSelect from "react-native-multiple-select";
 import TagsPassions from "../assets/TagsPassions";
-
-import * as ImagePicker from "expo-image-picker";
+import BackButton from "../modules/shared/icons/back-button/lightTheme";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -23,6 +21,7 @@ const AddCommunityEvent = ({ route }) => {
   const callback = route.params.update;
   const editMode = route.params.editMode || false;
   let editData;
+
   if (editMode) editData = route.params.data;
 
   const tagsList = TagsPassions.map((item) => {
@@ -33,13 +32,7 @@ const AddCommunityEvent = ({ route }) => {
     id: editMode ? editData.id : route.params.id,
     title: editMode ? editData.title : "",
     link: editMode ? editData.resource : "",
-    photo: editMode ? editData.photo : null,
     tags: editMode ? editData.tags : [],
-  });
-
-  const [photoData, setPhotoData] = useState({
-    URI: null,
-    base64: null,
   });
 
   const setState = (newState) => {
@@ -48,12 +41,11 @@ const AddCommunityEvent = ({ route }) => {
     });
   };
 
-  const constructRecommendation = (uploadedPhoto) => {
+  const constructRecommendation = () => {
     return {
       id: state.id,
       title: state.title,
       resource: state.link,
-      photo: uploadedPhoto,
       tags: state.tags,
     };
   };
@@ -72,29 +64,6 @@ const AddCommunityEvent = ({ route }) => {
   };
 
   /**
-   * Upload the selected photo to ImgBB and return the response from the server
-   */
-  const uploadPhotoToServer = async () => {
-    const data = new FormData();
-    data.append("image", photoData.base64);
-
-    const configUpload = {
-      method: "POST",
-      body: data,
-    };
-
-    const uploadResponse = await fetch(
-      `https://api.imgbb.com/1/upload?key=5ce1e038673d1d870dd0550841fcf1d7`,
-      configUpload
-    ).catch((err) =>
-      console.log("There was and error while uploading to imgbb", err)
-    );
-    const responseJSON = await uploadResponse.json();
-
-    return responseJSON;
-  };
-
-  /**
    * checks if the update was successful and redirects to the Profile page
    */
   const updateCallBack = async () => {
@@ -103,14 +72,10 @@ const AddCommunityEvent = ({ route }) => {
     if (fieldsEmpty) {
       alert("Please don't leave required fields empty!");
     } else {
-      const photoServerResponse = await uploadPhotoToServer();
+      const recommendation = constructRecommendation();
 
-      if (photoServerResponse.status == 200) {
-        const recommendation = constructRecommendation(photoServerResponse.data.url);
-
-        callback(recommendation);
-        navigation.goBack();
-      }
+      callback(recommendation);
+      navigation.goBack();
     }
   };
 
@@ -118,51 +83,10 @@ const AddCommunityEvent = ({ route }) => {
     setState({ tags: selectedItems });
   };
 
-  const importPhoto = async () => {
-    var options = {
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      quality: 0.3,
-      base64: true,
-    };
-
-    const response = await ImagePicker.launchImageLibraryAsync(
-      options
-    ).catch((err) => console.log(err));
-
-    if (response) {
-      if (response.cancelled) {
-        console.log("User cancelled image picker");
-      } else {
-        const encoded_image = await response.base64;
-        const imageURI = await response.uri;
-
-        setPhotoData({ URI: imageURI, base64: encoded_image });
-      }
-    } else console.log("There was something wrong with the response");
-  };
-
   return (
     <ScrollView>
       <View style={styles.container}>
-        {navigation.canGoBack() && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-            style={{ marginTop: 20 }}
-          >
-            <Image
-              source={require("../assets/leftArrow.png")}
-              style={{
-                height: 20,
-                width: 25,
-                resizeMode: "contain",
-                alignSelf: "flex-start",
-              }}
-            />
-          </TouchableOpacity>
-        )}
+        <BackButton navigation={navigation} />
         <Text style={styles.header}>Add an upcoming event</Text>
         {/* Title */}
         <View>
@@ -190,32 +114,6 @@ const AddCommunityEvent = ({ route }) => {
             }
             onChangeText={(input) => setState({ link: input })}
           />
-        </View>
-        {/* Thumbnail */}
-        <View>
-          <Text style={styles.categoryHeader}>
-            Event Thumbnail
-          </Text>
-          <TouchableOpacity
-            onPress={() => importPhoto()}
-            style={{ marginTop: 40 }}
-          >
-            <Image
-              source={
-                photoData.URI != null
-                  ? { uri: photoData.URI }
-                  : require("../assets/addThumbnail.png")
-              }
-              style={{
-                height: 250,
-                width: 250,
-                resizeMode: "contain",
-                alignSelf: "center",
-                marginBottom: 50,
-                borderRadius: 15,
-              }}
-            />
-          </TouchableOpacity>
         </View>
         {/* Tags */}
         <View
