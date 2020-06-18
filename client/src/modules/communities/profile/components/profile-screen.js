@@ -55,9 +55,12 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
   const members = (
     <View>
-      <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
-        Members
-      </Text>
+      <View style={styles.editRow}>
+        <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+          Members
+        </Text>
+        <EditButton />
+      </View>
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         {params.members.map(member => (
           <TouchableOpacity onPress={() => { navigation.navigate('Home'); navigation.navigate("Profile", { uid: member._id }) }} >
@@ -147,30 +150,31 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                 </TouchableOpacity>
             </View> 
             <LatestPostComponent post={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} likes={"3"} comments={"5"} /> 
-            <View style={styles.myStoryContainer}>
-                <View style={styles.myStory}>
-                  <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
-                      Upcoming Events
-                  </Text>
-                  <View style={{ marginTop: 10 }}>
-                    {[
-                      { name: 'Meet & Greet', location: 'The Hub (LDN)', date: '28th February', time: '6pm'},
-                      { name: 'Dev Conference', location: 'The Hub (LDN)', date: '5th March', time: '11am'}
-                    ].map(e => (
-                      <Card
-                        key={e.name}
-                        title={e.name}
-                        rightComponent={
-                          <View>
-                            <Text style={{ fontFamily: "poppins-semi-bold", fontSize: 10 }}>{e.location}</Text>
-                            <Text style={{ fontSize: 10 }}>{`${e.date} @ ${e.time}`}</Text>
-                          </View>
-                        }
-                      />
-                    ))}
-                  </View>
+            <View style={{ ...styles.editRow, marginTop: 20 }}>
+              <Text style={{ fontFamily: "poppins-semi-bold" }}>
+                Upcoming Events
+              </Text>
+              <EditButton />
               </View>
-            </View>
+
+              <View style={{ marginTop: 10 }}>
+                {[
+                  { name: 'Meet & Greet', location: 'The Hub (LDN)', date: '28th February', time: '6pm'},
+                  { name: 'Dev Conference', location: 'The Hub (LDN)', date: '5th March', time: '11am'}
+                ].map(e => (
+                  <Card
+                    key={e.name}
+                    title={e.name}
+                    rightComponent={
+                      <View>
+                        <Text style={{ fontFamily: "poppins-semi-bold", fontSize: 10 }}>{e.location}</Text>
+                        <Text style={{ fontSize: 10 }}>{`${e.date} @ ${e.time}`}</Text>
+                      </View>
+                    }
+                  />
+                ))}
+              </View>
+  
             <View style={styles.recommendationsSection}>
               <View style={styles.editRow}>
                 <Text
@@ -182,6 +186,7 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                 >
                   Articles
                 </Text>
+                <EditButton />
               </View>
 
               <View>

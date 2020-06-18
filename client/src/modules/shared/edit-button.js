@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 
 const EditButton = ({ navigation, screen, params }) => {
     return (
-        <TouchableOpacity onPress={() => navigation.navigate(screen, params)}>
+        <TouchableOpacity onPress={() => navigation ? navigation.navigate(screen, params) : null }>
             <Image
                 source={require("../../assets/editPen.png")}
                 style={styles.editPen}
