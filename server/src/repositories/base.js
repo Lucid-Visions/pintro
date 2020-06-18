@@ -39,37 +39,6 @@ class BaseRepository {
 
     return response
   }
-
-  /**
-   * update
-   *
-   * @param {string} id Id of record that will be updated
-   * @param {Object} data Data to overwrite existing data
-   */
-  async update(userId, communityId, data) {
-    let response
-    try {
-
-      response = await this.collection.updateOne({ _id: mongoose.Types.ObjectId(communityId), admins: userId }, { $set: { ...data } })
-
-      if (response.result.nModified === 0) {
-        return { error: 'Could not update database' }
-      }
-
-    } catch (error) {
-      response = { error }
-    }
-
-    return response
-  }
-
-  /**
-     * Other CRUDs
-     */
-
-  // getAll() {
-
-  // }
 }
 
 export default BaseRepository

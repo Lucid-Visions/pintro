@@ -134,6 +134,31 @@ class CommunityController {
 
     return res.status(http.OK).json({ data: Boolean(response.result.ok) })
   }
+
+  async deleteCommunity(req, res) {
+    const communityId = req.params.id
+
+    // Decode jwt
+    const decodedJwt = jwt.verify(
+      req.token,
+      jwtData.publicKEY,
+      jwtData.verifyOptions
+    )
+
+    // Return error if userId is not present
+    if (!decodedJwt.user.uid) {
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not read user token' }})
+    }
+
+    const response = await this.repository.deleteCommunity(decodedJwt.user.uid, communityId)
+
+    // Return error if there was an error updating the record
+    if (response.error) {
+      return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not delete community' }})
+    }
+
+    return res.status(http.OK).json({ data: Boolean(response.result.ok) })
+  }
 }
 
 export default CommunityController
