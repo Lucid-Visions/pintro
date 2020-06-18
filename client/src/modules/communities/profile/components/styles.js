@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     marginRight: 25,
     marginTop: 5
   },
+  editRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   myStoryContainer: {
     alignSelf: 'stretch',
     paddingBottom: 10

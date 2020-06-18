@@ -9,6 +9,7 @@ import {
 
 import Card from '../../../shared/card'
 import ImageCard from '../../../shared/image-card'
+import EditButton from '../../../shared/edit-button'
 
 import { FollowMeButton } from "../../../../components/ProfileActionButtons";
 import { MessageMeButton } from "../../../../components/ProfileActionButtons";
@@ -54,9 +55,12 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
   const members = (
     <View>
-      <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
-        Members
-      </Text>
+      <View style={styles.editRow}>
+        <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+          Members
+        </Text>
+        <EditButton />
+      </View>
       <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
         {params.members.map(member => (
           <TouchableOpacity onPress={() => { navigation.navigate('Home'); navigation.navigate("Profile", { uid: member._id }) }} >
@@ -100,8 +104,15 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
           {profilePicture}
           <View style={styles.container} >
             <View style={styles.myStory}>
+              <View style={styles.editRow}>
                 <Text style={{ fontFamily:'poppins-regular', color: 'grey' }}>{params.url}</Text>
-                <Text style={styles.companyName}>{params.name}</Text>
+                <EditButton
+                  navigation={navigation}
+                  screen="SettingsStack"
+                  params={{screen: "Edit Community Info", params: { story: params.story, name: params.name, url: params.url }}}
+                />
+              </View>
+              <Text style={styles.companyName}>{params.name}</Text>
             </View>
             <View style={styles.buttons}>
                 <FollowMeButton onPress={()=>{}} text={"FOLLOW US"}/>
@@ -139,30 +150,31 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                 </TouchableOpacity>
             </View> 
             <LatestPostComponent post={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} likes={"3"} comments={"5"} /> 
-            <View style={styles.myStoryContainer}>
-                <View style={styles.myStory}>
-                  <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
-                      Upcoming Events
-                  </Text>
-                  <View style={{ marginTop: 10 }}>
-                    {[
-                      { name: 'Meet & Greet', location: 'The Hub (LDN)', date: '28th February', time: '6pm'},
-                      { name: 'Dev Conference', location: 'The Hub (LDN)', date: '5th March', time: '11am'}
-                    ].map(e => (
-                      <Card
-                        key={e.name}
-                        title={e.name}
-                        rightComponent={
-                          <View>
-                            <Text style={{ fontFamily: "poppins-semi-bold", fontSize: 10 }}>{e.location}</Text>
-                            <Text style={{ fontSize: 10 }}>{`${e.date} @ ${e.time}`}</Text>
-                          </View>
-                        }
-                      />
-                    ))}
-                  </View>
+            <View style={{ ...styles.editRow, marginTop: 20 }}>
+              <Text style={{ fontFamily: "poppins-semi-bold" }}>
+                Upcoming Events
+              </Text>
+              <EditButton />
               </View>
-            </View>
+
+              <View style={{ marginTop: 10 }}>
+                {[
+                  { name: 'Meet & Greet', location: 'The Hub (LDN)', date: '28th February', time: '6pm'},
+                  { name: 'Dev Conference', location: 'The Hub (LDN)', date: '5th March', time: '11am'}
+                ].map(e => (
+                  <Card
+                    key={e.name}
+                    title={e.name}
+                    rightComponent={
+                      <View>
+                        <Text style={{ fontFamily: "poppins-semi-bold", fontSize: 10 }}>{e.location}</Text>
+                        <Text style={{ fontSize: 10 }}>{`${e.date} @ ${e.time}`}</Text>
+                      </View>
+                    }
+                  />
+                ))}
+              </View>
+  
             <View style={styles.recommendationsSection}>
               <View style={styles.editRow}>
                 <Text
@@ -174,6 +186,7 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                 >
                   Articles
                 </Text>
+                <EditButton />
               </View>
 
               <View>
