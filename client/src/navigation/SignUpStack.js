@@ -5,7 +5,7 @@ import createAccountScreen from "../modules/users/create/components/create-accou
 import userProfilePhotoScreen from "../modules/users/create/components/user-profile-photo-screen";
 import userDetailsScreen from "../modules/users/create/components/user-details-screen";
 import workExperienceScreen from "../modules/users/create/components/work-experience-screen";
-import selectTagsScreen from "../modules/users/create/components/select-tags-screen";
+import selectInterestsScreen from "../modules/users/create/components/select-interests-screen";
 import selectSuperpowersScreen from "../modules/users/create/components/select-superpowers-screen";
 import thankYouScreen from "../modules/users/create/components/thank-you-screen";
 import BusSignUpScreen1 from "../screens/BusSignUpScreen1";
@@ -37,7 +37,7 @@ function SignUpStack() {
       <Stack.Screen name="BusSignUp6" component={BusSignUpScreen6} />*/}
       <Stack.Screen name="SignUp4" component={userDetailsScreen} />
       <Stack.Screen name="SignUp5" component={workExperienceScreen} />
-      <Stack.Screen name="SignUp6" component={selectTagsScreen} />
+      <Stack.Screen name="SignUp6" component={selectInterestsScreen} />
       <Stack.Screen name="SignUp7" component={selectSuperpowersScreen} />
       <Stack.Screen name="SignUp8" component={thankYouScreen} />
       <Stack.Screen name="LogIn" component={LogInScreen} />

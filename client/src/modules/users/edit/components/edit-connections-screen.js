@@ -8,8 +8,9 @@ import {
   AsyncStorage,
 } from "react-native";
 import Constants from "expo-constants";
-import ConnectionButton from "../components/ConnectionButton";
-import EmptyState from "../components/EmptyState";
+import ConnectionButton from "../../../../components/ConnectionButton";
+import EmptyState from "../../../../components/EmptyState";
+import BackButton from "../../../shared/icons/back-button/lightTheme";
 
 import Animated from "react-native-reanimated";
 import SwipeableItem from "react-native-swipeable-item";
@@ -17,7 +18,7 @@ import DraggableFlatList from "react-native-draggable-flatlist";
 import { useNavigation } from "@react-navigation/native";
 import ElevatedView from "react-native-elevated-view";
 
-const updateRequest = require("../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/updateRequest").update;
 
 const EditConnections = ({ route }) => {
   const navigation = useNavigation();
@@ -329,24 +330,7 @@ const EditConnections = ({ route }) => {
   } else {
     return (
       <View style={styles.container}>
-        {navigation.canGoBack() && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-            style={{ marginTop: 20 }}
-          >
-            <Image
-              source={require("../assets/leftArrow.png")}
-              style={{
-                height: 20,
-                width: 25,
-                resizeMode: "contain",
-                alignSelf: "flex-start",
-              }}
-            />
-          </TouchableOpacity>
-        )}
+        <BackButton navigation={navigation} />
         <Text style={styles.header}>Edit your connections</Text>
         <Text style={styles.headerText}>
           Move between tiers or swipe to remove connections
@@ -406,6 +390,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingTop: 30,
     paddingBottom: 5,
+  },
+  categoryHeaderBold: {
+    fontFamily: "poppins-semi-bold",
+    margin: "auto",
+    textAlign: "left",
+    alignItems: "baseline",
+    fontSize: 14,
+    padding: 20
   },
   placeholder: {
     fontFamily: "poppins-regular",

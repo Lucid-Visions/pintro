@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   ScrollView,
   TouchableOpacity,
   Image,
 } from "react-native";
-import Constants from "expo-constants";
+import styles from "../styles"
 import { useNavigation } from "@react-navigation/native";
+import BackButton from "../../../shared/icons/back-button/lightTheme";
 
-import SettingsRow from "../components/SettingsRow";
+import SettingsRow from "../../../../components/SettingsRow";
 
 const EditProfileScreen = ({ route }) => {
   const user = route.params.user
@@ -31,7 +31,7 @@ const EditProfileScreen = ({ route }) => {
     return (
       <Image
         style={{ width: 8, height: 20, resizeMode: "contain" }}
-        source={require("../assets/rightArrow.png")}
+        source={require("../../../../assets/rightArrow.png")}
       />
     );
   };
@@ -44,7 +44,7 @@ const EditProfileScreen = ({ route }) => {
       lbl: "Edit your photo",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Photo");
+        navigation.navigate("Edit Photo", route.params);
       }
     },
     {
@@ -62,25 +62,26 @@ const EditProfileScreen = ({ route }) => {
       }
     },
     {
-      lbl: "What are your passions",
+      lbl: "Edit your interests",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Passions", { interests });
+        navigation.navigate("Edit Interests", { interests });
       }
     },
     {
-      lbl: "How can you help others?",
+      lbl: "Edit your superpowers",
       rightComponent: <ArrowComponent />,
       action: () => {
         navigation.navigate("Edit Skills", { skills });
       }
     },
-    { lbl: "Edit your connections", 
-    rightComponent: <ArrowComponent />,
-    action: () => {
-      navigation.navigate("Edit Connections");
-    }
-   },
+  //This functionality has been moved to MVP-2
+  //   { lbl: "Edit your connections", 
+  //   rightComponent: <ArrowComponent />,
+  //   action: () => {
+  //     navigation.navigate("Edit Connections");
+  //   }
+  //  },
     {
       lbl: "Edit your Recommendations",
       rightComponent: <ArrowComponent />,
@@ -124,53 +125,18 @@ const EditProfileScreen = ({ route }) => {
   });
 
   return (
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{paddingTop: Constants.statusBarHeight}}>
-        {navigation.canGoBack() && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-            style={{ paddingTop: Constants.statusBarHeight }}
-          >
-            <Image
-              source={require("../assets/leftArrow.png")}
-              style={{
-                height: 20,
-                width: 25,
-                resizeMode: "contain",
-                alignSelf: "flex-start",
-                marginHorizontal: 20
-              }}
-            />
-          </TouchableOpacity>
-        )}
+      <ScrollView>
         <View style={styles.container}>
+          
+        <BackButton navigation={navigation} />
+        </View>
           <View style={styles.sectionContainer}>
             <Text style={styles.heading}>PROFILE</Text>
             {profileButtons}
           </View>
-        </View>
+        
       </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  sectionContainer: {
-    width: "100%"
-  },
-  heading: {
-    fontFamily: "poppins-medium",
-    fontSize: 10,
-    color: "#A9A9A9",
-    marginLeft: 30,
-    marginTop: 30
-  },
-});
 
 export default EditProfileScreen;

@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   Text,
-  Image,
   ScrollView,
   TextInput,
   TouchableOpacity
 } from "react-native";
-import Constants from "expo-constants";
+
 import { useNavigation } from "@react-navigation/native";
+import BackButton from "../../../shared/icons/back-button/lightTheme";
+import styles from "../styles";
 
-import WideButton from "../components/WideButton";
+import WideButton from "../../../../components/WideButton";
 
-const updateRequest = require("../assets/updateRequest").update;
+const updateRequest = require("../../../../assets/updateRequest").update;
 
 const EditStory = ({ route }) => {
+
   const navigation = useNavigation();
   const user = route.params;
 
@@ -69,24 +70,7 @@ const EditStory = ({ route }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        {navigation.canGoBack() && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-            style={{ marginTop: 20 }}
-          >
-            <Image
-              source={require("../assets/leftArrow.png")}
-              style={{
-                height: 20,
-                width: 25,
-                resizeMode: "contain",
-                alignSelf: "flex-start",
-              }}
-            />
-          </TouchableOpacity>
-        )}
+        <BackButton navigation={navigation} />
         <Text style={styles.header}>Edit your story</Text>
         <Text style={styles.headerText}>Build your profile</Text>
         <View>
@@ -95,7 +79,7 @@ const EditStory = ({ route }) => {
             style={styles.placeholder}
             placeholderTextColor={"grey"}
             placeholder={state.name || "Enter your full name..."}
-            onChangeText={nameInput => setState({ name: nameInput })}
+            onEndEditing={input => setState({name: input.nativeEvent.text})}
           />
         </View>
         <View>
@@ -104,7 +88,7 @@ const EditStory = ({ route }) => {
             style={styles.placeholder}
             placeholderTextColor={"grey"}
             placeholder={state.role || "Enter your current position"}
-            onChangeText={roleInput => setState({ role: roleInput })}
+            onEndEditing={input => setState({role: input.nativeEvent.text})}
           />
         </View>
         <View>
@@ -113,7 +97,7 @@ const EditStory = ({ route }) => {
             style={styles.placeholder}
             placeholderTextColor={"grey"}
             placeholder={state.company || "Enter your current company..."}
-            onChangeText={companyInput => setState({ company: companyInput })}
+            onEndEditing={input => setState({company: input.nativeEvent.text})}
           />
         </View>
         <View>
@@ -123,7 +107,7 @@ const EditStory = ({ route }) => {
             placeholderTextColor={"grey"}
             placeholder={state.bio || "Enter your story..."}
             multiline={true}
-            onChangeText={storyInput => setState({ bio: storyInput })}
+            onEndEditing={input => setState({bio: input.nativeEvent.text})}
           />
         </View>
         <TouchableOpacity onPress={() => update()}>
@@ -137,58 +121,5 @@ const EditStory = ({ route }) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-around",
-    marginHorizontal: 20
-  },
-  header: {
-    fontFamily: "poppins-bold",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 24,
-    paddingTop: 30
-  },
-  headerText: {
-    fontFamily: "poppins-regular",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingTop: 15,
-    paddingBottom: 30
-  },
-  categoryHeader: {
-    fontFamily: "poppins-regular",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingBottom: 5
-  },
-  placeholder: {
-    fontFamily: "poppins-regular",
-    borderBottomWidth: 0.2,
-    margin: "auto",
-    alignItems: "stretch",
-    fontSize: 13,
-    marginBottom: 50,
-    paddingVertical: 15
-  },
-  submitBtn: {
-    backgroundColor: "black",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "black",
-    color: "black",
-    width: 300,
-    marginVertical: 30
-  }
-});
 
 export default EditStory;

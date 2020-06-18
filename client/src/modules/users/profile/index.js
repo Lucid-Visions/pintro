@@ -25,6 +25,8 @@ import MoodButtonCard from "../../../components/MoodButtonCard";
 import AcceptRequestModal from "../../../components/followRequestModal";
 import ConnectModal from "../../../components/ConnectModal";
 import ChatConnectPopup from "../../../components/ChatConnectPopup";
+import CommunityPreview from './community-preview'
+
 const updateRequest = require("../../../assets/updateRequest").update;
 
 
@@ -56,6 +58,7 @@ const ProfileScreen = ({
   currentCompany,
   experience,
   refresh,
+  communities
 }) => {
   // Set whether the 'My Story' text is expanded.
   const [textExpanded, setTextExpanded] = useState(false);
@@ -297,7 +300,7 @@ const ProfileScreen = ({
           >
             Talk to me about
           </Text>
-          {editBtn("SettingsStack", {screen:"Edit Passions", params: { interests }})}
+          {editBtn("SettingsStack", {screen:"Edit Interests", params: { interests }})}
         </View>
 
         <View style={styles.tagScrollContainer}>
@@ -373,7 +376,7 @@ const ProfileScreen = ({
           data={relationshipData}
           connection={connection}
           respond={respond}
-          profilePicture={{ url: relationshipData.follower.profile_picture }}
+          profilePicture={{ uri: relationshipData.follower.profile_picture }}
           onModalHide={() => {}}
           connectModal={
             <ConnectModal
@@ -579,7 +582,7 @@ const ProfileScreen = ({
               !uid ? toggleMoodSelector() : null
             }}
             onLongPress={() => {
-              !uid ? navigation.navigate("SettingsStack", {screen: "Edit Photo"}) : null;
+              !uid ? navigation.navigate("SettingsStack", {screen: "Edit Photo", params: {profile_picture}}) : null;
             }}
           />
         <View style={styles.headerText}>
@@ -665,6 +668,7 @@ const ProfileScreen = ({
         />
         {editBtn("SettingsStack", {screen: "Edit Experience", params: { experience }})}
       </View>
+      <CommunityPreview communities={communities} navigation={navigation} />
 
       {recommendationsSection()}
       <View style={styles.badgesSection}>

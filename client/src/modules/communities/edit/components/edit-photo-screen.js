@@ -2,25 +2,21 @@ import React, { useState } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TouchableOpacity,
-  ScrollView,
   Image,
 } from "react-native";
-import Constants from "expo-constants";
-import PostButton from "../components/WideButtonRight";
-import { useNavigation } from "@react-navigation/native";
+import styles from "../styles"
+import PostButton from "../../../../components/WideButtonRight";
+import BackButton from "../../../shared/icons/back-button/lightTheme";
+import { updateCommunity } from "../../actions";
 
 import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from "expo-file-system";
 
-const updateRequest = require("../assets/updateRequest").update;
-
-const EditPhoto = ({ route }) => {
-  const navigation = useNavigation();
+const EditCommunityPhoto = ({ navigation, route }) => {
+  const community = route.params
 
   const [state, updateState] = useState({
-    photoURI: null,
+    photoURI: community.profile_picture || null,
     photoBase64: null,
   });
 
@@ -39,8 +35,13 @@ const EditPhoto = ({ route }) => {
     if (photoServerResponse.status == 200) {
       const photoUrl = photoServerResponse.data.url;
 
-      updateRequest({ profile_picture: photoUrl });
-      navigation.goBack();
+      updateCommunity(
+        community._id,
+        {
+          profile_picture: photoUrl,
+        }
+      );
+      navigation.navigate('CommunityProfile', {...community})
     }
   };
 
@@ -72,7 +73,6 @@ const EditPhoto = ({ route }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 0.3,
-      aspect: [1, 1],
       base64: true,
     };
 
@@ -94,26 +94,9 @@ const EditPhoto = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      {navigation.canGoBack() && (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-          style={{ marginTop: 20 }}
-        >
-          <Image
-            source={require("../assets/leftArrow.png")}
-            style={{
-              height: 20,
-              width: 25,
-              resizeMode: "contain",
-              alignSelf: "flex-start",
-            }}
-          />
-        </TouchableOpacity>
-      )}
-      <Text style={styles.header}>Edit your photo</Text>
-      <Text style={styles.headerText}>Upload a profile photo</Text>
+      <BackButton navigation={navigation} />
+      <Text style={styles.header}>Edit your community photo</Text>
+      <Text style={styles.headerText}>Upload a community photo</Text>
       {/* Thumbnail */}
       <View
         style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
@@ -126,15 +109,15 @@ const EditPhoto = ({ route }) => {
             source={
               state.photoURI != null
                 ? { uri: state.photoURI }
-                : require("../assets/addProfilePhoto.png")
+                : require("../../../../assets/addProfilePhoto.png")
             }
             style={{
               height: 250,
               width: 250,
               resizeMode: "contain",
-              marginVertical: 30,
-              borderRadius: 120/2,
-              overflow: "hidden",
+              alignSelf: "center",
+              marginVertical: 50,
+              borderRadius: 125,
             }}
           />
         </TouchableOpacity>
@@ -150,40 +133,4 @@ const EditPhoto = ({ route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Constants.statusBarHeight,
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-around",
-    marginHorizontal: 20,
-  },
-  header: {
-    fontFamily: "poppins-bold",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 24,
-    paddingTop: 50,
-  },
-  headerText: {
-    fontFamily: "poppins-regular",
-    margin: "auto",
-    textAlign: "left",
-    alignItems: "baseline",
-    fontSize: 12,
-    paddingTop: 20,
-    paddingBottom: 30,
-  },
-  submitBtn: {
-    backgroundColor: "black",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "black",
-    color: "black",
-    width: 300,
-    marginVertical: 50,
-  },
-});
-
-export default EditPhoto;
+export default EditCommunityPhoto;
