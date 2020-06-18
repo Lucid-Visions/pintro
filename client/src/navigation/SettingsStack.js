@@ -59,7 +59,7 @@ function SettingsStack() {
       <Stack.Screen name="Edit Community Photo" component={EditCommunityPhoto} />
       <Stack.Screen name="Edit Community Info" component={EditCommunityInfo} />
       <Stack.Screen name="Edit Community Tags" component={EditCommunityTags} />
-      {/* 
+      {/*
       <Stack.Screen name="Edit Community Articles" component={EditCommunityArticles} />
       <Stack.Screen name="Edit Community Members" component={EditCommunityMembers} />
       <Stack.Screen name="Edit Community Events" component={EditCommunityEvents} /> */}
