@@ -92,6 +92,34 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
     </View>
   )
 
+  const articles = params.articles && (
+    <View style={styles.recommendationsSection}>
+      <View style={styles.editRow}>
+        <Text
+          style={{
+            marginVertical: "5%",
+            fontFamily: "poppins-bold",
+            height: 30,
+          }}
+        >
+          Articles
+        </Text>
+        <EditButton />
+      </View>
+
+      <View>
+        <ScrollView
+          style={{ height: 145, marginTop: -25 }}
+          horizontal={true}
+        >
+          <View style={styles.articles}>
+            {recommendationsButtons}
+          </View>
+        </ScrollView>
+      </View>
+    </View>
+  )
+
   return (
     <View>
       <TouchableOpacity
@@ -174,32 +202,7 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                   />
                 ))}
               </View>
-  
-            <View style={styles.recommendationsSection}>
-              <View style={styles.editRow}>
-                <Text
-                  style={{
-                    marginVertical: "5%",
-                    fontFamily: "poppins-bold",
-                    height: 30,
-                  }}
-                >
-                  Articles
-                </Text>
-                <EditButton />
-              </View>
-
-              <View>
-                <ScrollView
-                  style={{ height: 145, marginTop: -25 }}
-                  horizontal={true}
-                >
-                  <View style={styles.articles}>
-                    {recommendationsButtons}
-                  </View>
-                </ScrollView>
-              </View>
-            </View>
+              {articles}
           </View>
         </View>
         </ScrollView>
