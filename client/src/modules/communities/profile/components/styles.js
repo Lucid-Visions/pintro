@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     marginRight: 25,
     marginTop: 5
   },
+  editRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
   myStoryContainer: {
     alignSelf: 'stretch',
     paddingBottom: 10
@@ -75,10 +79,13 @@ const styles = StyleSheet.create({
   experience: {
     flexDirection: "row"
   },
-  recommendationsSection: {
-    flexDirection: "column",
-    flexWrap: "wrap",
-    marginTop: 10
+  articles: {
+    top: 5,
+    flexDirection: "row",
+    marginTop: "2%",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   tags: {
     flexDirection: "row",
