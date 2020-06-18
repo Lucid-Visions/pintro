@@ -43,41 +43,6 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
     setTextExpanded(prevState => { return !prevState });
   };
 
-  const getCompanyTags = companyTags => {
-    if (companyTags.length == 0) {
-      return null;
-    }
-    return (  
-      <View>
-        <View style={styles.tagScrollContainer}>
-          <ScrollView style={styles.tagScrollView} horizontal={true}>
-            <View>
-              <View style={{ ...styles.tags }}>
-                {companyTags.slice(
-                  0,
-                  Math.trunc(companyTags.length / 2)
-                )}
-              </View>
-              <View style={{ ...styles.tags }}>
-                {companyTags.slice(Math.trunc(companyTags.length / 2))}
-              </View>
-            </View>
-          </ScrollView>
-        </View>
-      </View>
-    );
-  };
-
-
-
-  let companyTags = params.tags.map((tag, i) => (
-    <Tag
-      key={i}
-      item={{ text: tag.toUpperCase(), disabled: true }}
-      i={5}
-    />
-  ));
-
   const communityAdmins = admin && (
     <View>
       <Text style={{ fontFamily: "poppins-semi-bold", marginTop: 30 }}>
@@ -143,9 +108,6 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
               </View>
             </View>
             {communityAdmins}
-            <View style={{ marginTop: 10 }} >
-              {getCompanyTags(companyTags)}
-            </View>
             <View style={{flexDirection: "row" }}>
                 <Text style={{ marginTop: "6%", fontFamily: "poppins-semi-bold", marginBottom: 8, marginLeft: 2 }}>
                     Latest Posts
