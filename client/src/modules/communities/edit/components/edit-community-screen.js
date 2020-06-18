@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -7,23 +7,12 @@ import {
   Image,
 } from "react-native";
 import styles from "../styles"
-import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 
 import SettingsRow from "../../../../components/SettingsRow";
 
-const EditProfileScreen = ({ route }) => {
-  const user = route.params.user
+const EditCommunityScreen = ({navigation, route: {params}}) => {
 
-  const interests = user.tags;
-  const skills = user.skills;
-  const bio = user.bio;
-  const recommendations = user.recommendations;
-  const name = user.name;
-  const experience = user.experience;
-
-  const navigation = useNavigation();
-  
   /**
    * Right arrow component
    */
@@ -39,54 +28,53 @@ const EditProfileScreen = ({ route }) => {
   /**
    * Define the screen tab rows
    */
-  const profileData = [
+  const communityData = [
     {
-      lbl: "Edit your photo",
+      lbl: "Edit community information",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Photo", route.params);
+        navigation.navigate("Edit Community Info", params);
       }
     },
     {
-      lbl: "Edit your story",
+      lbl: "Edit community photo",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Story", { name, experience, bio });
+        navigation.navigate("Edit Community Photo", params);
       }
     },
     {
-      lbl: "Edit your experience",
+      lbl: "Edit community tags",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Experience", { experience });
+        navigation.navigate("Edit Community Tags", params);
       }
     },
     {
-      lbl: "Edit your interests",
+      lbl: "Edit community articles",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Interests", { interests });
+        navigation.navigate("Edit Community Articles", params);
       }
     },
     {
-      lbl: "Edit your superpowers",
+      lbl: "Edit community events",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Skills", { skills });
+        navigation.navigate("Edit Events");
       }
     },
-  //This functionality has been moved to MVP-2
-  //   { lbl: "Edit your connections", 
-  //   rightComponent: <ArrowComponent />,
-  //   action: () => {
-  //     navigation.navigate("Edit Connections");
-  //   }
-  //  },
     {
-      lbl: "Edit your Recommendations",
+      lbl: "Edit community members",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Recommendations", { name, recommendations });
+        navigation.navigate("Edit Members");
+      }
+    },
+    {
+      lbl: "Delete Community",
+      action: () => {
+        //deleteCommunity();
       }
     }
   ];
@@ -120,7 +108,7 @@ const EditProfileScreen = ({ route }) => {
     }
   };
 
-  let profileButtons = profileData.map((btn, i) => {
+  let communityButtons = communityData.map((btn, i) => {
     return getRow(btn, i);
   });
 
@@ -131,12 +119,12 @@ const EditProfileScreen = ({ route }) => {
         <BackButton navigation={navigation} />
         </View>
           <View style={styles.sectionContainer}>
-            <Text style={styles.heading}>PROFILE</Text>
-            {profileButtons}
+            <Text style={styles.heading}>COMMUNITY</Text>
+            {communityButtons}
           </View>
         
       </ScrollView>
   );
 };
 
-export default EditProfileScreen;
+export default EditCommunityScreen;
