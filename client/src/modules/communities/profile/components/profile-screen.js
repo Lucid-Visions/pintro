@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,8 @@ import {
   Image,
 } from "react-native";
 
+import ImageCard from '../../../shared/image-card'
+
 import { FollowMeButton } from "../../../../components/ProfileActionButtons";
 import { MessageMeButton } from "../../../../components/ProfileActionButtons";
 import { ExtrasButton } from "../../../../components/ProfileActionButtons";
@@ -14,12 +16,25 @@ import LatestPostComponent from "../../../../components/LatestPostButton";
 import FollowersComponent from "../../../../components/Followers";
 import Tag from "../../../../components/Tag";
 
+import { getUser } from '../../../users/profile/actions'
+
 import styles from './styles'
 
 const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
   // Set whether the 'My Story' text is expanded.
   const [ textExpanded, setTextExpanded ] = useState(false);
+  
+  const [ admin, setAdmin ] = useState(null)
+
+  useEffect(() => {
+    async function fetchData() {
+      const user = await getUser(params.admins[0])
+      setAdmin(user)
+    }
+
+    fetchData()
+  }, [])
 
   /**
    * Expand the 'My story' text on press of the 'More' button.
@@ -62,6 +77,17 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
       i={5}
     />
   ));
+
+  const communityAdmins = admin && (
+    <View>
+      <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+        Community Admins
+      </Text>
+      <View style={{ marginTop: 10 }} >
+        <ImageCard title={admin.name} subtitle={`${admin.experience.currentJobTitle} @ ${admin.experience.currentCompany}`} />
+      </View>
+    </View>
+  )
 
   return (
     <View>
@@ -106,7 +132,8 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View>
+            {communityAdmins}
+            <View style={{ marginTop: 10 }} >
               {getCompanyTags(companyTags)}
             </View>
             <View style={{flexDirection: "row" }}>

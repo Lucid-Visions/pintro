@@ -11,3 +11,13 @@ export const getCommunities = async (dispatch) => {
 
   dispatch({ type: ActionTypes.FETCHED_COMMUNITIES, payload: response.data })
 }
+
+export const getUser = async (id) => {
+  const response = await FetchAPIService.get('/api/v1/user/data')
+
+  if (response.error) {
+    dispatch({ type: GlobalActionTypes.SET_ERROR, payload: response.error })
+  }
+
+  return response.data
+} 
