@@ -61,6 +61,9 @@ class CommunityRepository extends BaseRepository {
     let response
     try {
 
+      delete data.members
+      delete data.admins
+
       response = await this.collection.updateOne({ admins: userId, _id: mongoose.Types.ObjectId(communityId) }, { $set: { ...data } })
 
       if (response.result.nModified === 0) {
