@@ -46,6 +46,7 @@ class BaseRepository {
    * @param {string} id Id of record that will be updated
    * @param {Object} data Data to overwrite existing data
    */
+
   async update(userId, communityId, data) {
     let response
     try {

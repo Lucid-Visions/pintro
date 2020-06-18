@@ -106,6 +106,7 @@ class CommunityController {
   }
 
   async updateCommunity(req, res) {
+
     const communityId = req.params.id
 
     // Decode jwt

@@ -17,9 +17,7 @@ const CommunityCard = ({ community, navigation }) => {
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('CommunityProfile', {
-        name: community.name, story: community.story, url: community.url, tags: community.tags
-      })}
+      onPress={() => navigation.navigate('CommunityProfile', {...community})}
     >
       <View style={{ borderRadius: 15, width: '100%', backgroundColor: '#FFF', marginBottom: '3%', padding: '5%'}}>
         <View style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between" }}>
