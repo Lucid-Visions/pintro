@@ -99,7 +99,6 @@ const EditCommunityEvents = ({ navigation, route }) => {
 
     setState({events: nextRecommendations})
   };
-
   
   /**
    * Creates a row with existing recommendations or empty slots for new ones

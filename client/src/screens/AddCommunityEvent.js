@@ -6,13 +6,17 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  Dimensions
+  Dimensions,
+  Button
 } from "react-native";
 import Constants from "expo-constants";
 import PostButton from "../components/WideButtonRight";
 import MultiSelect from "react-native-multiple-select";
 import TagsPassions from "../assets/TagsPassions";
 import BackButton from "../modules/shared/icons/back-button/lightTheme";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
+import moment from "moment";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -22,17 +26,13 @@ const AddCommunityEvent = ({ route }) => {
   const editMode = route.params.editMode || false;
   let editData;
 
-  if (editMode) editData = route.params.data;
-
-  const tagsList = TagsPassions.map((item) => {
-    return { text: item.text, id: `${item.text}` };
-  });
-
   const [state, updateState] = useState({
     id: editMode ? editData.id : route.params.id,
     title: editMode ? editData.title : "",
     link: editMode ? editData.resource : "",
-    tags: editMode ? editData.tags : [],
+    date: editMode ? editData.date : "",
+    time: editMode ? editData.time : "",
+    location: editMode ? editData.location : ""
   });
 
   const setState = (newState) => {
@@ -41,12 +41,46 @@ const AddCommunityEvent = ({ route }) => {
     });
   };
 
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+ 
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    hideDatePicker();
+    state.date = moment(date).format('dddd Do MMMM YYYY')
+  };
+
+  const showTimePicker = () => {
+    setTimePickerVisibility(true);
+  };
+ 
+  const hideTimePicker = () => {
+    setTimePickerVisibility(false);
+  };
+
+  const handleConfirmTime = (time) => {
+    hideTimePicker();
+    state.time = moment(time).format('HH:mm')
+  };
+
+  if (editMode) editData = route.params.data;
+
   const constructRecommendation = () => {
     return {
       id: state.id,
       title: state.title,
       resource: state.link,
-      tags: state.tags,
+      location: state.location,
+      date: state.date,
+      time: state.time
     };
   };
 
@@ -56,9 +90,8 @@ const AddCommunityEvent = ({ route }) => {
   const checkFieldsEmpty = () => {
     const titleEmpty = state.title === "";
     const linkEmpty = state.link === "";
-    const tagsEmpty = state.tags.length == 0;
 
-    if (titleEmpty || linkEmpty || tagsEmpty) {
+    if (titleEmpty || linkEmpty) {
       return true;
     } else return false;
   };
@@ -79,10 +112,6 @@ const AddCommunityEvent = ({ route }) => {
     }
   };
 
-  const onSelectedTagsChange = (selectedItems) => {
-    setState({ tags: selectedItems });
-  };
-
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -90,7 +119,7 @@ const AddCommunityEvent = ({ route }) => {
         <Text style={styles.header}>Add an upcoming event</Text>
         {/* Title */}
         <View>
-          <Text style={styles.categoryHeader}>Event Name</Text>
+          <Text style={{...styles.categoryHeader, paddingTop: 30}}>Event Name</Text>
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
@@ -115,50 +144,38 @@ const AddCommunityEvent = ({ route }) => {
             onChangeText={(input) => setState({ link: input })}
           />
         </View>
-        {/* Tags */}
-        <View
-          marginHorizontal={15}
-          flex={1}
-          borderBottomColor="#ACACAC"
-          borderBottomWidth={1}
-          width={Dimensions.get("screen").width / 1.1}
-          alignSelf="center"
-          paddingBottom={10}
-        >
-          <Text style={styles.categoryHeader}>Choose up to 3 tags</Text>
-          <MultiSelect
-            hideSubmitButton
-            items={tagsList}
-            uniqueKey="id"
-            onSelectedItemsChange={onSelectedTagsChange}
-            selectedItems={state.tags}
-            selectText="Start typing..."
-            searchInputPlaceholderText="Start typing..."
-            altFontFamily="poppins-regular"
-            fontFamily="poppins-regular"
-            itemFontFamily="poppins-regular"
-            selectedItemFontFamily="poppins-regular"
-            tagRemoveIconColor="#ACACAC"
-            tagBorderColor="#ACACAC"
-            tagTextColor="#2E2E2E"
-            selectedItemTextColor="#2E2E2E"
-            selectedItemIconColor="#2E2E2E"
-            itemTextColor="#ACACAC"
-            displayKey="text"
-            searchInputStyle={{ color: "black" }}
-            styleDropdownMenuSubsection={{
-              backgroundColor: "#F1F1F1",
-              borderBottomColor: "#F1F1F1",
-            }}
-            styleDropdownMenu={{
-              backgroundColor: "#F1F1F1",
-            }}
-            styleInputGroup={{
-              backgroundColor: "#F1F1F1",
-            }}
-            styleItemsContainer={{
-              backgroundColor: "#F1F1F1",
-            }}
+        {/* Location */}
+        <View>
+          <Text style={styles.categoryHeader}>Event Location</Text>
+          <TextInput
+            style={styles.placeholder}
+            placeholderTextColor={"grey"}
+            placeholder={editMode ? state.location : "Insert location here"}
+            onChangeText={(locationInput) => setState({ location: locationInput })}
+          />
+        </View>
+        <View>
+          <Text style={styles.categoryHeader}>Event Date</Text>
+          <TouchableOpacity onPress={showDatePicker}>
+            <Text style={{...styles.placeholder, color: "gray"}}>{state.date ? state.date : "Select Event Date"}</Text>
+          </TouchableOpacity>
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+          />
+        </View>
+        <View>
+          <Text style={styles.categoryHeader}>Event Time</Text>
+          <TouchableOpacity onPress={showTimePicker}>
+            <Text style={{...styles.placeholder, color: "gray"}}>{state.time ? state.time : "Select Event Time"}</Text>
+          </TouchableOpacity>
+          <DateTimePickerModal
+            isVisible={isTimePickerVisible}
+            mode="time"
+            onConfirm={handleConfirmTime}
+            onCancel={hideTimePicker}
           />
         </View>
         <TouchableOpacity onPress={() => updateCallBack()}>
