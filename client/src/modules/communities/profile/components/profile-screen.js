@@ -8,14 +8,14 @@ import {
 } from "react-native";
 
 import ImageCard from '../../../shared/image-card'
+import EditButton from '../../../shared/edit-button'
 
 import { FollowMeButton } from "../../../../components/ProfileActionButtons";
 import { MessageMeButton } from "../../../../components/ProfileActionButtons";
 import { ExtrasButton } from "../../../../components/ProfileActionButtons";
 import LatestPostComponent from "../../../../components/LatestPostButton";
-import FollowersComponent from "../../../../components/Followers";
-import Tag from "../../../../components/Tag";
 
+import FollowersComponent from "../../../../components/Followers";
 import { getUser } from '../../../users/profile/actions'
 
 import styles from './styles'
@@ -71,8 +71,15 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
         </View>
           <View style={styles.container} >
             <View style={styles.myStory}>
+              <View style={styles.editRow}>
                 <Text style={{ fontFamily:'poppins-regular', color: 'grey' }}>{params.url}</Text>
-                <Text style={styles.companyName}>{params.name}</Text>
+                <EditButton
+                  navigation={navigation}
+                  screen="SettingsStack"
+                  params={{screen: "Edit Community Info", params: { story: params.story, name: params.name, url: params.url }}}
+                />
+              </View>
+              <Text style={styles.companyName}>{params.name}</Text>
             </View>
             <View style={styles.buttons}>
                 <FollowMeButton onPress={()=>{}} text={"FOLLOW US"}/>
