@@ -7,6 +7,7 @@ import {
   Image,
 } from "react-native";
 
+import Card from '../../../shared/card'
 import ImageCard from '../../../shared/image-card'
 import EditButton from '../../../shared/edit-button'
 
@@ -146,6 +147,30 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                 </TouchableOpacity>
             </View> 
             <LatestPostComponent post={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} likes={"3"} comments={"5"} /> 
+            <View style={styles.myStoryContainer}>
+                <View style={styles.myStory}>
+                  <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+                      Upcoming Events
+                  </Text>
+                  <View style={{ marginTop: 10 }}>
+                    {[
+                      { name: 'Meet & Greet', location: 'The Hub (LDN)', date: '28th February', time: '6pm'},
+                      { name: 'Dev Conference', location: 'The Hub (LDN)', date: '5th March', time: '11am'}
+                    ].map(e => (
+                      <Card
+                        key={e.name}
+                        title={e.name}
+                        rightComponent={
+                          <View>
+                            <Text style={{ fontFamily: "poppins-semi-bold", fontSize: 10 }}>{e.location}</Text>
+                            <Text style={{ fontSize: 10 }}>{`${e.date} @ ${e.time}`}</Text>
+                          </View>
+                        }
+                      />
+                    ))}
+                  </View>
+              </View>
+            </View>
             <View style={styles.recommendationsSection}>
               <View style={styles.editRow}>
                 <Text
