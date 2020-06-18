@@ -80,7 +80,7 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
   const communityAdmins = admin && (
     <View>
-      <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+      <Text style={{ fontFamily: "poppins-semi-bold", marginTop: 30 }}>
         Community Admins
       </Text>
       <View style={{ marginTop: 10 }} >
@@ -131,6 +131,16 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                         </Text>
                     </TouchableOpacity>
                 </View>
+            </View>
+            <View>
+              <Text style={{ fontFamily: "poppins-semi-bold", marginTop: "2%" }}>
+                Members
+              </Text>
+              <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
+                {[...Array(6).keys()].map((_, i) => (
+                  <Image style={{ height: 50, width: 50, borderRadius: 25, marginRight: 7 }} source={require("../../../../assets/empty-profile-picture.png")} />
+                ))}
+              </View>
             </View>
             {communityAdmins}
             <View style={{ marginTop: 10 }} >
