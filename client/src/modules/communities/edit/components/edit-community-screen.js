@@ -47,7 +47,7 @@ const EditCommunityScreen = ({navigation, route: {params}}) => {
       lbl: "Edit community tags",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Tags");
+        navigation.navigate("Edit Community Tags", params);
       }
     },
     {
