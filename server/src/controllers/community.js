@@ -73,8 +73,7 @@ class CommunityController {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not retrieve community' }})
     }
 
-    const [ community ] = response.data
-    return res.status(http.OK).json({ data: community })
+    return res.status(http.OK).json({ data: response.data })
   }
 
   /**

@@ -21,6 +21,7 @@ export const getCommunity = async (dispatch, id) => {
   }
 
   dispatch({ type: ActionTypes.FETCHED_COMMUNITY, payload: response })
+  return response
 }
 
 export const updateCommunity = async (id, data) => {
