@@ -154,10 +154,9 @@ const EditRecommendations = ({ navigation, route }) => {
           <BackButton navigation={navigation} />
           <View>
             <Text style={styles.headerTextRecommendations}>{state.communityName}'s</Text>
-            <Text style={styles.headerRecommendations}>Recommendations</Text>
+            <Text style={styles.headerRecommendations}>Articles</Text>
             {/* Articles */}
-            <View>
-              <Text style={styles.categoryHeaderBold}>Articles</Text>
+            <View style={{paddingTop: 50}}>
               <View style={styles.recommendationsRow}>
                 {recommendationRow("articles").slice(0, 3)}
               </View>

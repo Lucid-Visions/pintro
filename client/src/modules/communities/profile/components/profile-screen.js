@@ -21,13 +21,13 @@ import styles from './styles'
 
 const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
-  let recommendationsButtons = params.articles && params.articles.map((item, i) => {
+  let recommendationsButtons = params.recommendations && params.recommendations.map((item, i) => {
     return (
       <RecommendationButton
         key={i}
         title={item.title}
         resource={item.resource}
-        thumbnail={item.thumbnail}
+        thumbnail={item.photo}
       />
     );
   });
@@ -47,8 +47,11 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
   const profilePicture = (
     <View>
       <Image
-        source={require("../../../../assets/Empty-profile-picture-semi.png")}
-        style={{resizeMode: "cover", width:"100%"}}
+        source={params.profile_picture ? {uri: params.profile_picture} : require("../../../../assets/Empty-profile-picture-semi.png")}
+        style={{
+          alignSelf: 'stretch',
+          height: 300,
+          overflow: "hidden"}}
       />
     </View>
   )
@@ -92,7 +95,7 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
     </View>
   )
 
-  const articles = params.articles && (
+  const articles = params.recommendations && (
     <View style={styles.recommendationsSection}>
       <View style={styles.editRow}>
         <Text
@@ -104,7 +107,11 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
         >
           Articles
         </Text>
-        <EditButton />
+        <EditButton 
+          navigation={navigation}
+          screen="SettingsStack"
+          params={{screen: "Edit Community Articles", params}}
+        />
       </View>
 
       <View>
@@ -121,11 +128,19 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
   )
 
   return (
-    <View>
+    <View style={{paddingBottom: 120}}>
       <TouchableOpacity
                 onPress={() => navigation.navigate("SettingsStack", {screen: "Edit Community", params })}
                 style={{ zIndex: 99, width: "100%", height: 30, marginTop: 20 }}
-      ></TouchableOpacity>
+      ><Image
+      source={require("../../../../assets/settings.png")}
+      style={{
+        width: 30,
+        height: 30,
+        position: "absolute",
+        right: 20
+      }}
+    /></TouchableOpacity>
       <View>
         <ScrollView contentInsetAdjustmentBehavior="automatic" style={{backgroundColor:"#F5F5F5"}}>
           <View style={{flexDirection: "column"}}>

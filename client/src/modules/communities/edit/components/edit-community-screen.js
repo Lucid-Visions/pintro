@@ -62,16 +62,16 @@ const EditCommunityScreen = ({navigation, route: {params}}) => {
     {
       lbl: "Edit community events",
       rightComponent: <ArrowComponent />,
-      action: () => {
-        navigation.navigate("Edit Events");
-      }
+      // action: () => {
+      //   navigation.navigate("Edit Events");
+      // }
     },
     {
       lbl: "Edit community members",
       rightComponent: <ArrowComponent />,
-      action: () => {
-        navigation.navigate("Edit Members");
-      }
+      // action: () => {
+      //   navigation.navigate("Edit Members");
+      // }
     },
     {
       lbl: "Delete Community",

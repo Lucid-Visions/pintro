@@ -176,7 +176,6 @@ const SettingsScreen = () => {
     },
     { lbl: "Push notifications", rightComponent: <ToggleSwitchComponent /> },
     { lbl: "Set nearby distance", rightComponent: <SliderComponent /> },
-    { lbl: "Edit communities", rightComponent: <ArrowComponent /> },
     {
       lbl: "Create community",
       rightComponent: <ArrowComponent />,
