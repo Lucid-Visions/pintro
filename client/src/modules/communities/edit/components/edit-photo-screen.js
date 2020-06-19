@@ -73,6 +73,7 @@ const EditCommunityPhoto = ({ navigation, route }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 0.3,
+      aspect: [1, 1],
       base64: true,
     };
 
