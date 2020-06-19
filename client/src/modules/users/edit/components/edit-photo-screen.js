@@ -113,9 +113,9 @@ const EditPhoto = ({ route }) => {
               height: 250,
               width: 250,
               resizeMode: "contain",
-              marginVertical: 30,
               borderRadius: 120/2,
               overflow: "hidden",
+              alignSelf: "center",
             }}
           />
         </TouchableOpacity>
