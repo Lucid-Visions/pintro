@@ -60,11 +60,7 @@ class CommunityRepository extends BaseRepository {
   async update(userId, communityId, data) {
     let response
     try {
-
-      delete data.members
-      delete data.admins
-
-      response = await this.collection.updateOne({ admins: userId, _id: mongoose.Types.ObjectId(communityId) }, { $set: { ...data } })
+      response = await this.collection.updateOne({ adminIds: userId, _id: mongoose.Types.ObjectId(communityId) }, { $set: { ...data } })
 
       if (response.result.nModified === 0) {
         return { error: 'Could not update community' }
