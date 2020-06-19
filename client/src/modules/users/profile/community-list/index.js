@@ -17,8 +17,8 @@ const CommunityList = ({ route: { params: { communities }}, navigation }) => (
         <ImageCard
           key={c.name}
           title={c.name}
-          subtitle={`${c.users.length} Members`}
-          onPress={() => navigation.navigate('CommunityProfile', {...community} )}
+          subtitle={`${c.members.length} Members`}
+          onPress={() => navigation.navigate('CommunityProfile', {...c} )}
         />
       ))}
     </View>
