@@ -17,6 +17,7 @@ const CommunityList = ({ route: { params: { communities }}, navigation }) => (
         <ImageCard
           key={c.name}
           title={c.name}
+          imgSrc={c.profile_picture ? { uri: c.profile_picture } : ''}
           subtitle={`${c.members.length} Members`}
           onPress={() => navigation.navigate('CommunityProfile', {...c} )}
         />
