@@ -5,9 +5,11 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Alert
 } from "react-native";
 import styles from "../styles"
 import BackButton from "../../../shared/icons/back-button/lightTheme";
+import { deleteCommunity } from "../../actions";
 
 import SettingsRow from "../../../../components/SettingsRow";
 
@@ -67,14 +69,30 @@ const EditCommunityScreen = ({navigation, route: {params}}) => {
     {
       lbl: "Edit community members",
       rightComponent: <ArrowComponent />,
-      action: () => {
-        navigation.navigate("Edit Members");
-      }
+      // action: () => {
+      //   navigation.navigate("Edit Members");
+      // }
     },
     {
       lbl: "Delete Community",
       action: () => {
-        //deleteCommunity();
+        Alert.alert(
+          "You are about to DELETE this community forever!",
+          "Once deleted, you cannot restore this community. Are you sure you wish to proceed?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log('Canceled'),
+              style: "cancel"
+            },
+            { text: "Confirm", onPress: () => {
+              deleteCommunity(params._id)
+              navigation.navigate('Profile')
+              navigation.navigate('Home')
+            }}
+          ],
+          { cancelable: true }
+        );
       }
     }
   ];

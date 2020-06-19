@@ -44,7 +44,7 @@ const EditProfileScreen = ({ route }) => {
       lbl: "Edit your photo",
       rightComponent: <ArrowComponent />,
       action: () => {
-        navigation.navigate("Edit Photo", route.params);
+        navigation.navigate("Edit Photo", route.params.user);
       }
     },
     {

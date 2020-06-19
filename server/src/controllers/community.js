@@ -43,7 +43,7 @@ class CommunityController {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Community already exists' }})
     }
 
-    const community = { ...req.body, users: [ decodedJwt.user.uid ], admins: [ decodedJwt.user.uid ] }
+    const community = { ...req.body, memberIds: [ decodedJwt.user.uid ], adminIds: [ decodedJwt.user.uid ] }
     const createResult = await this.repository.create(community)
 
     // Return error if there is a DB issue on creation
@@ -73,8 +73,7 @@ class CommunityController {
       return res.status(http.BAD_REQUEST).json({ error: { message: 'Could not retrieve community' }})
     }
 
-    const [ community ] = response.data
-    return res.status(http.OK).json({ data: community })
+    return res.status(http.OK).json({ data: response.data })
   }
 
   /**

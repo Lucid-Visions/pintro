@@ -18,7 +18,7 @@ const EditPhoto = ({ route }) => {
   const navigation = useNavigation();
 
   const [state, updateState] = useState({
-    photoURI: route.params.user.profile_picture || null,
+    photoURI: route.params.profile_picture || null,
     photoBase64: null,
   });
 
@@ -70,6 +70,7 @@ const EditPhoto = ({ route }) => {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       quality: 0.3,
+      aspect: [1, 1],
       base64: true,
     };
 
@@ -112,9 +113,9 @@ const EditPhoto = ({ route }) => {
               height: 250,
               width: 250,
               resizeMode: "contain",
+              borderRadius: 120/2,
+              overflow: "hidden",
               alignSelf: "center",
-              marginVertical: 50,
-              borderRadius: 125,
             }}
           />
         </TouchableOpacity>

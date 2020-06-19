@@ -582,7 +582,7 @@ const ProfileScreen = ({
               !uid ? toggleMoodSelector() : null
             }}
             onLongPress={() => {
-              !uid ? navigation.navigate("SettingsStack", {screen: "Edit Photo"}) : null;
+              !uid ? navigation.navigate("SettingsStack", {screen: "Edit Photo", params: {profile_picture}}) : null;
             }}
           />
         <View style={styles.headerText}>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { View, Text, TouchableOpacity } from 'react-native'
 
 import { title, seeAllLabel } from '../constants'
-import CommunityCard from '../community-card'
+import ImageCard from '../../../shared/image-card'
 
 const CommunityPreview = ({ communities, navigation }) => {
 
@@ -24,7 +24,12 @@ const CommunityPreview = ({ communities, navigation }) => {
         {seeAllBtn}
       </View>
       {communities.slice(0, 2).map(c => (
-        <CommunityCard key={c.name} community={c} navigation={navigation} />
+        <ImageCard
+          title={c.name}
+          imgSrc={c.profile_picture ? { uri: c.profile_picture } : ''}
+          subtitle={`${c.members.length} Members`}
+          onPress={() => navigation.navigate('CommunityProfile', {...c})}
+        />
       ))}
     </View>
   ) : null

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ScrollView, View } from 'react-native'
 
-import CommunityCard from '../community-card'
+import ImageCard from '../../../shared/image-card'
 import BackButton from '../../../shared/icons/back-button/lightTheme'
 
 import styles from './styles'
@@ -14,7 +14,13 @@ const CommunityList = ({ route: { params: { communities }}, navigation }) => (
     </View>
     <View>
       {communities.map(c => (
-        <CommunityCard key={c.name} community={c} navigation={navigation} />
+        <ImageCard
+          key={c.name}
+          title={c.name}
+          imgSrc={c.profile_picture ? { uri: c.profile_picture } : ''}
+          subtitle={`${c.members.length} Members`}
+          onPress={() => navigation.navigate('CommunityProfile', {...c} )}
+        />
       ))}
     </View>
   </ScrollView>
