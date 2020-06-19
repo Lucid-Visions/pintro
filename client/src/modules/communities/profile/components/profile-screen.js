@@ -48,10 +48,12 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
     <View>
       <Image
         source={params.profile_picture ? {uri: params.profile_picture} : require("../../../../assets/Empty-profile-picture-semi.png")}
-        style={{
+        style={params.profile_picture ? {
           alignSelf: 'stretch',
           height: 300,
-          overflow: "hidden"}}
+          overflow: "hidden"} 
+          : 
+          {resizeMode: "cover", width:"100%"}}
       />
     </View>
   )

@@ -84,7 +84,7 @@ class CommunityRepository extends BaseRepository {
     try {
 
       console.log({ userId })
-      response = await this.collection.deleteOne({ admins: userId, _id: mongoose.Types.ObjectId(communityId) })
+      response = await this.collection.deleteOne({ adminIds: userId, _id: mongoose.Types.ObjectId(communityId) })
 
       if (response.deletedCount === 0) {
         return { error: 'Could not delete community' }

@@ -67,7 +67,7 @@ const EditStory = ({ navigation, route }) => {
       <View style={styles.container}>
         <BackButton navigation={navigation} />
         <Text style={styles.header}>Edit your community info</Text>
-        <View>
+        <View style={{paddingTop: 30}}>
           <Text style={styles.categoryHeader}>Name</Text>
           <TextInput
             style={styles.placeholder}
@@ -88,7 +88,12 @@ const EditStory = ({ navigation, route }) => {
         <View>
           <Text style={styles.categoryHeader}>URL</Text>
           <TextInput
-            style={styles.placeholder}
+            style={{fontFamily: "poppins-regular",
+            borderBottomWidth: 1,
+            margin: "auto",
+            alignItems: "stretch",
+            fontSize: 13,
+            paddingVertical: 15}}
             placeholderTextColor={"grey"}
             placeholder={state.url || "Enter your community URL..."}
             onEndEditing={input => setState({url: input.nativeEvent.text})}
