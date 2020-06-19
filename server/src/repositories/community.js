@@ -96,6 +96,17 @@ class CommunityRepository extends BaseRepository {
 
     return response
   }
+
+  async get(id) {
+    const response = await super.get(id)
+
+    const [ community ] = response.data
+
+    const members = await UserModel.find({ _id: community.memberIds })
+    const admins = await UserModel.find({ _id: community.adminIds })
+
+    return { data: { ...community, members, admins }}
+  }
 }
 
 export default CommunityRepository
