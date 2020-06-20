@@ -2,6 +2,8 @@ import React from 'react';
 import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
+import useForm from '../../shared/hooks/use-form'
+
 import WideButtonComponent from "../../../components/WideButtonRight";
 import BackButton from '../../shared/icons/back-button/lightTheme';
 
@@ -17,7 +19,6 @@ import {
   urlPlaceholder1,
   ctaText1
 } from '../constants';
-import  useForm from './hooks'
 
 import styles from './styles';
 
