@@ -17,9 +17,7 @@ jobs:
           name: Docker build and push (commit sha)
           command: |
             docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1} server
-            docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1} docker/mongo-seed
             docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:${CIRCLE_SHA1}
-            docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:${CIRCLE_SHA1}
   master_only:
     docker:
       - image: google/cloud-sdk
@@ -37,9 +35,7 @@ jobs:
           name: Docker build and push (latest)
           command: |
             docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:latest server
-            docker build --tag ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:latest docker/mongo-seed
             docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/pintro-server:latest
-            docker push ${GCLOUD_COMPUTE_ZONE}/${GCLOUD_PROJECT_ID}/mongo-seed:latest
 
 workflows:
   version: 2.1
