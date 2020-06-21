@@ -3,9 +3,11 @@ import {
   Text,
   View,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import styles from "../styles";
-import RecommendationButton from "../../../../components/RecommendationButton";
+import EventCard from "../../../shared/event-card";
+import WideButton from "../../../../components/WideButton";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import { updateCommunity } from "../../actions";
 
@@ -104,43 +106,26 @@ const EditCommunityEvents = ({ navigation, route }) => {
    * Creates a row with existing recommendations or empty slots for new ones
    * @param {*} type the type of the recommendation row {articles, books, videos}
    */
-  const recommendationRow = type => {
-    return [...Array(6)].map((x, i) => {
-      if (state.events[i] != null) {
+  const eventsList = state.events.length > 0 && (
+    <View>
+      {state.events.map((event) => {
         return (
-          <RecommendationButton
-          key={`item-${i}`}
-            editView={true}
-            title={state.events[i].title}
-            resource={state.events[i].resource}
-            thumbnail={state.events[i].photo}
-            secondaryResource={() =>
-              navigation.navigate("Add Community Event", {
-                update,
-                type,
-                editMode: true,
-                data: state.events[i]
-              })
-            }
+          <EventCard
+            id={event.id}
+            name={event.title}
+            location={event.location}
+            date={event.date}
+            time={event.time}
+            onPress={() => {navigation.navigate("Add Community Event", {
+              update,
+              editMode: true,
+              data: event
+            })}}
           />
-        );
-      } else
-        return (
-          <RecommendationButton
-          key={`item-${i}`}
-            title={"empty"}
-            resource={""}
-            secondaryResource={() =>
-              navigation.navigate("Add Community Event", {
-                update,
-                type,
-                id: 0
-              })
-            }
-          />
-        );
-    });
-  };
+        )
+      })}
+    </View>
+  )
 
   return (
     <ScrollView>
@@ -150,15 +135,21 @@ const EditCommunityEvents = ({ navigation, route }) => {
           <View>
             <Text style={styles.headerTextRecommendations}>{state.communityName}'s</Text>
             <Text style={styles.headerRecommendations}>Events</Text>
-            {/* Articles */}
             <View>
               <Text style={styles.categoryHeaderBold}>Upcoming Events</Text>
-              <View style={styles.recommendationsRow}>
-                {recommendationRow("articles").slice(0, 3)}
-              </View>
-              <View style={styles.recommendationsRow}>
-                {recommendationRow("articles").slice(2, 5)}
-              </View>
+              {eventsList}
+              <TouchableOpacity 
+                onPress={() => navigation.navigate("Add Community Event", {
+                  update,
+                  id: 0
+                })}
+              >
+                <WideButton
+                  containerStyle={styles.submitBtn}
+                  textStyle={{ color: "white" }}
+                  value="Create a new event"
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </View>

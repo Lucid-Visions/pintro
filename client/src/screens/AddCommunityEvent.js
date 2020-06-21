@@ -23,8 +23,8 @@ import { useNavigation } from "@react-navigation/native";
 const AddCommunityEvent = ({ route }) => {
   const navigation = useNavigation();
   const callback = route.params.update;
-  const editMode = route.params.editMode || false;
-  let editData;
+  let editMode = route.params.editMode || false;
+  let editData = route.params.data;
 
   const [state, updateState] = useState({
     id: editMode ? editData.id : route.params.id,
@@ -54,8 +54,8 @@ const AddCommunityEvent = ({ route }) => {
   };
 
   const handleConfirm = (date) => {
+    state.date = moment(date).format('Do MMMM YYYY')
     hideDatePicker();
-    state.date = moment(date).format('dddd Do MMMM YYYY')
   };
 
   const showTimePicker = () => {
@@ -67,13 +67,11 @@ const AddCommunityEvent = ({ route }) => {
   };
 
   const handleConfirmTime = (time) => {
+    state.time = moment(time).format('LT')
     hideTimePicker();
-    state.time = moment(time).format('HH:mm')
   };
 
-  if (editMode) editData = route.params.data;
-
-  const constructRecommendation = () => {
+  const constructEvent = () => {
     return {
       id: state.id,
       title: state.title,
@@ -90,8 +88,9 @@ const AddCommunityEvent = ({ route }) => {
   const checkFieldsEmpty = () => {
     const titleEmpty = state.title === "";
     const linkEmpty = state.link === "";
+    const locationEmpty = state.location === "";
 
-    if (titleEmpty || linkEmpty) {
+    if (titleEmpty || linkEmpty || locationEmpty) {
       return true;
     } else return false;
   };
@@ -105,9 +104,9 @@ const AddCommunityEvent = ({ route }) => {
     if (fieldsEmpty) {
       alert("Please don't leave required fields empty!");
     } else {
-      const recommendation = constructRecommendation();
+      const event = constructEvent();
 
-      callback(recommendation);
+      callback(event);
       navigation.goBack();
     }
   };
@@ -116,14 +115,19 @@ const AddCommunityEvent = ({ route }) => {
     <ScrollView>
       <View style={styles.container}>
         <BackButton navigation={navigation} />
-        <Text style={styles.header}>Add an upcoming event</Text>
+        {!editMode ? 
+          <Text style={styles.header}>Add an upcoming event</Text> 
+          :
+          <Text style={styles.header}>Edit event</Text>
+        }
         {/* Title */}
         <View>
           <Text style={{...styles.categoryHeader, paddingTop: 30}}>Event Name</Text>
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={editMode ? state.title : "Insert name here"}
+            placeholder={"Insert name here"}
+            defaultValue={state.title}
             onChangeText={(nameInput) => setState({ title: nameInput })}
           />
         </View>
@@ -138,9 +142,8 @@ const AddCommunityEvent = ({ route }) => {
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={
-              editMode ? state.link : "Add external eventbrite link"
-            }
+            placeholder={"Add eventbrite link"}
+            defaultValue={state.link}
             onChangeText={(input) => setState({ link: input })}
           />
         </View>
@@ -150,14 +153,15 @@ const AddCommunityEvent = ({ route }) => {
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={editMode ? state.location : "Insert location here"}
+            placeholder={"Insert location here"}
+            defaultValue={state.location}
             onChangeText={(locationInput) => setState({ location: locationInput })}
           />
         </View>
         <View>
           <Text style={styles.categoryHeader}>Event Date</Text>
           <TouchableOpacity onPress={showDatePicker}>
-            <Text style={{...styles.placeholder, color: "gray"}}>{state.date ? state.date : "Select Event Date"}</Text>
+            <Text style={{...styles.placeholder, color: "black"}}>{state.date ? state.date : "Select Event Date"}</Text>
           </TouchableOpacity>
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
@@ -169,7 +173,7 @@ const AddCommunityEvent = ({ route }) => {
         <View>
           <Text style={styles.categoryHeader}>Event Time</Text>
           <TouchableOpacity onPress={showTimePicker}>
-            <Text style={{...styles.placeholder, color: "gray"}}>{state.time ? state.time : "Select Event Time"}</Text>
+            <Text style={{...styles.placeholder, color: "black"}}>{state.time ? state.time : "Select Event Time"}</Text>
           </TouchableOpacity>
           <DateTimePickerModal
             isVisible={isTimePickerVisible}
@@ -192,7 +196,7 @@ const AddCommunityEvent = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight +20,
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-around",
