@@ -169,13 +169,13 @@ class ChatList extends React.Component {
     const directChats = this.state.directChats.length > 0 && this.state.directChats.map(chat => {
       // Get last message and user that sent it
       const lastMessage = chat.messages[chat.messages.length - 1]
-      const [ lastSender ] = chat.users.filter(u => lastMessage.sentby === u._id)
+      const [ otherUser ] = chat.users.filter(u => u._id !== this.state.user._id)
 
       return (
         <ImageCard
-          title={lastSender.name}
+          title={otherUser.name}
           subtitle={lastMessage.content}
-          imgSrc={{ uri: lastSender.profile_picture }}
+          imgSrc={{ uri: otherUser.profile_picture }}
           onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat })}
         />
       )
