@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Text } from 'react-native'
+import { Linking } from "expo"
 
 import EventCard from '../../../shared/event-card'
 import BackButton from '../../../shared/icons/back-button/lightTheme'
@@ -20,6 +21,7 @@ const EventsList = ({ route: { params: { events }}, navigation }) => (
             location={event.location}
             date={event.date}
             time={event.time}
+            onPress={() => Linking.openURL(event.resource)}
         />
       ))}
     </View>

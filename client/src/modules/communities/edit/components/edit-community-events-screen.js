@@ -4,6 +4,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import styles from "../styles";
 import EventCard from "../../../shared/event-card";
@@ -64,7 +65,7 @@ const EditCommunityEvents = ({ navigation, route }) => {
    * add recommendation screen
    */
   const update = recommendation => {
-      let nextRecommendations
+      let events
 
     // check if the recommendation is new, or updated one
     if(recommendation.id == 0){
@@ -81,25 +82,25 @@ const EditCommunityEvents = ({ navigation, route }) => {
         }
 
         // add the new recommendation to an array with the old ones
-        nextRecommendations = state.events.concat([newRecommendation])
+        events = state.events.concat([newRecommendation])
     } else {
         // search the index of the recommendation we are updating
         const idx = state.events.findIndex(item => item.id === recommendation.id)
         // copy the old recommendation array and replace the updated recommendation
         const tmpRecommendations = state.events.slice();
         tmpRecommendations[idx] = recommendation
-        nextRecommendations = tmpRecommendations
+        events = tmpRecommendations
     }
 
     // update the db with the updated recommendations array
     updateCommunity(
         community._id,
         {
-          events: nextRecommendations,
+          events: events,
         }
     );
 
-    setState({events: nextRecommendations})
+    setState({events: events})
   };
   
   /**
@@ -108,7 +109,7 @@ const EditCommunityEvents = ({ navigation, route }) => {
    */
   const eventsList = state.events.length > 0 && (
     <View>
-      {state.events.map((event) => {
+      {state.events.map((event, index) => {
         return (
           <EventCard
             id={event.id}
@@ -121,6 +122,29 @@ const EditCommunityEvents = ({ navigation, route }) => {
               editMode: true,
               data: event
             })}}
+            onLongPress={() => {
+              Alert.alert(
+                "Delete Event",
+                "Do you wish to remove this event?",
+                [
+                  {
+                    text: "Cancel",
+                    onPress: () => console.log('Canceled'),
+                    style: "cancel"
+                  },
+                  { text: "Confirm", onPress: () => {
+                    state.events.splice(index, 1)
+                    updateCommunity(
+                      community._id,
+                      {
+                        events: state.events,
+                      }
+                    );
+                  }}
+                ],
+                { cancelable: true }
+              );
+            }}
           />
         )
       })}

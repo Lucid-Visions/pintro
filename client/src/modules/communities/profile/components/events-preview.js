@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 
 import { eventsTitle, seeAllLabel } from '../../constants'
 import EventCard from '../../../shared/event-card'
+import { Linking } from "expo"
 
 const EventsPreview = ({ events, navigation }) => {
 
@@ -30,6 +31,7 @@ const EventsPreview = ({ events, navigation }) => {
                 location={event.location}
                 date={event.date}
                 time={event.time}
+                onPress={() => Linking.openURL(event.resource)}
             />
         ))}
       </View>
