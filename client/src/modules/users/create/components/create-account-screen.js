@@ -22,12 +22,11 @@ import fieldValidator from "../../../shared/utils"
 var validEmail;
 var validNumber;
 var validPassword;
-var passwordMatch;
 
 var btnStyles = { ...styles.btn, ...styles.btnDisabled }
 
 const isSubmitDisabled = () => {
-  if(validEmail && validNumber && validPassword && passwordMatch) {
+  if(validEmail && validNumber && validPassword) {
     btnStyles = styles.btn
     return false;
   } else {
@@ -46,8 +45,8 @@ export default class createAccountScreen extends Component {
     this.state = {
       email: "",
       phoneNumber: "",
-      password1: "",
-      password2: ""
+      password: "",
+      hidePassword: true
     };
   }
 
@@ -58,7 +57,7 @@ export default class createAccountScreen extends Component {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", userToken);
-    var password = this.state.password1; //need to hash the password here
+    var password = this.state.password; //need to hash the password here
 
     var raw = JSON.stringify({
       email_login: this.state.email.toLowerCase(),
@@ -145,40 +144,31 @@ export default class createAccountScreen extends Component {
               />
             </View>
 
-            <View style={validPassword==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
+            <View style={validPassword==false ? styles.bottomBorderInvalid : styles.bottomBorder}>          
               <Text style={styles.prompt}>Password</Text>
-              <TextInput
-                style={styles.placeholder}
-                secureTextEntry={true}
-                placeholderTextColor={"white"}
-                placeholder="Enter a strong password"
-                onChangeText={password1 => {
-                  validPassword = fieldValidator({regex: passwordRegex, input: password1})
-                  this.setState({ password1 })
-                }}
-                value={this.state.password1}
-              />
+              <View style={{flexDirection: 'row', width: '100%'}}>
+                <View style={{flex: 6}}>
+                  <TextInput
+                    style={styles.placeholder}
+                    secureTextEntry={this.state.hidePassword}
+                    placeholderTextColor={"white"}
+                    placeholder="Enter a strong password"
+                    onChangeText={password => {
+                      validPassword = fieldValidator({regex: passwordRegex, input: password})
+                      this.setState({ password })
+                    }}
+                    value={this.state.password}
+                  />
+                </View>
+                <View style={{flex: 1, alignSelf:'flex-end'}}>
+                  <TouchableOpacity onPress={()=>{this.setState({hidePassword: !this.state.hidePassword})}}>
+                  {this.state.hidePassword ? <Text style={{alignSelf:'flex-end', ...styles.placeholder}}>Show</Text>:<Text style={{alignSelf:'flex-end', ...styles.placeholder}}>Hide</Text>}
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
             {validPassword==false && <Text style={styles.errorText}>Passwords must contain one uppercase letter, one lowercase letter, one number and one special character</Text>}
-            <View style={passwordMatch==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
-              <Text style={styles.prompt}>Confirm password</Text>
-              <TextInput
-                style={styles.placeholder}
-                secureTextEntry={true}
-                placeholderTextColor={"white"}
-                placeholder="Confirm your strong password"
-                onChangeText={password2 => {
-                  if(this.state.password1 !== password2) { 
-                    passwordMatch = false;
-                  } else {
-                    passwordMatch = true;
-                  }
-                  this.setState({ password2 })
-                }}
-                value={this.state.password2}
-              />
-            </View>
-            {passwordMatch==false && <Text style={styles.errorText}>Passwords do not match</Text>}
+
             <View paddingTop={20} alignSelf={"center"}>
               <TouchableOpacity
                 onPress={() => this.register()}
