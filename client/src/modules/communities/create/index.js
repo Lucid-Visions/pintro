@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, View, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import PropTypes from 'prop-types';
 
 import WideButtonComponent from "../../../components/WideButtonRight";
@@ -38,62 +38,64 @@ const CreateCommunity = ({ navigation }) => {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <BackButton navigation={navigation} />
-        
-        <View>
-          <Text style={styles.h1}>{title1}</Text>
-          <Text style={styles.h2}>{subTitle1}</Text>
-        </View>
+    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+      <ScrollView>
+        <View style={styles.container}>
+          <BackButton navigation={navigation} />
+          
+          <View>
+            <Text style={styles.h1}>{title1}</Text>
+            <Text style={styles.h2}>{subTitle1}</Text>
+          </View>
 
-        <View style={styles.bottomBorder}>
-          <Text style={styles.prompt}>{nameLabel1}</Text>
-            <TextInput
-                style={styles.placeholder}
-                placeholder={namePlaceholder1}
-                onChangeText={text => onChange('name', text)}
-                value={name}
-            />
-        </View>
-
-        <View style={styles.bottomBorder}>
-          <Text style={styles.prompt}>{storyLabel1}</Text>
-          <TextInput
-              style={{...styles.placeholder,height:100}}
-              multiline={true}
-              placeholder={storyPlaceholder1}
-              onChangeText={text => onChange('story', text)}
-              value={story}
-          />
-        </View>
-
-        <View style={styles.bottomBorder}>
-          <Text style={styles.prompt}>{urlLabel1}</Text>
-            <TextInput
-                style={styles.placeholder}
-                placeholder={urlPlaceholder1}
-                onChangeText={text => onChange('url', text)}
-                value={url}
-            />
-        </View>
-
-        <View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('CreateCommunityAddTags', fields)}
-            disabled={isSubmitDisabled()}
-          >
-              <WideButtonComponent
-                  value={ctaText1}
-                  source={require("../../../assets/arrow-right-white.png")}
-                  containerStyle={btnStyles}
-                  textStyle={styles.btnText}
+          <View style={styles.bottomBorder}>
+            <Text style={styles.prompt}>{nameLabel1}</Text>
+              <TextInput
+                  style={styles.placeholder}
+                  placeholder={namePlaceholder1}
+                  onChangeText={text => onChange('name', text)}
+                  value={name}
               />
-          </TouchableOpacity>
-        </View>
+          </View>
 
-      </View>
-    </ScrollView>
+          <View style={styles.bottomBorder}>
+            <Text style={styles.prompt}>{storyLabel1}</Text>
+            <TextInput
+                style={{...styles.placeholder,height:100}}
+                multiline={true}
+                placeholder={storyPlaceholder1}
+                onChangeText={text => onChange('story', text)}
+                value={story}
+            />
+          </View>
+
+          <View style={styles.bottomBorder}>
+            <Text style={styles.prompt}>{urlLabel1}</Text>
+              <TextInput
+                  style={styles.placeholder}
+                  placeholder={urlPlaceholder1}
+                  onChangeText={text => onChange('url', text)}
+                  value={url}
+              />
+          </View>
+
+          <View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('CreateCommunityAddTags', fields)}
+              disabled={isSubmitDisabled()}
+            >
+                <WideButtonComponent
+                    value={ctaText1}
+                    source={require("../../../assets/arrow-right-white.png")}
+                    containerStyle={btnStyles}
+                    textStyle={styles.btnText}
+                />
+            </TouchableOpacity>
+          </View>
+
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   )
 };
 
