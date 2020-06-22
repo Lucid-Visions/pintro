@@ -19,20 +19,17 @@ const Messaging = {
 
     const uid = decoded.user.uid
     try {
-      // get user (need other fields for Firebase query)
-      const user = await UserModel.findOne({ _id: uid })
-
       // Read chats from Firestore that this user belongs to
       let chats = []
       const chatData = await messagesDB.collection('chats')
         .where('userIds', 'array-contains', uid)
         .get()
-  
+
       chatData.docs.map(doc => chats.push(doc.data()))
 
       for (let i = 0; i < chats.length; i++) {
         const users = await UserModel.find({ _id: chats[i].userIds })
-        
+
         chats[i] = { ...chats[i], users }
       }
 
@@ -91,7 +88,7 @@ const Messaging = {
     } catch (error) {
       res.status(400).json({ error: 'There was a problem sending this message.' })
     }
-  }
+  },
 }
 
 export default Messaging

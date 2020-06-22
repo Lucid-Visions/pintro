@@ -3,7 +3,7 @@ import Config from 'react-native-config'
 let host;
 const ssl = false
 const { manifest } = Constants;
-const production = true
+const production = false
 const productionHost = "34.74.71.84"
 if(!production) host = manifest.debuggerHost.split(':').shift()
 

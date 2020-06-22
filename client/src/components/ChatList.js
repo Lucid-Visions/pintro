@@ -1,20 +1,3 @@
-/**
- * Index of functions in the class:
- *  - main rendering functions:
- *    * renderCommunityChats
- *    * renderDirectChats
- *    * render
- *  - auxiliary rendering functions:
- *    * renderLastMesssage  <- last message in a direct chat
- *    * renderToggleButton  <- "see all/see less" button for community chats
- *    * renderSearchBar
- *    * renderPadding   <- padding for the community chats list
- *  - other auxiliary functions:
- *    * filterResults  <- filter chats
- *    * toggleDisplayedCommunityChats
- *    * getMessageTimestamp   <- formats the timestamp displayed with a direct chat message
- */
-
 import React from "react";
 import {
   StyleSheet,
@@ -32,17 +15,11 @@ import {
   AsyncStorage
 } from "react-native";
 import ElevatedView from 'react-native-elevated-view';
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
 import ImageCard from "../modules/shared/image-card";
-TimeAgo.addLocale(en);
-const timeAgo = new TimeAgo();
-
 
 const io = require('socket.io-client');
 
 class ChatList extends React.Component {
-  static MAX_COMMUNITY_CHAT_NAME = 11;  // maximum community chat name length to be displayed
   static MAX_MESSAGE_LENGTH = 25;   // maximum message length to be displayed
 
   static MINUTE = 60;
@@ -55,7 +32,6 @@ class ChatList extends React.Component {
   state = {
     refreshing: false,
     user: {},
-    // Community chats are not implemented, but a placeholder is set.
     directChats: [],
     displayedDirectChats: [],
     resultsFiltered: false,
@@ -64,18 +40,8 @@ class ChatList extends React.Component {
 
   async componentDidMount() {
     await this.getCurrentUser();
-    // Load all chats and format them.
     await this.loadData();
-    // State the fact that 
   }
-
-  // async refresh() {
-    
-  // }
-
-  // async componentDidUpdate() {
-
-  // }
 
   /**
    * Retrieve the current user from local storage.
@@ -197,20 +163,6 @@ class ChatList extends React.Component {
     );
   }
 
-  renderToggleButton = () => {
-    return (
-      <TouchableOpacity onPress={this.toggleDisplayedCommunityChats}>
-        <Text style={styles.communityChatsToggle}>
-          {
-            this.state.viewingAllCommunityChats ?
-              "See less" :
-              `See all (${this.state.communityChats.length})`
-          }
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-
   renderSearchBar() {
     return (
       <ElevatedView style={styles.searchBarContainer} elevation={20}>
@@ -240,50 +192,19 @@ class ChatList extends React.Component {
   filterResults = (text) => {
     if (text === "") {   // clear the filter
       this.setState({
-        displayedCommunityChats: this.state.communityChats.slice(0, 4),
         directChats: this.state.directChats,
-        viewingAllCommunityChats: false,
         resultsFiltered: false
       });
     } else {
-      // filter the list of displayed community chats for the ones containing the input text
-      let newDisplayedCommunityChats = this.state.communityChats.filter((item) => item.name.toLowerCase().includes(text.toLowerCase()));
 
       // filter the list of direct chats for the ones containing the input text
       let newDisplayedDirectChats = this.state.directChats.filter((item) => item.recipientName.toLowerCase().includes(text.toLowerCase()));
 
       this.setState({
-        displayedCommunityChats: newDisplayedCommunityChats,
         directChats: newDisplayedDirectChats,
         resultsFiltered: true
       });
     }
-  }
-
-  /**
-   * Show shorter version (4 previews) or all preview of the community chats.
-   */
-  toggleDisplayedCommunityChats = () => {
-    if (this.state.viewingAllCommunityChats) {
-      this.setState({
-        displayedCommunityChats: this.state.communityChats.slice(0, 4),
-        viewingAllCommunityChats: false
-      });
-    } else {
-      this.setState({
-        displayedCommunityChats: this.state.communityChats,
-        viewingAllCommunityChats: true
-      });
-    }
-  }
-
-  /**
-   * Format message date to display in the preview.
-   * @param {Date} date the date the message was sent.
-   */
-  getMessageTimestamp(date) {
-    let messageDate = new Date(date);
-    return timeAgo.format(messageDate);
   }
 }
 
@@ -292,16 +213,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0   // TO BE DELETED WHEN THE COMPONENT ADDED TO TAB SCREEN
-  },
-  communityChatsContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 20,
-    marginRight: 20
   },
   chatsTitle: {
     fontSize: 17,
@@ -324,19 +235,6 @@ const styles = StyleSheet.create({
   searchBarInput: {
     height: 50,
     fontFamily: "poppins-light"
-  },
-  communityChatsToggle: {
-    fontSize: 11,
-    fontFamily: "poppins-light"
-  },
-  communityChatTitle: {
-    fontSize: 11,
-    fontFamily: "poppins-medium"
-  },
-  communityChatContainer: {
-    borderRadius: 20 / 2,
-    marginRight: 10,
-    alignItems: "center"
   },
   img: {
     alignItems: "flex-end",

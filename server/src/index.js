@@ -9,10 +9,10 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 io.on('connection', socket => {
-    socket.on('message', message => {
-        // Re-emit the fact that a new message has been sent.
-        io.emit('newMessage', message);
-    });
+  socket.on('message', message => {
+    // Re-emit the fact that a new message has been sent.
+    io.emit('newMessage', message)
+  })
 })
 
 const port = process.env.PORT_HTTP | 3000
