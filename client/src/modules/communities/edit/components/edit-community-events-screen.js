@@ -11,6 +11,7 @@ import EventCard from "../../../shared/event-card";
 import WideButton from "../../../../components/WideButton";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import { updateCommunity } from "../../actions";
+import Moment from 'moment'
 
 const EditCommunityEvents = ({ navigation, route }) => {
 
@@ -91,6 +92,9 @@ const EditCommunityEvents = ({ navigation, route }) => {
         tmpRecommendations[idx] = recommendation
         events = tmpRecommendations
     }
+
+    //Sort events by date order
+    events.sort((a, b) => new Moment(a.dateSort) - new Moment(b.dateSort))
 
     // update the db with the updated recommendations array
     updateCommunity(

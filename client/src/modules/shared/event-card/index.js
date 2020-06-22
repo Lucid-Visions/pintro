@@ -11,9 +11,7 @@ const EventCard = ({ id, name, location, date, time, onPress, onLongPress}) => {
                 </View>
                 <View style={{ width: '45%', flex: 1, height: '80%', justifyContent:'center' }}>
                     <Text style={{ fontFamily: "poppins-semi-bold", alignSelf: 'flex-end' }}>{location}</Text>
-                    {date && time ? 
-                        <Text style={{ fontSize: 10, alignSelf: 'flex-end' }}>{date} @ {time}</Text> : null
-                    }          
+                    <Text style={{ fontSize: 10, alignSelf: 'flex-end' }}>{date} @ {time}</Text>         
                 </View>
             </View>
         </TouchableOpacity>

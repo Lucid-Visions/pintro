@@ -31,6 +31,7 @@ const AddCommunityEvent = ({ route }) => {
     title: editMode ? editData.title : "",
     link: editMode ? editData.resource : "",
     date: editMode ? editData.date : "",
+    dateSort: editMode ? editData.dateSort : "",
     time: editMode ? editData.time : "",
     location: editMode ? editData.location : ""
   });
@@ -55,6 +56,7 @@ const AddCommunityEvent = ({ route }) => {
 
   const handleConfirm = (date) => {
     state.date = moment(date).format('Do MMMM YYYY')
+    state.dateSort = moment(date).format('L')
     hideDatePicker();
   };
 
@@ -78,6 +80,7 @@ const AddCommunityEvent = ({ route }) => {
       resource: state.link,
       location: state.location,
       date: state.date,
+      dateSort: state.dateSort,
       time: state.time
     };
   };
@@ -89,8 +92,10 @@ const AddCommunityEvent = ({ route }) => {
     const titleEmpty = state.title === "";
     const linkEmpty = state.link === "";
     const locationEmpty = state.location === "";
+    const dateEmpty = state.date === "";
+    const timeEmpty = state.time === "";
 
-    if (titleEmpty || linkEmpty || locationEmpty) {
+    if (titleEmpty || linkEmpty || locationEmpty || dateEmpty || timeEmpty) {
       return true;
     } else return false;
   };
@@ -99,16 +104,10 @@ const AddCommunityEvent = ({ route }) => {
    * checks if the update was successful and redirects to the Profile page
    */
   const updateCallBack = async () => {
-    const fieldsEmpty = checkFieldsEmpty();
+    const event = constructEvent();
 
-    if (fieldsEmpty) {
-      alert("Please don't leave required fields empty!");
-    } else {
-      const event = constructEvent();
-
-      callback(event);
-      navigation.goBack();
-    }
+    callback(event);
+    navigation.goBack();
   };
 
   return (
@@ -182,9 +181,9 @@ const AddCommunityEvent = ({ route }) => {
             onCancel={hideTimePicker}
           />
         </View>
-        <TouchableOpacity onPress={() => updateCallBack()}>
+        <TouchableOpacity onPress={() => updateCallBack()} disabled={checkFieldsEmpty()}>
           <PostButton
-            containerStyle={styles.submitBtn}
+            containerStyle={checkFieldsEmpty() ? {...styles.submitBtn, ...styles.btnDisabled} : styles.submitBtn}
             textStyle={{ color: "white" }}
             value="Done"
           />
@@ -245,6 +244,9 @@ const styles = StyleSheet.create({
     width: 300,
     marginVertical: 30,
   },
+  btnDisabled : {
+    opacity: 0.4
+  }
 });
 
 export default AddCommunityEvent;
