@@ -18,10 +18,10 @@ const updateRequest = require("../../../../assets/updateRequest").update;
 const EditStory = ({ navigation, route: { params } }) => {
 
   const initialFields = {
-    name: params.name,
-    role: params.experience.currentJobTitle,
-    company: params.experience.currentCompany,
-    bio: params.bio,
+    name: params.name || '',
+    role: params.experience.currentJobTitle || '',
+    company: params.experience.currentCompany || '',
+    bio: params.bio || '',
   }
 
   const [ fields, onChange ] = useForm(initialFields)
