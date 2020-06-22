@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import { withNavigationFocus } from '@react-navigation/compat';
 import ProfileScreen from "../modules/users/profile/index";
 import env from "../env";
 import {
   AsyncStorage,
-  Text,
   View,
   ScrollView,
   RefreshControl,
-  StyleSheet,
   Image
 } from "react-native";
 import EmptyState from "./EmptyState";
@@ -50,6 +49,12 @@ class UserProfileHandler extends Component {
 
   componentDidMount() {
     this.fetchUserData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this._onRefresh()
+    }
   }
 
   async fetchUserData() {
@@ -242,4 +247,4 @@ class UserProfileHandler extends Component {
   }
 }
 
-export default UserProfileHandler;
+export default withNavigationFocus(UserProfileHandler);

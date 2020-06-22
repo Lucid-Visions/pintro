@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity
 } from "react-native";
 
-import { useNavigation } from "@react-navigation/native";
+import useForm from '../../../shared/hooks/use-form'
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import styles from "../styles";
 
@@ -15,57 +15,37 @@ import WideButton from "../../../../components/WideButton";
 
 const updateRequest = require("../../../../assets/updateRequest").update;
 
-const EditStory = ({ route }) => {
+const EditStory = ({ navigation, route: { params } }) => {
 
-  const navigation = useNavigation();
-  const user = route.params;
+  const initialFields = {
+    name: params.name || '',
+    role: params.experience.currentJobTitle || '',
+    company: params.experience.currentCompany || '',
+    bio: params.bio || '',
+  }
 
-  // State of the fields on the screen
-  const [state, updateState] = useState({
-    name: user.name || "",
-    role: user.experience.currentJobTitle || "",
-    company: user.experience.currentCompany || "",
-    bio: user.bio || ""
-  });
+  const [ fields, onChange ] = useForm(initialFields)
 
-  const setState = newState => {
-    updateState(prevState => {
-      return { ...prevState, ...newState };
+  const isSubmitDisabled = () => {
+    return Object.values(fields).some(f => f.length < 1)
+  }
+
+  const submit = async () => {
+
+    await updateRequest({
+      name: fields.name,
+      "experience.currentJobTitle": fields.role,
+      "experience.currentCompany": fields.company,
+      bio: fields.bio
     });
-  };
 
-  /**
-   * Check if fields are not empty
-   */
-  const checkFieldsEmpty = () => {
-    const nameEmpty = state.name === "";
-    const roleEmpty = state.role === "";
-    const companyEmpty = state.company === "";
-    const bioEmpty = state.bio === "";
+    navigation.navigate('Profile')
+  }
 
-    if (nameEmpty || roleEmpty || companyEmpty || bioEmpty) {
-      return true;
-    } else return false;
-  };
-
-  /**
-   * checks if fields are not empty then saves the data in the db
-   * and redirects to the profile page
-   */
-  const update = () => {
-    const fieldsEmpty = checkFieldsEmpty();
-    if (fieldsEmpty) {
-      alert("Please don't leave empty fields");
-    } else {
-      const result = updateRequest({
-        name: state.name,
-        "experience.currentCompany": state.company,
-        bio: state.bio,
-        "experience.currentJobTitle": state.role
-      });
-      navigation.navigate("Profile");
-    }
-  };
+  let btnStyles = { ...styles.submitBtn }
+  if (isSubmitDisabled()) {
+    btnStyles = { ...styles.submitBtn, ...styles.btnDisabled }
+  }
 
   return (
     <ScrollView>
@@ -78,8 +58,9 @@ const EditStory = ({ route }) => {
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={state.name || "Enter your full name..."}
-            onEndEditing={input => setState({name: input.nativeEvent.text})}
+            placeholder="Enter your full name..."
+            defaultValue={fields.name}
+            onChangeText={text => onChange('name', text)}
           />
         </View>
         <View>
@@ -87,8 +68,9 @@ const EditStory = ({ route }) => {
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={state.role || "Enter your current position"}
-            onEndEditing={input => setState({role: input.nativeEvent.text})}
+            placeholder="Enter your current position"
+            defaultValue={fields.role}
+            onChangeText={text => onChange('role', text)}
           />
         </View>
         <View>
@@ -96,8 +78,9 @@ const EditStory = ({ route }) => {
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={state.company || "Enter your current company..."}
-            onEndEditing={input => setState({company: input.nativeEvent.text})}
+            placeholder="Enter your current company..."
+            defaultValue={fields.company}
+            onChangeText={text => onChange('company', text)}
           />
         </View>
         <View>
@@ -105,14 +88,15 @@ const EditStory = ({ route }) => {
           <TextInput
             style={styles.placeholder}
             placeholderTextColor={"grey"}
-            placeholder={state.bio || "Enter your story..."}
+            placeholder="Enter your story..."
+            defaultValue={fields.bio}
+            onChangeText={text => onChange('bio', text)}
             multiline={true}
-            onEndEditing={input => setState({bio: input.nativeEvent.text})}
           />
         </View>
-        <TouchableOpacity onPress={() => update()}>
+        <TouchableOpacity onPress={submit} disabled={isSubmitDisabled()}>
           <WideButton
-            containerStyle={styles.submitBtn}
+            containerStyle={btnStyles}
             textStyle={{ color: "white" }}
             value="Done"
           />
