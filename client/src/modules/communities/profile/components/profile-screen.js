@@ -46,15 +46,17 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
   const profilePicture = (
     <View>
-      <Image
-        source={params.profile_picture ? {uri: params.profile_picture} : require("../../../../assets/Empty-profile-picture-semi.png")}
-        style={params.profile_picture ? {
-          alignSelf: 'stretch',
-          height: 300,
-          overflow: "hidden"} 
-          : 
-          {resizeMode: "cover", width:"100%"}}
-      />
+      <TouchableOpacity onPress={() => navigation.navigate("SettingsStack", {screen: 'Edit Community Photo', params})}>
+        <Image
+          source={params.profile_picture ? {uri: params.profile_picture} : require("../../../../assets/Empty-profile-picture-semi.png")}
+          style={params.profile_picture ? {
+            alignSelf: 'stretch',
+            height: 300,
+            overflow: "hidden"} 
+            : 
+            {resizeMode: "cover", width:"100%"}}
+        />
+      </TouchableOpacity>
     </View>
   )
 
@@ -151,11 +153,13 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
             <View style={styles.myStory}>
               <View style={styles.editRow}>
                 <Text style={{ fontFamily:'poppins-regular', color: 'grey' }}>{params.url}</Text>
-                <EditButton
-                  navigation={navigation}
-                  screen="SettingsStack"
-                  params={{screen: "Edit Community Info", params}}
-                />
+                <View style={{paddingLeft:310}}>
+                  <EditButton
+                    navigation={navigation}
+                    screen="SettingsStack"
+                    params={{screen: "Edit Community Info", params}}
+                  />
+                </View>
               </View>
               <Text style={styles.companyName}>{params.name}</Text>
             </View>
