@@ -1,6 +1,9 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
+
+import useForm from '../../../shared/hooks/use-form'
 import BackButton from '../../../shared/icons/back-button/lightTheme'
+
 import { createCommunity, getCommunity } from '../../actions'
 import WideButtonRight from "../../../../components/WideButtonRight";
 import TagsData from "../../../../assets/TagsData";
@@ -11,7 +14,6 @@ import {
     ctaText2,
     fieldTitle2
 } from '../../constants';
-import useForm from '../hooks'
 
 import styles from "./styles";
 import { useDispatch } from 'react-redux';

@@ -91,6 +91,9 @@ const styles = StyleSheet.create({
         width: 300,
         marginVertical: 50
     },
+    btnDisabled: {
+        opacity: 0.4,
+    },
     sectionContainer: {
         width: "100%"
     },
