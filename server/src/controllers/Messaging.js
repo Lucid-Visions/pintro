@@ -2,27 +2,9 @@ import messagesDB from '../firebase'
 import jwt from 'jsonwebtoken'
 import jwtData from '../bin/jwtData'
 
-const Messaging = {
+import UserModel from '../models/user_model'
 
-  /**
-     * Get all data from a given groupchat.
-     * @param {string} req the id of the groupchat.
-     * @param {*} res the creator, creation timestamp and messages of the groupchat.
-     */
-  getGroupchats(req, res) {
-    let id = req.query.id
-    messagesDB.collection('groupchats')
-      .doc(id)
-      .get()
-      .then(doc => {
-        if (!doc.exists) {
-          return res.status(400).send("Document doesn't exist!")
-        } else {
-          return res.status(200).json(doc.data())
-        }
-      })
-      .catch(error => console.log(error))
-  },
+const Messaging = {
 
   /**
      * Get all private chats the given user has created or is part of.
@@ -30,7 +12,6 @@ const Messaging = {
      * @param {Array} res an array containing all the chats.
      */
   async getChats(req, res) {
-    let chats = []
     const decoded = jwt.verify(
       req.token,
       jwtData.publicKEY,
@@ -38,49 +19,28 @@ const Messaging = {
 
     const uid = decoded.user.uid
     try {
-      // Find the chats the user has created.
-      let createdChats = await messagesDB.collection('chats')
-        .where('uid', '==', uid)
+      // get user (need other fields for Firebase query)
+      const user = await UserModel.findOne({ _id: uid })
+
+      // Read chats from Firestore that this user belongs to
+      let chats = []
+      const chatData = await messagesDB.collection('chats')
+        .where('userIds', 'array-contains', uid)
         .get()
-      createdChats.docs.map(doc => chats.push(doc.data()))
-      // Find the chats the user is part of.
-      let inChats = await messagesDB.collection('chats')
-        .where('recipientid', '==', uid)
-        .get()
-      inChats.docs.map(doc => chats.push(doc.data()))
+  
+      chatData.docs.map(doc => chats.push(doc.data()))
+
+      for (let i = 0; i < chats.length; i++) {
+        const users = await UserModel.find({ _id: chats[i].userIds })
+        
+        chats[i] = { ...chats[i], users }
+      }
+
+      return res.status(200).json({ data: chats })
+
     } catch (error) {
       console.log(error)
       return res.status(400).send('Error!')
-    }
-    return res.status(200).send(chats)
-  },
-
-  /**
-     * Get all groupchats the user has created or is part of.
-     * @param {string} req the id of the user
-     * @param {Array} res an array containing all the groupchats.
-     */
-  async getAllGroupchats(req, res) {
-    let chats = []
-    const decoded = jwt.verify(
-      req.token,
-      jwtData.publicKEY,
-      jwtData.verifyOptions)
-
-    const uid = decoded.user.uid
-    try {
-      let createdChats = await messagesDB.collection('groupchats')
-        .where('uid', '==', uid)
-        .get()
-      createdChats.docs.map(doc => chats.push(doc.data()))
-      let inChats = await messagesDB.collection('groupchats')
-        .where('participants', 'array-contains', uid)
-        .get()
-      inChats.docs.map(doc => chats.push(doc.data()))
-      return res.status(200).send(chats)
-    } catch (error) {
-      console.log(error)
-      res.status(400).send(error)
     }
   },
 
@@ -123,32 +83,15 @@ const Messaging = {
      * @param {*} res success or error.
      */
   async createChat(req, res) {
-    const decoded = jwt.verify(
-      req.token,
-      jwtData.publicKEY,
-      jwtData.verifyOptions)
+    try {
 
-    const uid = decoded.user.uid
-    let { type, context, recipientid } = req.body
-    if (type && uid && recipientid) {
-      try {
-        let ref = await messagesDB.collection('chats').add({
-          context: context || '',
-          type: type,
-          uid: uid,
-          recipientid: recipientid,
-          messages: [],
-        })
-        res.status(200).send('Successfully created chat document with id ' + ref.id)
-      } catch (error) {
-        res.status(400).send('Error creating the chat!')
-        console.log(error)
-      }
-    } else {
-      res.status(400).send('User id or recipient id parameters missing!')
+      let ref = await messagesDB.collection('chats').add(req.body)
+
+      res.status(200).json({ data: 'Successfully created chat document with id ' + ref.id })
+    } catch (error) {
+      res.status(400).json({ error: 'There was a problem sending this message.' })
     }
-  },
-
+  }
 }
 
 export default Messaging
