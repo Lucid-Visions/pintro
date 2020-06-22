@@ -85,7 +85,7 @@ export default class createAccountScreen extends Component {
       this._storeData("token", responseJson.token);
       this._storeData("user", JSON.stringify(responseJson));
       if (responseJson.newUser) {
-        navigation.navigate("SignUp4");
+        navigation.navigate("SignUp3");
       } else {
         alert("User already exists. Please sign in.");
       }

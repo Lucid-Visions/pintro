@@ -6,7 +6,7 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native";
-import Constants from "expo-constants";
+
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import styles from "../styles";

@@ -7,6 +7,7 @@ class BaseRepository {
   }
 
   /**
+     * create
      *
      * @param {Object} record New database entry
      *
@@ -17,6 +18,7 @@ class BaseRepository {
   }
 
   /**
+   * get
    *
    * @param {string} id
    */
@@ -25,8 +27,33 @@ class BaseRepository {
     try {
       const collection = await this.collection.find({ _id: mongoose.Types.ObjectId(id) })
 
-      if (await collection.count() > 0) {
-        response = { data: await collection.toArray() }
+      if (await collection.count() === 0) {
+        return { error: 'Record not found' }
+      }
+
+      response = { data: await collection.toArray() }
+
+    } catch (error) {
+      response = { error }
+    }
+
+    return response
+  }
+
+  /**
+   * update
+   *
+   * @param {string} id Id of record that will be updated
+   * @param {Object} data Data to overwrite existing data
+   */
+  async update(userId, communityId, data) {
+    let response
+    try {
+
+      response = await this.collection.updateOne({ _id: mongoose.Types.ObjectId(communityId), admins: userId }, { $set: { ...data } })
+
+      if (response.result.nModified === 0) {
+        return { error: 'Could not update database' }
       }
     } catch (error) {
       response = { error }
@@ -42,11 +69,6 @@ class BaseRepository {
   // getAll() {
 
   // }
-
-  // update() {
-
-  // }
-
 }
 
 export default BaseRepository

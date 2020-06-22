@@ -21,4 +21,26 @@ export const getCommunity = async (dispatch, id) => {
   }
 
   dispatch({ type: ActionTypes.FETCHED_COMMUNITY, payload: response })
+  return response
+}
+
+export const updateCommunity = async (id, data) => {
+  const response = await FetchAPIService.patch(`/api/v1/community/${id}`, { body: JSON.stringify(data) })
+
+  if (response.error) {
+    dispatch({ type: GlobalActionTypes.SET_ERROR, payload: response.error })
+  }
+
+  return response
+
+}
+
+export const deleteCommunity = async (id) => {
+  const response = await FetchAPIService.delete(`/api/v1/community/${id}`)
+
+  if (response.error) {
+    dispatch({ type: GlobalActionTypes.SET_ERROR, payload: response.error })
+  }
+
+  return response
 }

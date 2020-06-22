@@ -32,7 +32,10 @@ const styles = StyleSheet.create({
     myStoryContainer: {
       alignSelf: "stretch",
     },
-    subTextExperience: { fontFamily: "poppins-medium", color: "#757575" },
+    subTextExperience: { 
+      fontFamily: "poppins-medium",
+      color: "#757575" 
+    },
     experienceCircle: {
       height: 7,
       width: 7,

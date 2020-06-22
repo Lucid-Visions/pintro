@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
 import BackButton from '../../../shared/icons/back-button/lightTheme'
-import { createCommunity } from '../../actions'
+import { createCommunity, getCommunity } from '../../actions'
 import WideButtonRight from "../../../../components/WideButtonRight";
 import TagsData from "../../../../assets/TagsData";
 import Tag from "../../../../components/Tag";
@@ -50,7 +50,14 @@ const CreateCommunityAddTags = ({ navigation, route: { params } }) => {
         return
       }
 
-      navigation.navigate("CreateCommunityThanks", { id: resp.data.insertedId, ...fields })
+      const response = await getCommunity(dispatch, resp.data.data.insertedId)
+
+      if (!response.ok) {
+        alert(response.data.error.message)
+        return
+      }
+
+      navigation.navigate("CreateCommunityThanks", { ...response.data.data })
     }
 
     const isSubmitDisabled = () => {

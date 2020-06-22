@@ -168,7 +168,7 @@ const AddRecommendation = ({ route }) => {
         )}
         <Text style={styles.header}>Add a recommendation</Text>
         <Text style={styles.headerText}>
-          Let people know what has helped ypu on your journey!
+          Let people know what has helped you on your journey!
         </Text>
         {/* Title */}
         <View>

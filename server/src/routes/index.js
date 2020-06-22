@@ -148,5 +148,8 @@ router.get('/newpassword', ResetPassword.newPasswordPage)
  */
 router.post('/community', jwtData.verifyToken, communityController.createCommunity.bind(communityController))
 router.get('/community/:id', jwtData.verifyToken, communityController.getCommunity.bind(communityController))
+router.get('/community', jwtData.verifyToken, communityController.getCommunities.bind(communityController))
+router.patch('/community/:id', jwtData.verifyToken, communityController.updateCommunity.bind(communityController))
+router.delete('/community/:id', jwtData.verifyToken, communityController.deleteCommunity.bind(communityController))
 
 export default router

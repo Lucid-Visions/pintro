@@ -4,7 +4,7 @@ let host;
 const ssl = false
 const { manifest } = Constants;
 const production = true
-const productionHost = "34.75.14.169"
+const productionHost = "34.74.71.84"
 if(!production) host = manifest.debuggerHost.split(':').shift()
 
 env = {

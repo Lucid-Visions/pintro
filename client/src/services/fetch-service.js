@@ -72,7 +72,25 @@ class FetchAPIService {
 
     // PUT
 
-    // DELETE
+    /**
+     * FetchAPI.delete(url: string, config: Object)
+     * 
+     * @param {string} url 
+     * @param {object} config 
+     */
+    static async delete(url, config) {
+        return FetchAPIService.sendRequest(url, { method: 'DELETE', ...config})
+    }
+
+    /**
+     * FetchAPI.patch(url: string, config: Object)
+     * 
+     * @param {string} url 
+     * @param {object} config 
+     */
+    static async patch(url, config) {
+        return FetchAPIService.sendRequest(url, { method: 'PATCH', ...config})
+    }
 }
 
 export default FetchAPIService
