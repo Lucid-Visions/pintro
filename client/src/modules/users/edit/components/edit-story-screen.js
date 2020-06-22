@@ -4,9 +4,9 @@ import {
   Text,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
-
 import { useNavigation } from "@react-navigation/native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import styles from "../styles";
@@ -68,57 +68,60 @@ const EditStory = ({ route }) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <BackButton navigation={navigation} />
-        <Text style={styles.header}>Edit your story</Text>
-        <Text style={styles.headerText}>Build your profile</Text>
-        <View>
-          <Text style={styles.categoryHeader}>Name</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={state.name || "Enter your full name..."}
-            onEndEditing={input => setState({name: input.nativeEvent.text})}
-          />
+    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+      <ScrollView>
+        <View style={styles.container}>
+          <BackButton navigation={navigation} />
+          <Text style={styles.header}>Edit your story</Text>
+          <Text style={styles.headerText}>Build your profile</Text>
+          <View>
+            <Text style={styles.categoryHeader}>Name</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              placeholder={state.name || "Enter your full name..."}
+              onEndEditing={input => setState({name: input.nativeEvent.text})}
+            />
+          </View>
+          <View>
+            <Text style={styles.categoryHeader}>Current job title</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              placeholder={state.role || "Enter your current position"}
+              onEndEditing={input => setState({role: input.nativeEvent.text})}
+            />
+          </View>
+          <View>
+            <Text style={styles.categoryHeader}>Current company</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              placeholder={state.company || "Enter your current company..."}
+              onEndEditing={input => setState({company: input.nativeEvent.text})}
+            />
+          </View>
+          <View>
+            <Text style={styles.categoryHeader}>Your Story</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              placeholder={state.bio || "Enter your story..."}
+              multiline={true}
+              scrollEnabled={false}
+              onEndEditing={input => setState({bio: input.nativeEvent.text})}
+            />
+          </View>
+          <TouchableOpacity onPress={() => update()}>
+            <WideButton
+              containerStyle={styles.submitBtn}
+              textStyle={{ color: "white" }}
+              value="Done"
+            />
+          </TouchableOpacity>
         </View>
-        <View>
-          <Text style={styles.categoryHeader}>Current job title</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={state.role || "Enter your current position"}
-            onEndEditing={input => setState({role: input.nativeEvent.text})}
-          />
-        </View>
-        <View>
-          <Text style={styles.categoryHeader}>Current company</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={state.company || "Enter your current company..."}
-            onEndEditing={input => setState({company: input.nativeEvent.text})}
-          />
-        </View>
-        <View>
-          <Text style={styles.categoryHeader}>Your Story</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={state.bio || "Enter your story..."}
-            multiline={true}
-            onEndEditing={input => setState({bio: input.nativeEvent.text})}
-          />
-        </View>
-        <TouchableOpacity onPress={() => update()}>
-          <WideButton
-            containerStyle={styles.submitBtn}
-            textStyle={{ color: "white" }}
-            value="Done"
-          />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

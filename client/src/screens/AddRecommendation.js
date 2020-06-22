@@ -7,7 +7,8 @@ import {
   ScrollView,
   Image,
   TextInput,
-  Dimensions
+  Dimensions,
+  KeyboardAvoidingView
 } from "react-native";
 import Constants from "expo-constants";
 import PostButton from "../components/WideButtonRight";
@@ -146,138 +147,140 @@ const AddRecommendation = ({ route }) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        {navigation.canGoBack() && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}
-            style={{ marginTop: 20 }}
-          >
-            <Image
-              source={require("../assets/leftArrow.png")}
-              style={{
-                height: 20,
-                width: 25,
-                resizeMode: "contain",
-                alignSelf: "flex-start",
+    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+      <ScrollView>
+        <View style={styles.container}>
+          {navigation.canGoBack() && (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
               }}
+              style={{ marginTop: 20 }}
+            >
+              <Image
+                source={require("../assets/leftArrow.png")}
+                style={{
+                  height: 20,
+                  width: 25,
+                  resizeMode: "contain",
+                  alignSelf: "flex-start",
+                }}
+              />
+            </TouchableOpacity>
+          )}
+          <Text style={styles.header}>Add a recommendation</Text>
+          <Text style={styles.headerText}>
+            Let people know what has helped you on your journey!
+          </Text>
+          {/* Title */}
+          <View>
+            <Text style={styles.categoryHeader}>Recommendation Title</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              placeholder={editMode ? state.title : "Insert name here"}
+              onChangeText={(nameInput) => setState({ title: nameInput })}
             />
-          </TouchableOpacity>
-        )}
-        <Text style={styles.header}>Add a recommendation</Text>
-        <Text style={styles.headerText}>
-          Let people know what has helped you on your journey!
-        </Text>
-        {/* Title */}
-        <View>
-          <Text style={styles.categoryHeader}>Recommendation Title</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={editMode ? state.title : "Insert name here"}
-            onChangeText={(nameInput) => setState({ title: nameInput })}
-          />
-        </View>
-        {/* Link */}
-        <View>
-          <Text style={styles.categoryHeader}>
-            Recommendation Link{" "}
-            <Text style={{ fontStyle: "italic" }}>
-              (full https URL required)
-            </Text>{" "}
-          </Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={
-              editMode ? state.link : "Add external link (article, book, video)"
-            }
-            onChangeText={(input) => setState({ link: input })}
-          />
-        </View>
-        {/* Thumbnail */}
-        <View>
-          <Text style={styles.categoryHeader}>
-            Recommendation Thumbnail (Optional)
-          </Text>
-          <TouchableOpacity
-            onPress={() => importPhoto()}
-            style={{ marginTop: 40 }}
-          >
-            <Image
-              source={
-                photoData.URI != null
-                  ? { uri: photoData.URI }
-                  : require("../assets/addThumbnail.png")
+          </View>
+          {/* Link */}
+          <View>
+            <Text style={styles.categoryHeader}>
+              Recommendation Link{" "}
+              <Text style={{ fontStyle: "italic" }}>
+                (full https URL required)
+              </Text>{" "}
+            </Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              placeholder={
+                editMode ? state.link : "Add external link (article, book, video)"
               }
-              style={{
-                height: 250,
-                width: 250,
-                resizeMode: "contain",
-                alignSelf: "center",
-                marginBottom: 50,
-                borderRadius: 15,
+              onChangeText={(input) => setState({ link: input })}
+            />
+          </View>
+          {/* Thumbnail */}
+          <View>
+            <Text style={styles.categoryHeader}>
+              Recommendation Thumbnail (Optional)
+            </Text>
+            <TouchableOpacity
+              onPress={() => importPhoto()}
+              style={{ marginTop: 40 }}
+            >
+              <Image
+                source={
+                  photoData.URI != null
+                    ? { uri: photoData.URI }
+                    : require("../assets/addThumbnail.png")
+                }
+                style={{
+                  height: 250,
+                  width: 250,
+                  resizeMode: "contain",
+                  alignSelf: "center",
+                  marginBottom: 50,
+                  borderRadius: 15,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+          {/* Tags */}
+          <View
+            marginHorizontal={15}
+            flex={1}
+            borderBottomColor="#ACACAC"
+            borderBottomWidth={1}
+            width={Dimensions.get("screen").width / 1.1}
+            alignSelf="center"
+            paddingBottom={10}
+          >
+            <Text style={styles.categoryHeader}>Choose up to 3 tags</Text>
+            <MultiSelect
+              hideSubmitButton
+              items={tagsList}
+              uniqueKey="id"
+              onSelectedItemsChange={onSelectedTagsChange}
+              selectedItems={state.tags}
+              selectText="Start typing..."
+              searchInputPlaceholderText="Start typing..."
+              altFontFamily="poppins-regular"
+              fontFamily="poppins-regular"
+              itemFontFamily="poppins-regular"
+              selectedItemFontFamily="poppins-regular"
+              tagRemoveIconColor="#ACACAC"
+              tagBorderColor="#ACACAC"
+              tagTextColor="#2E2E2E"
+              selectedItemTextColor="#2E2E2E"
+              selectedItemIconColor="#2E2E2E"
+              itemTextColor="#ACACAC"
+              displayKey="text"
+              searchInputStyle={{ color: "black" }}
+              styleDropdownMenuSubsection={{
+                backgroundColor: "#F1F1F1",
+                borderBottomColor: "#F1F1F1",
               }}
+              styleDropdownMenu={{
+                backgroundColor: "#F1F1F1",
+              }}
+              styleInputGroup={{
+                backgroundColor: "#F1F1F1",
+              }}
+              styleItemsContainer={{
+                backgroundColor: "#F1F1F1",
+              }}
+            />
+          </View>
+          <TouchableOpacity onPress={() => updateCallBack()}>
+            <PostButton
+              containerStyle={styles.submitBtn}
+              textStyle={{ color: "white" }}
+              value="Done"
             />
           </TouchableOpacity>
         </View>
-        {/* Tags */}
-        <View
-          marginHorizontal={15}
-          flex={1}
-          borderBottomColor="#ACACAC"
-          borderBottomWidth={1}
-          width={Dimensions.get("screen").width / 1.1}
-          alignSelf="center"
-          paddingBottom={10}
-        >
-          <Text style={styles.categoryHeader}>Choose up to 3 tags</Text>
-          <MultiSelect
-            hideSubmitButton
-            items={tagsList}
-            uniqueKey="id"
-            onSelectedItemsChange={onSelectedTagsChange}
-            selectedItems={state.tags}
-            selectText="Start typing..."
-            searchInputPlaceholderText="Start typing..."
-            altFontFamily="poppins-regular"
-            fontFamily="poppins-regular"
-            itemFontFamily="poppins-regular"
-            selectedItemFontFamily="poppins-regular"
-            tagRemoveIconColor="#ACACAC"
-            tagBorderColor="#ACACAC"
-            tagTextColor="#2E2E2E"
-            selectedItemTextColor="#2E2E2E"
-            selectedItemIconColor="#2E2E2E"
-            itemTextColor="#ACACAC"
-            displayKey="text"
-            searchInputStyle={{ color: "black" }}
-            styleDropdownMenuSubsection={{
-              backgroundColor: "#F1F1F1",
-              borderBottomColor: "#F1F1F1",
-            }}
-            styleDropdownMenu={{
-              backgroundColor: "#F1F1F1",
-            }}
-            styleInputGroup={{
-              backgroundColor: "#F1F1F1",
-            }}
-            styleItemsContainer={{
-              backgroundColor: "#F1F1F1",
-            }}
-          />
-        </View>
-        <TouchableOpacity onPress={() => updateCallBack()}>
-          <PostButton
-            containerStyle={styles.submitBtn}
-            textStyle={{ color: "white" }}
-            value="Done"
-          />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

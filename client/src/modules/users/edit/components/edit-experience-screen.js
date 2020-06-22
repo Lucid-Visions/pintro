@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   ScrollView,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 import styles from "../styles"
 import RNPickerSelect from "react-native-picker-select";
@@ -215,97 +216,99 @@ const EditExperience = ({ route }) => {
   });
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-      <BackButton navigation={navigation} />
-        <Text style={styles.header}>Edit your experience</Text>
-        <Text style={styles.headerText}>Your work experience timeline</Text>
+    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+      <ScrollView>
+        <View style={styles.container}>
+        <BackButton navigation={navigation} />
+          <Text style={styles.header}>Edit your experience</Text>
+          <Text style={styles.headerText}>Your work experience timeline</Text>
 
-        <Text style={styles.categoryHeader}>Work Experience *</Text>
-        <TextInput
-          style={styles.placeholder}
-          placeholderTextColor={"grey"}
-          placeholder={state.years ? `${state.years} Years` : "Enter number of years"}
-          onEndEditing={input => setState({years: input.nativeEvent.text})}
-          keyboardType={"numeric"}
-        />
-
-        <Text style={styles.categoryHeader}>Industry *</Text>
-        <TextInput
-          style={styles.placeholder}
-          placeholderTextColor={"grey"}
-          placeholder={state.industry || "Enter your industry..."}
-          onEndEditing={input => setState({ industry: input.nativeEvent.text })}
-        />
-
-        <Text style={styles.categoryHeader}>Previous Companies</Text>
-        {displayCompanies}
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            setState({
-              companies: state.companies.concat({
-                year: null,
-                value: null,
-                placeholder: {
-                  year: null,
-                  text: null
-                }
-              })
-            });
-          }}
-        >
-          <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
-        </TouchableOpacity>
-
-        <Text style={styles.categoryHeader}>Education</Text>
-        {displayEducation}
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => {
-            setState({
-              education: state.education.concat({
-                year: null,
-                value: null,
-                placeholder: {
-                  year: null,
-                  text: null
-                }
-              })
-            });
-          }}
-        >
-          <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
-        </TouchableOpacity>
-
-
-        <Text style={styles.categoryHeader}>Academic Level *</Text>
-        <RNPickerSelect
-          style={styles.pickerContainer}
-          value={state.level}
-          placeholder={{}}
-          onValueChange={value => setState({ level: value })}
-          items={[
-            {
-              label: "Certificate of Higher Education",
-              value: "Certificate of Higher Education"
-            },
-            { label: "Foundation degree", value: "Foundation degree" },
-            { label: "Bachelor's degree", value: "Bachelor's degree" },
-            { label: "Master's degree", value: "Master's degree" },
-            { label: "PhD/DPhil", value: "PhD/DPhil" }
-          ]}
-        />
-
-        <TouchableOpacity onPress={() => update()}>
-          <WideButton
-            containerStyle={styles.submitBtn}
-            textStyle={{ color: "white" }}
-            value="Done"
+          <Text style={styles.categoryHeader}>Work Experience *</Text>
+          <TextInput
+            style={styles.placeholder}
+            placeholderTextColor={"grey"}
+            placeholder={state.years ? `${state.years} Years` : "Enter number of years"}
+            onEndEditing={input => setState({years: input.nativeEvent.text})}
+            keyboardType={"numeric"}
           />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+
+          <Text style={styles.categoryHeader}>Industry *</Text>
+          <TextInput
+            style={styles.placeholder}
+            placeholderTextColor={"grey"}
+            placeholder={state.industry || "Enter your industry..."}
+            onEndEditing={input => setState({ industry: input.nativeEvent.text })}
+          />
+
+          <Text style={styles.categoryHeader}>Previous Companies</Text>
+          {displayCompanies}
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              setState({
+                companies: state.companies.concat({
+                  year: null,
+                  value: null,
+                  placeholder: {
+                    year: null,
+                    text: null
+                  }
+                })
+              });
+            }}
+          >
+            <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
+          </TouchableOpacity>
+
+          <Text style={styles.categoryHeader}>Education</Text>
+          {displayEducation}
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              setState({
+                education: state.education.concat({
+                  year: null,
+                  value: null,
+                  placeholder: {
+                    year: null,
+                    text: null
+                  }
+                })
+              });
+            }}
+          >
+            <Ionicons name="ios-add-circle-outline" size={20} color="grey"/>
+          </TouchableOpacity>
+
+
+          <Text style={styles.categoryHeader}>Academic Level *</Text>
+          <RNPickerSelect
+            style={styles.pickerContainer}
+            value={state.level}
+            placeholder={{}}
+            onValueChange={value => setState({ level: value })}
+            items={[
+              {
+                label: "Certificate of Higher Education",
+                value: "Certificate of Higher Education"
+              },
+              { label: "Foundation degree", value: "Foundation degree" },
+              { label: "Bachelor's degree", value: "Bachelor's degree" },
+              { label: "Master's degree", value: "Master's degree" },
+              { label: "PhD/DPhil", value: "PhD/DPhil" }
+            ]}
+          />
+
+          <TouchableOpacity onPress={() => update()}>
+            <WideButton
+              containerStyle={styles.submitBtn}
+              textStyle={{ color: "white" }}
+              value="Done"
+            />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

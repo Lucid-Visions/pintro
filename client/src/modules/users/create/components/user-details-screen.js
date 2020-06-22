@@ -57,11 +57,11 @@ export default class userDetailsScreen extends Component {
     {/* Need to verify with danielle which of these fields are going to be required*/}
     const { navigation } = this.props;
     return (
-      <ScrollView
-        style={styles.container2}
-        showsVerticalScrollIndicator={false}
-      >
-        <KeyboardAvoidingView>
+      <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+        <ScrollView
+          style={styles.container2}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.container1}>
             <View style={styles.container}>
             <BackButton navigation={navigation} />
@@ -109,11 +109,12 @@ export default class userDetailsScreen extends Component {
               </View>
 
               <View style={styles.bottomBorder}>
-                <Text style={styles.prompt}>Your story</Text>
+                <Text style={styles.prompt}>Your story (optional)</Text>
                 <TextInput
-                  style={{ ...styles.placeholder, height: 100 }}
+                  style={styles.placeholder}
                   placeholderTextColor={"white"}
                   multiline={true}
+                  scrollEnabled={false}
                   placeholder={"Tell us about yourself"}
                   onChangeText={story => {
                     if (story.length < 160) {
@@ -146,8 +147,8 @@ export default class userDetailsScreen extends Component {
               </View>
             </View>
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }

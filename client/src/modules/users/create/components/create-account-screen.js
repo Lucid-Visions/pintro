@@ -105,11 +105,11 @@ export default class createAccountScreen extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <ScrollView
-        style={styles.container2}
-        showsVerticalScrollIndicator={false}
-      >
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+        <ScrollView
+          style={styles.container2}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.container1}>
             <View style={styles.container}>
             <BackButton navigation={navigation} />
@@ -201,8 +201,8 @@ export default class createAccountScreen extends Component {
               </View>
             </View>
           </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
