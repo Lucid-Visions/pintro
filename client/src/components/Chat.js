@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Text, Image, AsyncStorage } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image } from 'react-native';
 import ChatInputToolbar from './ChatInputToolbar';
 const io = require('socket.io-client');
 
@@ -14,11 +14,6 @@ export default class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.socket = props.socket;
-    this.messages = React.createRef();
-    this.state = {
-      user: props.user,
-      chat: props.chat,
-    };
   };  
 
   /**
@@ -33,18 +28,6 @@ export default class Chat extends React.Component {
     };
     // Inform the message has been sent.
     this.socket.emit('message', newMessage);
-  }
-
-  renderPicture(message) {
-    if (message.uid !== this.state.user._id) {
-      let pictureUri = this.state.chat.pictureUri;
-      return (
-        <Image
-          style={{ height: 40, width: 40, borderRadius: 60 }}
-          source={pictureUri !== undefined ? { uri: pictureUri } : require('../assets/empty-profile-picture.png')}
-        />
-      );
-    }
   }
 
   renderDate(index) {
@@ -92,30 +75,28 @@ export default class Chat extends React.Component {
       <View style={styles.container}>
 
         <FlatList
-          data={this.state.chat ? this.state.chat.messages : []}
-          ref={this.messages}
+          data={this.props.chat.messages || []}
           contentContainerStyle={styles.messagesContainer}
-          renderItem={({ item, index }) => {
-            let isAuthorCurrentUser = false;
-            if (item.uid === this.state.user._id) {
-              isAuthorCurrentUser = true;
-            }
+          renderItem={message => {
+
+            const currentUser = this.props.user
+            const isAuthorCurrentUser = message.sentby === currentUser._id;
+      
             return (
               <View>
-                {/** this.renderDate(index) */}
                 <View style={{
                   marginBottom: 5, marginTop: 5,
                   alignItems: isAuthorCurrentUser ? "flex-end" : "flex-start"
                 }}>
                   <View style={{ flex: 1, flexDirection: "row", alignItems: "flex-end" }}>
-                    {this.renderPicture(item)}
+
                     <View style={{
                       paddingTop: 15, paddingBottom: 15, paddingRight: 15, paddingLeft: 15,
                       maxWidth: 250, marginLeft: 10, borderRadius: 15,
-                      backgroundColor: isAuthorCurrentUser ? "black" : "lightgray"
+                      backgroundColor: isAuthorCurrentUser ? "lightgray" : "black"
                     }}>
-                      <Text style={{ fontFamily: "poppins-regular", fontSize: 12, color: isAuthorCurrentUser ? "white" : "black" }}>
-                        {item.content}
+                      <Text style={{ fontFamily: "poppins-regular", fontSize: 12, color: isAuthorCurrentUser ? "black" : "white" }}>
+                        {message.content}
                       </Text>
                     </View>
                   </View>

@@ -8,7 +8,7 @@ import Constants from "expo-constants";
 import * as React from "react";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import NotificationFeed from "../components/NotificationFeed"
-import Chats from "./ChatsComponent";
+import ChatList from "./ChatList";
 const initialLayout = { width: Dimensions.get("window").width };
 
 export default function ChatTabScreen({ navigation, route }) {
@@ -18,17 +18,17 @@ export default function ChatTabScreen({ navigation, route }) {
   );
 
   const SecondRoute = () => (
-    <Chats navigation={navigation} />
+    <ChatList navigation={navigation} />
   );
   const [index, setIndex] = React.useState(route.params?route.params.index || 0 :0);
   const [routes] = React.useState([
     { key: "notifications", title: "Notifications", icon: require("../assets/mapPin.png") },
-    { key: "chats", title: "Chats", icon: require("../assets/mapPin.png") }
+    { key: "chatList", title: "Chats", icon: require("../assets/mapPin.png") }
   ]);
 
   const renderScene = SceneMap({
     notifications: FirstRoute,
-    chats: SecondRoute
+    chatList: SecondRoute
   });
 
   const renderTabBar = props => (

@@ -118,6 +118,7 @@ class UserProfileHandler extends Component {
     var recommendations = user.recommendations;
     var actions = user.action_buttons;
     var name = user.name;
+    var email = user.email_login;
     var previousCompanies = [];
     var previousEducation = [];
     var years = 0;
@@ -144,6 +145,7 @@ class UserProfileHandler extends Component {
     }
     var newState = {
       username: username,
+      email,
       skills: skills || [],
       interests: interests || [],
       bio,
