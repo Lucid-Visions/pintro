@@ -17,15 +17,6 @@ const EditCommunityEvents = ({ navigation, route }) => {
 
   const community = route.params;
 
-  /**
-   * Deconstruct the updated recommendation array 
-   * for easy use in the program
-   * recommendations :{
-   *    articles: {},
-   *    books: {},
-   *    videos: {}
-   * }
-   */
   const helperConstructState = arrayRecommendations => {
     let events = [];
 
