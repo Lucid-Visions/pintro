@@ -24,6 +24,7 @@ import ResetPassword from '../controllers/ResetPassword'
 import CommunityController from '../controllers/community'
 
 const router = express.Router()
+
 const connection = new Database()
 const communityController = new CommunityController(connection.getDatabase())
 
@@ -83,11 +84,9 @@ router.patch('/hub/:id', jwtData.verifyToken, Hub.updateHubData)
 router.delete('/hub/:id', jwtData.verifyToken, Hub.deleteHubData)
 
 /* ---------- Firebase ---------*/
-router.get('/chat/gc', jwtData.verifyToken, Messaging.getGroupchats)
-router.get('/chat/chat', jwtData.verifyToken, Messaging.getChats)
+router.get('/chat', jwtData.verifyToken, Messaging.getChats)
 router.patch('/chat/update', jwtData.verifyToken, Messaging.updateChat)
-router.get('/chat/gcAll', jwtData.verifyToken, Messaging.getAllGroupchats)
-router.put('/chat', jwtData.verifyToken, Messaging.createChat)
+router.post('/chat', jwtData.verifyToken, Messaging.createChat)
 
 /* ------------- Article -------------*/
 router.get('/article', Article.getArticleData)

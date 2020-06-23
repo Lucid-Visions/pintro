@@ -36,6 +36,7 @@ const updateRequest = require("../../../assets/updateRequest").update;
 const ProfileScreen = ({
   uid, //if you are looking at your own profile, uid is null
   username,
+  email,
   actions,
   interests,
   skills,
@@ -516,7 +517,7 @@ const ProfileScreen = ({
     console.log(responseJson.message);
   };
 
-  const messageUser = async (intent, message) => {
+  const messageUser = async (intent, content) => {
     //put this chat in db
     var token = await AsyncStorage.getItem("token");
     var myHeaders = new Headers();
@@ -526,13 +527,23 @@ const ProfileScreen = ({
     let user = JSON.parse(await AsyncStorage.getItem("user"));
     let userdoc = user.doc;
 
-    var raw = JSON.stringify({"type":"help","context":intent,"recipientid":uid});
+    const messageData = {
+      intent,
+      user1: {
+        uid: userdoc._id,
+        email: userdoc.email_login
+      },
+      user2: {
+        uid,
+        email
+      },
+      messages: [{ content, sentBy: uid }]
+    }
 
-    console.log(raw)
     var requestOptions = {
       method: "PUT",
       headers: myHeaders,
-      body: raw,
+      body: JSON.stringify(messageData),
     };
 
     let response = await fetch(

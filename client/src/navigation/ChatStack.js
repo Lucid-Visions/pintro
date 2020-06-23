@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ChatScreen from '../screens/ChatScreen';
 import ChatTabScreen from "../components/ChatTabScreen";
 import ProfileScreen from '../modules/users/profile/index';
-import Chats from '../components/ChatsComponent';
+import ChatList from '../components/ChatList';
 const Stack = createStackNavigator();
 
 /**
@@ -20,7 +20,7 @@ function ChatStack({navigation, route}) {
     return (
         <Stack.Navigator>
             <Stack.Screen name="ChatTabScreen" component={ChatTabScreen} options={{headerShown: false}} />
-            <Stack.Screen name="ChatList" component={Chats} options={{headerShown: false}} />
+            <Stack.Screen name="ChatList" component={ChatList} options={{headerShown: false}} />
             <Stack.Screen name="Chat" component={ChatScreen} options={{headerShown: false /*the screen has a custom header*/}} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
         </Stack.Navigator>
