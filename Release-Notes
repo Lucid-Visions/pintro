@@ -1,3 +1,36 @@
+#1.0.11
+
+New Features
+
+Community Profiles:
+- Users are now able create community events
+- Community events are displayed on the communities profile page
+- Users are now able to edit community events
+- Users are now able to delete community events by pressing and holding on the edit events page
+- Users are now able to set/edit a community profile picture by tapping on the image area
+- Added a show/hide button to the password field on login/sign up screens
+
+Bugs
+- Fixed a bug where the user profile page doesn't refresh after changes have been made
+- Fixed a bug where the keyboard is covering up text input fields
+
+#1.0.10
+
+New Features
+
+Community profiles:
+- Users can now set a profile picture for their community page
+- Users can now edit their communities story, name and URL
+- Users can now edit their communities articles
+- Users are now able to edit their community tags
+- Members and admins of the community are now displayed on the community profile page
+- Admins are now able to delete their community
+
+Sign up:
+- Added the upload profile image step back to the user sign up process
+- Added front-end verification to some fields in the sign up process to filter information
+- Disable next step buttons until user has filled out the required fields on each step
+
 #1.0.9
 
 General Bugs
