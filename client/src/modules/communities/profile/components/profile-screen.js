@@ -4,12 +4,15 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Image,
+  Image
 } from "react-native";
+import { Linking } from "expo";
 
-import Card from '../../../shared/card'
+import EventCard from '../../../shared/event-card'
 import ImageCard from '../../../shared/image-card'
 import EditButton from '../../../shared/edit-button'
+
+import EventsPreview from "../../profile/components/events-preview"
 
 import { FollowMeButton } from "../../../../components/ProfileActionButtons";
 import { MessageMeButton } from "../../../../components/ProfileActionButtons";
@@ -46,15 +49,17 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
 
   const profilePicture = (
     <View>
-      <Image
-        source={params.profile_picture ? {uri: params.profile_picture} : require("../../../../assets/Empty-profile-picture-semi.png")}
-        style={params.profile_picture ? {
-          alignSelf: 'stretch',
-          height: 300,
-          overflow: "hidden"} 
-          : 
-          {resizeMode: "cover", width:"100%"}}
-      />
+      <TouchableOpacity onPress={() => navigation.navigate("SettingsStack", {screen: 'Edit Community Photo', params})}>
+        <Image
+          source={params.profile_picture ? {uri: params.profile_picture} : require("../../../../assets/Empty-profile-picture-semi.png")}
+          style={params.profile_picture ? {
+            alignSelf: 'stretch',
+            height: 300,
+            overflow: "hidden"} 
+            : 
+            {resizeMode: "cover", width:"100%"}}
+        />
+      </TouchableOpacity>
     </View>
   )
 
@@ -151,11 +156,13 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
             <View style={styles.myStory}>
               <View style={styles.editRow}>
                 <Text style={{ fontFamily:'poppins-regular', color: 'grey' }}>{params.url}</Text>
-                <EditButton
-                  navigation={navigation}
-                  screen="SettingsStack"
-                  params={{screen: "Edit Community Info", params}}
-                />
+                <View style={{paddingLeft:310}}>
+                  <EditButton
+                    navigation={navigation}
+                    screen="SettingsStack"
+                    params={{screen: "Edit Community Info", params}}
+                  />
+                </View>
               </View>
               <Text style={styles.companyName}>{params.name}</Text>
             </View>
@@ -195,31 +202,8 @@ const CommunityProfileScreen = ({ navigation, route: {params} }) => {
                 </TouchableOpacity>
             </View> 
             <LatestPostComponent post={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."} likes={"3"} comments={"5"} /> 
-            <View style={{ ...styles.editRow, marginTop: 20 }}>
-              <Text style={{ fontFamily: "poppins-semi-bold" }}>
-                Upcoming Events
-              </Text>
-              <EditButton />
-              </View>
-
-              <View style={{ marginTop: 10 }}>
-                {[
-                  { name: 'Meet & Greet', location: 'The Hub (LDN)', date: '28th February', time: '6pm'},
-                  { name: 'Dev Conference', location: 'The Hub (LDN)', date: '5th March', time: '11am'}
-                ].map(e => (
-                  <Card
-                    key={e.name}
-                    title={e.name}
-                    rightComponent={
-                      <View>
-                        <Text style={{ fontFamily: "poppins-semi-bold", fontSize: 10 }}>{e.location}</Text>
-                        <Text style={{ fontSize: 10 }}>{`${e.date} @ ${e.time}`}</Text>
-                      </View>
-                    }
-                  />
-                ))}
-              </View>
-              {articles}
+            <EventsPreview events={params.events} navigation={navigation} />
+            {articles}
           </View>
         </View>
         </ScrollView>

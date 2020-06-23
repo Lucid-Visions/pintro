@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -10,10 +11,26 @@ const styles = StyleSheet.create({
     marginTop: -50,
     padding: 20
   },
+  container2: {
+    paddingTop: Constants.statusBarHeight+20,
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "space-around",
+    marginHorizontal: 20,
+    paddingBottom: 30
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
     margin: "5%"
+  },
+  categoryHeaderBold: {
+    fontFamily: "poppins-semi-bold",
+    margin: "auto",
+    textAlign: "left",
+    alignItems: "baseline",
+    fontSize: 14,
+    paddingBottom: 20
   },
   experienceContainer: {
     flexDirection: "row",
