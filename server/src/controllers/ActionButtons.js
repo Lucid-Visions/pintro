@@ -18,12 +18,12 @@ const ActionButtons = {
     )
     const buttonData = req.body
     const authorId = decoded.user.uid
-    if (!['help', 'introduce'].includes(buttonData.type)) {
+    if (!['help', 'introduce', 'talktomeabout', 'promoteme', 'letscollaborate'].includes(buttonData.type)) {
       return res
         .status(400)
         .send({
           error: 'incorrect datatype',
-          message: "Type must be 'help' or 'introduce'",
+          message: "Type must be 'help' or 'introduce' or 'talktomeabout' or 'promoteme' or 'letscollaborate'",
         })
     }
     let newButton = new ActionButtonModel({

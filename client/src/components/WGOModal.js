@@ -78,6 +78,21 @@ export default class WGOModal extends React.Component {
       toggleModal();
     };
 
+    const talkToMeAboutPressed = () => {
+      navigation.navigate("TalkToMeAbout", {user: this.state.loggedUser});
+      toggleModal();
+    };
+
+    const promoteMePressed = () => {
+      navigation.navigate("PromoteMe", {user: this.state.loggedUser});
+      toggleModal();
+    };
+
+    const letsCollaboratePressed = () => {
+      navigation.navigate("LetsCollaborate", {user: this.state.loggedUser});
+      toggleModal();
+    };
+
     const checkInLocation = async () => {
       var token = await AsyncStorage.getItem("token");
 
@@ -205,6 +220,69 @@ export default class WGOModal extends React.Component {
                 />
               </TouchableOpacity>
             </View>
+
+            <View style={styles.twoColumns}>
+              <Image
+                style={styles.image}
+                source={require("../assets/MessageIcon.png")}
+              />
+              <TouchableOpacity onPress={() => talkToMeAboutPressed()}>
+                <WideButton
+                  value={"Talk to me about"}
+                  containerStyle={{
+                    ...styles.btn
+                  }}
+                  textStyle={{
+                    fontSize: 15,
+                    fontFamily: "poppins-medium",
+                    color: "#1A1A1A",
+                    alignSelf: "flex-start"
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.twoColumns}>
+              <Image
+                style={styles.image}
+                source={require("../assets/MessageIcon.png")}
+              />
+              <TouchableOpacity onPress={() => promoteMePressed()}>
+                <WideButton
+                  value={"Promote Me"}
+                  containerStyle={{
+                    ...styles.btn
+                  }}
+                  textStyle={{
+                    fontSize: 15,
+                    fontFamily: "poppins-medium",
+                    color: "#1A1A1A",
+                    alignSelf: "flex-start"
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.twoColumns}>
+              <Image
+                style={styles.image}
+                source={require("../assets/MessageIcon.png")}
+              />
+              <TouchableOpacity onPress={() => letsCollaboratePressed()}>
+                <WideButton
+                  value={"Let's collaborate"}
+                  containerStyle={{
+                    ...styles.btn
+                  }}
+                  textStyle={{
+                    fontSize: 15,
+                    fontFamily: "poppins-medium",
+                    color: "#1A1A1A",
+                    alignSelf: "flex-start"
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -257,11 +335,11 @@ const styles = StyleSheet.create({
   modal: {
     justifyContent: "space-evenly",
     backgroundColor: "#FCFCFC",
-    maxHeight: 450,
+    maxHeight: 700,
     width: Dimensions.get("screen").width / 1.1,
     borderRadius: 20,
     alignSelf: "center",
     alignItems: "center",
-    marginTop: Dimensions.get("screen").height / 4.5
+    marginTop: 20
   }
 });

@@ -34,7 +34,9 @@ function resolveType(type) {
     switch (type) {
         case "help": return "Help me with";
         case "introduce": return "Introduce me to";
-        case "talk": return "Talk to me about";
+        case "talktomeabout": return "Talk to me about";
+        case "promoteme": return "Promote me";
+        case "letscollaborate": return "Let's collaborate";
     }
 }
 
