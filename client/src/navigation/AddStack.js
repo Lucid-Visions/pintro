@@ -6,7 +6,6 @@ import WriteStatusScreen from "../screens/WriteStatusScreen";
 import AskHelpScreen from "../screens/AskHelpScreen";
 import TalkToMeAboutScreen from "../screens/TalkToMeAboutScreen";
 import PromoteMeScreen from "../screens/PromoteMeScreen";
-import LetsCollaborateScreen from "../screens/LetsCollaborateScreen";
 import RequestIntroScreen from "../screens/RequestIntroScreen";
 
 const Stack = createStackNavigator();
@@ -25,7 +24,6 @@ function AddStack() {
       <Stack.Screen name="RequestIntro" component={RequestIntroScreen} />
       <Stack.Screen name="TalkToMeAbout" component={TalkToMeAboutScreen} />
       <Stack.Screen name="PromoteMe" component={PromoteMeScreen} />
-      <Stack.Screen name="LetsCollaborate" component={LetsCollaborateScreen} />
     </Stack.Navigator>
   );
 }

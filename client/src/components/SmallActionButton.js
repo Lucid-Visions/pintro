@@ -36,7 +36,6 @@ function resolveType(type) {
         case "introduce": return "Introduce me to";
         case "talktomeabout": return "Talk to me about";
         case "promoteme": return "Promote me";
-        case "letscollaborate": return "Let's collaborate";
     }
 }
 

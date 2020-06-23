@@ -88,11 +88,6 @@ export default class WGOModal extends React.Component {
       toggleModal();
     };
 
-    const letsCollaboratePressed = () => {
-      navigation.navigate("LetsCollaborate", {user: this.state.loggedUser});
-      toggleModal();
-    };
-
     const checkInLocation = async () => {
       var token = await AsyncStorage.getItem("token");
 
@@ -250,27 +245,6 @@ export default class WGOModal extends React.Component {
               <TouchableOpacity onPress={() => promoteMePressed()}>
                 <WideButton
                   value={"Promote Me"}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
-                  textStyle={{
-                    fontSize: 15,
-                    fontFamily: "poppins-medium",
-                    color: "#1A1A1A",
-                    alignSelf: "flex-start"
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.twoColumns}>
-              <Image
-                style={styles.image}
-                source={require("../assets/MessageIcon.png")}
-              />
-              <TouchableOpacity onPress={() => letsCollaboratePressed()}>
-                <WideButton
-                  value={"Let's collaborate"}
                   containerStyle={{
                     ...styles.btn
                   }}

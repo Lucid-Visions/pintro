@@ -11,8 +11,7 @@ const FilterType = {
     HELP_ME_WITH: 2,
     INTRODUCE_ME: 3,
     TALK_TO_ME_ABOUT: 4,
-    PROMOTE_ME: 5,
-    LETS_COLLABORATE: 6
+    PROMOTE_ME: 5
 }
 
 class FeedFilterModal extends React.Component {
@@ -26,7 +25,6 @@ class FeedFilterModal extends React.Component {
             isIntroduceMe: false, //3
             isTalkToMeAbout: false, //4
             isPromoteMe: false, //5
-            isLetsCollaborate: false, //6
         }
     }
     
@@ -51,7 +49,6 @@ class FeedFilterModal extends React.Component {
             isSelected: false, 
             isTalkToMeAbout: false,
             isPromoteMe: false,
-            isLetsCollaborate: false,
         })
 
     }
@@ -107,20 +104,6 @@ class FeedFilterModal extends React.Component {
             isLetsCollaborate: false,
         })
     }
-
-    toggleLetsCollaborate = () => {
-        this.props.onSetFilter(!this.state.isLetsCollaborate ? FilterType.LETS_COLLABORATE : null)
-        this.setState({
-            isLetsCollaborate: !this.state.isLetsCollaborate,
-            isStatus: false,
-            isHelpMeWith: false,
-            isSelected: false,
-            isIntroduceMe: false,
-            isPromoteMe: false,
-            isTalkToMeAbout: false,
-        })
-    }
-
 
     render () {
         return(
@@ -216,24 +199,6 @@ class FeedFilterModal extends React.Component {
                         </View>
                     </View>
                 </TouchableOpacity> :
-                !this.state.isSelected && this.state.isLetsCollaborate ?
-                <TouchableOpacity style={styles.container} onPress={this.toggleState}>
-                    <View style={{flexDirection: "column", marginTop: 15, marginLeft: 12 }}>
-                        <View style={{flexDirection: "row" }}>
-                            <Image
-                                style={{height: 30, width: 30, marginRight: 10}}
-                                source={require('../assets/MessageIcon.png')}>
-                            </Image>
-                            <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 5, marginBottom: 20}}>
-                                Let's Collaborate
-                            </Text>
-                            <Image 
-                                style={{height: 18, width: 18, marginLeft: 153, marginTop: 7}}
-                                source={require('../assets/filter.png')}>
-                            </Image>
-                        </View>
-                    </View>
-                </TouchableOpacity> :
                     !this.state.isSelected ?
                     <TouchableOpacity style={styles.container} onPress={this.toggleState}>
                     <View style={{flexDirection: "column", marginTop: 15, marginLeft: 12 }}>
@@ -308,17 +273,6 @@ class FeedFilterModal extends React.Component {
                                             </Image>
                                             <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 6, marginBottom: 10}}>
                                                 Promote Me
-                                            </Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity onPress={this.toggleLetsCollaborate}>
-                                        <View style={{flexDirection: "row", marginTop: 5 }}>
-                                            <Image
-                                                style={{height: 30, width: 30, marginRight: 10}}
-                                                source={require('../assets/MessageIcon.png')}>
-                                            </Image>
-                                            <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 6, marginBottom: 10}}>
-                                                Let's collaborate
                                             </Text>
                                         </View>
                                     </TouchableOpacity>
