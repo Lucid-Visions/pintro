@@ -54,6 +54,7 @@ const LogInScreen = ({ navigation }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { signIn } = React.useContext(AuthContext);
+  const [hidePassword, setHidePassword] = React.useState(true);
 
   return (
     <View style={styles.container}>
@@ -99,14 +100,23 @@ const LogInScreen = ({ navigation }) => {
 
             <View style={styles.bottomBorder}>
               <Text style={styles.prompt}>Password</Text>
-              <TextInput
-                style={styles.placeholder}
-                placeholderTextColor={"white"}
-                placeholder="Enter your password"
-                secureTextEntry={true}
-                onChangeText={(p) => setPassword(p)}
-                value={password}
-              />
+              <View style={{flexDirection: 'row', width: '100%'}}>
+                <View style={{flex: 6}}>
+                  <TextInput
+                    style={styles.placeholder}
+                    placeholderTextColor={"white"}
+                    placeholder="Enter your password"
+                    secureTextEntry={hidePassword}
+                    onChangeText={(p) => setPassword(p)}
+                    value={password}
+                  />
+                </View>
+                <View style={{flex: 1, alignSelf:'flex-end'}}>
+                  <TouchableOpacity onPress={()=>{setHidePassword(!hidePassword)}}>
+                  {hidePassword ? <Text style={{alignSelf:'flex-end', ...styles.placeholder}}>Show</Text>:<Text style={{alignSelf:'flex-end', ...styles.placeholder}}>Hide</Text>}
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </View>
         </View>
