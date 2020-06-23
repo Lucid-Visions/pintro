@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 import BackButton from "../../../shared/icons/back-button/lightTheme";
 import styles from "../styles";
@@ -63,51 +64,55 @@ const EditStory = ({ navigation, route }) => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <BackButton navigation={navigation} />
-        <Text style={styles.header}>Edit your community info</Text>
-        <View style={{paddingTop: 30}}>
-          <Text style={styles.categoryHeader}>Name</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={state.name || "Enter your community name..."}
-            onEndEditing={input => setState({name: input.nativeEvent.text})}
-          />
+    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS == "ios" ? "padding" : "height"}>
+      <ScrollView>
+        <View style={styles.container}>
+          <BackButton navigation={navigation} />
+          <Text style={styles.header}>Edit your community info</Text>
+          <View style={{paddingTop: 30}}>
+            <Text style={styles.categoryHeader}>Name</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              placeholder={state.name || "Enter your community name..."}
+              onEndEditing={input => setState({name: input.nativeEvent.text})}
+            />
+          </View>
+          <View>
+            <Text style={styles.categoryHeader}>Story</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholderTextColor={"grey"}
+              multiline={true}
+              scrollEnabled={false}
+              placeholder={state.story || "Enter your community story"}
+              onEndEditing={input => setState({story: input.nativeEvent.text})}
+            />
+          </View>
+          <View>
+            <Text style={styles.categoryHeader}>URL</Text>
+            <TextInput
+              style={{fontFamily: "poppins-regular",
+              borderBottomWidth: 1,
+              margin: "auto",
+              alignItems: "stretch",
+              fontSize: 13,
+              paddingVertical: 15}}
+              placeholderTextColor={"grey"}
+              placeholder={state.url || "Enter your community URL..."}
+              onEndEditing={input => setState({url: input.nativeEvent.text})}
+            />
+          </View>
+          <TouchableOpacity onPress={() => update()}>
+            <WideButton
+              containerStyle={styles.submitBtn}
+              textStyle={{ color: "white" }}
+              value="Done"
+            />
+          </TouchableOpacity>
         </View>
-        <View>
-          <Text style={styles.categoryHeader}>Story</Text>
-          <TextInput
-            style={styles.placeholder}
-            placeholderTextColor={"grey"}
-            placeholder={state.story || "Enter your community story"}
-            onEndEditing={input => setState({story: input.nativeEvent.text})}
-          />
-        </View>
-        <View>
-          <Text style={styles.categoryHeader}>URL</Text>
-          <TextInput
-            style={{fontFamily: "poppins-regular",
-            borderBottomWidth: 1,
-            margin: "auto",
-            alignItems: "stretch",
-            fontSize: 13,
-            paddingVertical: 15}}
-            placeholderTextColor={"grey"}
-            placeholder={state.url || "Enter your community URL..."}
-            onEndEditing={input => setState({url: input.nativeEvent.text})}
-          />
-        </View>
-        <TouchableOpacity onPress={() => update()}>
-          <WideButton
-            containerStyle={styles.submitBtn}
-            textStyle={{ color: "white" }}
-            value="Done"
-          />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
