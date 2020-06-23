@@ -62,7 +62,6 @@ class FeedFilterModal extends React.Component {
             isSelected: false,
             isTalkToMeAbout: false,
             isPromoteMe: false,
-            isLetsCollaborate: false,
         })
     }
 
@@ -75,7 +74,6 @@ class FeedFilterModal extends React.Component {
             isSelected: false,
             isTalkToMeAbout: false,
             isPromoteMe: false,
-            isLetsCollaborate: false,
         })
     }
 
@@ -88,7 +86,6 @@ class FeedFilterModal extends React.Component {
             isSelected: false,
             isIntroduceMe: false,
             isPromoteMe: false,
-            isLetsCollaborate: false,
         })
     }
 
@@ -101,7 +98,6 @@ class FeedFilterModal extends React.Component {
             isSelected: false,
             isIntroduceMe: false,
             isTalkToMeAbout: false,
-            isLetsCollaborate: false,
         })
     }
 
@@ -305,7 +301,7 @@ const styles = StyleSheet.create({
     },
     secondContainer: {
         width: 335,
-        height: 350,
+        height: 320,
         borderRadius: 50 / 2,
         alignSelf:'center',
         backgroundColor: 'white',

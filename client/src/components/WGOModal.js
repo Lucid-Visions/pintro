@@ -309,11 +309,11 @@ const styles = StyleSheet.create({
   modal: {
     justifyContent: "space-evenly",
     backgroundColor: "#FCFCFC",
-    maxHeight: 700,
+    maxHeight: 630,
     width: Dimensions.get("screen").width / 1.1,
     borderRadius: 20,
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 20
+    marginTop: 50
   }
 });
