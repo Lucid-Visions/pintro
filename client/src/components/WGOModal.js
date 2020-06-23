@@ -160,7 +160,7 @@ export default class WGOModal extends React.Component {
               />
               <TouchableOpacity onPress={() => writeStatusPressed()}>
                 <WideButton
-                  value={"Write a status"}
+                  value={"General post"}
                   containerStyle={{
                     ...styles.btn
                   }}

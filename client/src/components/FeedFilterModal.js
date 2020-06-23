@@ -114,7 +114,7 @@ class FeedFilterModal extends React.Component {
                                     source={require('../assets/StatusIcon.png')}>
                                 </Image>
                                 <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 5, marginLeft: 10, marginBottom: 20}}>
-                                    Status
+                                    General post
                                 </Text>
                                 <Image 
                                     style={{height: 18, width: 18, marginLeft: 210, marginTop: 4}}
@@ -224,7 +224,7 @@ class FeedFilterModal extends React.Component {
                                                 source={require('../assets/StatusIcon.png')}>
                                             </Image>
                                             <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 5, marginLeft: 10, marginBottom: 10}}>
-                                                Status
+                                                General post
                                             </Text>
                                         </View>
                                     </TouchableOpacity>
