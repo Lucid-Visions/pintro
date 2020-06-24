@@ -39,8 +39,6 @@ services:
     ports:
       - 443:443
       - 3000:3000
-    volumes:
-      - ./server:/app
     environment:
       PORT_HTTPS: 443
       PORT_HTTP: 3000
