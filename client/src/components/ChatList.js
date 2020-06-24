@@ -14,6 +14,7 @@ import {
   RefreshControl,
   AsyncStorage
 } from "react-native";
+import { withNavigationFocus } from '@react-navigation/compat';
 import ElevatedView from 'react-native-elevated-view';
 import ImageCard from "../modules/shared/image-card";
 
@@ -27,8 +28,6 @@ class ChatList extends React.Component {
   static DAY = 24 * ChatList.HOUR;
   static YEAR = 365 * ChatList.DAY;
 
-  // Initialize socket.
-  socket = io(`http://${env.host}:${env.port}`, { transports: ['websocket'] });
   state = {
     refreshing: false,
     user: {},
@@ -41,6 +40,14 @@ class ChatList extends React.Component {
   async componentDidMount() {
     await this.getCurrentUser();
     await this.loadData();
+    this.socket = io(`http://${env.host}:${env.port}`, { transports: ['websocket'], query: `roomId=${this.state.user._id}` });
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      await this.getCurrentUser();
+      await this.loadData();
+    }
   }
 
   /**
@@ -77,7 +84,6 @@ class ChatList extends React.Component {
   async loadData() {
     const response = await this.getAllChats()
     this.setState({ directChats: response.data, isLoading: false });
-    // this.connectSocket();
   }
 
   /**
@@ -121,17 +127,8 @@ class ChatList extends React.Component {
     return user;
   }
 
-  /**
-   * Listen for new messages.
-   */
-  connectSocket() {
-    this.socket.on('newMessage', async message => {
-      // Store message.
-      await this.updateChat(message);
-    });
-  }
-
   render() {
+    
     const directChats = this.state.directChats.length > 0 && this.state.directChats.map(chat => {
       // Get last message and user that sent it
       const lastMessage = chat.messages[chat.messages.length - 1]
@@ -142,7 +139,7 @@ class ChatList extends React.Component {
           title={otherUser.name}
           subtitle={lastMessage.content}
           imgSrc={{ uri: otherUser.profile_picture }}
-          onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat })}
+          onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat, socket: this.socket })}
         />
       )
     })
@@ -157,7 +154,7 @@ class ChatList extends React.Component {
           {this.renderSearchBar()}
 
           <Text style={[styles.chatsTitle, styles.directChatsTitle]}>Direct Chats</Text>
-          {directChats && directChats}
+          {directChats}
         </ScrollView>
       </View>
     );
@@ -288,4 +285,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ChatList;
+export default withNavigationFocus(ChatList);

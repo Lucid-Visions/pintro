@@ -1,8 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Text, Image } from 'react-native';
+import { StyleSheet, View, FlatList, Text, AsyncStorage } from 'react-native';
 import ChatInputToolbar from './ChatInputToolbar';
-const io = require('socket.io-client');
-
 
 /**
  * Chat component
@@ -16,58 +14,66 @@ export default class Chat extends React.Component {
     this.socket = props.socket;
   };  
 
+  componentDidMount() {
+    this.connectSocket()
+  }
+
+  /**
+   * Listen for new messages.
+   */
+  connectSocket() {
+    this.socket.on('sentMsg', () => {
+      this.setState({ state: this.state });
+    });
+  }
+
+  /**
+   * Store the new chat.
+   * @param {any} message the new message.
+   */
+  async updateChat(message) {
+    await this.updateMessages(message);
+  }
+
+  /**
+  * Save any new messages in the database.
+  */
+  async updateMessages(message) {
+    var myHeaders = new Headers();
+    var userToken = await AsyncStorage.getItem("token");
+
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", userToken);
+
+    var requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: JSON.stringify(message)
+    };
+
+    try {
+      await fetch(`http://${env.host}:${env.port}/api/v1/chat/update`, requestOptions);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   /**
    * Create a new message with a timestamp the id of the user that sent it
    * @param {string} message the new message plaintext.
    */
-  createNewMessage(message) {
+  sendMessage(message) {
+    const [ otherUserId ] = this.props.chat.userIds.filter(uid => uid !== this.props.user._id)
+
     let newMessage = {
       content: message,
-      createdAt: new Date(),
-      uid: this.state.user._id
+      sentby: this.props.user._id,
+      sentto: otherUserId
     };
+
     // Inform the message has been sent.
     this.socket.emit('message', newMessage);
-  }
-
-  renderDate(index) {
-    let currentMessageDateStamp = this.state.chat.messages[index].createdAt;
-    let shouldRenderDate = false;
-    let firstMessage = false;
-
-    if (index === 0) {
-      shouldRenderDate = true;
-      firstMessage = true;
-    }
-    else if (index > 0) {
-      let previousMessageDateStamp = this.state.chat.messages[index - 1].createdAt;
-      let timeDifference = currentMessageDateStamp.getTime() - previousMessageDateStamp.getTime();
-      let timeDifferenceMins = timeDifference / 60000;
-
-      if (timeDifferenceMins > Chat.MAX_MESSAGE_TIME_DIFFERENCE) shouldRenderDate = true;
-    }
-
-    if (shouldRenderDate) {
-      let text = currentMessageDateStamp.getDate() + " " +    // day of the month
-        Chat.MONTHS[currentMessageDateStamp.getMonth()] + ", " +    // month
-        currentMessageDateStamp.getHours() + ":";   // hour
-      let minutes = currentMessageDateStamp.getMinutes();
-
-      if (minutes < 10)
-        text = text + "0" + minutes;
-      else
-        text = text + minutes;
-
-      return (
-        <View style={{
-          marginTop: firstMessage ? 20 : 5,
-          marginBottom: 5,
-          alignItems: "center"
-        }}>
-          <Text style={{ fontFamily: "poppins-light", fontSize: 11 }}>{text}</Text>
-        </View>
-      );
-    }
+    this.updateChat(newMessage);
   }
 
   render() {
@@ -77,10 +83,10 @@ export default class Chat extends React.Component {
         <FlatList
           data={this.props.chat.messages || []}
           contentContainerStyle={styles.messagesContainer}
-          renderItem={message => {
+          renderItem={({ item }) => {
 
             const currentUser = this.props.user
-            const isAuthorCurrentUser = message.sentby === currentUser._id;
+            const isAuthorCurrentUser = item.sentby === currentUser._id;
       
             return (
               <View>
@@ -93,10 +99,10 @@ export default class Chat extends React.Component {
                     <View style={{
                       paddingTop: 15, paddingBottom: 15, paddingRight: 15, paddingLeft: 15,
                       maxWidth: 250, marginLeft: 10, borderRadius: 15,
-                      backgroundColor: isAuthorCurrentUser ? "lightgray" : "black"
+                      backgroundColor: isAuthorCurrentUser ? "black" : "lightgray"
                     }}>
-                      <Text style={{ fontFamily: "poppins-regular", fontSize: 12, color: isAuthorCurrentUser ? "black" : "white" }}>
-                        {message.content}
+                      <Text style={{ fontFamily: "poppins-regular", fontSize: 12, color: isAuthorCurrentUser ? "white" : "black" }}>
+                        {item.content}
                       </Text>
                     </View>
                   </View>
@@ -110,8 +116,7 @@ export default class Chat extends React.Component {
 
         <ChatInputToolbar style={{ justifyContent: "flex-end" }}
           onSend={message => {
-            this.createNewMessage(message);
-            this.messages.current.scrollToEnd();
+            this.sendMessage(message);
           }}
         />
 
