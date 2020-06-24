@@ -4,8 +4,6 @@ import jwtData from '../bin/jwtData'
 
 import UserModel from '../models/user_model'
 
-import Notification from './Notification'
-
 const Messaging = {
 
   /**
@@ -63,19 +61,17 @@ const Messaging = {
       let data = await messagesDB.collection('chats')
         .where('userIds', '==', [ message.sentto, uid ])
         .get()
-      
-        if (data.docs.length === 0) {
-          data = await messagesDB.collection('chats')
-            .where('userIds', '==', [ uid, message.sentto ])
-            .get()
-        }
 
-        const messages = [ ...data.docs[0].data().messages, message ]
+      if (data.docs.length === 0) {
+        data = await messagesDB.collection('chats')
+          .where('userIds', '==', [ uid, message.sentto ])
+          .get()
+      }
+
+      const messages = [ ...data.docs[0].data().messages, message ]
 
       if (data) {
         await data.docs[0].ref.update({ messages: messages })
-
-        // Notifications.create(status.author.author_id, user.name + ' liked your status.', 'status', {status, user: userId})
 
         return res.status(200).send('Messages successfully updated.')
       } else {

@@ -12,9 +12,9 @@ io.on('connection', socket => {
   if (socket.handshake.query.roomId) {
     socket.join(socket.handshake.query.roomId)
   }
-  
+
   socket.on('message', message => {
-    socket.to(message.sentto).emit('sentMsg', message);
+    socket.to(message.sentto).emit('sentMsg', message)
   })
 })
 
