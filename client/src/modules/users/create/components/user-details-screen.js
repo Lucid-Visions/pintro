@@ -14,12 +14,15 @@ import { nameRegex } from '../../constants'
 import fieldValidator from "../../../shared/utils/index";
 
 const updateRequest = require("../../../../assets/updateRequest").update;
+
 var validName;
+var validTitle;
+var validCompany;
 
 var btnStyles = { ...styles.btn, ...styles.btnDisabled }
 
 const isSubmitDisabled = () => {
-  if(validName) {
+  if(validName && validTitle && validCompany) {
     btnStyles = styles.btn
     return false;
   } else {
@@ -34,7 +37,7 @@ export default class userDetailsScreen extends Component {
     super(props);
     this.state = {
       name: "",
-      currentJob: "",
+      currentTitle: "",
       currentCompany: "",
       story: ""
     };
@@ -43,7 +46,7 @@ export default class userDetailsScreen extends Component {
   update(navigation) {
     const toUpdate = {
       name: this.state.name.trim(),
-      "experience.currentJobTitle": this.state.currentJob.trim(),
+      "experience.currentJobTitle": this.state.currentTitle.trim(),
       "experience.currentCompany": this.state.currentCompany.trim(),
       bio: this.state.story.trim()
     };
@@ -84,26 +87,30 @@ export default class userDetailsScreen extends Component {
                 />
               </View>
               {/* Going to be a dropdown as per PIN-79*/}
-              <View style={styles.bottomBorder}>
+              <View style={validTitle==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
                 <Text style={styles.prompt}>Current job title</Text>
                 <TextInput
                   style={styles.placeholder}
                   placeholderTextColor={"white"}
                   placeholder="Enter your job title"
-                  onChangeText={currentJob => this.setState({ currentJob })}
-                  value={this.state.currentJob}
+                  onChangeText={currentTitle => {
+                    validTitle = fieldValidator({regex: nameRegex, input: currentTitle})
+                    this.setState({ currentTitle })
+                  }}
+                  value={this.state.currentTitle}
                 />
               </View>
 
-              <View style={styles.bottomBorder}>
+              <View style={validCompany==false ? styles.bottomBorderInvalid : styles.bottomBorder}>
                 <Text style={styles.prompt}>Current company</Text>
                 <TextInput
                   style={styles.placeholder}
                   placeholderTextColor={"white"}
                   placeholder="Enter current company name"
-                  onChangeText={currentCompany =>
+                  onChangeText={currentCompany => {
+                    currentCompany !== "" ? validCompany = true : validCompany=false;
                     this.setState({ currentCompany })
-                  }
+                  }}
                   value={this.state.currentCompany}
                 />
               </View>
