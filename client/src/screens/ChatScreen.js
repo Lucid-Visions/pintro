@@ -46,29 +46,16 @@ export default class ChatScreen extends React.Component {
     );
   }
 
-  renderTopComponent() {
-    if (this.state.chat.type !== undefined) {
-      let chatType = this.state.chat.type;
-      let chatTypeContext = this.state.chat.context;
-      if (chatType && chatTypeContext) {
-        return (
-          <View style={styles.chatInfoContainer}>
-            <ActionButtonComponent type={chatType} context={chatTypeContext} />
-          </View>
-        );
-      }
-    }
-    else {
-      return;
-    }
-  }
-
   render() {
     return (
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'android' ? "height" : null}>
         <View style={styles.container}>
           {this.renderHeader()}
-          {this.renderTopComponent()}
+
+          <View style={styles.chatInfoContainer}>
+            <ActionButtonComponent type={this.state.chat.type} intent={this.state.chat.intent} />
+          </View>
+
           <Chat
             user={this.state.user}
             chat={this.state.chat}

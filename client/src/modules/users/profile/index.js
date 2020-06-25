@@ -529,19 +529,12 @@ const ProfileScreen = ({
 
     const messageData = {
       intent,
-      user1: {
-        uid: userdoc._id,
-        email: userdoc.email_login
-      },
-      user2: {
-        uid,
-        email
-      },
-      messages: [{ content, sentBy: uid }]
+      userIds: [ userdoc._id, uid],
+      messages: [{ content, sentto: uid, sentby: userdoc._id }]
     }
 
     var requestOptions = {
-      method: "PUT",
+      method: "POST",
       headers: myHeaders,
       body: JSON.stringify(messageData),
     };
