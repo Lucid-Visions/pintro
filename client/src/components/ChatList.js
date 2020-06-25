@@ -18,7 +18,7 @@ import { withNavigationFocus } from '@react-navigation/compat';
 import ElevatedView from 'react-native-elevated-view';
 import ImageCard from "../modules/shared/image-card";
 
-const io = require('socket.io-client');
+import SocketService from '../services/socket-service'
 
 class ChatList extends React.Component {
   static MAX_MESSAGE_LENGTH = 25;   // maximum message length to be displayed
@@ -38,9 +38,9 @@ class ChatList extends React.Component {
   };
 
   async componentDidMount() {
-    await this.getCurrentUser();
-    await this.loadData();
-    this.socket = io(`http://${env.host}:${env.port}`, { transports: ['websocket'], query: `roomId=${this.state.user._id}` });
+    await this.getData()
+
+    this.socket = SocketService.getSocket(this.state.user._id, 'sentMsg', this.onRefresh)
   }
 
   async componentDidUpdate(prevProps) {
@@ -127,6 +127,15 @@ class ChatList extends React.Component {
     return user;
   }
 
+  getData = async () => {
+    await this.getCurrentUser();
+    await this.loadData();
+  }
+
+  onRefresh = () => {
+    this.getData()
+  }
+
   render() {
     
     const directChats = this.state.directChats.length > 0 && this.state.directChats.map(chat => {
@@ -139,13 +148,13 @@ class ChatList extends React.Component {
           title={otherUser.name}
           subtitle={lastMessage.content}
           imgSrc={{ uri: otherUser.profile_picture }}
-          onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat, socket: this.socket })}
+          onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat, socket: this.socket, refresh: this.onRefresh })}
         />
       )
     })
 
     const refreshControl = (
-      <RefreshControl refreshing={this.state.refreshing} onRefresh={() => console.log("Refreshing")} />
+      <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
     )
 
     return (

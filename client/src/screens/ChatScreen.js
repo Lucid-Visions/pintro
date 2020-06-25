@@ -14,10 +14,11 @@ export default class ChatScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      socket: props.route.params.socket,
       user: props.route.params.user,
-      chat: props.route.params.chat
+      chat: props.route.params.chat,
+      refresh: props.route.params.refresh
     };
   };
 
@@ -68,7 +69,12 @@ export default class ChatScreen extends React.Component {
         <View style={styles.container}>
           {this.renderHeader()}
           {this.renderTopComponent()}
-          <Chat user={this.state.user} chat={this.state.chat} socket={this.state.socket} style={styles.chat} />
+          <Chat
+            user={this.state.user}
+            chat={this.state.chat}
+            refresh={this.state.refresh}
+            style={styles.chat}
+          />
           <View />
         </View>
       </KeyboardAvoidingView>

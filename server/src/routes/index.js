@@ -85,7 +85,8 @@ router.delete('/hub/:id', jwtData.verifyToken, Hub.deleteHubData)
 
 /* ---------- Firebase ---------*/
 router.get('/chat', jwtData.verifyToken, Messaging.getChats)
-router.patch('/chat/update', jwtData.verifyToken, Messaging.updateChat)
+router.get('/chat/:id', jwtData.verifyToken, Messaging.getChat)
+router.patch('/chat/:id', jwtData.verifyToken, Messaging.updateChat)
 router.post('/chat', jwtData.verifyToken, Messaging.createChat)
 
 /* ------------- Article -------------*/
