@@ -42,19 +42,13 @@ const Messaging = {
   },
 
   async getChat(req, res) {
-    const decoded = jwt.verify(
-      req.token,
-      jwtData.publicKEY,
-      jwtData.verifyOptions)
-
-    const uid = decoded.user.uid
     const chatId = req.params.id
 
     try {
-      let doc = await messagesDB.collection("chats").doc(chatId).get();
+      let doc = await messagesDB.collection('chats').doc(chatId).get()
       const users = await UserModel.find({ _id: doc.data().userIds })
       const chat = { id: doc.id, ...doc.data(), users }
-      
+
       return res.status(200).json({ data: chat })
 
     } catch (error) {
@@ -73,16 +67,9 @@ const Messaging = {
     const chatId = req.params.id
     const message = req.body
 
-    const decoded = jwt.verify(
-      req.token,
-      jwtData.publicKEY,
-      jwtData.verifyOptions)
-
-    const uid = decoded.user.uid
-
     try {
-      
-      let chat = await messagesDB.collection("chats").doc(chatId).get();
+
+      let chat = await messagesDB.collection('chats').doc(chatId).get()
 
       const messages = [ ...chat.data().messages, message ]
 
