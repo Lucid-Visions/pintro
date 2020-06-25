@@ -16,7 +16,7 @@ export default class Chat extends React.Component {
       chat: null
     }
   }
-  
+
   async componentDidMount() {
     this.socket = SocketService.getSocket(this.props.user._id, 'sentMsg', this.loadData)
     await this.loadData()
