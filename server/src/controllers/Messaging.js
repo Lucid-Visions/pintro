@@ -48,22 +48,31 @@ const Messaging = {
      * @param {void} res success or error warning
      */
   async updateChat(req, res) {
-    let messages = JSON.parse(req.query.messages)
+    const message = req.body
+
     const decoded = jwt.verify(
       req.token,
       jwtData.publicKEY,
       jwtData.verifyOptions)
 
     const uid = decoded.user.uid
+
     try {
-      let docs = await messagesDB.collection('chats')
-        .where('uid', '==', uid)
+      let data = await messagesDB.collection('chats')
+        .where('userIds', '==', [ message.sentto, uid ])
         .get()
-      if (docs) {
-        let docRef = docs.docs[0].ref
-        // Delete fist and then add to avoid duplicates.
-        await docRef.update({ messages: [] })
-        await docRef.update({ messages: messages })
+
+      if (data.docs.length === 0) {
+        data = await messagesDB.collection('chats')
+          .where('userIds', '==', [ uid, message.sentto ])
+          .get()
+      }
+
+      const messages = [ ...data.docs[0].data().messages, message ]
+
+      if (data) {
+        await data.docs[0].ref.update({ messages: messages })
+
         return res.status(200).send('Messages successfully updated.')
       } else {
         console.log('Error')

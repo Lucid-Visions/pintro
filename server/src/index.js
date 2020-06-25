@@ -9,9 +9,12 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 io.on('connection', socket => {
+  if (socket.handshake.query.roomId) {
+    socket.join(socket.handshake.query.roomId)
+  }
+
   socket.on('message', message => {
-    // Re-emit the fact that a new message has been sent.
-    io.emit('newMessage', message)
+    socket.to(message.sentto).emit('sentMsg', message)
   })
 })
 
