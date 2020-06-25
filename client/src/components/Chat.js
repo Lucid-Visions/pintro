@@ -16,7 +16,7 @@ export default class Chat extends React.Component {
       chat: null
     }
   }
-
+  
   async componentDidMount() {
     this.socket = SocketService.getSocket(this.props.user._id, 'sentMsg', this.loadData)
     await this.loadData()
@@ -124,7 +124,6 @@ export default class Chat extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
         {this.state.chat && (
           <FlatList
             data={this.state.chat.messages || []}

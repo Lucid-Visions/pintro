@@ -23,7 +23,8 @@ export default class ChatScreen extends React.Component {
   };
 
   renderHeader() {
-    let pictureUri = this.state.chat.pictureUri;
+    const chatPartnerUser = this.state.chat.users.filter(user => user._id != this.state.user._id)
+    let pictureUri = chatPartnerUser[0].profile_picture;
     return (
       <View style={styles.headerContainer}>
         <View style={styles.headerInnerContainer}>
@@ -34,13 +35,14 @@ export default class ChatScreen extends React.Component {
               resizeMode={"center"}
             />
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', {uid: chatPartnerUser[0]._id})}>
+            <Image
+              style={[styles.headerImages, { marginLeft: 10, marginRight: 10 }]}
+              source={pictureUri !== undefined ? { uri: pictureUri } : require('../assets/empty-profile-picture.png')}
+            />
 
-          <Image
-            style={[styles.headerImages, { marginLeft: 10, marginRight: 10 }]}
-            source={pictureUri !== undefined ? { uri: pictureUri } : require('../assets/empty-profile-picture.png')}
-          />
-
-          <Text style={styles.headerTitle}>{this.state.chat.name}</Text>
+            <Text style={styles.headerTitle}>{chatPartnerUser[0].name}</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
