@@ -25,7 +25,7 @@ const Messaging = {
         .where('userIds', 'array-contains', uid)
         .get()
 
-      chatData.docs.map(doc => chats.push(doc.data()))
+      chatData.docs.map(doc => chats.push({ id: doc.id, ...doc.data()}))
 
       for (let i = 0; i < chats.length; i++) {
         const users = await UserModel.find({ _id: chats[i].userIds })
@@ -41,6 +41,28 @@ const Messaging = {
     }
   },
 
+  async getChat(req, res) {
+    const decoded = jwt.verify(
+      req.token,
+      jwtData.publicKEY,
+      jwtData.verifyOptions)
+
+    const uid = decoded.user.uid
+    const chatId = req.params.id
+
+    try {
+      let doc = await messagesDB.collection("chats").doc(chatId).get();
+      const users = await UserModel.find({ _id: doc.data().userIds })
+      const chat = { id: doc.id, ...doc.data(), users }
+      
+      return res.status(200).json({ data: chat })
+
+    } catch (error) {
+      console.log(error)
+      return res.status(400).send('Error!')
+    }
+  },
+
   /**
      * Update the messages with the one the user has input.
      * Also return the updated messages.
@@ -48,6 +70,7 @@ const Messaging = {
      * @param {void} res success or error warning
      */
   async updateChat(req, res) {
+    const chatId = req.params.id
     const message = req.body
 
     const decoded = jwt.verify(
@@ -58,20 +81,13 @@ const Messaging = {
     const uid = decoded.user.uid
 
     try {
-      let data = await messagesDB.collection('chats')
-        .where('userIds', '==', [ message.sentto, uid ])
-        .get()
+      
+      let chat = await messagesDB.collection("chats").doc(chatId).get();
 
-      if (data.docs.length === 0) {
-        data = await messagesDB.collection('chats')
-          .where('userIds', '==', [ uid, message.sentto ])
-          .get()
-      }
+      const messages = [ ...chat.data().messages, message ]
 
-      const messages = [ ...data.docs[0].data().messages, message ]
-
-      if (data) {
-        await data.docs[0].ref.update({ messages: messages })
+      if (chat) {
+        await chat.ref.update({ messages: messages })
 
         return res.status(200).send('Messages successfully updated.')
       } else {
