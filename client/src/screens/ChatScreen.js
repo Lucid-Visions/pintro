@@ -36,12 +36,15 @@ export default class ChatScreen extends React.Component {
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', {uid: chatPartnerUser[0]._id})}>
-            <Image
-              style={[styles.headerImages, { marginLeft: 10, marginRight: 10 }]}
-              source={pictureUri !== undefined ? { uri: pictureUri } : require('../assets/empty-profile-picture.png')}
-            />
-
-            <Text style={styles.headerTitle}>{chatPartnerUser[0].name}</Text>
+            <View style={{flex:1}}>
+              <Image
+                style={[styles.headerImages, { marginLeft: 10, marginRight: 10 }]}
+                source={pictureUri !== undefined ? { uri: pictureUri } : require('../assets/empty-profile-picture.png')}
+              />
+            </View>
+            <View style={{paddingLeft:75}}>
+              <Text style={styles.headerTitle}>{chatPartnerUser[0].name}</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -108,6 +111,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
   },
   headerTitle: {
+
     fontFamily: "poppins-medium",
     fontSize: 18
   },
