@@ -527,24 +527,36 @@ const ProfileScreen = ({
     let user = JSON.parse(await AsyncStorage.getItem("user"));
     let userdoc = user.doc;
 
-    const messageData = {
-      intent,
-      userIds: [ userdoc._id, uid],
-      messages: [{ content, sentto: uid, sentby: userdoc._id }]
+    const getChatResp = await fetch(`http://${env.host}:${env.port}/api/v1/chat`, { method: 'GET', headers: myHeaders })
+    const chats = await getChatResp.json()
+
+    // Set up for POST
+    let method = 'POST'
+    let uri = `http://${env.host}:${env.port}/api/v1/chat`
+    let messageData = {
+          type: 'help',
+          intent,
+          userIds: [ userdoc._id, uid],
+          messages: [{ content, sentto: uid, sentby: userdoc._id }]
+        }
+
+    const [ chat ] = chats.data.filter(chat => chat.userIds.includes(uid))
+
+    // If chat exists, change some arguments
+    if (chat) {
+      method = 'PATCH'
+      uri = `${uri}/${chat.id}`
+      messageData = { content, sentto: uid, sentby: userdoc._id }
     }
 
     var requestOptions = {
-      method: "POST",
+      method,
       headers: myHeaders,
       body: JSON.stringify(messageData),
     };
 
-    let response = await fetch(
-      `http://${env.host}:${env.port}/api/v1/chat`,
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+    // Perform request
+    let response = await fetch(uri, requestOptions)
       .catch((error) => console.log("error", error));
 
 
