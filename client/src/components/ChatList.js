@@ -138,7 +138,6 @@ class ChatList extends React.Component {
   }
 
   render() {
-    
     const directChats = this.state.directChats.length > 0 && this.state.directChats.map(chat => {
       // Get last message and user that sent it
       const lastMessage = chat.messages[chat.messages.length - 1]
@@ -146,12 +145,22 @@ class ChatList extends React.Component {
 
       return (
         <View style={styles.directChatContainer}>
-          <ImageCard
-            title={otherUser.name}
-            subtitle={lastMessage.content.substring(0,35)+(lastMessage.content.length > 35?"...":"")}
-            imgSrc={{ uri: otherUser.profile_picture }}
-            onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat, socket: this.socket, refresh: this.onRefresh })}
-          />
+          <View style={{flex:10}}>
+            <ImageCard
+              title={otherUser.name}
+              subtitle={lastMessage.content.substring(0,35)+(lastMessage.content.length > 35?"...":"")}
+              imgSrc={{ uri: otherUser.profile_picture }}
+              onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat, socket: this.socket, refresh: this.onRefresh })}
+            />
+          </View>
+          <View style={{flex:1}}>
+            {lastMessage.sentto == this.state.user._id ? 
+              <Image
+                style={{height: 10, width: 10, marginTop: 50}}
+                source={require('../assets/unreadMessage.png')}>
+              </Image>
+            : null}
+          </View>
         </View>
       )
     })
@@ -251,11 +260,11 @@ const styles = StyleSheet.create({
     height: 85
   },
   directChatContainer: {
-    flex: 1,
     paddingBottom: 2,
     paddingTop: 1,
     borderBottomWidth: 0.5,
-    borderColor: "lightgray"
+    borderColor: "lightgray",
+    flexDirection: "row"
   },
   directChatPicture: {
     height: 45,
