@@ -37,22 +37,18 @@ class LiveFeed extends React.Component {
     };
   }
 
-  _onRefresh = (x = true) => {
-    this.setState({ refreshing: x });
-    this.fetchData({}).then(() => {
-      this.setState({ refreshing: false });
-    });
+  _onRefresh = () => {
+    this.getUid()
+    this.fetchData({});
   };
 
   componentDidMount() {
-    this.getUid()
-    this.fetchData({});
+    this._onRefresh()
   }
 
   async componentDidUpdate(prevProps) {
     if (prevProps.isFocused !== this.props.isFocused) {
-      this.getUid()
-      this.fetchData({});
+      this._onRefresh()
     }
   }
 
@@ -176,7 +172,6 @@ class LiveFeed extends React.Component {
           refreshing={this.state.refreshing}
           keyExtractor={(item) => item._id}
           numColumns={2}
-          onMomentumScrollEnd={()=>this.fetchData({date_stamp:this.state.items.length > 0 ? this.state.items[this.state.items.length-1].date_stamp-1:Date.now(), extend:true})}
           onEndReachedThreshold={0.5}
           initialNumToRender={4}
         />
