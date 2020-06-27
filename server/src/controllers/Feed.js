@@ -36,6 +36,22 @@ const Feed = {
     let statusData = []
 
     switch (payload.filter) {
+      case 5: {
+        actionButtonData = await Feed.getDataFromCollection(
+          ActionButtonModel,
+          'ACTION',
+          payload
+        )
+        break
+      }
+      case 4: {
+        actionButtonData = await Feed.getDataFromCollection(
+          ActionButtonModel,
+          'ACTION',
+          payload
+        )
+        break
+      }
       case 3: {
         actionButtonData = await Feed.getDataFromCollection(
           ActionButtonModel,
@@ -119,6 +135,8 @@ const Feed = {
     switch (payload.filter){
       case 2: { filterType = 'help'; break }
       case 3: { filterType = 'introduce'; break }
+      case 4: { filterType = 'talktomeabout'; break }
+      case 5: { filterType = 'promoteme'; break }
     }
     switch (type) {
       case 'ACTION': {
