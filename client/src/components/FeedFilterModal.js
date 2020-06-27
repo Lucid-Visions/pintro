@@ -9,7 +9,9 @@ import Modal from "react-native-modal";
 const FilterType = {
     STATUS: 1,
     HELP_ME_WITH: 2,
-    INTRODUCE_ME: 3
+    INTRODUCE_ME: 3,
+    TALK_TO_ME_ABOUT: 4,
+    PROMOTE_ME: 5
 }
 
 class FeedFilterModal extends React.Component {
@@ -21,6 +23,8 @@ class FeedFilterModal extends React.Component {
             isStatus: false, // 1
             isHelpMeWith: false, // 2
             isIntroduceMe: false, //3
+            isTalkToMeAbout: false, //4
+            isPromoteMe: false, //5
         }
     }
     
@@ -43,6 +47,8 @@ class FeedFilterModal extends React.Component {
             isHelpMeWith: false,
             isIntroduceMe: false,
             isSelected: false, 
+            isTalkToMeAbout: false,
+            isPromoteMe: false,
         })
 
     }
@@ -54,6 +60,8 @@ class FeedFilterModal extends React.Component {
             isStatus: false,
             isIntroduceMe: false,
             isSelected: false,
+            isTalkToMeAbout: false,
+            isPromoteMe: false,
         })
     }
 
@@ -64,9 +72,34 @@ class FeedFilterModal extends React.Component {
             isStatus: false,
             isHelpMeWith: false,
             isSelected: false,
+            isTalkToMeAbout: false,
+            isPromoteMe: false,
         })
     }
 
+    toggleTalkToMeAbout = () => {
+        this.props.onSetFilter(!this.state.isTalkToMeAbout ? FilterType.TALK_TO_ME_ABOUT : null)
+        this.setState({
+            isTalkToMeAbout: !this.state.isTalkToMeAbout,
+            isStatus: false,
+            isHelpMeWith: false,
+            isSelected: false,
+            isIntroduceMe: false,
+            isPromoteMe: false,
+        })
+    }
+
+    togglePromoteMe = () => {
+        this.props.onSetFilter(!this.state.isPromoteMe ? FilterType.PROMOTE_ME : null)
+        this.setState({
+            isPromoteMe: !this.state.isPromoteMe,
+            isStatus: false,
+            isHelpMeWith: false,
+            isSelected: false,
+            isIntroduceMe: false,
+            isTalkToMeAbout: false,
+        })
+    }
 
     render () {
         return(
@@ -81,7 +114,7 @@ class FeedFilterModal extends React.Component {
                                     source={require('../assets/StatusIcon.png')}>
                                 </Image>
                                 <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 5, marginLeft: 10, marginBottom: 20}}>
-                                    Status
+                                    General post
                                 </Text>
                                 <Image 
                                     style={{height: 18, width: 18, marginLeft: 210, marginTop: 4}}
@@ -126,6 +159,42 @@ class FeedFilterModal extends React.Component {
                         </View>
                     </View>
                 </TouchableOpacity> :
+                !this.state.isSelected && this.state.isTalkToMeAbout ?
+                <TouchableOpacity style={styles.container} onPress={this.toggleState}>
+                    <View style={{flexDirection: "column", marginTop: 15, marginLeft: 12 }}>
+                        <View style={{flexDirection: "row" }}>
+                            <Image
+                                style={{height: 30, width: 30, marginRight: 10}}
+                                source={require('../assets/MessageIcon.png')}>
+                            </Image>
+                            <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 5, marginBottom: 20}}>
+                                Talk to me about
+                            </Text>
+                            <Image 
+                                style={{height: 18, width: 18, marginLeft: 153, marginTop: 7}}
+                                source={require('../assets/filter.png')}>
+                            </Image>
+                        </View>
+                    </View>
+                </TouchableOpacity> :
+                !this.state.isSelected && this.state.isPromoteMe ?
+                <TouchableOpacity style={styles.container} onPress={this.toggleState}>
+                    <View style={{flexDirection: "column", marginTop: 15, marginLeft: 12 }}>
+                        <View style={{flexDirection: "row" }}>
+                            <Image
+                                style={{height: 30, width: 30, marginRight: 10}}
+                                source={require('../assets/MessageIcon.png')}>
+                            </Image>
+                            <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 5, marginBottom: 20}}>
+                                Promote me
+                            </Text>
+                            <Image 
+                                style={{height: 18, width: 18, marginLeft: 153, marginTop: 7}}
+                                source={require('../assets/filter.png')}>
+                            </Image>
+                        </View>
+                    </View>
+                </TouchableOpacity> :
                     !this.state.isSelected ?
                     <TouchableOpacity style={styles.container} onPress={this.toggleState}>
                     <View style={{flexDirection: "column", marginTop: 15, marginLeft: 12 }}>
@@ -155,7 +224,7 @@ class FeedFilterModal extends React.Component {
                                                 source={require('../assets/StatusIcon.png')}>
                                             </Image>
                                             <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 5, marginLeft: 10, marginBottom: 10}}>
-                                                Status
+                                                General post
                                             </Text>
                                         </View>
                                     </TouchableOpacity>
@@ -181,10 +250,32 @@ class FeedFilterModal extends React.Component {
                                             </Text>
                                         </View>
                                     </TouchableOpacity>
+                                    <TouchableOpacity onPress={this.toggleTalkToMeAbout}>
+                                        <View style={{flexDirection: "row", marginTop: 5 }}>
+                                            <Image
+                                                style={{height: 30, width: 30, marginRight: 10}}
+                                                source={require('../assets/MessageIcon.png')}>
+                                            </Image>
+                                            <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 6, marginBottom: 10}}>
+                                                Talk to me about
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={this.togglePromoteMe}>
+                                        <View style={{flexDirection: "row", marginTop: 5 }}>
+                                            <Image
+                                                style={{height: 30, width: 30, marginRight: 10}}
+                                                source={require('../assets/MessageIcon.png')}>
+                                            </Image>
+                                            <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 12, marginTop: 6, marginBottom: 10}}>
+                                                Promote Me
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
                                 </View>
                                 <TouchableOpacity onPress={this.toggleState} >
                                     <Image 
-                                        style={{height: 18, width: 18, marginLeft: 150, marginTop: 5}}
+                                        style={{height: 18, width: 18, marginLeft: 100, marginTop: 5}}
                                         source={require('../assets/CloseButton.png')}>
                                     </Image>
                                 </TouchableOpacity>
@@ -210,13 +301,13 @@ const styles = StyleSheet.create({
     },
     secondContainer: {
         width: 335,
-        height: 185,
+        height: 320,
         borderRadius: 50 / 2,
-        marginLeft: 5,
+        alignSelf:'center',
         backgroundColor: 'white',
         marginTop: 15,
         marginBottom: 320,
-        marginRight: 100
+        padding:'5%'
     },
     outline: {
         flexDirection: 'column',
