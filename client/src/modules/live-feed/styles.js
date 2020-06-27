@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         margin: "auto",
         alignItems: "stretch",
         fontSize: 13,
-        marginBottom: 50,
+        marginBottom: 30,
         paddingVertical: 15
     },
     btn: {

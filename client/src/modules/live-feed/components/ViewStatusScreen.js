@@ -132,7 +132,7 @@ export default class ViewStatusScreen extends Component {
                 maxLength={300}
               />
           </View>
-          <View>
+          <View style={{paddingBottom:50}}>
               <TouchableOpacity 
                 disabled={isSubmitDisabled()}
                 onPress={async () => {
