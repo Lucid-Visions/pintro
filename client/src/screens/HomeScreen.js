@@ -19,7 +19,7 @@ export default function HomeScreen({ navigation }) {
   );
   
   const SecondRoute = () => (
-    <LiveFeed/>
+    <LiveFeed navigation={navigation}/>
   );
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
