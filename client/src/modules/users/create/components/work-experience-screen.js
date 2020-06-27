@@ -104,14 +104,12 @@ export default class workExperienceScreen extends Component {
       newEducation
     ) {
       return {
-        experience:{
-        work_experience_years: this.state.years,
-        industry: this.state.industry,
-        companies: newCompanies,
-        education: newEducation,
-        academic_level: this.state.level
-        }
-      };
+        "experience.work_experience_years": this.state.years,
+        "experience.industry": this.state.industry,
+        "experience.companies": newCompanies,
+        "experience.education": newEducation,
+        "experience.academic_level": this.state.level
+      }
     } 
   }
 

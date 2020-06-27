@@ -11,6 +11,8 @@ import ViewStatusScreen from "../modules/live-feed/components/ViewStatusScreen"
 //for WGO Modal
 import WriteStatusScreen from "../screens/WriteStatusScreen";
 import AskHelpScreen from "../screens/AskHelpScreen";
+import TalkToMeAboutScreen from "../screens/TalkToMeAboutScreen";
+import PromoteMeScreen from "../screens/PromoteMeScreen";
 import RequestIntroScreen from "../screens/RequestIntroScreen";
 
 const AuthContext = React.createContext();
@@ -123,6 +125,8 @@ export default function AppNavigator() {
           <Stack.Screen name="ViewStatus" component={ViewStatusScreen} />
           <Stack.Screen name="AskHelp" component={AskHelpScreen} />
           <Stack.Screen name="RequestIntro" component={RequestIntroScreen} />
+          <Stack.Screen name="TalkToMeAbout" component={TalkToMeAboutScreen} />
+          <Stack.Screen name="PromoteMe" component={PromoteMeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

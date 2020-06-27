@@ -223,7 +223,6 @@ const ProfileScreen = ({
               >
                 My Story
               </Text>
-              {editBtn("SettingsStack", {screen: "Edit Story", params: { name, experience, bio }})}
             </View>
             <Text
               style={{ fontFamily: "poppins-semi-bold", color: "grey" }}
@@ -599,7 +598,9 @@ const ProfileScreen = ({
         <View style={styles.headerText}>
           <View style={styles.editRow}>
             <Text style={styles.name}>{name}</Text>
-            {editBtn("SettingsStack", {screen: "Edit Story", params: { name, experience, bio }})}
+            <View style={{paddingLeft: 35}}>
+              {editBtn("SettingsStack", {screen: "Edit Story", params: { name, experience, bio }})}
+            </View>
           </View>
 
           <Text style={{ fontFamily: "poppins-bold", marginBottom: "3%" }}>
