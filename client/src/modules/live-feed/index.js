@@ -6,7 +6,9 @@ import {
   AsyncStorage,
   FlatList,
 } from "react-native";
-import FeedComponent from "../../components/FeedItem";
+import { withNavigationFocus } from '@react-navigation/compat';
+
+import FeedItem from "../../components/FeedItem";
 import WhiteFeedComponent from "../../components/WhiteFeedItem";
 import FeedFilterModal from "../../components/FeedFilterModal";
 import EmptyStateRefresh from "../../components/EmptyStateRefresh";
@@ -17,9 +19,7 @@ import { getFeed } from './actions'
 /**
  * Main screen of the Home tab.
  */
-export default class LiveFeed extends React.Component {
-
-
+class LiveFeed extends React.Component {
 
   static navigationOptions = {
     headerLeft: "Arrow_back", // To be changed with an icon.
@@ -47,6 +47,13 @@ export default class LiveFeed extends React.Component {
   componentDidMount() {
     this.getUid()
     this.fetchData({});
+  }
+
+  async componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.getUid()
+      this.fetchData({});
+    }
   }
 
   getUid = async () => {
@@ -77,7 +84,7 @@ export default class LiveFeed extends React.Component {
     this.setState({uid:responseJson._id})
   }
 
-  fetchData = async ({limit, date_stamp, extend, filter}) => {
+  fetchData = async ({limit, date_stamp, filter}) => {
     const response = await getFeed({limit, date_stamp, filter})
     if (response.error) {
         this.setState({ networkError: true, refreshing: false })
@@ -85,7 +92,7 @@ export default class LiveFeed extends React.Component {
     }
 
     this.setState({
-        items: extend?[...this.state.items, ...response.data]:response.data,
+        items: response.data,
         networkError: false,
         refreshing: false,
     })    
@@ -113,16 +120,13 @@ export default class LiveFeed extends React.Component {
         }
         case "ARTICLE": {
           return (
-            <FeedComponent
+            <FeedItem
               name={x.author.name}
               photo={x.author.profile_picture}
               timeAgo={x.date_stamp}
               post={x.text}
               likes={x.likes.length}
               comments={x.comments.length}
-              hashtag1={"#hey"}
-              hashtag2={"#heyhey"}
-              hashtag3={"#hello"}
               data={x}
               uid={this.state.uid}
             />
@@ -130,16 +134,13 @@ export default class LiveFeed extends React.Component {
         }
         case "STATUS": {
           return (
-            <FeedComponent
+            <FeedItem
               name={x.author.author_id.name}
               photo={x.author.author_id.profile_picture}
               timeAgo={x.date_stamp}
               post={x.text}
               likes={x.likes.length}
               comments={x.comments.length}
-              hashtag1={x.tags[0] || null}
-              hashtag2={x.tags[1] || null}
-              hashtag3={x.tags[2] || null}
               data={x}
               refresh={() => this._onRefresh(false)}
               uid={this.state.uid}
@@ -189,3 +190,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
 });
+
+export default withNavigationFocus(LiveFeed);
