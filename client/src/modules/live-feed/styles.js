@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
         textAlign: "center",
         fontSize: 12,
-        paddingBottom: 10
+        paddingBottom: 10,
+        paddingTop: 20
     },
     placeholder: {
         fontFamily: "poppins-regular",

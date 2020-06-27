@@ -318,6 +318,7 @@ const StatusComment = {
             let comment = {
               user_id: user._id,
               user_name: user.name,
+              profile_picture: user.profile_picture,
               text: commentText,
             }
 

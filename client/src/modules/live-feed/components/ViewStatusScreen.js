@@ -10,11 +10,10 @@ import {
 import BackButton from "../../shared/icons/back-button/lightTheme";
 import ProfilePictureComponent from '../../../components/ProfilePicture';
 import PostButton from '../../../components/WideButtonRight';
-import fieldValidator from '../../shared/utils/index'
+import ImageCard from '../../../modules/shared/image-card'
 
 import styles from "../styles"
 
-import {nameRegex} from "../../../modules/users/constants"
 
 var validComment;
 var btnStyles = { ...styles.btn, ...styles.btnDisabled }
@@ -39,7 +38,6 @@ export default class ViewStatusScreen extends Component {
   }
 
   postComment = async () => {
-      var tester="wanker"
     var myHeaders = new Headers();
     var userToken = await AsyncStorage.getItem("token");
     myHeaders.append(
@@ -74,7 +72,7 @@ export default class ViewStatusScreen extends Component {
   render() {
     const status = this.props.route.params;
     return (
-      <ScrollView>
+      <ScrollView nestedScrollEnabled={true}>
         <View style={styles.container1}>
           <BackButton navigation={this.props.navigation} />
           <View style={styles.container}>
@@ -92,16 +90,46 @@ export default class ViewStatusScreen extends Component {
                 </View>
             </View>
           </View>
+          {!status.data.comments == [] &&
+            <ScrollView 
+              style={{maxHeight: 300}} 
+              nestedScrollEnabled={true}
+              ref={ref => {this.scrollView = ref}}
+              onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
+            >
+              {status.data.comments.map(comment => (    
+                <ImageCard
+                  title={comment.user_name}
+                  subtitle={comment.text}
+                  imgSrc={comment.profile_picture ? {uri: comment.profile_picture} : null}
+                  customStyles={{
+                    card: {
+                      borderRadius: 15,
+                      width: '100%',
+                      paddingBottom: '3%',
+                      paddingRight: 110,
+                      borderBottomWidth: 0.2,
+                      borderColor: "lightgrey"
+                    }
+                  }}
+                />
+              ))}
+            </ScrollView>
+          }
           <View>
               <Text style={styles.h3}>Leave a comment</Text>
               <TextInput
                 style={styles.placeholder}
                 placeholderTextColor={"grey"}
                 placeholder={"Enter comment..."}
+                multiline={true}
+                scrollEnabled={false}
                 onEndEditing={input => {
-                  validComment = fieldValidator({regex: nameRegex, input: input.nativeEvent.text})
+                  if(input.nativeEvent.text.length >= 1) validComment = true
+                  else validComment = false
                   this.setState({comment: input.nativeEvent.text})
                 }}
+                maxLength={300}
               />
           </View>
           <View>

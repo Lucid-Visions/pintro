@@ -13,9 +13,9 @@ class StatusTextInput extends Component {
         }
     }
 
-    onChangeText(text, status){
+    onChangeText(status){
         this.setState({
-            textLength: text.length,
+            textLength: status.length,
             status
         })
 
@@ -32,10 +32,12 @@ class StatusTextInput extends Component {
                 </View>
                 <View style={styles.blackSquare}>
                     <TextInput 
+                        multiline={true}
+                        scrollEnabled={false}
                         style={styles.textInput}
                         placeholderTextColor={"lightgrey"}
                         placeholder="Tell the world what's happening..."
-                        onChangeText={this.onChangeText.bind(this, this)}
+                        onChangeText={input => {this.onChangeText(input)}}
                         value={this.state.status}
                         maxLength={300}
                     />
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
     wordCount: {
         fontSize: 12,
         fontFamily: "poppins-regular",
-        color: "#ACACAC",
+        color: "lightgray",
         alignItems: "center",
         position: "absolute",
         zIndex: 1,

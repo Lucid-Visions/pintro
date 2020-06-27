@@ -124,17 +124,17 @@ class FeedComponent extends React.Component {
               </View>
               <View>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("ViewStatus", this.props)}>
-                <Text
-                  numberOfLines={5}
-                  style={{
-                    fontFamily: "poppins-medium",
-                    color: "white",
-                    fontSize: 11,
-                    marginTop: 5,
-                    marginRight: 8,
-                  }}
-                >
-                  {this.props.post.substring(0,60)+(this.props.post.length > 60?"...":"")}
+                  <Text
+                    numberOfLines={5}
+                    style={{
+                      fontFamily: "poppins-medium",
+                      color: "white",
+                      fontSize: 11,
+                      marginTop: 5,
+                      marginRight: 8,
+                    }}
+                  >
+                  {this.props.post}
                 </Text>
                 </TouchableOpacity>
               </View>
@@ -169,9 +169,7 @@ class FeedComponent extends React.Component {
                   </TouchableOpacity>
                 </View>
                 <View style={{width: '50%', alignItems:'center'}}>
-                  <TouchableOpacity
-                    style={{ position: "absolute", marginLeft: 57 }}
-                  >
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("ViewStatus", this.props)}>
                     <Image
                       source={require("../assets/Comment.png")}
                       style={{
