@@ -20,9 +20,40 @@ export default class WriteStatusScreen extends Component {
     super(props);
     this.state = {
       status: "",
-      selectedItems: []
+      selectedItems: [],
+      communities: []
     };
   }
+  
+  componentDidMount() {
+    this.getCommunities()
+  }
+
+  getCommunities = async () => {
+    var token = await AsyncStorage.getItem("token");
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", token);
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders
+    };
+
+    const response = await
+      fetch(`http://${env.host}:${env.port}/api/v1/community`, requestOptions)
+        .catch(error => console.log("error", error));
+    
+    const json = await response.json()
+    const communities = json.data.map((o, i) => ({
+      id: i,
+      text: o.name
+    }))
+
+    this.setState({ communities })
+  }
+
   postStatus = async () => {
     var token = await AsyncStorage.getItem("token");
 
@@ -94,6 +125,7 @@ export default class WriteStatusScreen extends Component {
               width={Dimensions.get("screen").width / 1.1}
               alignSelf="center"
               paddingBottom={10}
+              style={{ marginBottom: 20}}
             >
               <Text style={styles.h3}>Choose up to 3 tags</Text>
               <MultiSelect
@@ -136,6 +168,55 @@ export default class WriteStatusScreen extends Component {
                   backgroundColor: "#F1F1F1"
                 }}
               />
+            </View>
+            <View
+              marginHorizontal={15}
+              flex={1}
+              borderBottomColor="#ACACAC"
+              borderBottomWidth={1}
+              width={Dimensions.get("screen").width / 1.1}
+              alignSelf="center"
+              paddingBottom={10}
+            >
+              <Text style={styles.h3}>Choose communities</Text>
+              <MultiSelect
+                hideSubmitButton
+                items={this.state.communities}
+                uniqueKey="id"
+                ref={component => {
+                  this.multiSelect = component;
+                }}
+                onSelectedItemsChange={this.onSelectedItemsChange}
+                selectedItems={selectedItems}
+                selectText="Start typing..."
+                searchInputPlaceholderText="Start typing..."
+                onChangeInput={text => console.log(text)}
+                altFontFamily="poppins-regular"
+                fontFamily="poppins-regular"
+                itemFontFamily="poppins-regular"
+                selectedItemFontFamily="poppins-regular"
+                tagRemoveIconColor="#ACACAC"
+                tagBorderColor="#ACACAC"
+                tagTextColor="#2E2E2E"
+                selectedItemTextColor="#2E2E2E"
+                selectedItemIconColor="#2E2E2E"
+                itemTextColor="#ACACAC"
+                displayKey="text"
+                searchInputStyle={{ color: "black" }}
+                styleDropdownMenuSubsection={{
+                  backgroundColor: "#F1F1F1",
+                  borderBottomColor: "#F1F1F1"
+                }}
+                styleDropdownMenu={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                styleInputGroup={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                styleItemsContainer={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                />
             </View>
             <View>
               <TouchableOpacity onPress={this.postStatus}>
