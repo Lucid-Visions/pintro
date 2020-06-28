@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, Dimensions } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, Dimensions, Alert } from "react-native";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
+import {deletePost} from '../modules/live-feed/actions'
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo();
 
@@ -24,6 +25,25 @@ class FeedComponent extends React.Component {
 
   componentDidMount(){
     this.checkLiked()
+  }
+
+  deletePost = () => {
+    Alert.alert(
+      "Delete General Post",
+      "Are you sure?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log('Canceled'),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => {
+          deletePost(this.props.data._id)
+          this.props.refresh()
+        }}
+      ],
+      { cancelable: true }
+    );
   }
 
   toggleState1 = async () => {
@@ -115,6 +135,11 @@ class FeedComponent extends React.Component {
                     {time}
                   </Text>
                 </View>
+                {this.props.isAuthor &&
+                  <TouchableOpacity onPress={() => this.deletePost()}>
+                      <Image source={require('../assets/whiteCross.png')} style={{height: 15, width: 15}}></Image>
+                  </TouchableOpacity>
+                }
               </TouchableOpacity>
               <View style={{ flexDirection: "row" }}>
                 {this.props.hashtag1 && (

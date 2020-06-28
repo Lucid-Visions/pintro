@@ -1,14 +1,35 @@
 import React from 'react';
-import { View,Dimensions, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { View,Dimensions, Text, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import SmallActionComponent from '../components/SmallActionButton';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import { deleteHelpRequest } from '../modules/live-feed/actions'
+
 TimeAgo.addLocale(en)
 const timeAgo = new TimeAgo()
 
 class WhiteFeedComponent extends React.Component {
     constructor(props) {
         super(props)
+    }
+
+    deleteRequest = () => {
+        Alert.alert(
+            "Delete Help Request?",
+            "Are you sure?",
+            [
+              {
+                text: "No",
+                onPress: () => console.log('Canceled'),
+                style: "cancel"
+              },
+              { text: "Yes", onPress: () => {
+                deleteHelpRequest(this.props.data._id)
+                this.props.refresh()
+              }}
+            ],
+            { cancelable: true }
+        );
     }
 
     resizeToFit = () => {
@@ -44,6 +65,11 @@ class WhiteFeedComponent extends React.Component {
                                     {time}
                                 </Text>
                             </View>
+                            {this.props.isAuthor &&
+                                <TouchableOpacity onPress={() => this.deleteRequest()}>
+                                    <Image source={require('../assets/blackCross.png')} style={{height: 15, width: 15}}></Image>
+                                </TouchableOpacity>
+                            }
                         </TouchableOpacity>
                         <View
                                 style={{

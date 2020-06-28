@@ -97,56 +97,64 @@ export default class LiveFeed extends React.Component {
   }
 
   getItem(x){
-      if (x.author == null) return null;
-      switch (x._type) {
-        case "ACTION": {
-          return (
-            <WhiteFeedComponent
-              name={x.author.name}
-              photo={x.author.profile_picture}
-              timeAgo={x.date_stamp}
-              thisType={x.type}
-              context={x.context}
-              data={x}
-            />
-          );
-        }
-        case "ARTICLE": {
-          return (
-            <FeedComponent
-              name={x.author.name}
-              photo={x.author.profile_picture}
-              timeAgo={x.date_stamp}
-              post={x.text}
-              likes={x.likes.length}
-              comments={x.comments.length}
-              hashtag1={"#hey"}
-              hashtag2={"#heyhey"}
-              hashtag3={"#hello"}
-              data={x}
-              uid={this.state.uid}
-            />
-          );
-        }
-        case "STATUS": {
-          return (
-            <FeedComponent
-              name={x.author.author_id.name}
-              photo={x.author.author_id.profile_picture}
-              timeAgo={x.date_stamp}
-              post={x.text}
-              likes={x.likes.length}
-              comments={x.comments.length}
-              hashtag1={x.tags[0] || null}
-              hashtag2={x.tags[1] || null}
-              hashtag3={x.tags[2] || null}
-              data={x}
-              refresh={() => this._onRefresh(false)}
-              uid={this.state.uid}
-            />
-          );
-        }
+    let authorId = (x.author.author_id ? x.author.author_id._id : x.author._id);
+    let isAuthor = false;
+    if(this.state.uid==authorId) isAuthor = true;
+    if (x.author == null) return null;
+    switch (x._type) {
+      case "ACTION": {
+        return (
+          <WhiteFeedComponent
+            name={x.author.name}
+            photo={x.author.profile_picture}
+            timeAgo={x.date_stamp}
+            thisType={x.type}
+            context={x.context}
+            refresh={() => this._onRefresh(false)}
+            data={x}
+            isAuthor={isAuthor}
+          />
+        );
       }
+      case "ARTICLE": {
+        return (
+          <FeedComponent
+            name={x.author.name}
+            photo={x.author.profile_picture}
+            timeAgo={x.date_stamp}
+            post={x.text}
+            likes={x.likes.length}
+            comments={x.comments.length}
+            hashtag1={"#hey"}
+            hashtag2={"#heyhey"}
+            hashtag3={"#hello"}
+            refresh={() => this._onRefresh(false)}
+            data={x}
+            uid={this.state.uid}
+            isAuthor={isAuthor}
+          />
+        );
+      }
+      case "STATUS": {
+        return (
+          <FeedComponent
+            name={x.author.author_id.name}
+            photo={x.author.author_id.profile_picture}
+            timeAgo={x.date_stamp}
+            post={x.text}
+            likes={x.likes.length}
+            comments={x.comments.length}
+            hashtag1={x.tags[0] || null}
+            hashtag2={x.tags[1] || null}
+            hashtag3={x.tags[2] || null}
+            data={x}
+            refresh={() => this._onRefresh(false)}
+            uid={this.state.uid}
+            isAuthor={isAuthor}
+          />
+        );
+      }
+    }
   
   }
 
