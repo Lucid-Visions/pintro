@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import jwtData from '../bin/jwtData'
 import ActionButtonModel from '../models/actionButton_model'
 import UserModel from '../models/user_model'
-import User from './User'
 require('dotenv').config()
 
 const ActionButtons = {
@@ -81,7 +80,7 @@ const ActionButtons = {
         }
       }
     })
-  }
+  },
 }
 
 export default ActionButtons
