@@ -42,6 +42,15 @@ class ChatConnectPopup extends React.Component {
       label: item.text,
       value: item.text,
     }));
+  
+    const extraStyles = this.props.chat == "Connect" ? styles.connectPicker : styles.chatPicker
+
+    let pickerStyles = {
+      inputAndroid: {
+        width: 300,
+      },
+      ...extraStyles
+    }
 
     return (
       <Modal
@@ -49,7 +58,6 @@ class ChatConnectPopup extends React.Component {
         animationOut="slideOutDown"
         isVisible={this.props.visible}
         onBackdropPress={() => toggleModal()}
-        style={styles.modal}
       >
         <View
           style={[
@@ -93,14 +101,9 @@ class ChatConnectPopup extends React.Component {
                   label: "Select an option...",
                   value: null,
                 }}
-                style={{ color: "white" }}
                 selectedValue={this.state.intent}
                 placeholderTextColor={this.props.chat == "Connect" ? "white" : "black"}
-                style={
-                  this.props.chat == "Connect"
-                    ? styles.connectPicker
-                    : styles.chatPicker
-                }
+                style={pickerStyles}
                 onValueChange={(itemValue) =>
                   this.setState({ intent: itemValue })
                 }
@@ -231,7 +234,6 @@ const styles = StyleSheet.create({
   },
   chatPicker: {
     width: "100%",
-    height: 40,
     fontFamily: "poppins-light",
     color: "grey",
   },
