@@ -11,6 +11,13 @@ import Modal from "react-native-modal";
 import TagsData from "../assets/TagsData";
 import RNPickerSelect from "react-native-picker-select";
 
+
+const pickerStyle = {
+	inputAndroid: {
+    width: 300,
+	}
+};
+
 class ChatConnectPopup extends React.Component {
   constructor(props) {
     super(props);
@@ -42,6 +49,15 @@ class ChatConnectPopup extends React.Component {
       label: item.text,
       value: item.text,
     }));
+  
+    const extraStyles = this.props.chat == "Connect" ? styles.connectPicker : styles.chatPicker
+
+    let pickerStyles = {
+      inputAndroid: {
+        width: 300,
+      },
+      ...extraStyles
+    }
 
     return (
       <Modal
@@ -49,7 +65,7 @@ class ChatConnectPopup extends React.Component {
         animationOut="slideOutDown"
         isVisible={this.props.visible}
         onBackdropPress={() => toggleModal()}
-        style={styles.modal}
+        style={{ minHeight: 200 }}
       >
         <View
           style={[
@@ -93,14 +109,9 @@ class ChatConnectPopup extends React.Component {
                   label: "Select an option...",
                   value: null,
                 }}
-                style={{ color: "white" }}
                 selectedValue={this.state.intent}
                 placeholderTextColor={this.props.chat == "Connect" ? "white" : "black"}
-                style={
-                  this.props.chat == "Connect"
-                    ? styles.connectPicker
-                    : styles.chatPicker
-                }
+                style={pickerStyles}
                 onValueChange={(itemValue) =>
                   this.setState({ intent: itemValue })
                 }
@@ -231,7 +242,6 @@ const styles = StyleSheet.create({
   },
   chatPicker: {
     width: "100%",
-    height: 40,
     fontFamily: "poppins-light",
     color: "grey",
   },
