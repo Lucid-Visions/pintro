@@ -20,22 +20,57 @@ export default class WriteStatusScreen extends Component {
     super(props);
     this.state = {
       status: "",
-      selectedItems: []
+      selectedTags: [],
+      selectedCommunities: [],
+      communities: []
     };
   }
+  
+  componentDidMount() {
+    this.getCommunities()
+  }
+
+  getCommunities = async () => {
+    var token = await AsyncStorage.getItem("token");
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", token);
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders
+    };
+
+    const response = await
+      fetch(`http://${env.host}:${env.port}/api/v1/community`, requestOptions)
+        .catch(error => console.log("error", error));
+    
+    const json = await response.json()
+    const communities = json.data.map(o => ({
+      id: o._id,
+      text: o.name
+    }))
+
+    this.setState({ communities })
+  }
+
   postStatus = async () => {
     var token = await AsyncStorage.getItem("token");
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", token);
-    var raw = JSON.stringify({ text: this.state.status });
+    var raw = JSON.stringify({
+      text: this.state.status,
+      communityIds: this.state.selectedCommunities,
+      tags: this.state.selectedTags
+    });
 
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: raw,
-      redirect: "follow"
+      body: raw
     };
 
     fetch(
@@ -47,12 +82,26 @@ export default class WriteStatusScreen extends Component {
     navigation.goBack();
   };
 
-  onSelectedItemsChange = selectedItems => {
-    this.setState({ selectedItems });
-  };
+  onSelectedItemsChangeTags = selectedItems => {
+    this.setState({ selectedTags: selectedItems });
+  }
+
+  onSelectedItemsChangeCommunities = selectedItems => {
+    this.setState({ selectedCommunities: selectedItems });
+  }
+
+  isSubmitDisabled = () => {
+    return !(this.state.selectedCommunities.length > 0 && this.state.status.length > 0)
+  }
 
   render() {
-    const { selectedItems } = this.state;
+
+    let btnStyles = styles.btn
+
+    if (this.isSubmitDisabled()) {
+      btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    }
+
     const user = this.props.route.params.user;
     return (
       <ScrollView
@@ -94,19 +143,16 @@ export default class WriteStatusScreen extends Component {
               width={Dimensions.get("screen").width / 1.1}
               alignSelf="center"
               paddingBottom={10}
+              style={{ marginBottom: 20}}
             >
               <Text style={styles.h3}>Choose up to 3 tags</Text>
               <MultiSelect
-                //hideTags
+                name="selectedTags"
                 hideSubmitButton
-                //hideDropdown
-                items={TagsData}
                 uniqueKey="id"
-                ref={component => {
-                  this.multiSelect = component;
-                }}
-                onSelectedItemsChange={this.onSelectedItemsChange}
-                selectedItems={selectedItems}
+                items={TagsData}
+                onSelectedItemsChange={this.onSelectedItemsChangeTags}
+                selectedItems={this.state.selectedTags}
                 selectText="Start typing..."
                 searchInputPlaceholderText="Start typing..."
                 onChangeInput={text => console.log(text)}
@@ -137,14 +183,59 @@ export default class WriteStatusScreen extends Component {
                 }}
               />
             </View>
+            <View
+              marginHorizontal={15}
+              flex={1}
+              borderBottomColor="#ACACAC"
+              borderBottomWidth={1}
+              width={Dimensions.get("screen").width / 1.1}
+              alignSelf="center"
+              paddingBottom={10}
+            >
+              <Text style={styles.h3}>Choose communities</Text>
+              <MultiSelect
+                name="selectedCommunities"
+                hideSubmitButton
+                uniqueKey="id"
+                items={this.state.communities}
+                onSelectedItemsChange={this.onSelectedItemsChangeCommunities}
+                selectedItems={this.state.selectedCommunities}
+                selectText="Start typing..."
+                searchInputPlaceholderText="Start typing..."
+                onChangeInput={text => console.log(text)}
+                altFontFamily="poppins-regular"
+                fontFamily="poppins-regular"
+                itemFontFamily="poppins-regular"
+                selectedItemFontFamily="poppins-regular"
+                tagRemoveIconColor="#ACACAC"
+                tagBorderColor="#ACACAC"
+                tagTextColor="#2E2E2E"
+                selectedItemTextColor="#2E2E2E"
+                selectedItemIconColor="#2E2E2E"
+                itemTextColor="#ACACAC"
+                displayKey="text"
+                searchInputStyle={{ color: "black" }}
+                styleDropdownMenuSubsection={{
+                  backgroundColor: "#F1F1F1",
+                  borderBottomColor: "#F1F1F1"
+                }}
+                styleDropdownMenu={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                styleInputGroup={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                styleItemsContainer={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                />
+            </View>
             <View>
-              <TouchableOpacity onPress={this.postStatus}>
+              <TouchableOpacity onPress={this.postStatus} disabled={this.isSubmitDisabled()}>
                 <PostButton
                   value={"POST"}
                   source={require("../assets/arrow-right-white.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 13,
                     fontFamily: "poppins-medium",
@@ -208,5 +299,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#1A1A1A",
     flexDirection: "row",
     justifyContent: "space-evenly"
-  }
+  },
+  btnDisabled: {
+    opacity: 0.4,
+  },
 });

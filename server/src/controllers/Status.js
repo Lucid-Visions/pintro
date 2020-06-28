@@ -71,6 +71,7 @@ const Status = {
             tags: [...statusData.tags],
             likes: [],
             comments: [],
+            communityIds: [...statusData.communityIds],
           }
         )
 

@@ -7,15 +7,15 @@ import { Ionicons } from '@expo/vector-icons';
 /**
  * Renders an action button for the user's profile.
  * @param {string} type the type of the button.
- * @param {string} context the specific topic related to the type. 
+ * @param {string} intent the specific topic related to the type. 
  */
-const ActionButtonComponent = ({ type, context }) => (
+const ActionButtonComponent = ({ type, intent }) => (
 
     <ElevatedView style={styles.view} elevation={10}>
         <TouchableOpacity style={styles.container}>
             <View style={styles.text}>
                 <Text style={styles.title}>{resolveType(type)}</Text>
-                <Text style={styles.subtitle}>{context}</Text>
+                <Text style={styles.subtitle}>{intent}</Text>
             </View>
             <View style={styles.outline}>
                 <View style={styles.icon}>
@@ -59,7 +59,7 @@ const typeValidator = (props, propName, componentName) => {
 // Type checker
 ActionButtonComponent.propTypes = {
     type: typeValidator,
-    context: PropTypes.string,
+    intent: PropTypes.string,
 }
 
 const styles = StyleSheet.create({

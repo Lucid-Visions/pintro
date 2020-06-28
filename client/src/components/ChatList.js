@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   StyleSheet,
@@ -137,19 +138,30 @@ class ChatList extends React.Component {
   }
 
   render() {
-    
     const directChats = this.state.directChats.length > 0 && this.state.directChats.map(chat => {
       // Get last message and user that sent it
       const lastMessage = chat.messages[chat.messages.length - 1]
       const [ otherUser ] = chat.users.filter(u => u._id !== this.state.user._id)
 
       return (
-        <ImageCard
-          title={otherUser.name}
-          subtitle={lastMessage.content}
-          imgSrc={{ uri: otherUser.profile_picture }}
-          onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat, socket: this.socket, refresh: this.onRefresh })}
-        />
+        <View style={styles.directChatContainer}>
+          <View style={{flex:10}}>
+            <ImageCard
+              title={otherUser.name}
+              subtitle={lastMessage.content.substring(0,35)+(lastMessage.content.length > 35?"...":"")}
+              imgSrc={{ uri: otherUser.profile_picture }}
+              onPress={() => this.props.navigation.navigate("Chat", { user: this.state.user, chat, socket: this.socket, refresh: this.onRefresh })}
+            />
+          </View>
+          <View style={{flex:1}}>
+            {lastMessage.sentto == this.state.user._id ? 
+              <Image
+                style={{height: 10, width: 10, marginTop: 50}}
+                source={require('../assets/unreadMessage.png')}>
+              </Image>
+            : null}
+          </View>
+        </View>
       )
     })
 
@@ -225,15 +237,15 @@ const styles = StyleSheet.create({
     fontFamily: "poppins-medium"
   },
   directChatsTitle: {
-    marginTop: 30,
+    marginTop: 20,
     marginLeft: 20
   },
   searchBarContainer: {
     justifyContent: "center",
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 25,
-    marginBottom: 15,
+    marginTop: 20,
+    marginBottom: 10,
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 30
@@ -248,17 +260,11 @@ const styles = StyleSheet.create({
     height: 85
   },
   directChatContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 15,
-    paddingBottom: 15,
-    marginLeft: 10,
-    paddingLeft: 10,
-    marginRight: 10,
-    paddingRight: 10,
+    paddingBottom: 2,
+    paddingTop: 1,
     borderBottomWidth: 0.5,
-    borderColor: "lightgray"
+    borderColor: "lightgray",
+    flexDirection: "row"
   },
   directChatPicture: {
     height: 45,
