@@ -111,6 +111,7 @@ class LiveFeed extends React.Component {
               thisType={x.type}
               context={x.context}
               data={x}
+              navigation={this.props.navigation}
             />
           );
         }
@@ -140,6 +141,7 @@ class LiveFeed extends React.Component {
               data={x}
               refresh={() => this._onRefresh(false)}
               uid={this.state.uid}
+              navigation={this.props.navigation}
             />
           );
         }
@@ -171,7 +173,8 @@ class LiveFeed extends React.Component {
           onRefresh={this._onRefresh}
           refreshing={this.state.refreshing}
           keyExtractor={(item) => item._id}
-          numColumns={2}
+          numColumns={1}
+          onMomentumScrollEnd={()=>this.fetchData({date_stamp:this.state.items.length > 0 ? this.state.items[this.state.items.length-1].date_stamp-1:Date.now(), extend:true})}
           onEndReachedThreshold={0.5}
           initialNumToRender={4}
         />

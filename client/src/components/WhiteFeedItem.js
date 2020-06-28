@@ -11,33 +11,24 @@ class WhiteFeedComponent extends React.Component {
         super(props)
     }
 
-    resizeToFit = () => {
-        return (this.props.name.length > 20 ? 
-                    5 : this.props.name.length > 17 ? 
-                        8 : this.props.name.length > 10 ? 
-                            10 : 11)
-    }
-
     specifyTime = () => {
         const time = this.props.timeAgo
         return timeAgo.format(time)
     }
-    
 
-    render () {        
-        const size = this.resizeToFit()
+    render () {
         const time = this.specifyTime()
         return(
         <View style={styles.outline}>
             <View style={{flexDirection: "row" }}>
                 <View style={styles.container}>
-                    <View style={{flexDirection: "column", marginTop: 15, marginLeft: 12 }}>
-                        <TouchableOpacity style={{flexDirection: "row" }}>
+                    <View style={{ marginTop: 15, marginLeft: 20, width: '100%' }}>
+                        <TouchableOpacity style={{flexDirection: "row", width:'100%' }}>
                             <Image 
                                 style={{height: 45, width: 45, borderRadius: 200 / 2}}
                                 source={this.props.photo ? {uri: this.props.photo} : require('../assets/empty-profile-picture.png')} />
                             <View style={{flexDirection: "column" }} > 
-                                <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: size, marginTop: 5, marginLeft: 8}}>
+                                <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 11, marginTop: 5, marginLeft: 8}}>
                                     {this.props.name}
                                 </Text>
                                 <Text style={{fontFamily: "poppins-semi-bold", color: "gray", fontSize: 10, marginLeft: 8}}>
@@ -49,7 +40,7 @@ class WhiteFeedComponent extends React.Component {
                                 style={{
                                 borderBottomColor: '#DCDCDC',
                                 borderBottomWidth: 1,
-                                width: 150,
+                                width: '90%',
                                 marginTop: 8
                                 }}/>
                         <View>
@@ -63,19 +54,14 @@ class WhiteFeedComponent extends React.Component {
     }
 }
 
-const screenWidth = Math.round(Dimensions.get('window').width);
-
 const styles = StyleSheet.create({
     container: {
-        alignSelf: 'flex-start',
-        width: (screenWidth/2)-10,
+        alignSelf: 'center',
+        width: '95%',
         borderRadius: 40 / 2,
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        padding:5,
-        height:140,
-        marginLeft:5,
-        marginTop:2
+        flexDirection: "row",
+        backgroundColor: "white",
+        marginLeft: 11
     },
     outline: {
         flexDirection: 'column',

@@ -12,18 +12,21 @@ import { Ionicons } from '@expo/vector-icons';
 const SmallActionComponent = ({ type, context }) => (
 
     <ElevatedView style={styles.view}>
-        <TouchableOpacity style={styles.container}>
-            <View style={styles.text}>
+        <View style={styles.text}>
+            <TouchableOpacity>
                 <Text style={styles.title}>{resolveType(type)}</Text>
-                <Text style={styles.subtitle}>{context.substring(0,35)+(context.length > 35?"...":"")}</Text>
-            </View>
-            <View style={styles.outline}>
+                <Text style={styles.subtitle}>{context.substring(0,45)+(context.length > 45?"...":"")}</Text>
+            </TouchableOpacity>
+        </View>
+    
+        <View style={styles.outline}>
+            <TouchableOpacity>
                 <View style={styles.icon}>
                     <Ionicons name="ios-chatbubbles" size={25} />
                 </View>
-            </View>
-        </TouchableOpacity>
-        </ElevatedView>
+            </TouchableOpacity>
+        </View>   
+    </ElevatedView>
 );
 
 /**
@@ -65,9 +68,11 @@ SmallActionComponent.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex:1,
         flexDirection: 'row',
         borderColor: 'red',
+        borderWidth: 1,
+        width: '90%'
     },
     view: {
         alignItems: 'center',
@@ -76,38 +81,29 @@ const styles = StyleSheet.create({
         width: '85%',
         marginTop: 17
     },
-    text: {
-        flexDirection: 'column',
-        left: 0,
-    },
     title: {
         fontWeight: 'bold',
         fontSize: 13,
     },
     subtitle: {
         fontWeight: 'normal',
-        fontSize: 10,
-        color: 'grey',
-        marginBottom: 10,
-        width: 100
+        fontSize: 11,
+        color: 'black',
+        marginBottom: 10
     },
     outline: {
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row',
-        marginLeft: 'auto',
-
+        marginLeft: 'auto'
     },
     icon: {
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'row',
         marginLeft: 'auto',
         backgroundColor: 'orange',
         width: 38,
         height: 38,
         borderRadius: 50 / 2,
-        marginLeft: 160,
         marginTop: -5,
         marginBottom: 10
     }

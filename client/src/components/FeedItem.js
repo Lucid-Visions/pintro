@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, Dimensions } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 TimeAgo.addLocale(en);
@@ -59,30 +59,19 @@ class FeedComponent extends React.Component {
     });
   };
 
-  resizeToFit = () => {
-    return this.props.name.length > 20
-      ? 5
-      : this.props.name.length > 17
-      ? 8
-      : this.props.name.length > 10
-      ? 10
-      : 11;
-  };
-
   specifyTime = () => {
     const time = this.props.timeAgo;
     return timeAgo.format(time);
   };
 
   render() {
-    const size = this.resizeToFit();
     const time = this.specifyTime();
     return (
       <View style={styles.outline}>
         <View style={{ flexDirection: "row" }}>
           <View style={styles.container}>
             <View
-              style={{ flexDirection: "column", marginTop: 15, marginLeft: 12 }}
+              style={{ flexDirection: "column", marginTop: 15, marginLeft: 20 }}
             >
               <TouchableOpacity style={{ flexDirection: "row" }}>
                 <Image
@@ -97,7 +86,7 @@ class FeedComponent extends React.Component {
                     style={{
                       fontFamily: "poppins-semi-bold",
                       color: "white",
-                      fontSize: size,
+                      fontSize: 11,
                       marginTop: 5,
                       marginLeft: 8,
                     }}
@@ -134,74 +123,77 @@ class FeedComponent extends React.Component {
                 )}
               </View>
               <View>
-                <Text
-                  numberOfLines={5}
-                  style={{
-                    fontFamily: "poppins-medium",
-                    color: "white",
-                    fontSize: 11,
-                    marginTop: 5,
-                    marginRight: 8,
-                  }}
-                >
-                  {this.props.post.substring(0,60)+(this.props.post.length > 60?"...":"")}
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("ViewStatus", this.props)}>
+                  <Text
+                    numberOfLines={5}
+                    style={{
+                      fontFamily: "poppins-medium",
+                      color: "white",
+                      fontSize: 11,
+                      marginTop: 5,
+                      marginRight: 8,
+                    }}
+                  >
+                  {this.props.post}
                 </Text>
+                </TouchableOpacity>
               </View>
               <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity onPress={this.toggleState1}>
-                  <Image
-                    source={
-                      this.state.isSelected1
-                        ? require("../assets/Heart.png")
-                        : require("../assets/HeartEmpty.png")
-                    }
-                    style={{
-                      resizeMode: "contain",
-                      width: 19,
-                      height: 19,
-                      marginTop: 10,
-                    }}
-                  ></Image>
-                  <Text
-                    style={{
-                      fontFamily: "poppins-semi-bold",
-                      color: "gray",
-                      fontSize: 9,
-                      marginTop: -15,
-                      marginLeft: 24,
-                      marginBottom: 20,
-                    }}
-                  >
-                    {this.props.likes+" "}
-                    likes
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={{ position: "absolute", marginLeft: 57 }}
-                >
-                  <Image
-                    source={require("../assets/Comment.png")}
-                    style={{
-                      resizeMode: "contain",
-                      width: 19,
-                      height: 19,
-                      marginLeft: 10,
-                      marginTop: 10,
-                    }}
-                  ></Image>
-                  <Text
-                    style={{
-                      fontFamily: "poppins-semi-bold",
-                      color: "gray",
-                      fontSize: 9,
-                      marginLeft: 34,
-                      marginTop: -15,
-                      marginBottom: 15,
-                    }}
-                  >
-                    {this.props.comments} comments
-                  </Text>
-                </TouchableOpacity>
+                <View style={{width:'48%', alignItems:'center'}}>
+                  <TouchableOpacity onPress={this.toggleState1}>
+                    <Image
+                      source={
+                        this.state.isSelected1
+                          ? require("../assets/Heart.png")
+                          : require("../assets/HeartEmpty.png")
+                      }
+                      style={{
+                        resizeMode: "contain",
+                        width: 19,
+                        height: 19,
+                        marginTop: 10,
+                      }}
+                    ></Image>
+                    <Text
+                      style={{
+                        fontFamily: "poppins-semi-bold",
+                        color: "gray",
+                        fontSize: 9,
+                        marginTop: -15,
+                        marginLeft: 24,
+                        marginBottom: 20,
+                      }}
+                    >
+                      {(this.props.likes === 0 || this.props.likes > 1) ? this.props.likes + " likes" : this.props.likes + " like"}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{width: '50%', alignItems:'center'}}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate("ViewStatus", this.props)}>
+                    <Image
+                      source={require("../assets/Comment.png")}
+                      style={{
+                        resizeMode: "contain",
+                        width: 19,
+                        height: 19,
+                        marginLeft: 10,
+                        marginTop: 10,
+                      }}
+                    ></Image>
+                    <Text
+                      style={{
+                        fontFamily: "poppins-semi-bold",
+                        color: "gray",
+                        fontSize: 9,
+                        marginLeft: 34,
+                        marginTop: -15,
+                        marginBottom: 15,
+                      }}
+                    >
+                      {this.props.comments} comments
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>
@@ -211,19 +203,15 @@ class FeedComponent extends React.Component {
   }
 }
 
-const screenWidth = Math.round(Dimensions.get('window').width);
-
 const styles = StyleSheet.create({
   container: {
-    alignSelf: "flex-start",
-    width: (screenWidth/2)-10,
+    alignSelf: 'center',
+    alignContent: 'center',
+    width: '95%',
     borderRadius: 40 / 2,
     flexDirection: "row",
     backgroundColor: "black",
-    height:140,
-    marginLeft:5,
-    marginTop:2
-
+    marginLeft:11
   },
   outline: {
     flexDirection: "column",

@@ -19,6 +19,7 @@ const commentSchema = new mongoose.Schema(
   {
     user_id: {type: Schema.Types.ObjectId, required: true, ref: 'user'},
     user_name: String,
+    profile_picture: String,
     text: {type: String, required: true},
   }
 )
