@@ -31,6 +31,7 @@ const statusSchema = new mongoose.Schema(
     likes: [likeSchema],
     comments: [commentSchema],
     tags: [String], //     tags:[{type: Schema.Types.ObjectId, ref: "Tags"}]
+    communityIds: [String],
 
   },
   { collection: 'status' }
