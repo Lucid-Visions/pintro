@@ -25,7 +25,7 @@ export default class TalkToMeAboutScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: [""],
+      tags: [],
       status: "",
       selectedTags: [],
       selectedCommunities: [],
@@ -131,7 +131,11 @@ export default class TalkToMeAboutScreen extends Component {
               <Text style={styles.h2}>@{user.user}</Text>
             </View>
             <View paddingTop={40} paddingBottom={10}>
-              <TalkToMeInput userData={user} onChange={x => this.setState({ status: x })} />
+              <TalkToMeInput
+                userData={user}
+                status={this.props.status}
+                onChange={x => this.setState({ status: x })}
+              />
             </View>
             <View
               marginHorizontal={15}

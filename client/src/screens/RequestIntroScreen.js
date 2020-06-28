@@ -23,13 +23,16 @@ export default class RequestIntroScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedItems: [],
-      users: [""]
+      communities: [],
+      selectedUsers: [],
+      selectedCommunities: [],
+      users: []
     };
   }
 
   componentDidMount(){
     this.getUsers()
+    this.getCommunities()
   }
 
   getUsers = async () => {
@@ -59,17 +62,42 @@ export default class RequestIntroScreen extends Component {
     this.setState({users:userData})
   };
 
-  postAction = async (navigation, action_buttons) => {
-    if(action_buttons.length >= 3){
-      alert("You cannot add more than 3 action buttons.")
-      return;
-    }
+  getCommunities = async () => {
+    var token = await AsyncStorage.getItem("token");
 
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", token);
+
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders
+    };
+
+    const response = await
+      fetch(`http://${env.host}:${env.port}/api/v1/community`, requestOptions)
+        .catch(error => console.log("error", error));
+    
+    const json = await response.json()
+    const communities = json.data.map(o => ({
+      id: o._id,
+      text: o.name
+    }))
+
+    this.setState({ communities })
+  }
+
+  postAction = async () => {
     var token = await AsyncStorage.getItem("token");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", token);
-    var raw = JSON.stringify({ context: this.state.selectedItems[0].split("&")[0], type: "introduce", user:this.state.selectedItems[0].split("&")[1] });
+    var raw = JSON.stringify({
+      type: "introduce",
+      context: this.state.selectedUsers[0].split("&")[0],
+      user:this.state.selectedUsers[0].split("&")[1],
+      communityIds: this.state.selectedCommunities
+    })
 
     var requestOptions = {
       method: "POST",
@@ -83,18 +111,31 @@ export default class RequestIntroScreen extends Component {
       requestOptions
     ).catch(error => console.log("error", error));
 
-    navigation.goBack();
+    this.props.navigation.goBack();
   };
 
-  onSelectedItemsChange = (selectedItems) => {
-    this.setState({ selectedItems });
-  };
+  onSelectedItemsChangeUsers = selectedItems => {
+    this.setState({ selectedUsers: selectedItems });
+  }
+
+  onSelectedItemsChangeCommunities = selectedItems => {
+    this.setState({ selectedCommunities: selectedItems });
+  }
+
+  isSubmitDisabled = () => {
+    return !(this.state.selectedCommunities.length > 0 && this.state.users.length > 0)
+  }
 
   render() {
+
+    let btnStyles = styles.btn
+
+    if (this.isSubmitDisabled()) {
+      btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    }
+
     const { navigation } = this.props;
     const user = this.props.route.params.user;
-
-    const { selectedItems } = this.state;
 
     return (
       <ScrollView
@@ -126,7 +167,7 @@ export default class RequestIntroScreen extends Component {
               <Text style={styles.h2}>@{user.user}</Text>
             </View>
             <View paddingTop={40} paddingBottom={10}>
-              <IntroTextInput userData={user} text={this.state.selectedItems[0]}/>
+              <IntroTextInput userData={user} text={this.state.selectedUsers[0]}/>
             </View>
             <View
               marginHorizontal={15}
@@ -142,11 +183,8 @@ export default class RequestIntroScreen extends Component {
                 hideSubmitButton
                 items={this.state.users}
                 uniqueKey="id"
-                ref={component => {
-                  this.multiSelect = component;
-                }}
-                onSelectedItemsChange={this.onSelectedItemsChange}
-                selectedItems={selectedItems}
+                onSelectedItemsChange={this.onSelectedItemsChangeUsers}
+                selectedItems={this.state.selectedUsers}
                 selectText="Start typing..."
                 searchInputPlaceholderText="Start typing..."
                 altFontFamily="poppins-regular"
@@ -177,14 +215,62 @@ export default class RequestIntroScreen extends Component {
                 single={true}
               />
             </View>
+            <View
+              marginHorizontal={15}
+              flex={1}
+              borderBottomColor="#ACACAC"
+              borderBottomWidth={1}
+              width={Dimensions.get("screen").width / 1.1}
+              alignSelf="center"
+              paddingBottom={10}
+            >
+              <Text style={styles.h3}>Choose communities</Text>
+              <MultiSelect
+                name="selectedCommunities"
+                hideSubmitButton
+                uniqueKey="id"
+                items={this.state.communities}
+                onSelectedItemsChange={this.onSelectedItemsChangeCommunities}
+                selectedItems={this.state.selectedCommunities}
+                selectText="Start typing..."
+                searchInputPlaceholderText="Start typing..."
+                onChangeInput={text => console.log(text)}
+                altFontFamily="poppins-regular"
+                fontFamily="poppins-regular"
+                itemFontFamily="poppins-regular"
+                selectedItemFontFamily="poppins-regular"
+                tagRemoveIconColor="#ACACAC"
+                tagBorderColor="#ACACAC"
+                tagTextColor="#2E2E2E"
+                selectedItemTextColor="#2E2E2E"
+                selectedItemIconColor="#2E2E2E"
+                itemTextColor="#ACACAC"
+                displayKey="text"
+                searchInputStyle={{ color: "black" }}
+                styleDropdownMenuSubsection={{
+                  backgroundColor: "#F1F1F1",
+                  borderBottomColor: "#F1F1F1"
+                }}
+                styleDropdownMenu={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                styleInputGroup={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                styleItemsContainer={{
+                  backgroundColor: "#F1F1F1"
+                }}
+                />
+            </View>
             <View>
-              <TouchableOpacity onPress={() => this.postAction(navigation, user.action_buttons)}>
+              <TouchableOpacity
+                onPress={this.postAction}
+                disabled={this.isSubmitDisabled()}
+              >
                 <PostButton
                   value={"POST"}
                   source={require("../assets/arrow-right-white.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 13,
                     fontFamily: "poppins-medium",
@@ -248,5 +334,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#1A1A1A",
     flexDirection: "row",
     justifyContent: "space-evenly"
-  }
+  },
+  btnDisabled: {
+    opacity: 0.4,
+  },
 });
