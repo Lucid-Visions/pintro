@@ -11,13 +11,6 @@ import Modal from "react-native-modal";
 import TagsData from "../assets/TagsData";
 import RNPickerSelect from "react-native-picker-select";
 
-
-const pickerStyle = {
-	inputAndroid: {
-    width: 300,
-	}
-};
-
 class ChatConnectPopup extends React.Component {
   constructor(props) {
     super(props);
@@ -65,7 +58,6 @@ class ChatConnectPopup extends React.Component {
         animationOut="slideOutDown"
         isVisible={this.props.visible}
         onBackdropPress={() => toggleModal()}
-        style={{ minHeight: 200 }}
       >
         <View
           style={[
