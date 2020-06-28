@@ -61,7 +61,11 @@ export default class WriteStatusScreen extends Component {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", token);
-    var raw = JSON.stringify({ text: this.state.status, communityIds: this.state.selectedCommunities });
+    var raw = JSON.stringify({
+      text: this.state.status,
+      communityIds: this.state.selectedCommunities,
+      tags: this.state.selectedTags
+    });
 
     var requestOptions = {
       method: "POST",
@@ -227,7 +231,7 @@ export default class WriteStatusScreen extends Component {
                 />
             </View>
             <View>
-              <TouchableOpacity onPress={this.postStatus}>
+              <TouchableOpacity onPress={this.postStatus} disabled={this.isSubmitDisabled()}>
                 <PostButton
                   value={"POST"}
                   source={require("../assets/arrow-right-white.png")}

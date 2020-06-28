@@ -167,7 +167,7 @@ class LiveFeed extends React.Component {
         <FlatList
           ListHeaderComponent={filterPopup}
           data={this.state.items}
-          renderItem={({item})=>this.getItem(item)}
+          renderItem={({item})=> this.getItem(item)}
           onRefresh={this._onRefresh}
           refreshing={this.state.refreshing}
           keyExtractor={(item) => item._id}

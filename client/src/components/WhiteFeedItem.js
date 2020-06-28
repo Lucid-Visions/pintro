@@ -24,7 +24,7 @@ class WhiteFeedComponent extends React.Component {
     }
     
 
-    render () {
+    render () {        
         const size = this.resizeToFit()
         const time = this.specifyTime()
         return(
