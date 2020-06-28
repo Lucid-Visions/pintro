@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import jwtData from '../bin/jwtData'
 import ActionButtonModel from '../models/actionButton_model'
-import UserModel from '../models/user_model'
+
 require('dotenv').config()
 
 const ActionButtons = {
@@ -32,7 +32,7 @@ const ActionButtons = {
       type: buttonData.type,
       context: buttonData.context,
       tags: buttonData.tags,
-      communityIds: buttonData.communityIds
+      communityIds: buttonData.communityIds,
     })
 
     await newButton.save()

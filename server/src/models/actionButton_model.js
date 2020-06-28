@@ -7,7 +7,7 @@ const actionButtonSchema = new mongoose.Schema(
     type: {type: String, required: true},
     context: {type: String, required: true},
     tags: [String],
-    communityIds: [String]
+    communityIds: [String],
   },
   { collection: 'actionButtons' }
 )

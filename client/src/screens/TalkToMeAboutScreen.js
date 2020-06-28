@@ -62,10 +62,6 @@ export default class TalkToMeAboutScreen extends Component {
     this.setState({ communities })
   }
 
-  componentDidMount() {
-    this.getCommunities()
-  }
-
   postAction = async (navigation, action_buttons) => {
     if(action_buttons.length >= 3){
       alert("You cannot add more than 3 action buttons.")
