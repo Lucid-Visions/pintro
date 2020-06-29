@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import jwtData from '../bin/jwtData'
 import ActionButtonModel from '../models/actionButton_model'
-import UserModel from '../models/user_model'
+
 require('dotenv').config()
 
 const ActionButtons = {
@@ -10,7 +10,7 @@ const ActionButtons = {
    * @param {*} req payload should include type and context
    * @param {*} res
    */
-  create(req, res) {
+  async create(req, res) {
     const decoded = jwt.verify(
       req.token,
       jwtData.publicKEY,
@@ -32,26 +32,12 @@ const ActionButtons = {
       type: buttonData.type,
       context: buttonData.context,
       tags: buttonData.tags,
+      communityIds: buttonData.communityIds,
     })
-    newButton
-      .save()
-      .then(doc => {
-        // Add action button to users profile
-        UserModel.findOneAndUpdate(
-          { _id: authorId },
-          { $push: { action_buttons: doc._id } },
-          function(error, success) {
-            if (error) {
-              console.log(error)
-            }
-          }
-        )
 
-        return res.status(201).send({ message: 'Button saved', doc })
-      })
-      .catch(error => {
-        return res.status(400).send({ error, message: error.message })
-      })
+    await newButton.save()
+
+    return res.status(201).json({ data: 'OK' })
   },
 
   delete(req, res) {

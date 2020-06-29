@@ -7,6 +7,7 @@ import SignInScreen from "../screens/SignInScreen";
 import SignUpStack from "./SignUpStack";
 import TabMenu from "./MainTabNavigator";
 import registerNotification from "../assets/registerNotification"
+import ViewStatusScreen from "../modules/live-feed/components/ViewStatusScreen"
 //for WGO Modal
 import WriteStatusScreen from "../screens/WriteStatusScreen";
 import AskHelpScreen from "../screens/AskHelpScreen";
@@ -121,6 +122,7 @@ export default function AppNavigator() {
             />
           )}
           <Stack.Screen name="WriteStatus" component={WriteStatusScreen} />
+          <Stack.Screen name="ViewStatus" component={ViewStatusScreen} />
           <Stack.Screen name="AskHelp" component={AskHelpScreen} />
           <Stack.Screen name="RequestIntro" component={RequestIntroScreen} />
           <Stack.Screen name="TalkToMeAbout" component={TalkToMeAboutScreen} />

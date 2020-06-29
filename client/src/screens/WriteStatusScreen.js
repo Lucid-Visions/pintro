@@ -20,7 +20,8 @@ export default class WriteStatusScreen extends Component {
     super(props);
     this.state = {
       status: "",
-      selectedItems: [],
+      selectedTags: [],
+      selectedCommunities: [],
       communities: []
     };
   }
@@ -46,8 +47,8 @@ export default class WriteStatusScreen extends Component {
         .catch(error => console.log("error", error));
     
     const json = await response.json()
-    const communities = json.data.map((o, i) => ({
-      id: i,
+    const communities = json.data.map(o => ({
+      id: o._id,
       text: o.name
     }))
 
@@ -60,13 +61,16 @@ export default class WriteStatusScreen extends Component {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", token);
-    var raw = JSON.stringify({ text: this.state.status });
+    var raw = JSON.stringify({
+      text: this.state.status,
+      communityIds: this.state.selectedCommunities,
+      tags: this.state.selectedTags
+    });
 
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
-      body: raw,
-      redirect: "follow"
+      body: raw
     };
 
     fetch(
@@ -78,12 +82,26 @@ export default class WriteStatusScreen extends Component {
     navigation.goBack();
   };
 
-  onSelectedItemsChange = selectedItems => {
-    this.setState({ selectedItems });
-  };
+  onSelectedItemsChangeTags = selectedItems => {
+    this.setState({ selectedTags: selectedItems });
+  }
+
+  onSelectedItemsChangeCommunities = selectedItems => {
+    this.setState({ selectedCommunities: selectedItems });
+  }
+
+  isSubmitDisabled = () => {
+    return !(this.state.selectedCommunities.length > 0 && this.state.status.length > 0)
+  }
 
   render() {
-    const { selectedItems } = this.state;
+
+    let btnStyles = styles.btn
+
+    if (this.isSubmitDisabled()) {
+      btnStyles = { ...styles.btn, ...styles.btnDisabled }
+    }
+
     const user = this.props.route.params.user;
     return (
       <ScrollView
@@ -129,16 +147,12 @@ export default class WriteStatusScreen extends Component {
             >
               <Text style={styles.h3}>Choose up to 3 tags</Text>
               <MultiSelect
-                //hideTags
+                name="selectedTags"
                 hideSubmitButton
-                //hideDropdown
-                items={TagsData}
                 uniqueKey="id"
-                ref={component => {
-                  this.multiSelect = component;
-                }}
-                onSelectedItemsChange={this.onSelectedItemsChange}
-                selectedItems={selectedItems}
+                items={TagsData}
+                onSelectedItemsChange={this.onSelectedItemsChangeTags}
+                selectedItems={this.state.selectedTags}
                 selectText="Start typing..."
                 searchInputPlaceholderText="Start typing..."
                 onChangeInput={text => console.log(text)}
@@ -180,14 +194,12 @@ export default class WriteStatusScreen extends Component {
             >
               <Text style={styles.h3}>Choose communities</Text>
               <MultiSelect
+                name="selectedCommunities"
                 hideSubmitButton
-                items={this.state.communities}
                 uniqueKey="id"
-                ref={component => {
-                  this.multiSelect = component;
-                }}
-                onSelectedItemsChange={this.onSelectedItemsChange}
-                selectedItems={selectedItems}
+                items={this.state.communities}
+                onSelectedItemsChange={this.onSelectedItemsChangeCommunities}
+                selectedItems={this.state.selectedCommunities}
                 selectText="Start typing..."
                 searchInputPlaceholderText="Start typing..."
                 onChangeInput={text => console.log(text)}
@@ -219,13 +231,11 @@ export default class WriteStatusScreen extends Component {
                 />
             </View>
             <View>
-              <TouchableOpacity onPress={this.postStatus}>
+              <TouchableOpacity onPress={this.postStatus} disabled={this.isSubmitDisabled()}>
                 <PostButton
                   value={"POST"}
                   source={require("../assets/arrow-right-white.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 13,
                     fontFamily: "poppins-medium",
@@ -289,5 +299,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#1A1A1A",
     flexDirection: "row",
     justifyContent: "space-evenly"
-  }
+  },
+  btnDisabled: {
+    opacity: 0.4,
+  },
 });

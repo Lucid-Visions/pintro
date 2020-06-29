@@ -23,7 +23,8 @@ export default class ChatScreen extends React.Component {
   };
 
   renderHeader() {
-    let pictureUri = this.state.chat.pictureUri;
+    const chatPartnerUser = this.state.chat.users.filter(user => user._id != this.state.user._id)
+    let pictureUri = chatPartnerUser[0].profile_picture;
     return (
       <View style={styles.headerContainer}>
         <View style={styles.headerInnerContainer}>
@@ -34,33 +35,20 @@ export default class ChatScreen extends React.Component {
               resizeMode={"center"}
             />
           </TouchableOpacity>
-
-          <Image
-            style={[styles.headerImages, { marginLeft: 10, marginRight: 10 }]}
-            source={pictureUri !== undefined ? { uri: pictureUri } : require('../assets/empty-profile-picture.png')}
-          />
-
-          <Text style={styles.headerTitle}>{this.state.chat.name}</Text>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', {uid: chatPartnerUser[0]._id})}>
+            <View style={{flex:1}}>
+              <Image
+                style={[styles.headerImages, { marginLeft: 10, marginRight: 10 }]}
+                source={pictureUri !== undefined ? { uri: pictureUri } : require('../assets/empty-profile-picture.png')}
+              />
+            </View>
+            <View style={{paddingLeft:75}}>
+              <Text style={styles.headerTitle}>{chatPartnerUser[0].name}</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     );
-  }
-
-  renderTopComponent() {
-    if (this.state.chat.type !== undefined) {
-      let chatType = this.state.chat.type;
-      let chatTypeContext = this.state.chat.context;
-      if (chatType && chatTypeContext) {
-        return (
-          <View style={styles.chatInfoContainer}>
-            <ActionButtonComponent type={chatType} context={chatTypeContext} />
-          </View>
-        );
-      }
-    }
-    else {
-      return;
-    }
   }
 
   render() {
@@ -68,7 +56,11 @@ export default class ChatScreen extends React.Component {
       <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'android' ? "height" : null}>
         <View style={styles.container}>
           {this.renderHeader()}
-          {this.renderTopComponent()}
+
+          <View style={styles.chatInfoContainer}>
+            <ActionButtonComponent type={this.state.chat.type} intent={this.state.chat.intent} />
+          </View>
+
           <Chat
             user={this.state.user}
             chat={this.state.chat}
@@ -106,6 +98,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
   },
   headerTitle: {
+
     fontFamily: "poppins-medium",
     fontSize: 18
   },
