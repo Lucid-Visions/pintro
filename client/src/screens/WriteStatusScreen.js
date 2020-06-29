@@ -132,7 +132,7 @@ export default class WriteStatusScreen extends Component {
               <Text style={styles.h1}>{user.name}</Text>
               <Text style={styles.h2}>@{user.user}</Text>
             </View>
-            <View paddingTop={40} paddingBottom={10}>
+            <View paddingTop={30} paddingBottom={10}>
               <StatusTextInput userData={user} onChange={x => this.setState({ status: x })} />
             </View>
             <View
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F1F1F1",
     justifyContent: "space-between",
-    paddingVertical: 30
+    paddingVertical: 10
   },
   container1: {
     flex: 1,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container2: {
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight+20,
     flex: 1,
     backgroundColor: "#F1F1F1"
   },
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
   btn: {
     fontFamily: "poppins-medium",
     width: 350,
-    marginTop: 15,
+    marginTop: 20,
     backgroundColor: "#1A1A1A",
     flexDirection: "row",
     justifyContent: "space-evenly"

@@ -124,13 +124,15 @@ export default class TalkToMeAboutScreen extends Component {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.container1}>
+          <View style={{paddingLeft: 20}}>
             <BackButton navigation={navigation} />
+          </View>
           <View style={styles.container}>
             <View alignItems="center" alignSelf="center">
               <Text style={styles.h1}>{user.name}</Text>
               <Text style={styles.h2}>@{user.user}</Text>
             </View>
-            <View paddingTop={40} paddingBottom={10}>
+            <View paddingTop={30} paddingBottom={10}>
               <TalkToMeInput
                 userData={user}
                 status={this.props.status}
@@ -190,6 +192,7 @@ export default class TalkToMeAboutScreen extends Component {
               width={Dimensions.get("screen").width / 1.1}
               alignSelf="center"
               paddingBottom={10}
+              paddingTop={20}
             >
               <Text style={styles.h3}>Choose communities</Text>
               <MultiSelect
@@ -255,10 +258,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F1F1F1",
     justifyContent: "space-between",
-    paddingVertical: 30
+    paddingVertical: 10
   },
   container1: {
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight+20,
     flex: 1,
     backgroundColor: "#F1F1F1",
     justifyContent: "space-between"
@@ -294,7 +297,7 @@ const styles = StyleSheet.create({
   btn: {
     fontFamily: "poppins-medium",
     width: 350,
-    marginTop: 15,
+    marginTop: 20,
     backgroundColor: "#1A1A1A",
     flexDirection: "row",
     justifyContent: "space-evenly"

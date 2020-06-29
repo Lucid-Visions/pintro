@@ -13,6 +13,7 @@ import Constants from "expo-constants";
 import IntroTextInput from "../components/IntroTextInput";
 import MultiSelect from "react-native-multiple-select";
 import PostButton from "../components/WideButtonRight";
+import TagsData from "../assets/TagsData"
 
 export default class RequestIntroScreen extends Component {
   static navigationOptions = {
@@ -24,43 +25,17 @@ export default class RequestIntroScreen extends Component {
     super(props);
     this.state = {
       communities: [],
-      selectedUsers: [],
+      selectedTags: [],
       selectedCommunities: [],
-      users: []
+      status: ""
     };
   }
 
   componentDidMount(){
-    this.getUsers()
+    console.log('introscreen: ', this.state.status)
     this.getCommunities()
   }
 
-  getUsers = async () => {
-    var token = await AsyncStorage.getItem("token");
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", token);
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow"
-    };
-
-    let response = await fetch(
-      `http://${env.host}:${env.port}/api/v1/search?categories=people`,
-      requestOptions
-    ).catch(error => console.log("error", error));
-    let responseJson = await response.json()
-    let userData = responseJson.people.map((x)=>{
-      return {
-        text: x.name,
-        id: x.name+"&"+x._id
-      }
-    })
-    this.setState({users:userData})
-  };
 
   getCommunities = async () => {
     var token = await AsyncStorage.getItem("token");
@@ -94,8 +69,7 @@ export default class RequestIntroScreen extends Component {
     myHeaders.append("Authorization", token);
     var raw = JSON.stringify({
       type: "introduce",
-      context: this.state.selectedUsers[0].split("&")[0],
-      user:this.state.selectedUsers[0].split("&")[1],
+      context: this.state.status,
       communityIds: this.state.selectedCommunities
     })
 
@@ -114,8 +88,8 @@ export default class RequestIntroScreen extends Component {
     this.props.navigation.goBack();
   };
 
-  onSelectedItemsChangeUsers = selectedItems => {
-    this.setState({ selectedUsers: selectedItems });
+  onSelectedItemsChangeTags = selectedItems => {
+    this.setState({ selectedTags: selectedItems });
   }
 
   onSelectedItemsChangeCommunities = selectedItems => {
@@ -123,7 +97,7 @@ export default class RequestIntroScreen extends Component {
   }
 
   isSubmitDisabled = () => {
-    return !(this.state.selectedCommunities.length > 0 && this.state.users.length > 0)
+    return !(this.state.selectedCommunities.length > 0 && this.state.status.length > 0)
   }
 
   render() {
@@ -166,8 +140,9 @@ export default class RequestIntroScreen extends Component {
             <Text style={styles.h1}>{user.name}</Text>
               <Text style={styles.h2}>@{user.user}</Text>
             </View>
-            <View paddingTop={40} paddingBottom={10}>
-              <IntroTextInput userData={user} text={this.state.selectedUsers[0]}/>
+            <View paddingTop={30} paddingBottom={10}>
+              {console.log(this.state.status)}
+              <IntroTextInput userData={user} onChange={x => this.setState({ status: x })}/>
             </View>
             <View
               marginHorizontal={15}
@@ -178,13 +153,13 @@ export default class RequestIntroScreen extends Component {
               alignSelf="center"
               paddingBottom={10}
             >
-              <Text style={styles.h3}>Find a user</Text>
+              <Text style={styles.h3}>Choose up to 3 tags</Text>
               <MultiSelect
                 hideSubmitButton
-                items={this.state.users}
+                items={TagsData}
                 uniqueKey="id"
-                onSelectedItemsChange={this.onSelectedItemsChangeUsers}
-                selectedItems={this.state.selectedUsers}
+                onSelectedItemsChange={this.onSelectedItemsChangeTags}
+                selectedItems={this.state.selectedTags}
                 selectText="Start typing..."
                 searchInputPlaceholderText="Start typing..."
                 altFontFamily="poppins-regular"
@@ -212,7 +187,6 @@ export default class RequestIntroScreen extends Component {
                 styleItemsContainer={{
                   backgroundColor: "#F1F1F1"
                 }}
-                single={true}
               />
             </View>
             <View
@@ -223,6 +197,7 @@ export default class RequestIntroScreen extends Component {
               width={Dimensions.get("screen").width / 1.1}
               alignSelf="center"
               paddingBottom={10}
+              paddingTop={20}
             >
               <Text style={styles.h3}>Choose communities</Text>
               <MultiSelect
@@ -291,7 +266,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F1F1F1",
     justifyContent: "space-between",
-    paddingVertical: 30
+    paddingVertical: 10
   },
   container1: {
     flex: 1,
@@ -299,7 +274,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between"
   },
   container2: {
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight+20,
     flex: 1,
     backgroundColor: "#F1F1F1"
   },
@@ -330,7 +305,7 @@ const styles = StyleSheet.create({
   btn: {
     fontFamily: "poppins-medium",
     width: 350,
-    marginTop: 15,
+    marginTop: 20,
     backgroundColor: "#1A1A1A",
     flexDirection: "row",
     justifyContent: "space-evenly"
