@@ -230,7 +230,7 @@ export default class WriteStatusScreen extends Component {
                 }}
                 />
             </View>
-            <View>
+            <View style={{paddingBottom:50}}>
               <TouchableOpacity onPress={this.postStatus} disabled={this.isSubmitDisabled()}>
                 <PostButton
                   value={"POST"}

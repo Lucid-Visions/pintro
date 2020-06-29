@@ -236,14 +236,13 @@ export default class AskHelpScreen extends Component {
                 }}
                 />
             </View>
-            <View>
-              <TouchableOpacity onPress={this.postAction}>
+            <View style={{paddingBottom:50}}>
+              <TouchableOpacity 
+                onPress={this.postAction} disabled={this.isSubmitDisabled()}>
                 <PostButton
                   value={"POST"}
                   source={require("../assets/arrow-right-white.png")}
-                  containerStyle={{
-                    ...styles.btn
-                  }}
+                  containerStyle={btnStyles}
                   textStyle={{
                     fontSize: 13,
                     fontFamily: "poppins-medium",

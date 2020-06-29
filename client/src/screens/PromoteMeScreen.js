@@ -233,7 +233,7 @@ export default class TalkToMeAboutScreen extends Component {
                 }}
                 />
             </View>
-            <View>
+            <View style={{paddingBottom:50}}>
               <TouchableOpacity
                 onPress={() => this.postAction(navigation, user.action_buttons)}
                 disabled={this.isSubmitDisabled()}

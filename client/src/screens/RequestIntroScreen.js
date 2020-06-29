@@ -32,7 +32,6 @@ export default class RequestIntroScreen extends Component {
   }
 
   componentDidMount(){
-    console.log('introscreen: ', this.state.status)
     this.getCommunities()
   }
 
@@ -237,7 +236,7 @@ export default class RequestIntroScreen extends Component {
                 }}
                 />
             </View>
-            <View>
+            <View style={{paddingBottom:50}}>
               <TouchableOpacity
                 onPress={this.postAction}
                 disabled={this.isSubmitDisabled()}
