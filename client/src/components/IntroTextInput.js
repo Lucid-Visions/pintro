@@ -8,12 +8,8 @@ import {
   Image
 } from "react-native";
 import ProfilePictureComponent from "../components/ProfilePicture";
-//import MultiSelect from "react-native-multiple-select";
-import MultiSelect from "react-native-multiple-select";
-import TagsData from "../assets/TagsData";
 
 class IntroTextInput extends Component {
-  // TODO add multiselect dropdown for users in place of text input
   constructor(props) {
     super(props);
     this.maxLength = 150;
@@ -21,20 +17,21 @@ class IntroTextInput extends Component {
     this.state = {
       status: "",
       textLength: 0,
-      selectedUsers: [],
-      user: []
     };
   }
 
-  onChangeText(text, status) {
+  onChangeText(status){
     this.setState({
-      textLength: text.length,
-      status
-    });
+        textLength: status.length,
+        status
+    })
+
+    if(this.props.onChange){
+      this.props.onChange(status)
+    }
   }
 
   render() {
-    const { selectedUsers } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.profPic}>
@@ -55,9 +52,19 @@ class IntroTextInput extends Component {
           >
             <Text style={styles.h1}>Introduce me to</Text>
           </View>
-          <View alignSelf="flex-start">
-            <Text style={styles.h2}>{this.props.text?this.props.text.split("&")[0]:""}</Text>
+          <View>
+            <TextInput 
+                multiline={true}
+                scrollEnabled={false}
+                style={styles.textInput}
+                placeholderTextColor={"#B3B3B3"}
+                placeholder="Who do you want to be introduced to?"
+                onChangeText={input => this.onChangeText(input)}
+                value={this.state.status}
+                maxLength={50}
+            />
           </View>
+          <Text style={styles.wordCount}>{this.state.textLength}/50 Characters</Text>
         </View>
       </View>
     );
@@ -97,7 +104,9 @@ const styles = StyleSheet.create({
     color: "#B3B3B3",
     margin: 23,
     alignItems: "flex-start",
-    fontSize: 14
+    fontSize: 14,
+    width: 300,
+    height: 50
   },
   whiteSquare: {
     zIndex: 0,
@@ -134,8 +143,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
     zIndex: 1,
-    top: 220,
-    left: Dimensions.get("screen").width / 1.6
+    top: 190,
+    left: Dimensions.get("screen").width / 1.6 - 15
   }
 });
 

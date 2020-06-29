@@ -80,7 +80,7 @@ class LiveFeed extends React.Component {
     this.setState({uid:responseJson._id})
   }
 
-  fetchData = async ({limit, date_stamp, filter}) => {
+  fetchData = async ({limit, date_stamp, extend, filter}) => {
     const response = await getFeed({limit, date_stamp, filter})
     if (response.error) {
         this.setState({ networkError: true, refreshing: false })
@@ -88,7 +88,7 @@ class LiveFeed extends React.Component {
     }
 
     this.setState({
-        items: response.data,
+        items: extend?[...this.state.items, ...response.data]:response.data,
         networkError: false,
         refreshing: false,
     })    

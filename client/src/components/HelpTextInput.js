@@ -13,9 +13,9 @@ class HelpTextInput extends Component {
         }
     }
 
-    onChangeText(text, status){
+    onChangeText(status){
         this.setState({
-            textLength: text.length,
+            textLength: status.length,
             status
         })
 
@@ -37,7 +37,6 @@ class HelpTextInput extends Component {
                 <View style={styles.whiteSquare}>
                     <View 
                         width={Dimensions.get('screen').width / 1.2}
-                        height={110}
                         alignSelf="center"
                         borderBottomWidth={1}
                         borderBottomColor="#A9A9A9"
@@ -45,18 +44,20 @@ class HelpTextInput extends Component {
                     >
                         <Text style={styles.h1}>Help me with</Text>
                     </View>
-                    <View alignSelf="flex-start">
+                    <View>
                         <TextInput 
+                            multiline={true}
+                            scrollEnabled={false}
                             style={styles.textInput}
                             placeholderTextColor={"#B3B3B3"}
-                            placeholder="What do you need help with..."
-                            onChangeText={this.onChangeText.bind(this, this)}
+                            placeholder="What do you need help with?"
+                            onChangeText={input => this.onChangeText(input)}
                             value={this.state.status}
-                            maxLength={150}
+                            maxLength={50}
                         />
                     </View>
                 </View>
-                <Text style={styles.wordCount}>{this.state.textLength}/150 Characters</Text>
+                <Text style={styles.wordCount}>{this.state.textLength}/50 Characters</Text>
             </View>
         )
     }
@@ -86,7 +87,9 @@ const styles = StyleSheet.create({
         color: "#B3B3B3",
         margin: 23,
         alignItems: "flex-start",
-        fontSize: 14
+        fontSize: 14,
+        width: 300,
+        height: 50
     },
     whiteSquare: {
         zIndex: 0,

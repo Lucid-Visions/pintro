@@ -13,9 +13,9 @@ class TalkToMeInput extends Component {
         }
     }
 
-    onChangeText(text, status){
+    onChangeText(status){
         this.setState({
-            textLength: text.length,
+            textLength: status.length,
             status
         })
 
@@ -45,18 +45,20 @@ class TalkToMeInput extends Component {
                     >
                         <Text style={styles.h1}>Talk To Me About</Text>
                     </View>
-                    <View alignSelf="flex-start">
-                        <TextInput 
+                    <View>
+                        <TextInput
+                            multiline={true}
+                            scrollEnabled={false}
                             style={styles.textInput}
                             placeholderTextColor={"#B3B3B3"}
                             placeholder="What do you want to talk about?"
-                            onChangeText={this.onChangeText.bind(this, this)}
+                            onChangeText={input => this.onChangeText(input)}
                             value={this.state.status}
-                            maxLength={150}
+                            maxLength={50}
                         />
                     </View>
                 </View>
-                <Text style={styles.wordCount}>{this.state.textLength}/150 Characters</Text>
+                <Text style={styles.wordCount}>{this.state.textLength}/50 Characters</Text>
             </View>
         )
     }
@@ -86,7 +88,9 @@ const styles = StyleSheet.create({
         color: "#B3B3B3",
         margin: 23,
         alignItems: "flex-start",
-        fontSize: 14
+        fontSize: 14,
+        width: 300,
+        height: 50
     },
     whiteSquare: {
         zIndex: 0,
