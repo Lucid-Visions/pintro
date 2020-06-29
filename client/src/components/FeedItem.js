@@ -93,43 +93,45 @@ class FeedComponent extends React.Component {
             <View
               style={{ flexDirection: "column", marginTop: 15, marginLeft: 20 }}
             >
-              <TouchableOpacity style={{ flexDirection: "row" }}>
-                <Image
-                  style={{ height: 45, width: 45, borderRadius: 200 / 2 }}
-                  source={
-                    this.props.photo ? {uri: this.props.photo} :
-                    require("../assets/empty-profile-picture.png")
-                  }
-                />
-                <View style={{ flexDirection: "column" }}>
-                  <Text
-                    style={{
-                      fontFamily: "poppins-semi-bold",
-                      color: "white",
-                      fontSize: 11,
-                      marginTop: 5,
-                      marginLeft: 8,
-                    }}
-                  >
-                    {this.props.name}
-                  </Text>
-                  <Text
-                    style={{
-                      fontFamily: "poppins-semi-bold",
-                      color: "gray",
-                      fontSize: 10,
-                      marginLeft: 8,
-                    }}
-                  >
-                    {time}
-                  </Text>
-                </View>
+              <View style={{flexDirection:'row'}}>
+                <TouchableOpacity style={{ flexDirection: "row", flex: 10 }}>
+                  <Image
+                    style={{ height: 45, width: 45, borderRadius: 200 / 2 }}
+                    source={
+                      this.props.photo ? {uri: this.props.photo} :
+                      require("../assets/empty-profile-picture.png")
+                    }
+                  />
+                  <View style={{ flexDirection: "column" }}>
+                    <Text
+                      style={{
+                        fontFamily: "poppins-semi-bold",
+                        color: "white",
+                        fontSize: 11,
+                        marginTop: 5,
+                        marginLeft: 8,
+                      }}
+                    >
+                      {this.props.name}
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: "poppins-semi-bold",
+                        color: "gray",
+                        fontSize: 10,
+                        marginLeft: 8,
+                      }}
+                    >
+                      {time}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
                 {this.props.isAuthor &&
-                  <TouchableOpacity onPress={() => this.deletePost()}>
-                      <Image source={require('../assets/whiteCross.png')} style={{height: 15, width: 15}}></Image>
+                  <TouchableOpacity style={{flex:1}} onPress={() => this.deletePost()}>
+                      <Image source={require('../assets/whiteCross.png')} style={{height: 20, width: 20}}></Image>
                   </TouchableOpacity>
                 }
-              </TouchableOpacity>
+              </View>
               <View style={{ flexDirection: "row" }}>
                 {this.props.hashtag1 && (
                   <Text style={styles.hashtag}>
