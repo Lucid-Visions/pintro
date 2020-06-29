@@ -126,6 +126,7 @@ router.get('/tags', Tags.getTags)
 
 /* ------------- ActionButtons -------------*/
 router.post('/actionbutton', jwtData.verifyToken, ActionButtons.create)
+router.delete('/actionbutton/:id', jwtData.verifyToken, ActionButtons.delete)
 
 /* ------------- Feed -------------*/
 router.get('/feed', jwtData.verifyToken, Feed.getFeedData)

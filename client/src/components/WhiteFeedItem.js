@@ -1,14 +1,35 @@
 import React from 'react';
-import { View,Dimensions, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import { View,Dimensions, Text, Image, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import SmallActionComponent from '../components/SmallActionButton';
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
+import { deleteHelpRequest } from '../modules/live-feed/actions'
+
 TimeAgo.addLocale(en)
 const timeAgo = new TimeAgo()
 
 class WhiteFeedComponent extends React.Component {
     constructor(props) {
         super(props)
+    }
+
+    deleteRequest = () => {
+        Alert.alert(
+            "Delete Help Request?",
+            "Are you sure?",
+            [
+              {
+                text: "No",
+                onPress: () => console.log('Canceled'),
+                style: "cancel"
+              },
+              { text: "Yes", onPress: () => {
+                deleteHelpRequest(this.props.data._id)
+                this.props.refresh()
+              }}
+            ],
+            { cancelable: true }
+        );
     }
 
     specifyTime = () => {
@@ -23,19 +44,26 @@ class WhiteFeedComponent extends React.Component {
             <View style={{flexDirection: "row" }}>
                 <View style={styles.container}>
                     <View style={{ marginTop: 15, marginLeft: 20, width: '100%' }}>
-                        <TouchableOpacity style={{flexDirection: "row", width:'100%' }}>
-                            <Image 
-                                style={{height: 45, width: 45, borderRadius: 200 / 2}}
-                                source={this.props.photo ? {uri: this.props.photo} : require('../assets/empty-profile-picture.png')} />
-                            <View style={{flexDirection: "column" }} > 
-                                <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 11, marginTop: 5, marginLeft: 8}}>
-                                    {this.props.name}
-                                </Text>
-                                <Text style={{fontFamily: "poppins-semi-bold", color: "gray", fontSize: 10, marginLeft: 8}}>
-                                    {time}
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
+                        <View style={{flexDirection:'row'}}>
+                            <TouchableOpacity style={{flexDirection: "row", flex:6 }}>
+                                <Image 
+                                    style={{height: 45, width: 45, borderRadius: 200 / 2}}
+                                    source={this.props.photo ? {uri: this.props.photo} : require('../assets/empty-profile-picture.png')} />
+                                <View style={{flexDirection: "column" }} > 
+                                    <Text style={{fontFamily: "poppins-semi-bold", color: "black", fontSize: 11, marginTop: 5, marginLeft: 8}}>
+                                        {this.props.name}
+                                    </Text>
+                                    <Text style={{fontFamily: "poppins-semi-bold", color: "gray", fontSize: 10, marginLeft: 8}}>
+                                        {time}
+                                    </Text>
+                                </View> 
+                            </TouchableOpacity>
+                            {this.props.isAuthor &&
+                                <TouchableOpacity style={{flex: 1}} onPress={() => this.deleteRequest()}>
+                                    <Image source={require('../assets/blackCross.png')} style={{height: 15, width: 15}}></Image>
+                                </TouchableOpacity>
+                            }
+                        </View>
                         <View
                                 style={{
                                 borderBottomColor: '#DCDCDC',

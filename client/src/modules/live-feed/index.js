@@ -100,53 +100,60 @@ class LiveFeed extends React.Component {
   }
 
   getItem(x){
-      if (x.author == null) return null;
-      switch (x._type) {
-        case "ACTION": {
-          return (
-            <WhiteFeedComponent
-              name={x.author.name}
-              photo={x.author.profile_picture}
-              timeAgo={x.date_stamp}
-              thisType={x.type}
-              context={x.context}
-              data={x}
-              navigation={this.props.navigation}
-            />
-          );
-        }
-        case "ARTICLE": {
-          return (
-            <FeedItem
-              name={x.author.name}
-              photo={x.author.profile_picture}
-              timeAgo={x.date_stamp}
-              post={x.text}
-              likes={x.likes.length}
-              comments={x.comments.length}
-              data={x}
-              uid={this.state.uid}
-            />
-          );
-        }
-        case "STATUS": {
-          return (
-            <FeedItem
-              name={x.author.author_id.name}
-              photo={x.author.author_id.profile_picture}
-              timeAgo={x.date_stamp}
-              post={x.text}
-              likes={x.likes.length}
-              comments={x.comments.length}
-              data={x}
-              refresh={() => this._onRefresh(false)}
-              uid={this.state.uid}
-              navigation={this.props.navigation}
-            />
-          );
-        }
+    let authorId = (x.author.author_id ? x.author.author_id._id : x.author._id);
+    let isAuthor = false;
+    if(this.state.uid==authorId) isAuthor = true;
+    if (x.author == null) return null;
+    switch (x._type) {
+      case "ACTION": {
+        return (
+          <WhiteFeedComponent
+            name={x.author.name}
+            photo={x.author.profile_picture}
+            timeAgo={x.date_stamp}
+            thisType={x.type}
+            context={x.context}
+            refresh={() => this._onRefresh(false)}
+            data={x}
+            navigation={this.props.navigation}
+            isAuthor={isAuthor}
+          />
+        );
       }
-  
+      case "ARTICLE": {
+        return (
+          <FeedItem
+            name={x.author.name}
+            photo={x.author.profile_picture}
+            timeAgo={x.date_stamp}
+            post={x.text}
+            likes={x.likes.length}
+            comments={x.comments.length}
+            refresh={() => this._onRefresh(false)}
+            data={x}
+            uid={this.state.uid}
+            isAuthor={isAuthor}
+          />
+        );
+      }
+      case "STATUS": {
+        return (
+          <FeedItem
+            name={x.author.author_id.name}
+            photo={x.author.author_id.profile_picture}
+            timeAgo={x.date_stamp}
+            post={x.text}
+            likes={x.likes.length}
+            comments={x.comments.length}
+            data={x}
+            refresh={() => this._onRefresh(false)}
+            uid={this.state.uid}
+            navigation={this.props.navigation}
+            isAuthor={isAuthor}
+          />
+        );
+      }
+    }
   }
 
   render() {
