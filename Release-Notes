@@ -1,3 +1,22 @@
+#1.0.12
+
+Chats
+- Chats are now correctly set up in firebase. Users are able to send messages with intent to users they are not connected to and the chat will be created in firebase.
+- Users messages should be updated as soon as their chatting partner sends them a message
+- Revamped the Chats list screen
+
+Feed
+- Revamped the feed to be one feed item per line
+- User feeds only show posts from communities that they are a part of
+- Users are now able to tap on a "General post" to view comments on a post
+- Users are now able to comment on other users "General Posts"
+- When creating a Post or Help Request, users can now specify one or more communities to post to
+- Two new types of posts; "Promote Me" and "Talk to me about"
+
+Bugs
+- Fixed a bug where a users job title / company was being overwritten in the sign up process
+- Fixed the database not persisting across releases
+
 #1.0.11
 
 New Features
@@ -13,6 +32,7 @@ Community Profiles:
 Bugs
 - Fixed a bug where the user profile page doesn't refresh after changes have been made
 - Fixed a bug where the keyboard is covering up text input fields
+
 
 #1.0.10
 
@@ -30,6 +50,7 @@ Sign up:
 - Added the upload profile image step back to the user sign up process
 - Added front-end verification to some fields in the sign up process to filter information
 - Disable next step buttons until user has filled out the required fields on each step
+
 
 #1.0.9
 
