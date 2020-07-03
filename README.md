@@ -1,14 +1,46 @@
 # Pintro App
 Pintro is a mobile social networking app built for ios and android devices. The app consists of four parts, the react native client, the NodeJS server, the Admin panel and the Mongo database + Mongo Express.
 
-## Deployment
+## Client App
+* The beta version of the app is run using the expo framework
+* The expo server should be installed on a computer on the same network as the target mobile device for best results.
+* Install the expo cli with -g flag `npm install -g expo-cli`
+* cd into /client
+* run `npm install`
+* If you want to run the app using a local backend, follow the next step, if not then skip and set `production` to true in `/client/src/env.js`
+* Get your local device IP (This step is optional if you want to run using a local backend)
+  * On Mac - Go to `Networking` on System preferences and grab the IP on the right hand side
+  * In terminal, run `REACT_NATIVE_PACKAGER_HOSTNAME=[ip]` replacing [ip] with the one you just copied
+* run `expo start`
+* Install the Expo client on android or ios
+* Scan the QR code found on localhost:19002. Expo should build the react bundle and download it to your mobile device
+* Alternatively, it is possible to use either the Android or iOS simulator.
+  * Follow relevant guide to get started
+    * iOS -  https://docs.expo.io/workflow/ios-simulator/
+    * Android - https://docs.expo.io/workflow/android-studio-emulator/
 
-A live version of the DB and NodeJS server has been deployed 
 
-* API
-  * http://ec2-3-134-100-191.us-east-2.compute.amazonaws.com:3000
-* Mongo Express 
-  * http://ec2-3-134-100-191.us-east-2.compute.amazonaws.com:8081
+* Possible errors
+  * App silently times out and never starts the application
+    * This could be caused by a firewall rule blocking the expo client port (19001).
+      * Solutions:
+        * Allow this port on the firewall
+        * Start expo in tunnel mode `expo start --tunnel` or start it normally and choose `tunnel` from the left menu
+        
+### Add platform-tools to your path (pre-req to run using local backend with android device/emulator)
+* In terminal, run the following:
+`echo 'export ANDROID_HOME=/Users/$USER/Library/Android/sdk' >> ~/.bash_profile`
+`echo 'export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools' >> ~/.bash_profile`
+* Refresh your bash profile (or restart your terminal app)
+`source ~/.bash_profile`
+* Run `adb start-server`
+* Start your android emulator
+* In terminal run `adb reverse tcp:3000 tcp:3000`
+        
+
+## Backend Deployment
+
+A live version of the DB and NodeJS server has been deployed on google cloud. The IP can be found in `/client/src/env.js`
 
 ### NodeJS Server & Mongo DB & Mongo Express
 The backend components have been dockerized for simple deployment. This tutorial will go through deployment on an AWS Linux ec2 instance.
@@ -23,7 +55,6 @@ The backend components have been dockerized for simple deployment. This tutorial
 * Clone the Repo onto the instance
   * Install git
     * `sudo yum install git -y`
-  * `git clone https://github.com/KDKHD/SegWay.git`
 * Add enviroment variables
   * Create a file name ".env" in /server with the following content
 ```
@@ -76,48 +107,3 @@ FIREBASE_MEASUREMENTID=[Add creds]
 *  `$export PORT=5000` to use port 5000 for the admin panel
 * `npm start`
 
-### Add platform-tools to your path (pre-req to run using local backend with android device/emulator)
-* In terminal, run the following:
-`echo 'export ANDROID_HOME=/Users/$USER/Library/Android/sdk' >> ~/.bash_profile`
-`echo 'export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools' >> ~/.bash_profile`
-* Refresh your bash profile (or restart your terminal app)
-`source ~/.bash_profile`
-* Run `adb start-server`
-* Start your android emulator
-* In terminal run `adb reverse tcp:3000 tcp:3000`
-
-### Client App
-* The beta version of the app is run using the expo framework
-* The expo server should be installed on a computer on the same network as the target mobile device for best results.
-* Install the expo cli with -g flag `npm install -g expo-cli`
-* cd into /client
-* run `npm install`
-* If you want to run the app using a local backend, follow the next step, if not then skip and set `production` to true in `/client/src/env.js`
-* Get your local device IP (This step is optional if you want to run using a local backend)
-  * On Mac - Go to `Networking` on System preferences and grab the IP on the right hand side
-  * In terminal, run `REACT_NATIVE_PACKAGER_HOSTNAME=[ip]` replacing [ip] with the one you just copied
-* run `expo start`
-* Install the Expo client on android or ios
-* Scan the QR code found on localhost:19002. Expo should build the react bundle and download it to your mobile device
-* Alternatively, it is possible to use either the Android or iOS simulator.
-  * Follow relevant guide to get started
-    * iOS -  https://docs.expo.io/workflow/ios-simulator/
-    * Android - https://docs.expo.io/workflow/android-studio-emulator/
-
-
-* Possible errors
-  * App silently times out and never starts the application
-    * This could be caused by a firewall rule blocking the expo client port (19001).
-      * Solutions:
-        * Allow this port on the firewall
-        * Start expo in tunnel mode `expo start --tunnel` or start it normally and choose `tunnel` from the left menu
-
-## Authors
-
-* **alexps711** - *Initial work*
-* **ivan-ivanovv** - *Initial work*
-* **kuzarakamil** - *Initial work*
-* **Kevin Reiserbuk** - *Initial work*
-* **j-a-o** - *Initial work*
-* **mikamarciales** - *Initial work*
-* **KennethDK** - *Initial work*
